@@ -1,0 +1,13 @@
+\newSec[Fazit]{Fazit und Ausblick}{1}
+
+Die Ausarbeitung konnte verschiedene Varianten aufzeigen, welche die Aufgabenstellung entsprechend \refCap{Problemstellung} erfüllen könnten. Hierbei wurde unter anderem die berücksichtigt, den Umfang von Anpassungen an eine geänderte Konfiguration oder einen anderen Typen des \MCUDZ\ möglichst gering zu halten.
+Die in \refCap{Select} als optimal eingestufte Variante beinhaltet den geringsten zu erwartenden Programmspeicherplatz für die Firmware und kann umgesetzt werden, wie in \refCap{POC} beschrieben.
+
+Aus der in \refCap{CodesCOL} abgelegten experimentellen Programmierung des \COL\ ist eine finale Bibliothek zu erstellen, welche in Test-Firmware eingebunden werden kann. Darüber hinaus sind die in \refCap{ConfigInstr} Parser zum Einbinden in die Test-Firmware und zum Evaluieren der \ConfigF\ zu implementieren. 
+
+Die Test-Software auf dem Test-PC wird für jedes Projekt angepasst. Äquivalent zur Anpassung der Test-Firmware könnte die Test-Software dahingehend verändert werden, alsdass die zu testenden Funktionen des \textit{Base Boards} ebenfalls dynamisch durch die \textit{.ioc}-Datei konfiguriert wird. Hierfür wäre eine weitere \ConfigF\ erforderlich, welche die Testdurchführung und zu erwartenden Ergebnisse enthält.
+Da die gesamte Test-Architektur optimiert werden kann, könnte erweiternd zu dieser Ausarbeitung ein Gesamtkonzept für die zukünftige Durchführung von Hardware-Tests im Beispielunternehmen erdacht werden.
+
+
+Im Beispielunternehmen wird eine einheitliche Platine für das Bedienfeld der Geräte entwickelt. Der eingesetzte \uProc\ beinhaltet \ua\ einen \Cortex-M4-Kern\footnote{Dieser Prozessor-Kern ist identisch zu den Kernen der in dieser Arbeit betrachteten \MCUDZ.}. Die in dieser Ausarbeitung erdachte Test-Firmware könnte gemeinsam mit einer geeigneten Konfigurationsdatei als \textit{Power-on Self-Test} (\textit{POST}) beim Start der Geräte eingesetzt werden. Hierzu muss die Handhabung des eingesetzten \uProc\ weiter untersucht und die Test-Firmware \uU\ an die veränderte Architektur angepasst werden.
+

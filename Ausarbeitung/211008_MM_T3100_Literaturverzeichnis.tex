@@ -1,0 +1,94 @@
+\clearpage
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+\newcounter{IndexLiteratur}
+\newcommand{\NewBibItem}[2]{\stepcounter{IndexLiteratur} \bibitem[\theIndexLiteratur]{#1} #2,\newline}
+
+% Layout Commands
+\newcommand{\Published}[1]{veröffentlicht #1}
+\newcommand{\Modified}[1]{verändert #1}
+\newcommand{\Requested}[1]{abgefragt #1}
+\newcommand{\Online}[1]{online,  #1\newline}
+\newcommand{\Version}[1]{#1. Auflage}
+\newcommand{\ISBN}[1]{ISBN #1}
+\newcommand{\Article}[1]{Artikel \textit{#1}}
+\newcommand{\Pages}[1]{Seite #1}
+\newcommand{\NA}{-unbekannt-}
+
+
+
+\begin{thebibliography}{\theIndexLiteratur}
+
+%Bücher
+\NewBibItem{Paper1}{Pozo D., Romero L., Rosales J., Quadcopter stabilization by using PID controllers}
+\Published{2014}
+
+\NewBibItem{Paper2}{Fresk E., Nikolakopoulos G., Full Quaternion Based Attitude Control for a Quadrotor}
+\Published{19.07.2013}
+
+
+
+
+% Einleitung
+
+
+
+
+
+
+% Unternehmen
+
+
+% MCU
+
+
+%STM32
+
+
+
+%Hardware
+
+
+
+
+
+%Software
+
+
+%Language
+\NewBibItem{cpp1}{Saks D., Better even at the lowest levels}
+\Online{https://www.embedded.com/better-even-at-the-lowest-levels/}
+\Published{01.11.2008}, \Modified{05.12.2020}, \Requested{28.07.2021}
+
+\NewBibItem{c1}{Application Note Object-Oriented Programming in C}
+\Online{https://www.state-machine.com/doc/AN\_OOP\_in\_C.pdf}
+\Published{06.11.2020}, \Requested{28.07.2021}
+
+\NewBibItem{DyString}{Kirk N., How do strings allocate memory in c++?}
+\Online{https://stackoverflow.com/questions/18312658/how-do-strings-allocate-memory-in-c}
+\Published{19.08.2013}, \Requested{17.08.2021}
+
+\NewBibItem{Dy1}{Bansal A., Containers in C++ STL (Standard Template Library)}
+\Online{https://www.geeksforgeeks.org/containers-cpp-stl/}
+\Published{05.03.2018}, \Modified{12.07.2020}, \Requested{17.08.2021}
+
+\NewBibItem{DefASA}{Automatic Storage Duration}
+\Online{https://www.oreilly.com/library/view/c-primer-plus/9780132781145/ch09lev2sec2.html}
+\Published{\NA}, \Requested{17.08.2021}
+
+\NewBibItem{DefDSA}{Noar J., Orda A., Petruschka Y., Dynamic storage allocation with known durations}
+\Online{https://www.sciencedirect.com/science/article/pii/S0166218X99001754}
+\Published{30.03.2000}, \Requested{17.08.2021}
+
+
+
+
+%Varianten
+
+
+
+
+\end{thebibliography}
+
+\Anmerkung{Wird hier ein Veröffentlichungsdatum als \grqq -unbekannt-\grqq\ markiert, so konnte diese Angabe weder auf der entsprechenden Webseite, noch in deren Quelltext ausfindig gemacht werden.}
+
+\clearpage
