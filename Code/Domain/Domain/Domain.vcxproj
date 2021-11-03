@@ -139,7 +139,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controllable.cpp" />
+    <ClCompile Include="Controller_D.cpp" />
+    <ClCompile Include="Controller_Input.cpp" />
+    <ClCompile Include="Controller_PT.cpp" />
+    <ClCompile Include="Outputable.cpp" />
+    <ClCompile Include="Controller_I.cpp" />
+    <ClCompile Include="Controller_P.cpp" />
     <ClCompile Include="Domain.cpp" />
+    <ClCompile Include="Timeable.cpp" />
+    <ClCompile Include="Value.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controllable.h" />
+    <ClInclude Include="Controller_D.h" />
+    <ClInclude Include="Controller_I.h" />
+    <ClInclude Include="Controller_Input.h" />
+    <ClInclude Include="Controller_P.h" />
+    <ClInclude Include="Controller_PT.h" />
+    <ClInclude Include="Optional.h" />
+    <ClInclude Include="Outputable.h" />
+    <ClInclude Include="Ringbuffer.h" />
+    <ClInclude Include="RingbufferItem.h" />
+    <ClInclude Include="Timeable.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="Value.h" />
+    <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

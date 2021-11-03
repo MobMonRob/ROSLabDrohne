@@ -3,9 +3,36 @@
 
 #include <iostream>
 
+#include "Controller_Input.h"
+#include "Controller_P.h"
+#include "Controller_I.h"
+#include "Controller_D.h"
+#include "Controller_PT.h"
+
+#include "Ringbuffer.h"
+
+
 int main()
 {
     std::cout << "Hello World!\n";
+
+    Unit Unit1("m/s");
+    Unit Unit2("m");
+
+    Controller_Input I1(Unit1);
+    Controller_PT C1(Unit1, Unit1, 1.0, 1.0, &I1);
+
+
+    for (double t = 0; t < 5.0; t += 0.05)
+    {
+        I1.setInput(Value(Unit1, 1.0, t));
+
+        std::cout << t << " >> " << C1.getOutputValue().getValue() << std::endl;
+        std::cout << t << " >> " << C1.getOutputValue().getValue() << std::endl;
+    }
+
+
+
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
