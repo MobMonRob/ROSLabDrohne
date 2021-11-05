@@ -13,6 +13,9 @@ public:
 	Unit getOutputUnit() { return this->Output_; };
 	virtual Value getOutputValue() { return Value(); };
 
+protected:
+	void setOutputUnit(Unit UnitOutput) { this->Output_ = UnitOutput; };
+
 private:
 	Unit Output_;
 };

@@ -8,12 +8,9 @@
 class Controller_P : public Controllable
 {
 public:
-	Controller_P(Unit UnitInput, Unit UnitOutput, double kP = 1.0, Outputable* ValueableAddr = nullptr);
+	Controller_P(Unit UnitInput, Unit UnitOutput, double kP = 1.0, Outputable* InputAddr = nullptr);
 
 	Value getOutputValue();
-
-private:
-
 };
 
 #endif //CONTROLLER_P_H

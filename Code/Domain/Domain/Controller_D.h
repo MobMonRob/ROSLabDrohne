@@ -3,22 +3,19 @@
 
 #include "Value.h"
 #include "Controllable.h"
-#include "Timeable.h"
 
 
 
 
-class Controller_D : public Controllable, public Timeable
+class Controller_D : public Controllable
 {
 public:
 	Controller_D(Unit UnitInput, Unit UnitOutput, double kD = 1.0, Outputable* ValueableAddr = nullptr);
 
 	Value getOutputValue();
 
-
 private:
-	double InputLast_ = 0.0;
-
+	Value InputLast_;
 };
 
 #endif // CONTROLLER_D_H

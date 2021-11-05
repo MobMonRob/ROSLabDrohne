@@ -8,29 +8,62 @@
 #include "Controller_I.h"
 #include "Controller_D.h"
 #include "Controller_PT.h"
+#include "Controller_PID.h"
+#include "ControllerSystem.h"
 
 #include "Ringbuffer.h"
+#include "Vector3D.h"
 
 
 int main()
 {
     std::cout << "Hello World!\n";
 
-    Unit Unit1("m/s");
-    Unit Unit2("m");
+    Unit U0("m/s²");
+    Unit U1("m/s");
+    Unit U2("m");
 
-    Controller_Input I1(Unit1);
-    Controller_PT C1(Unit1, Unit1, 1.0, 1.0, &I1);
+    ControllerSystem CS1(U0);
+
+    CS1.addControllerI(U1, 1.0);
+    CS1.addControllerI(U2, 1.0);
 
 
-    for (double t = 0; t < 5.0; t += 0.05)
+    CS1.setInputValue(Value(U0));
+
+    double a = 1.0;
+    double tmax = 1.0;
+
+    for (double t = 0.0; t <= tmax; t += 0.0001)
     {
-        I1.setInput(Value(Unit1, 1.0, t));
+        CS1.setInputValue(Value(U0, a, t));
 
-        std::cout << t << " >> " << C1.getOutputValue().getValue() << std::endl;
-        std::cout << t << " >> " << C1.getOutputValue().getValue() << std::endl;
+
+        Value Out = CS1.getOutputValue();
+
+
+        if (false)
+        {
+            double Calc = 0.5 * a * t * t;
+            double Diff = Out.getValue() - Calc;
+
+            std::cout << "t = " << t << std::endl;
+            std::cout << "CS1.Out = " << Out.getValue() << std::endl;
+            std::cout << "calc = " << Calc << std::endl;
+            std::cout << "CS1.Diff = " << Diff << " (" << 100 * Diff / Calc << "%)" << std::endl;
+        }
+
     }
 
+
+    Value Out = CS1.getOutputValue();
+    double Calc = 0.5 * a * tmax * tmax;
+    double Diff = Out.getValue() - Calc;
+
+    std::cout << "t = " << tmax << std::endl;
+    std::cout << "CS1.Out = " << Out.getValue() << std::endl;
+    std::cout << "calc = " << Calc << std::endl;
+    std::cout << "CS1.Diff = " << Diff << " (" << 100 * Diff / Calc << "%)" << std::endl;
 
 
 }

@@ -11,6 +11,9 @@ class Value
 public:
 	Value(Unit Unit = Unit(), double Value = 0.0, double Time = 0.0) : Unit_(Unit), Value_(Value), Time_(Time) {};
 
+	Value operator+(const Value& V);
+	Value operator-(const Value& V);
+
 	double getValue() { return this->Value_; };
 	Unit getUnit() { return this->Unit_; };
 	double getTime() { return this->Time_; };

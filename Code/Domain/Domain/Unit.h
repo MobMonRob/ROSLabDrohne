@@ -4,10 +4,13 @@
 #include <string>
 
 
+#define UNIT_INVALID std::string("invalid")
+
+
 class Unit
 {
 public:
-	Unit(std::string Name = "invalid") { this->UnitName_ = Name; };
+	Unit(std::string Name = UNIT_INVALID) { this->UnitName_ = Name; };
 
 	bool operator== (const Unit& U) { return this->UnitName_ == U.UnitName_; };
 

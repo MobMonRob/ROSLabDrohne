@@ -3,10 +3,10 @@
 
 #include "Value.h"
 #include "Controllable.h"
-#include "Timeable.h"
 
 
-class Controller_I : public Controllable, public Timeable
+
+class Controller_I : public Controllable
 {
 public:
 	Controller_I(Unit UnitInput, Unit UnitOutput, double kI = 1.0, Outputable* InputAddr = nullptr, double InitValue = 0.0);
@@ -14,7 +14,7 @@ public:
 	Value getOutputValue();
 
 private:
-	double Sum_;
+	Value Sum_;
 };
 
 #endif //CONTROLLER_I_H

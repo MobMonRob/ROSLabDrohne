@@ -45,7 +45,10 @@
     <ClCompile Include="Controller_PT.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Timeable.cpp">
+    <ClCompile Include="Controller_PID.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerSystem.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +89,13 @@
     <ClInclude Include="Controller_PT.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Timeable.h">
+    <ClInclude Include="Optional.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Optional.h">
+    <ClInclude Include="Controller_PID.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerSystem.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
