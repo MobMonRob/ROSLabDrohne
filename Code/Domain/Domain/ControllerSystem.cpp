@@ -9,10 +9,7 @@ ControllerSystem::ControllerSystem(Unit UnitInput)
 
 
 
-Value ControllerSystem::getOutputValue()
-{
-	return this->getKnotAddrLast()->getOutputValue();
-}
+
 
 
 
@@ -23,21 +20,42 @@ Value ControllerSystem::getOutputValue()
 void ControllerSystem::addControllerP(Unit UnitOutput, double K)
 {
 	Outputable* KnotPrev = this->getKnotAddrLast();
-	Controller_P* ItemAddr = new Controller_P(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev);
 
 
-	this->Knots_.push_back(ItemAddr);
-	this->setOutputUnit(UnitOutput);
+	this->addControllable(new Controller_P(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
 }
 
 void ControllerSystem::addControllerI(Unit UnitOutput, double K)
 {
 	Outputable* KnotPrev = this->getKnotAddrLast();
-	Controller_I* ItemAddr = new Controller_I(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev);
 
 
-	this->Knots_.push_back(ItemAddr);
-	this->setOutputUnit(UnitOutput);
+	this->addControllable(new Controller_I(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+}
+
+void ControllerSystem::addControllerD(Unit UnitOutput, double K)
+{
+	Outputable* KnotPrev = this->getKnotAddrLast();
+
+
+	this->addControllable(new Controller_D(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+}
+
+void ControllerSystem::addControllerPID(Unit UnitOutput, double KP, double KI, double KD)
+{
+	Outputable* KnotPrev = this->getKnotAddrLast();
+
+
+	this->addControllable(new Controller_PID(KnotPrev->getOutputUnit(), UnitOutput, KP, KI, KD, KnotPrev));
+}
+
+
+void ControllerSystem::addControllerPT(Unit UnitOutput, double K, double T)
+{
+	Outputable* KnotPrev = this->getKnotAddrLast();
+
+
+	this->addControllable(new Controller_PT(KnotPrev->getOutputUnit(), UnitOutput, K, T, KnotPrev));
 }
 
 
@@ -47,9 +65,11 @@ void ControllerSystem::addControllerI(Unit UnitOutput, double K)
 
 
 
-
-
-
+void ControllerSystem::addControllable(Controllable* ControlAddr)
+{
+	this->Knots_.push_back(ControlAddr);
+	this->setOutputUnit(ControlAddr->getOutputUnit());
+}
 
 Outputable* ControllerSystem::getKnotAddrLast()
 {
