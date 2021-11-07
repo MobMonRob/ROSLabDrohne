@@ -1,5 +1,20 @@
 \newSec{Problemstellung}{1}
 
+Fluggeräte jeder Ausführung können durch Umwelteinflüsse von ihrer Position abgetrieben werden \vgl{Ballon}. Während der Versuchsdurchführung von Studierenden der \DHBW\ an einem \Quad\ hat sich gezeigt, dass sich das Halten einer Position für Piloten mit geringer Erfahrung als schwierig erweist. Beschädigungen der in Laborversuchen eingesetzten Hardware ist zu vermeiden.
+Die Versuchsdurchführung \textit{Höhenregelung}\footnote{Bei dem Laborversuch \textit{Höhenregelung} sollen Studierende eine ROS-Node erstellen, welche eine konstante Flughöhe des \Quad[s] ermöglicht. Hierzu wird als Rückführungsgröße des Regelkreises die Abstandsmessung zwischen \Quad\ und der daruterliegenden Ebene eingesetzt.} soll für die Studierenden dahingehend vereinfacht werden, alsdass der eingesetzte \Quad\ die horizontale Bewegung selbstständig regelt.
+
+Zu entwickeln ist eine Positionsregelung auf Basis der verfügbaren Beschleunigungswerte der Drohne. Optional kann die Regelung um ein bildgestütztes System erweitert werden.
+
+Für die Positionsregelung können unterschiedliche Modi entwickelt werden:
+\begin{itemize}
+\item Halten der Position nach einer manuellen Positionsänderung
+\item Anfliegen von vorgegebenen Positionen. Hierbei ist ein Überschwingen möglichst zu vermeiden.
+\end{itemize}
+
+Durch die Anschaffung eines neuen \Quad[s] erweitert sich die Aufgabenstellung um den Aufbau des Bausatzes und die Inbetriebnahme des \Quad[s], an dem die Positionsregelung implementiert werden soll.
+Die Anpassung der Versuchsbeschreibung an die geänderte Hardware ist gewünscht.
+
+Eine tabellarisch angelegtes Lastenheft ist \missing[im Kapitel Anhang...] einzusehen.
 
 
 
