@@ -1,0 +1,172 @@
+% Seiten-Layout
+\documentclass[a4paper,12pt]{scrartcl}	%Seitenlayout allgemein
+%\documentclass[a4paper,12pt]{article}		%Seitenlayout allgemein
+\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm, footskip=0.7cm]{geometry}						%Seitenränder
+\usepackage{fancyhdr}				%Kopf- und Fußzeilen-Manipulation
+\pagestyle{empty}					%Seitenzahl, empty=ohne, 
+\fancyhf{} 							%alle Kopf- und Fußzeilenfelder bereinigen
+\usepackage{lscape}					%Querformat in Bereich
+%\usepackage[section]{placeins}
+
+
+% Text-Layout
+\input{DefaultContent/140411_Default_UsepackagesGerman.tex}
+\usepackage{lmodern}				%Vektorisierte Schrift
+\usepackage[scaled]{uarial}			%Arial
+\usepackage[onehalfspacing]{setspace}	%1,5-facher Zeilenabstand
+
+
+
+% Überschriften
+
+
+
+% Forms-Formatierung
+\usepackage{parskip}				%Absätze
+\usepackage{array}					%Tabellen
+\usepackage[format=hang,font={footnotesize,sc}, 
+labelfont={bf},margin=1cm,aboveskip=5pt,
+position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
+\usepackage{pifont}					%Dingbats-Symbole (siehe Tabelle)
+\usepackage{enumerate}				%Aufzählungen: a A i I 1
+\usepackage{graphicx}				%Bilder
+
+
+
+% Verzeichnisse
+\usepackage{titletoc}				% Inhaltsverzeichnis umdefinieren
+\usepackage{tocloft}					% Abbildungsverzeichnis umdefinieren
+\usepackage{acronym}				%Abkürzungsverzeichnis
+
+
+
+% Codes
+\usepackage{xcolor}					% Color
+\usepackage{listings}				%Weiteres Verzeichnis
+\lstset{captionpos=b}				% Caption after Code
+
+
+
+% Anhang
+\usepackage[toc,page]{appendix}
+\renewcommand{\appendixtocname}{Anhang}
+\renewcommand{\appendixpagename}{Anhang}
+
+
+
+
+
+
+% Drawings
+\usepackage{tikz}				%Graphik-Elemente / Zeichnen
+
+
+
+% Programming Functions
+\input{DefaultContent/140411_Default_UsepackagesMath.tex}
+\usepackage{xifthen}
+
+
+
+
+% Layout Überschriften im TOC
+\newcommand{\TocLayoutE}[3]{\titlecontents{#1}[#2em]{}{\contentslabel{0em}}{\vspace*{#3cm}}{\titlerule*[0.3pc]{.}\contentspage}}
+\newcommand{\TocLayoutD}[4]{\titlecontents{#1}[#2em]{}{\contentslabel{#4em}}{\vspace*{#3cm}}{\titlerule*[0.3pc]{.}\contentspage}}
+\newcommand{\TocLayoutA}[4]{\titlecontents{#1}[#2em]{}{\contentslabel{#4em}}{\vspace*{#3cm}}{\titlerule*[0.3pc]{}}}
+
+\newcommand{\TocStdSectionE}{\TocLayoutE{section}{0}{0}}
+\newcommand{\TocStdSectionD}{\TocLayoutD{section}{1.5}{0}{1.5}}
+\newcommand{\TocStdSectionA}{\TocLayoutA{section}{0}{0}{1.5}}
+
+\newcommand{\TocStdSubSectionE}{\TocLayoutE{subsection}{3}{0.25}}
+\newcommand{\TocStdSubSectionD}{\TocLayoutD{subsection}{3}{0.25}{2.25}}
+\newcommand{\TocStdSubSectionA}{\TocLayoutA{subsection}{3}{0.25}{2.25}}
+
+\newcommand{\TocStdSubSubSectionE}{\TocLayoutE{subsubsection}{4.5}{0.25}}
+\newcommand{\TocStdSubSubSectionD}{\TocLayoutD{subsubsection}{4.5}{0.25}{3}}
+\newcommand{\TocStdSubSubSectionA}{\TocLayoutA{subsubsection}{4.5}{0.25}{3}}
+
+
+
+\usepackage{chngcntr}
+
+% Layout PaygeStyle
+\newcommand{\PagestyleStdPre}{\pagestyle{empty}}
+\newcommand{\PagestyleStdFormal}{\pagestyle{fancy} \setcounter{page}{1} \pagenumbering{Roman} \fancyhf[fr]{\thepage} \TocStdSectionE \TocStdSubSectionE \TocStdSubSubSectionE \captionsetup[figure]{list=no}}
+\newcommand{\PagestyleStdContent}{\pagestyle{fancy} \setcounter{page}{1} \pagenumbering{arabic} \fancyhf[fr]{\thepage} \TocStdSectionD \TocStdSubSectionD \TocStdSubSubSectionD \captionsetup[figure]{list=yes}}
+\newcommand{\PagestyleStdSuf}{\pagestyle{empty} \TocStdSectionA \TocStdSubSectionA \TocStdSubSubSectionA \captionsetup[figure]{list=no}}
+\newcommand{\PagestyleStdAppendix}{\pagestyle{fancy} \setcounter{page}{1} \pagenumbering{roman} \renewcommand{\thepage}{\thesection-\arabic{page+1}} \counterwithin{page}{section} \TocLayoutA{section}{1.5}{0}{1.5}}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+% Layout Codes
+\lstdefinestyle{Style_Java}{
+	language=Java,
+	basicstyle=\tiny,
+	backgroundcolor=\color[rgb]{.93,.93,.93},
+	commentstyle=\color[rgb]{.17,.55,.17},
+	keywordstyle=\color[rgb]{1,.08,.58},
+	numberstyle=\tiny\color[rgb]{.1,.2,.3},
+	stringstyle=\color[rgb]{0,0,.53},
+	numbers=left,
+	stepnumber=1,
+	breakatwhitespace=true,
+	breaklines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstdefinestyle{Style_CPP}{
+	language=C++,
+	basicstyle=\tiny,
+	backgroundcolor=\color[rgb]{.93,.93,.93},
+	commentstyle=\color[rgb]{.17,.55,.17},
+	keywordstyle=\color[rgb]{0.7,.05,.5},
+	numberstyle=\tiny\color[rgb]{.1,.2,.3},
+	stringstyle=\color[rgb]{0,0,.53},
+	numbers=left,
+	stepnumber=1,
+	breakatwhitespace=true,
+	breaklines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstdefinestyle{Style_IOC}{
+	language=XML,
+	basicstyle=\tiny,
+	backgroundcolor=\color[rgb]{.93,.93,.93},
+	commentstyle=\color[rgb]{.25,.25,.25},
+	keywordstyle=\color[rgb]{0,0,0},
+	numberstyle=\tiny\color[rgb]{0,0,0},
+	stringstyle=\color[rgb]{0,0,0},
+	numbers=left,
+	stepnumber=1,
+	breakatwhitespace=true,
+	breaklines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
