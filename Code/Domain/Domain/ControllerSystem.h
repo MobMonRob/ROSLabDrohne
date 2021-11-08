@@ -21,7 +21,8 @@ class ControllerSystem : public Outputable
 public:
 	ControllerSystem(Unit UnitInput);
 
-	void setInputValue(Value V) { this->Input_.setInput(V); };
+	bool setSetpointValue(Value V);
+	bool setFeedbackValue(Value V);
 
 	void addControllerP(Unit UnitOutput, double K);
 	void addControllerI(Unit UnitOutput, double K);
@@ -34,9 +35,12 @@ public:
 private:
 	void addControllable(Controllable* ControlAddr);
 	Outputable* getKnotAddrLast();
-
-	Controller_Input Input_;
+	bool calcError();
+	
 	std::vector<Controllable*> Knots_;
+	Controller_Input Error_;
+	Value Setpoint_;
+	Value Feedback_;
 };
 
 #endif // CONTROLLERSYSTEM_H

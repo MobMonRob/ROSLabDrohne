@@ -9,7 +9,7 @@ class Controller_Input : public Outputable
 public:
 	Controller_Input(Unit UnitOutput) : Outputable(UnitOutput) {};
 
-	void setInput(Value V) { this->Input_ = V; };
+	bool setInput(Value V);
 
 	Value getOutputValue() { return this->Input_; };
 

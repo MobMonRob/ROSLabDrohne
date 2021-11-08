@@ -15,6 +15,8 @@ Value Value::operator+(const Value& V)
 		else
 		{
 			// TODO how to tread different time-values?
+
+			ReturnItem = Value(this->getUnit(), this->getValue() + V.Value_, this->getTime());
 		}
 	}
 
@@ -35,6 +37,8 @@ Value Value::operator-(const Value& V)
 		else
 		{
 			// TODO how to tread different time-values?
+
+			ReturnItem = Value(this->getUnit(), this->getValue() - V.Value_, this->getTime());
 		}
 	}
 

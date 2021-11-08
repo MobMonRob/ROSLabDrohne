@@ -29,14 +29,14 @@ int main()
     CS1.addControllerI(U2, 1.0);
 
 
-    CS1.setInputValue(Value(U0));
-
     double a = 1.0;
     double tmax = 1.0;
 
-    for (double t = 0.0; t <= tmax; t += 0.0001)
+    CS1.setSetpointValue(Value(U0, a));
+
+    for (double t = 0.0; t <= tmax; t += 0.001)
     {
-        CS1.setInputValue(Value(U0, a, t));
+        bool Result = CS1.setFeedbackValue(Value(U0, 0.0, t));
 
 
         Value Out = CS1.getOutputValue();
