@@ -3,9 +3,24 @@
 
 #include <iostream>
 
+#include <Unit.h>
+#include <Value.h>
+#include <Controller_Input.h>
+#include <Controller_I.h>
+#include <ControllerSystem.h>
+
+
+
 int main()
 {
     std::cout << "Hello World!\n";
+
+    Unit U1("m");
+    Value V1(U1);
+
+    std::cout << U1.getUnit() << std::endl;
+
+
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
