@@ -9,5 +9,3 @@ AccelToPos::AccelToPos(double InitPos, double InitVel)
 {
 }
 
-
-
