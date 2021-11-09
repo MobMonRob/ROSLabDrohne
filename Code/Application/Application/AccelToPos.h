@@ -11,6 +11,7 @@ class AccelToPos : Outputable
 {
 public:
 	AccelToPos(double InitPos = 0.0, double InitVel = 0.0);
+<<<<<<< Updated upstream
 
 	/*
 	bool setInput(Value V) { return this->Input_.setInput(V); };
@@ -19,6 +20,8 @@ public:
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
 
+=======
+>>>>>>> Stashed changes
 
 	bool setInput(Value V) { return this->Input_.setInput(V); };
 
