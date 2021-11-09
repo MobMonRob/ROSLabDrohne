@@ -11,10 +11,13 @@ class AccelToPos : Outputable
 {
 public:
 	AccelToPos(double InitPos = 0.0, double InitVel = 0.0);
+<<<<<<< Updated upstream
 
 
 
 
+=======
+>>>>>>> Stashed changes
 
 	bool setInput(Value V) { return this->Input_.setInput(V); };
 
