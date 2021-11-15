@@ -1,14 +1,2 @@
-﻿  Controllable.cpp
-  ControllerSystem.cpp
-  Controller_D.cpp
-  Controller_Input.cpp
-  Controller_PID.cpp
-  Controller_PT.cpp
-  Outputable.cpp
-  Controller_I.cpp
-  Controller_P.cpp
-  Domain.cpp
-  Value.cpp
-  Vector3D.cpp
-  Code wird generiert...
-  Domain.vcxproj -> C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Domain\Debug\Domain.dll
+﻿  Domain.cpp
+  Domain.vcxproj -> C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Domain\Debug\Domain.exe

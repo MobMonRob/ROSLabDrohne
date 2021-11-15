@@ -27,7 +27,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -145,10 +145,10 @@
     <ClCompile Include="Controller_Input.cpp" />
     <ClCompile Include="Controller_PID.cpp" />
     <ClCompile Include="Controller_PT.cpp" />
+    <ClCompile Include="Domain.cpp" />
     <ClCompile Include="Outputable.cpp" />
     <ClCompile Include="Controller_I.cpp" />
     <ClCompile Include="Controller_P.cpp" />
-    <ClCompile Include="Domain.cpp" />
     <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
