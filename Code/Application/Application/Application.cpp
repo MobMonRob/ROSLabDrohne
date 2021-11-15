@@ -3,9 +3,17 @@
 
 #include <iostream>
 
+<<<<<<< HEAD
 #include "Controller_Input.h"
 #include "Controller_I.h"
 //#include "AccelToPos.h"
+=======
+#include <Unit.h>
+#include <Value.h>
+#include <Controller_Input.h>
+#include <Controller_I.h>
+#include <ControllerSystem.h>
+>>>>>>> devel_app
 
 
 
@@ -13,6 +21,7 @@ int main()
 {
     std::cout << "Hello World!\n";
 
+<<<<<<< HEAD
     Unit U("m/s²");
 
 
@@ -30,6 +39,12 @@ int main()
 
         //std::cout << "t=" << t << ", Value=" << I.getOutputValue().getValue() << std::endl;
     }
+=======
+    Unit U1("m");
+    Value V1(U1);
+
+    std::cout << U1.getUnit() << std::endl;
+>>>>>>> devel_app
 
 
 }

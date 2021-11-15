@@ -2,6 +2,7 @@
 
 
 AccelToPos::AccelToPos(double InitPos, double InitVel)
+<<<<<<< HEAD
 	: Outputable(Unit("m"))/*,
 	Input_(Unit("m/s²")),
 	AccelToVel_(Unit("m/s²"), Unit("m/s"), 1.0),
@@ -14,5 +15,12 @@ AccelToPos::AccelToPos(double InitPos, double InitVel)
 	this->VelToPos_.setIntputAddr(&this->AccelToVel_);
 	// set Sum to InitPos
 	*/
+=======
+	: Outputable(Unit("m")),
+	Input_(Unit("m/s²")),
+	AccelToVel_(Unit("m/s²"), Unit("m/s"), 1.0, &Input_, InitVel),
+	VelToPos_(Unit("m/s"), Unit("m"), 1.0, &AccelToVel_, InitPos)
+{
+>>>>>>> devel_app
 }
 
