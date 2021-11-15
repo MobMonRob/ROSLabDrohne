@@ -1,4 +1,4 @@
-﻿#include "AccelToPos.h"
+#include "AccelToPos.h"
 
 
 AccelToPos::AccelToPos(double InitPos, double InitVel)
