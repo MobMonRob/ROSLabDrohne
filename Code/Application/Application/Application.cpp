@@ -3,8 +3,10 @@
 
 #include <iostream>
 
+#include "Controller_Input.h"
+#include "Controller_I.h"
+//#include "AccelToPos.h"
 
-#include "AccelToPos.h"
 
 
 int main()
@@ -17,7 +19,7 @@ int main()
 
     //AccelToPos X;
     Controller_Input X(U);
-    Controller_I I(U, Unit(), 1.0);
+    Controller_I I(U, Unit("m/s"), 1.0);
 
 
     for (double t = 0.0; t < 1.0; t += 0.1)
