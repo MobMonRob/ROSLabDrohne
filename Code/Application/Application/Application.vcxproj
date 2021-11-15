@@ -73,8 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <SourcePath>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Domain\Domain;$(SourcePath)</SourcePath>
+<<<<<<< HEAD
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+=======
+    <IncludePath>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Domain\Domain;$(IncludePath)</IncludePath>
+>>>>>>> devel_app
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -97,7 +101,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+=======
+>>>>>>> devel_app
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,7 +157,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelToPos.h" />
+<<<<<<< HEAD
     <ClInclude Include="resource.h" />
+=======
+>>>>>>> devel_app
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

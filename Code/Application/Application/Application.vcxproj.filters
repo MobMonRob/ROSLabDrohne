@@ -26,8 +26,11 @@
     <ClInclude Include="AccelToPos.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="resource.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+=======
+>>>>>>> devel_app
   </ItemGroup>
 </Project>
