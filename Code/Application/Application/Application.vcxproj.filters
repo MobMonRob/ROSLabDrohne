@@ -7,6 +7,7 @@
     <ClCompile Include="Application.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headerdateien">
@@ -26,5 +27,6 @@
     <ClInclude Include="Transmitable.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="State.h" />
   </ItemGroup>
 </Project>
