@@ -1,6 +1,7 @@
 #ifndef ACCELTOPOS_H
 #define ACCELTOPOS_H
 
+#include <Unit.h>
 #include <Value.h>
 #include <Outputable.h>
 #include <Controller_Input.h>
@@ -11,19 +12,7 @@ class AccelToPos : Outputable
 {
 public:
 	AccelToPos(double InitPos = 0.0, double InitVel = 0.0);
-<<<<<<< Updated upstream
 
-	/*
-=======
-<<<<<<< Updated upstream
-
-
-
-
-=======
->>>>>>> Stashed changes
-
->>>>>>> devel_app
 	bool setInput(Value V) { return this->Input_.setInput(V); };
 
 	Value getOutputValue() { return this->VelToPos_.getOutputValue(); };
