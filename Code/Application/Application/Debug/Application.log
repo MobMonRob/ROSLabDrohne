@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-﻿Application.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""public: __thiscall Controller_I::Controller_I(class Unit,class Unit,double,class Outputable *,double)" (??0Controller_I@@QAE@VUnit@@0NPAVOutputable@@N@Z)" in Funktion "_main".
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Application\Debug\Application.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
-=======
-﻿  Application.vcxproj -> C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Application\Debug\Application.exe
->>>>>>> devel_app
