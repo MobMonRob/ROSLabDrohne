@@ -11,10 +11,10 @@ Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, double kP, doubl
 
 
 
-Value Controller_PID::getOutputValue()
+TimedValue Controller_PID::getOutputTimedValue()
 {
-	return this->ControlP_.getOutputValue() + 
-		this->ControlI_.getOutputValue() + 
-		this->ControlD_.getOutputValue();
+	return this->ControlP_.getOutputTimedValue() + 
+		this->ControlI_.getOutputTimedValue() + 
+		this->ControlD_.getOutputTimedValue();
 }
 

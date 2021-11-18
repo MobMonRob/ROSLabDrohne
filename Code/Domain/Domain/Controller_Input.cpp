@@ -1,17 +1,17 @@
 #include "Controller_Input.h"
 
 
-bool Controller_Input::setInput(Value V)
+bool Controller_Input::setInput(TimedValue V)
 {
-	bool ReturnValue = false;
+	bool ReturnTimedValue = false;
 
 
 	if (V.getUnit() == this->getOutputUnit())
 	{
 		this->Input_ = V;
 
-		ReturnValue = true;
+		ReturnTimedValue = true;
 	}
 
-	return ReturnValue;
+	return ReturnTimedValue;
 }

@@ -2,23 +2,23 @@
 
 
 
-Controller_I::Controller_I(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr, double InitValue)
+Controller_I::Controller_I(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr, double InitTimedValue)
 	: Controllable(UnitInput, UnitOutput, kI, InputAddr)
 {
 };
 
 
 
-Value Controller_I::getOutputValue()
+TimedValue Controller_I::getOutputTimedValue()
 {
 	if (this->getInputAddr() != nullptr)
 	{
-		Value Input = this->getInputAddr()->getOutputValue();
+		TimedValue Input = this->getInputAddr()->getOutputTimedValue();
 		double DiffTime = Input.getTime() - this->Sum_.getTime();
 		double Sum = this->Sum_.getValue() + Input.getValue() * this->k_ * DiffTime;
 
 
-		this->Sum_ = Value(this->getOutputUnit(), Sum, Input.getTime());
+		this->Sum_ = TimedValue(this->getOutputUnit(), Sum, Input.getTime());
 	}
 
 	return this->Sum_;

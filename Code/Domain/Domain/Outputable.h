@@ -2,7 +2,7 @@
 #define OUTPUTABLE_H
 
 #include "Unit.h"
-#include "Value.h"
+#include "TimedValue.h"
 
 
 class Outputable
@@ -11,7 +11,7 @@ public:
 	Outputable(Unit UnitOutput) : Output_(UnitOutput) {};
 
 	Unit getOutputUnit() { return this->Output_; };
-	virtual Value getOutputValue() { return Value(); };
+	virtual TimedValue getOutputTimedValue() { return TimedValue(); };
 
 protected:
 	void setOutputUnit(Unit UnitOutput) { this->Output_ = UnitOutput; };

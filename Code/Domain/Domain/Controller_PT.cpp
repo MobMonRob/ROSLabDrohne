@@ -9,11 +9,11 @@ Controller_PT::Controller_PT(Unit UnitInput, Unit UnitOutput, double kP, double 
 
 
 
-Value Controller_PT::getOutputValue()
+TimedValue Controller_PT::getOutputTimedValue()
 {
 	if (this->getInputAddr() != nullptr)
 	{
-		Value Input = this->getInputAddr()->getOutputValue();
+		TimedValue Input = this->getInputAddr()->getOutputTimedValue();
 		double DiffTime = Input.getTime() - this->OutputLast_.getTime();
 		double Out_Calc = this->OutputLast_.getValue();
 
@@ -24,7 +24,7 @@ Value Controller_PT::getOutputValue()
 				+ this->OutputLast_.getValue();
 		}
 
-		this->OutputLast_ = Value(this->getOutputUnit(), Out_Calc, Input.getTime());
+		this->OutputLast_ = TimedValue(this->getOutputUnit(), Out_Calc, Input.getTime());
 	}
 
 	return this->OutputLast_;

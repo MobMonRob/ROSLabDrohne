@@ -3,7 +3,7 @@
 
 
 #include "Unit.h"
-#include "Value.h"
+#include "TimedValue.h"
 
 #include "Controllable.h"
 #include "Controller_P.h"
@@ -19,7 +19,7 @@ public:
 	void setKI(double K) { this->ControlI_.setK(K); };
 	void setKD(double K) { this->ControlD_.setK(K); };
 
-	Value getOutputValue();
+	TimedValue getOutputTimedValue();
 
 private:
 	Controller_P ControlP_;

@@ -9,12 +9,12 @@ class Controller_Input : public Outputable
 public:
 	Controller_Input(Unit UnitOutput) : Outputable(UnitOutput) {};
 
-	bool setInput(Value V);
+	bool setInput(TimedValue V);
 
-	Value getOutputValue() { return this->Input_; };
+	TimedValue getOutputTimedValue() { return this->Input_; };
 
 private:
-	Value Input_;
+	TimedValue Input_;
 };
 
 #endif // CONTROLLER_INPUT_H

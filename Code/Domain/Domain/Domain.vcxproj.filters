@@ -24,9 +24,6 @@
     <ClCompile Include="Controller_P.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Value.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Controllable.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -51,6 +48,12 @@
     <ClCompile Include="Domain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TimedValue.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Value.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h">
@@ -63,9 +66,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Controller_P.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Value.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Controllable.h">
@@ -96,6 +96,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ControllerSystem.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedValue.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Timestamp.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

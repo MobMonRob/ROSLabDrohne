@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Unit.h"
-#include "Value.h"
+#include "TimedValue.h"
 #include "Outputable.h"
 #include "Controllable.h"
 #include "Controller_Input.h"
@@ -21,8 +21,8 @@ class ControllerSystem : public Outputable
 public:
 	ControllerSystem(Unit UnitInput);
 
-	bool setSetpointValue(Value V);
-	bool setFeedbackValue(Value V);
+	bool setSetpointTimedValue(TimedValue V);
+	bool setFeedbackTimedValue(TimedValue V);
 
 	void addControllerP(Unit UnitOutput, double K);
 	void addControllerI(Unit UnitOutput, double K);
@@ -30,7 +30,7 @@ public:
 	void addControllerPID(Unit UnitOutput, double KP, double KI, double KD);
 	void addControllerPT(Unit UnitOutput, double K, double T);
 
-	Value getOutputValue() { return this->getKnotAddrLast()->getOutputValue(); };
+	TimedValue getOutputTimedValue() { return this->getKnotAddrLast()->getOutputTimedValue(); };
 
 private:
 	void addControllable(Controllable* ControlAddr);
@@ -39,8 +39,8 @@ private:
 	
 	std::vector<Controllable*> Knots_;
 	Controller_Input Error_;
-	Value Setpoint_;
-	Value Feedback_;
+	TimedValue Setpoint_;
+	TimedValue Feedback_;
 };
 
 #endif // CONTROLLERSYSTEM_H
