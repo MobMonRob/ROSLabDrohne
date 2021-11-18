@@ -147,9 +147,11 @@
   <ItemGroup>
     <ClCompile Include="AccelToPos.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelToPos.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Transmitable.h" />
     <ClInclude Include="Triggerable.h" />
   </ItemGroup>
