@@ -14,6 +14,16 @@ public:
 <<<<<<< Updated upstream
 
 	/*
+=======
+<<<<<<< Updated upstream
+
+
+
+
+=======
+>>>>>>> Stashed changes
+
+>>>>>>> devel_app
 	bool setInput(Value V) { return this->Input_.setInput(V); };
 
 	Value getOutputValue() { return this->VelToPos_.getOutputValue(); };
