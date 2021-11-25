@@ -10,20 +10,20 @@ Controller_P::Controller_P(Unit UnitInput, Unit UnitOutput, double kP, Outputabl
 
 
 
-Value Controller_P::getOutputValue()
+TimedValue Controller_P::getOutputTimedValue()
 {
 	double Output = 0.0;
 	double TimeStamp = 0.0;
 
 	if (this->getInputAddr() != nullptr)
 	{
-		Value Input = this->getInputAddr()->getOutputValue();
+		TimedValue Input = this->getInputAddr()->getOutputTimedValue();
 		
 		
 		Output = Input.getValue() * this->k_;
 		TimeStamp = Input.getTime();
 	}
 
-	return Value(this->getOutputUnit(), Output, TimeStamp);
+	return TimedValue(this->getOutputUnit(), Output, TimeStamp);
 }
 

@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_D_H
 #define CONTROLLER_D_H
 
-#include "Value.h"
+#include "TimedValue.h"
 #include "Controllable.h"
 
 
@@ -10,12 +10,12 @@
 class Controller_D : public Controllable
 {
 public:
-	Controller_D(Unit UnitInput, Unit UnitOutput, double kD = 1.0, Outputable* ValueableAddr = nullptr);
+	Controller_D(Unit UnitInput, Unit UnitOutput, double kD = 1.0, Outputable* TimedValueableAddr = nullptr);
 
-	Value getOutputValue();
+	TimedValue getOutputTimedValue();
 
 private:
-	Value InputLast_;
+	TimedValue InputLast_;
 };
 
 #endif // CONTROLLER_D_H

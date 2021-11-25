@@ -2,7 +2,7 @@
 #define CONTROLLABLE_H
 
 #include "Unit.h"
-#include "Value.h"
+#include "TimedValue.h"
 #include "Outputable.h"
 
 class Controllable : public Outputable
@@ -15,7 +15,7 @@ public:
 
 	Unit getInputUnit() { return this->Input_; };
 	Outputable* getInputAddr() { return this->Inputable_; };
-	virtual Value getOutputValue() { return Value(); };
+	virtual TimedValue getOutputTimedValue() { return TimedValue(); };
 
 protected:
 	double k_;

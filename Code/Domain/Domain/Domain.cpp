@@ -1,5 +1,4 @@
-// Domain.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
-//
+
 
 #include <iostream>
 
@@ -29,17 +28,17 @@ int main()
     CS1.addControllerI(U2, 1.0);
 
 
-    CS1.setInputValue(Value(U0));
-
     double a = 1.0;
     double tmax = 1.0;
 
-    for (double t = 0.0; t <= tmax; t += 0.0001)
+    CS1.setSetpointTimedValue(TimedValue(U0, a));
+
+    for (double t = 0.0; t <= tmax; t += 0.001)
     {
-        CS1.setInputValue(Value(U0, a, t));
+        bool Result = CS1.setFeedbackTimedValue(TimedValue(U0, 0.0, t));
 
 
-        Value Out = CS1.getOutputValue();
+        TimedValue Out = CS1.getOutputTimedValue();
 
 
         if (false)
@@ -56,7 +55,7 @@ int main()
     }
 
 
-    Value Out = CS1.getOutputValue();
+    TimedValue Out = CS1.getOutputTimedValue();
     double Calc = 0.5 * a * tmax * tmax;
     double Diff = Out.getValue() - Calc;
 

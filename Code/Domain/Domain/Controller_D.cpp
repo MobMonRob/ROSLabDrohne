@@ -9,7 +9,7 @@ Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputabl
 
 
 
-Value Controller_D::getOutputValue()
+TimedValue Controller_D::getOutputTimedValue()
 {
 	double Diff = 0.0;
 	double Time = this->InputLast_.getTime();
@@ -17,14 +17,14 @@ Value Controller_D::getOutputValue()
 
 	if (this->getInputAddr() != nullptr)
 	{
-		Value Input = this->getInputAddr()->getOutputValue();
+		TimedValue Input = this->getInputAddr()->getOutputTimedValue();
 		
 
 		Time = Input.getTime();
 		Diff = Input.getValue() - this->InputLast_.getValue();
 		DiffTime = Time - this->InputLast_.getTime();
 
-		this->InputLast_ = Value(this->getInputUnit(), Input.getValue(), Time);
+		this->InputLast_ = TimedValue(this->getInputUnit(), Input.getValue(), Time);
 	}
 
 	if (DiffTime <= 0)
@@ -33,6 +33,6 @@ Value Controller_D::getOutputValue()
 		DiffTime = 1.0;
 	}
 
-	return Value(this->getOutputUnit(), (Diff / DiffTime) * this->k_, Time);
+	return TimedValue(this->getOutputUnit(), (Diff / DiffTime) * this->k_, Time);
 }
 

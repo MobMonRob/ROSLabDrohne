@@ -3,13 +3,41 @@
 
 
 ControllerSystem::ControllerSystem(Unit UnitInput)
-	: Outputable(Unit()), Input_(UnitInput)
+	: Outputable(Unit()), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
 {
 }
 
 
 
+bool ControllerSystem::setSetpointTimedValue(TimedValue V)
+{
+	bool ReturnTimedValue = false;
 
+
+	if (V.getUnit() == this->Error_.getOutputUnit())
+	{
+		this->Setpoint_ = V;
+
+		ReturnTimedValue = this->calcError();
+	}
+
+	return ReturnTimedValue;
+}
+
+bool ControllerSystem::setFeedbackTimedValue(TimedValue V)
+{
+	bool ReturnTimedValue = false;
+
+
+	if (V.getUnit() == this->Error_.getOutputUnit())
+	{
+		this->Feedback_ = V;
+
+		ReturnTimedValue = this->calcError();
+	}
+
+	return ReturnTimedValue;
+}
 
 
 
@@ -79,7 +107,14 @@ Outputable* ControllerSystem::getKnotAddrLast()
 	}
 	else
 	{
-		return &this->Input_;
+		return &this->Error_;
 	}
 }
+
+bool ControllerSystem::calcError()
+{
+	return this->Error_.setInput(TimedValue(this->Error_.getOutputUnit(), this->Setpoint_.getValue() - this->Feedback_.getValue(), this->Feedback_.getTime()));
+}
+
+
 
