@@ -1,0 +1,6 @@
+#ifndef STATECOLLECTOR_H
+#define STATECOLLECTOR_H
+
+
+
+#endif // STATECOLLECTOR_H

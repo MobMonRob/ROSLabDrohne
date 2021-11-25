@@ -1,0 +1,6 @@
+#ifndef ACTIONADAPTER_H
+#define ACTIONADAPTER_H
+
+
+
+#endif // ACTIONADAPTER_H

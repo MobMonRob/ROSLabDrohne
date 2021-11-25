@@ -158,6 +158,7 @@
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionAdapter.h" />
     <ClInclude Include="include\PosControl\AccelToPos.h" />
     <ClInclude Include="include\PosControl\Controllable.h" />
     <ClInclude Include="include\PosControl\ControllerSystem.h" />
@@ -174,10 +175,11 @@
     <ClInclude Include="include\PosControl\TimedValue.h" />
     <ClInclude Include="include\PosControl\Timestamp.h" />
     <ClInclude Include="include\PosControl\Transmitable.h" />
-    <ClInclude Include="include\PosControl\Triggerable.h" />
     <ClInclude Include="include\PosControl\Unit.h" />
     <ClInclude Include="include\PosControl\Value.h" />
     <ClInclude Include="include\PosControl\Vector3D.h" />
+    <ClInclude Include="StateCollector.h" />
+    <ClInclude Include="StateTranslator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
