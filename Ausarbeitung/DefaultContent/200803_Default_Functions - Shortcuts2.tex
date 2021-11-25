@@ -1,0 +1,26 @@
+%Private Commands which have to be within \begin{Document}
+\newcommand{\comSec}[2][]{\section{#2} \ifthenelse{\isempty{#1}}{\label{sec:#2}}{\label{sec:#1}}}
+\newcommand{\comSSec}[2][]{\subsection{#2} \ifthenelse{\isempty{#1}}{\label{sec:#2}}{\label{sec:#1}}}
+\newcommand{\comSSSec}[2][]{\subsubsection{#2} \ifthenelse{\isempty{#1}}{\label{sec:#2}}{\label{sec:#1}}}
+\newcommand{\comPar}[2][]{\textbf{#2} \ifthenelse{\isempty{#1}}{\label{sec:#2}}{\label{sec:#1}}}
+\newcommand{\comSPar}[2][]{\textit{\textbf{#2}} \ifthenelse{\isempty{#1}}{\label{sec:#2}}{\label{sec:#1}}}
+
+\newcommand{\newSec}[3][]{%
+	\ifthenelse{\equal{#3}{1}}{\comSec[#1]{#2}}{}
+	\ifthenelse{\equal{#3}{2}}{\comSSec[#1]{#2}}{}
+	\ifthenelse{\equal{#3}{3}}{\comSSSec[#1]{#2}}{}
+	\ifthenelse{\equal{#3}{4}}{\comPar[#1]{#2}}{}
+	\ifthenelse{\equal{#3}{5}}{\comSPar[#1]{#2}}{}
+	
+	\ifthenelse{\equal{#3}{-1}}{\comSec[#1]{#2} \setcounter{page}{1}}{} % Appendix Sections
+}
+
+
+
+
+
+\newcommand{\Cellln}[1]
+{
+	\begin{tabular}[c]{@{}l@{}}#1\end{tabular}
+}
+
