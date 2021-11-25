@@ -3,9 +3,39 @@
 
 #include <iostream>
 
+#include <Unit.h>
+#include <Value.h>
+#include <Controller_Input.h>
+#include <Controller_I.h>
+#include <ControllerSystem.h>
+
+#include "AccelToPos.h"
+
+
 int main()
 {
     std::cout << "Hello World!\n";
+
+    Unit U("m/s²");
+
+
+
+    //AccelToPos X;
+    Controller_Input X(U);
+    Controller_I I(U, Unit("m/s"), 1.0);
+
+
+    for (double t = 0.0; t < 1.0; t += 0.1)
+    {
+        //X.setInput(Value(U, 1.0, t));
+
+
+
+        //std::cout << "t=" << t << ", Value=" << I.getOutputValue().getValue() << std::endl;
+    }
+
+
+
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
