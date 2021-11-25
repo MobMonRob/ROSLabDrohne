@@ -18,15 +18,6 @@ public:
 	Value getOutputValue() { return this->VelToPos_.getOutputValue(); };
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
-
-=======
->>>>>>> Stashed changes
-
-	bool setInput(Value V) { return this->Input_.setInput(V); };
-
-	Value getOutputValue() { return this->VelToPos_.getOutputValue(); };
-	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
-
 private:
 	Controller_Input Input_;
 	Controller_I AccelToVel_;
