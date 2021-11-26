@@ -156,6 +156,7 @@
     <ClCompile Include="src\TimedValue.cpp" />
     <ClCompile Include="src\Value.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
+    <ClCompile Include="StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionAdapter.h" />
@@ -172,13 +173,13 @@
     <ClInclude Include="include\PosControl\Outputable.h" />
     <ClInclude Include="include\PosControl\Ringbuffer.h" />
     <ClInclude Include="include\PosControl\State.h" />
+    <ClInclude Include="include\PosControl\StateHandler.h" />
     <ClInclude Include="include\PosControl\TimedValue.h" />
     <ClInclude Include="include\PosControl\Timestamp.h" />
     <ClInclude Include="include\PosControl\Transmitable.h" />
     <ClInclude Include="include\PosControl\Unit.h" />
     <ClInclude Include="include\PosControl\Value.h" />
     <ClInclude Include="include\PosControl\Vector3D.h" />
-    <ClInclude Include="StateCollector.h" />
     <ClInclude Include="StateTranslator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
