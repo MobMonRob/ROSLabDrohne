@@ -44,6 +44,9 @@
     <ClCompile Include="src\Outputable.cpp">
       <Filter>Domain src</Filter>
     </ClCompile>
+    <ClCompile Include="StateHandler.cpp">
+      <Filter>Application src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Abstraction src">
@@ -126,14 +129,14 @@
     <ClInclude Include="StateTranslator.h">
       <Filter>Application h</Filter>
     </ClInclude>
-    <ClInclude Include="StateCollector.h">
-      <Filter>Application h</Filter>
-    </ClInclude>
     <ClInclude Include="include\PosControl\Transmitable.h">
       <Filter>Adapter h</Filter>
     </ClInclude>
     <ClInclude Include="ActionAdapter.h">
       <Filter>Adapter h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\StateHandler.h">
+      <Filter>Application h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

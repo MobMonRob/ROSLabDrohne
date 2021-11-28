@@ -1,8 +1,8 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-
 #include "PosControl/Unit.h"
+
 
 class Vector3D
 {
@@ -10,7 +10,10 @@ public:
 	Vector3D(Unit Unit) : Vector3D(Unit, 0.0, 0.0, 0.0) {};
 	Vector3D(Unit Unit, double X, double Y, double Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
 
+	Vector3D operator+ (const Vector3D& V);
 	Vector3D operator- (const Vector3D& V);
+	Vector3D operator/ (double Divisor);
+	bool operator== (const Vector3D& V);
 
 	Unit getUnit() { return this->Unit_; };
 	double getX() { return this->X_; };
