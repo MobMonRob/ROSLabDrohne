@@ -47,6 +47,9 @@
     <ClCompile Include="StateHandler.cpp">
       <Filter>Application src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ActionAdapter.cpp">
+      <Filter>Adapter src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Abstraction src">
@@ -69,6 +72,9 @@
     </Filter>
     <Filter Include="Adapter h">
       <UniqueIdentifier>{1a982228-0f16-4dd9-8189-8b77e8102cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapter src">
+      <UniqueIdentifier>{2779adb1-69a1-4c07-8e43-2f7e01be9129}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,11 +138,11 @@
     <ClInclude Include="include\PosControl\Transmitable.h">
       <Filter>Adapter h</Filter>
     </ClInclude>
-    <ClInclude Include="ActionAdapter.h">
-      <Filter>Adapter h</Filter>
-    </ClInclude>
     <ClInclude Include="include\PosControl\StateHandler.h">
       <Filter>Application h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\ActionAdapter.h">
+      <Filter>Adapter h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

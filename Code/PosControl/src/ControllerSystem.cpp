@@ -9,7 +9,7 @@ ControllerSystem::ControllerSystem(Unit UnitInput)
 
 
 
-bool ControllerSystem::setSetpointTimedValue(TimedValue V)
+bool ControllerSystem::setSetpointValue(Value V)
 {
 	bool ReturnTimedValue = false;
 

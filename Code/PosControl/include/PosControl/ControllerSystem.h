@@ -21,7 +21,7 @@ class ControllerSystem : public Outputable
 public:
 	ControllerSystem(Unit UnitInput);
 
-	bool setSetpointTimedValue(TimedValue V);
+	bool setSetpointValue(Value V);
 	bool setFeedbackTimedValue(TimedValue V);
 
 	void addControllerP(Unit UnitOutput, double K);
@@ -30,6 +30,7 @@ public:
 	void addControllerPID(Unit UnitOutput, double KP, double KI, double KD);
 	void addControllerPT(Unit UnitOutput, double K, double T);
 
+	Value getSetpointValue() { return this->Setpoint_; };
 	TimedValue getOutputTimedValue() { return this->getKnotAddrLast()->getOutputTimedValue(); };
 
 private:
@@ -39,7 +40,7 @@ private:
 	
 	std::vector<Controllable*> Knots_;
 	Controller_Input Error_;
-	TimedValue Setpoint_;
+	Value Setpoint_;
 	TimedValue Feedback_;
 };
 

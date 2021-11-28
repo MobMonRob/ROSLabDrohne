@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\AccelToPos.cpp" />
+    <ClCompile Include="src\ActionAdapter.cpp" />
     <ClCompile Include="src\Controllable.cpp" />
     <ClCompile Include="src\ControllerSystem.cpp" />
     <ClCompile Include="src\Controller_D.cpp" />
@@ -159,8 +160,8 @@
     <ClCompile Include="StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionAdapter.h" />
     <ClInclude Include="include\PosControl\AccelToPos.h" />
+    <ClInclude Include="include\PosControl\ActionAdapter.h" />
     <ClInclude Include="include\PosControl\Controllable.h" />
     <ClInclude Include="include\PosControl\ControllerSystem.h" />
     <ClInclude Include="include\PosControl\Controller_D.h" />

@@ -18,6 +18,11 @@ public:
 	TimedValue getOutputValue() { return this->VelToPos_.getOutputTimedValue(); };
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
+public:
+	static Unit Acceleration_;
+	static Unit Velocity_;
+	static Unit Position_;
+
 private:
 	Controller_Input Input_;
 	Controller_I AccelToVel_;

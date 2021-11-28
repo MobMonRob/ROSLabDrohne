@@ -15,7 +15,7 @@ public:
 
 	Unit getInputUnit() { return this->Input_; };
 	Outputable* getInputAddr() { return this->Inputable_; };
-	virtual TimedValue getOutputTimedValue() { return TimedValue(); };
+	virtual TimedValue getOutputTimedValue() { return TimedValue(this->getOutputUnit()); };
 
 protected:
 	double k_;
