@@ -3,9 +3,9 @@
 
 #include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
-#include "PosControl/Outputable.h"
+#include "PosControl/Output.h"
 
-class Controllable : public Outputable
+class Controllable : public Output
 {
 public:
 	Controllable(Unit UnitInput, Unit UnitOutput, double k = 1.0, Outputable* InputAddr = nullptr);

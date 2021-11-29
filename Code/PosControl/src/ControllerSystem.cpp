@@ -3,9 +3,22 @@
 
 
 ControllerSystem::ControllerSystem(Unit UnitInput)
-	: Outputable(Unit()), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
+	: Output(Unit()), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
 {
 }
+
+
+ControllerSystem::~ControllerSystem()
+{
+	while (this->Knots_.size() > 0)
+	{
+		delete this->getKnotAddrLast();
+	}
+}
+
+
+
+
 
 
 
@@ -99,16 +112,30 @@ void ControllerSystem::addControllable(Controllable* ControlAddr)
 	this->setOutputUnit(ControlAddr->getOutputUnit());
 }
 
+Controllable* ControllerSystem::getKnot(int ID)
+{
+	Controllable* ReturnAddr = nullptr;
+
+
+	if (ID >= 0 && ID < this->Knots_.size())
+	{
+		ReturnAddr = this->Knots_.at(ID);
+	}
+
+	return ReturnAddr;
+}
+
 Outputable* ControllerSystem::getKnotAddrLast()
 {
-	if (this->Knots_.size() > 0)
+	Outputable* ReturnAddr = this->getKnot(this->Knots_.size() - 1);
+
+
+	if (ReturnAddr == nullptr)
 	{
-		return this->Knots_.at(this->Knots_.size()-1);
+		ReturnAddr = &this->Error_;
 	}
-	else
-	{
-		return &this->Error_;
-	}
+
+	return ReturnAddr;
 }
 
 bool ControllerSystem::calcError()

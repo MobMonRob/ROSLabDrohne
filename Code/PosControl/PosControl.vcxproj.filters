@@ -44,11 +44,14 @@
     <ClCompile Include="src\Outputable.cpp">
       <Filter>Domain src</Filter>
     </ClCompile>
-    <ClCompile Include="StateHandler.cpp">
-      <Filter>Application src</Filter>
-    </ClCompile>
     <ClCompile Include="src\ActionAdapter.cpp">
       <Filter>Adapter src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Output.cpp">
+      <Filter>Domain src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateHandler.cpp">
+      <Filter>Application src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="include\PosControl\ActionAdapter.h">
       <Filter>Adapter h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\Output.h">
+      <Filter>Domain h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 class State
 {
 public:
-	State() : State(Vector3D(State::UnitTranslative_), Vector3D(State::UnitAngular_), Timestamp()) {};
+	State() : State(Vector3D(State::UnitTranslative), Vector3D(State::UnitAngular), Timestamp()) {};
 	State(Vector3D Translative, Vector3D Angular, Timestamp Time);
 
 	bool operator==(const State& S);

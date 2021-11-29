@@ -8,16 +8,8 @@
 class Outputable
 {
 public:
-	Outputable(Unit UnitOutput) : Output_(UnitOutput) {};
-
-	Unit getOutputUnit() { return this->Output_; };
-	virtual TimedValue getOutputTimedValue() { return TimedValue(); };
-
-protected:
-	void setOutputUnit(Unit UnitOutput) { this->Output_ = UnitOutput; };
-
-private:
-	Unit Output_;
+	virtual Unit getOutputUnit() { return Unit(); };
+	virtual TimedValue getOutputTimedValue() { return TimedValue(Unit()); };
 };
 
 #endif // OUTPUTABLE_H

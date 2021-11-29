@@ -3,7 +3,7 @@
 
 
 Controller_I::Controller_I(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr, double InitTimedValue)
-	: Controllable(UnitInput, UnitOutput, kI, InputAddr)
+	: Controllable(UnitInput, UnitOutput, kI, InputAddr), Sum_(UnitOutput)
 {
 };
 

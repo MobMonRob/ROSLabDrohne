@@ -3,7 +3,7 @@
 
 TimedValue TimedValue::operator+(const TimedValue& V)
 {
-	TimedValue ReturnItem;
+	TimedValue ReturnItem(this->getUnit());
 
 
 	if (this->getUnit() == V.Unit_)
@@ -25,7 +25,7 @@ TimedValue TimedValue::operator+(const TimedValue& V)
 
 TimedValue TimedValue::operator-(const TimedValue& V)
 {
-	TimedValue ReturnItem;
+	TimedValue ReturnItem(this->getUnit());
 
 
 	if (this->getUnit() == V.Unit_)

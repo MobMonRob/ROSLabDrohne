@@ -152,12 +152,13 @@
     <ClCompile Include="src\Controller_P.cpp" />
     <ClCompile Include="src\Controller_PID.cpp" />
     <ClCompile Include="src\Controller_PT.cpp" />
+    <ClCompile Include="src\Output.cpp" />
     <ClCompile Include="src\Outputable.cpp" />
     <ClCompile Include="src\State.cpp" />
+    <ClCompile Include="src\StateHandler.cpp" />
     <ClCompile Include="src\TimedValue.cpp" />
     <ClCompile Include="src\Value.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
-    <ClCompile Include="StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PosControl\AccelToPos.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\PosControl\Controller_PID.h" />
     <ClInclude Include="include\PosControl\Controller_PT.h" />
     <ClInclude Include="include\PosControl\Optional.h" />
+    <ClInclude Include="include\PosControl\Output.h" />
     <ClInclude Include="include\PosControl\Outputable.h" />
     <ClInclude Include="include\PosControl\Ringbuffer.h" />
     <ClInclude Include="include\PosControl\State.h" />

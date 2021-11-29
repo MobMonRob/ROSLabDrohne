@@ -2,7 +2,7 @@
 
 
 Controller_PT::Controller_PT(Unit UnitInput, Unit UnitOutput, double kP, double T1, Outputable* InputAddr)
-	: Controllable(UnitInput, UnitOutput, kP, InputAddr)
+	: Controllable(UnitInput, UnitOutput, kP, InputAddr), OutputLast_(UnitOutput)
 {
 	this->T1_ = T1;
 };

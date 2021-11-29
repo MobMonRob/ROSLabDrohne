@@ -7,10 +7,11 @@
 class Controller_Input : public Outputable
 {
 public:
-	Controller_Input(Unit UnitOutput) : Outputable(UnitOutput) {};
+	Controller_Input(Unit UnitOutput) : Outputable(), Input_(UnitOutput) {};
 
 	bool setInput(TimedValue V);
 
+	Unit getOutputUnit() { return this->Input_.getUnit(); };
 	TimedValue getOutputTimedValue() { return this->Input_; };
 
 private:

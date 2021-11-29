@@ -19,9 +19,9 @@ public:
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
 public:
-	static Unit Acceleration_;
-	static Unit Velocity_;
-	static Unit Position_;
+	static Unit Acceleration;
+	static Unit Velocity;
+	static Unit Position;
 
 private:
 	Controller_Input Input_;

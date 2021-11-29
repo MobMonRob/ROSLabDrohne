@@ -2,17 +2,12 @@
 
 #include <iostream>
 
-#include "PosControl/Controller_Input.h"
-#include "PosControl/Controller_Input.h"
-#include "PosControl/Controller_P.h"
-#include "PosControl/Controller_I.h"
-#include "PosControl/Controller_D.h"
-#include "PosControl/Controller_PT.h"
-#include "PosControl/Controller_PID.h"
 #include "PosControl/ControllerSystem.h"
 
 #include "PosControl/Ringbuffer.h"
 #include "PosControl/Vector3D.h"
+
+#include "PosControl/ActionAdapter.h"
 
 
 int main()
@@ -32,7 +27,7 @@ int main()
     double a = 1.0;
     double tmax = 1.0;
 
-    CS1.setSetpointTimedValue(TimedValue(U0, a));
+    CS1.setSetpointValue(TimedValue(U0, a));
 
     for (double t = 0.0; t <= tmax; t += 0.001)
     {

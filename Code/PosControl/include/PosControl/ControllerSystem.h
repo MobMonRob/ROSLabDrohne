@@ -5,7 +5,8 @@
 
 #include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
-#include "PosControl/Outputable.h"
+#include "PosControl/Output.h"
+
 #include "PosControl/Controllable.h"
 #include "PosControl/Controller_Input.h"
 #include "PosControl/Controller_P.h"
@@ -15,14 +16,23 @@
 #include "PosControl/Controller_PT.h"
 
 
+enum ControllerType
+{
+	P,
+	I,
+	D
+};
 
-class ControllerSystem : public Outputable
+
+class ControllerSystem : public Output
 {
 public:
 	ControllerSystem(Unit UnitInput);
+	~ControllerSystem();
 
 	bool setSetpointValue(Value V);
 	bool setFeedbackTimedValue(TimedValue V);
+	bool setK(int ID, ControllerType Type, double K);
 
 	void addControllerP(Unit UnitOutput, double K);
 	void addControllerI(Unit UnitOutput, double K);
@@ -35,6 +45,7 @@ public:
 
 private:
 	void addControllable(Controllable* ControlAddr);
+	Controllable* getKnot(int ID);
 	Outputable* getKnotAddrLast();
 	bool calcError();
 	

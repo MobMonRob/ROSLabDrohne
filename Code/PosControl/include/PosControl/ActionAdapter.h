@@ -5,12 +5,20 @@
 
 
 #include "PosControl/ControllerSystem.h"
-#include "PosControl/StateHandler.h"
-
 
 #include "PosControl/AccelToPos.h"
+#include "PosControl/StateHandler.h"
 
 #include "PosControl/Transmitable.h"
+
+
+enum ActionDirection
+{
+	DirX,
+	DirY,
+	DirZ
+
+};
 
 
 class ActionAdapter
@@ -20,6 +28,8 @@ public:
 
 	bool setPos_Abs(double X, double Y, double Z);
 	bool setPos_Diff(double DiffX, double DiffY, double DiffZ);
+
+	bool setK_Abs(ActionDirection Direction, ControllerType Type, double K);
 
 
 

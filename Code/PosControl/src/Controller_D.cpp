@@ -3,7 +3,7 @@
 
 
 Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr)
-	: Controllable(UnitInput, UnitOutput, kI, InputAddr)
+	: Controllable(UnitInput, UnitOutput, kI, InputAddr), InputLast_(UnitInput)
 {
 };
 
