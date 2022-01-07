@@ -24,7 +24,7 @@ enum ActionDirection
 class ActionAdapter
 {
 public:
-	ActionAdapter(Transmitable Transmitable);
+	ActionAdapter(Transmitable *Transmitable);
 
 	bool setPos_Abs(double X, double Y, double Z);
 	bool setPos_Diff(double DiffX, double DiffY, double DiffZ);
@@ -43,7 +43,7 @@ public:
 
 
 private:
-	Transmitable ActionReceiver_;
+	Transmitable *ActionReceiver_;
 	StateHandler StateHandler_;
 
 	AccelToPos PosX_;

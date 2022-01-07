@@ -4,7 +4,7 @@
 
 
 
-ActionAdapter::ActionAdapter(Transmitable Transmitable)
+ActionAdapter::ActionAdapter(Transmitable *Transmitable)
 	: ActionReceiver_(Transmitable),
 	ControlX_(AccelToPos::Position),
 	ControlY_(AccelToPos::Position),
@@ -89,7 +89,7 @@ void ActionAdapter::addState(State Entry)
 	this->ControlY_.setFeedbackTimedValue(this->PosY_.getOutputValue());
 	this->ControlZ_.setFeedbackTimedValue(this->PosZ_.getOutputValue());
 
-	this->ActionReceiver_.transmitAction(
+	this->ActionReceiver_->transmitAction(
 		this->ControlX_.getOutputTimedValue().getValue(),
 		this->ControlY_.getOutputTimedValue().getValue(),
 		this->ControlZ_.getOutputTimedValue().getValue(),
