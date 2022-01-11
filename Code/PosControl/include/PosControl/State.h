@@ -8,7 +8,7 @@
 class State
 {
 public:
-	State() : State(Vector3D(State::UnitTranslative), Vector3D(State::UnitAngular), Timestamp()) {};
+	State() : State(Vector3D(Unit_Velocity), Vector3D(Unit_AngleDeg), Timestamp()) {};
 	State(Vector3D Translative, Vector3D Angular, Timestamp Time);
 
 	bool operator==(const State& S);
@@ -17,10 +17,6 @@ public:
 	Vector3D getVector_Translative() { return this->Translative_; };
 	Vector3D getVector_Angular() { return this->Angular_; };
 	Timestamp getTimestamp() { return this->Time_; };
-
-public:
-	static Unit UnitTranslative;
-	static Unit UnitAngular;
 
 private:
 	Vector3D Translative_;

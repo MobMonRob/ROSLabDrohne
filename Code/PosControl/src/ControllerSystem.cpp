@@ -3,16 +3,24 @@
 
 
 ControllerSystem::ControllerSystem(Unit UnitInput)
-	: Output(Unit()), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
+	: Output(Unit_Invalid), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
 {
 }
 
 
 ControllerSystem::~ControllerSystem()
 {
-	while (this->Knots_.size() > 0)
+	while (!this->Knots_.empty())
 	{
-		delete this->getKnotAddrLast();
+		Outputable *Knot = this->getKnotAddrLast();
+
+
+		if (Knot != nullptr)
+		{
+			delete Knot;
+
+			this->Knots_.pop_back();
+		}
 	}
 }
 

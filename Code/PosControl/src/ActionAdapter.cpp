@@ -6,13 +6,13 @@
 
 ActionAdapter::ActionAdapter(Transmitable *Transmitable)
 	: ActionReceiver_(Transmitable),
-	ControlX_(AccelToPos::Position),
-	ControlY_(AccelToPos::Position),
-	ControlZ_(AccelToPos::Position)
+	ControlX_(Unit_Length),
+	ControlY_(Unit_Length),
+	ControlZ_(Unit_Length)
 {
-	this->ControlX_.addControllerPID(Unit("rad"), 1.0, 0.0, 0.0);
-	this->ControlY_.addControllerPID(Unit("rad"), 1.0, 0.0, 0.0);
-	this->ControlZ_.addControllerPID(Unit("%"), 1.0, 0.0, 0.0);
+	this->ControlX_.addControllerPID(Unit_AngleRad, 1.0, 0.0, 0.0);
+	this->ControlY_.addControllerPID(Unit_AngleRad, 1.0, 0.0, 0.0);
+	this->ControlZ_.addControllerPID(Unit_Percent, 1.0, 0.0, 0.0);
 }
 
 
@@ -35,10 +35,10 @@ bool ActionAdapter::setPos_Abs(double X, double Y, double Z)
 {
 	bool ReturnBool = true;
 
-
-	ReturnBool &= this->ControlX_.setSetpointValue(Value(AccelToPos::Position, X));
-	ReturnBool &= this->ControlY_.setSetpointValue(Value(AccelToPos::Position, Y));
-	ReturnBool &= this->ControlZ_.setSetpointValue(Value(AccelToPos::Position, Z));
+	
+	ReturnBool &= this->ControlX_.setSetpointValue(Value(Unit_Length, X));
+	ReturnBool &= this->ControlY_.setSetpointValue(Value(Unit_Length, Y));
+	ReturnBool &= this->ControlZ_.setSetpointValue(Value(Unit_Length, Z));
 
 	return ReturnBool;
 }
@@ -50,17 +50,17 @@ bool ActionAdapter::setPos_Diff(double DiffX, double DiffY, double DiffZ)
 
 	if (DiffX != 0)
 	{
-		ReturnBool &= this->ControlX_.setSetpointValue(this->ControlX_.getSetpointValue() + Value(AccelToPos::Position, DiffX));
+		ReturnBool &= this->ControlX_.setSetpointValue(this->ControlX_.getSetpointValue() + Value(Unit_Length, DiffX));
 	}
 
 	if (DiffY != 0)
 	{
-		ReturnBool &= this->ControlY_.setSetpointValue(this->ControlY_.getSetpointValue() + Value(AccelToPos::Position, DiffY));
+		ReturnBool &= this->ControlY_.setSetpointValue(this->ControlY_.getSetpointValue() + Value(Unit_Length, DiffY));
 	}
 
 	if (DiffZ != 0)
 	{
-		ReturnBool &= this->ControlZ_.setSetpointValue(this->ControlZ_.getSetpointValue() + Value(AccelToPos::Position, DiffZ));
+		ReturnBool &= this->ControlZ_.setSetpointValue(this->ControlZ_.getSetpointValue() + Value(Unit_Length, DiffZ));
 	}
 
 	return ReturnBool;
@@ -81,9 +81,9 @@ void ActionAdapter::addState(State Entry)
 		-Angle.getY(),
 		-Angle.getZ());
 
-	this->PosX_.setInput(TimedValue(State::UnitTranslative, Accel.getX(), Entry.getTimestamp()));
-	this->PosY_.setInput(TimedValue(State::UnitTranslative, Accel.getY(), Entry.getTimestamp()));
-	this->PosZ_.setInput(TimedValue(State::UnitTranslative, Accel.getZ(), Entry.getTimestamp()));
+	this->PosX_.setInput(TimedValue(Unit_Acceleration, Accel.getX(), Entry.getTimestamp()));
+	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY(), Entry.getTimestamp()));
+	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ(), Entry.getTimestamp()));
 
 	this->ControlX_.setFeedbackTimedValue(this->PosX_.getOutputValue());
 	this->ControlY_.setFeedbackTimedValue(this->PosY_.getOutputValue());

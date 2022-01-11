@@ -1,19 +1,19 @@
 #include "PosControl/State.h"
 
 
-Unit State::UnitTranslative = Unit("m/s²");
-Unit State::UnitAngular = Unit("°");
+
+
 
 
 State::State(Vector3D Translative, Vector3D Angular, Timestamp Time)
-	: Translative_(State::UnitTranslative), Angular_(State::UnitAngular)
+	: Translative_(Unit_Acceleration), Angular_(Unit_AngleDeg)
 {
-	if (Translative.getUnit() == State::UnitTranslative)
+	if (Translative.getUnit() == Unit_Acceleration)
 	{
 		this->Translative_ = Translative;
 	}
 
-	if (Angular.getUnit() == State::UnitAngular)
+	if (Angular.getUnit() == Unit_AngleDeg)
 	{
 		this->Angular_ = Angular;
 	}

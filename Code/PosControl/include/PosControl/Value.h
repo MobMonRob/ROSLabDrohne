@@ -9,7 +9,7 @@
 class Value
 {
 public:
-	Value(Unit Unit = Unit(), double Value = 0.0) : Unit_(Unit), Value_(Value) {};
+	Value(Unit Unit = Unit_Invalid, double Value = 0.0) : Unit_(Unit), Value_(Value) {};
 
 	Value operator+(const Value& V);
 	Value operator-(const Value& V);

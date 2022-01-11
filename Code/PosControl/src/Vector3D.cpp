@@ -9,7 +9,7 @@ Vector3D Vector3D::operator+(const Vector3D& V)
 	}
 	else
 	{
-		return Vector3D(Unit(UNIT_INVALID), 0, 0, 0);
+		return Vector3D(Unit_Invalid, 0, 0, 0);
 	}
 }
 
@@ -21,7 +21,7 @@ Vector3D Vector3D::operator-(const Vector3D& V)
 	}
 	else
 	{
-		return Vector3D(Unit(UNIT_INVALID), 0, 0, 0);
+		return Vector3D(Unit_Invalid, 0, 0, 0);
 	}
 }
 

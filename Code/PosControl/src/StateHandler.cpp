@@ -5,8 +5,8 @@
 State StateHandler::getAvgState()
 {
 	int BufferSize = this->getSize();
-	Vector3D Tran(State::UnitTranslative);
-	Vector3D Ang(State::UnitAngular);
+	Vector3D Tran(Unit_Length);
+	Vector3D Ang(Unit_AngleDeg);
 	double Time = 0;
 
 	for (int i = 0; i < BufferSize; i++)
