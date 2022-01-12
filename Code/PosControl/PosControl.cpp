@@ -23,7 +23,7 @@ int main()
 
     
     double a = 1.0;
-    double tmax = 1.0;
+    double tmax = 0.1;
     
 
     
@@ -37,7 +37,7 @@ int main()
         TimedValue Out = CS1.getOutput();
 
 
-        if (false)
+        if (true)
         {
             double Calc = 0.5 * a * t * t;
             double Diff = Out.getValue() - Calc;
@@ -50,8 +50,9 @@ int main()
 
     }
     
-    
     TimedValue Out = CS1.getOutput();
+
+
     double Calc = 0.5 * a * tmax * tmax;
     double Diff = Out.getValue() - Calc;
 
@@ -61,6 +62,19 @@ int main()
     std::cout << "CS1.Diff = " << Diff << " (" << 100 * Diff / Calc << "%)" << std::endl;
     
 
+
+
+    std::cout << std::endl << std::endl;
+    std::cout << "ControllerSystem Info:" << std::endl;
+
+
+
+
+
+
+
+
+    std::cout << "Destructor..." << std::endl;
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

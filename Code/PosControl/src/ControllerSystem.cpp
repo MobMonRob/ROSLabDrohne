@@ -6,6 +6,8 @@
 #include "PosControl/Controller_PID.h"
 #include "PosControl/Controller_PT.h"
 
+#include <iostream>
+
 
 ControllerSystem::ControllerSystem(Unit Unit)
 	: Output(Unit), Difference_(Unit)
@@ -14,14 +16,17 @@ ControllerSystem::ControllerSystem(Unit Unit)
 
 ControllerSystem::~ControllerSystem()
 {
+	std::cout << "Starting Destructor..." << std::endl;
+
 	for (int i = this->Knots_.size() - 1; i >= 0; i--)
 	{
 		// ERROR OCCURS!
 		// Some Problems with delete.
 
+		std::cout << "Deleting Knot at " << i << "..." << std::endl;
 
-
-		//delete this->Knots_.at(i);
+		delete this->Knots_.at(i);
+		std::cout << "Deleted Knot at " << i << "." << std::endl;
 	}
 }
 

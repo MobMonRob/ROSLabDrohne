@@ -167,9 +167,11 @@
   <ItemGroup>
     <ClInclude Include="include\PosControl\AccelToPos.h" />
     <ClInclude Include="include\PosControl\ActionAdapter.h" />
+    <ClInclude Include="include\PosControl\ActionAdapter_Mock.h" />
     <ClInclude Include="include\PosControl\Controllable.h" />
     <ClInclude Include="include\PosControl\ControlledOutput.h" />
     <ClInclude Include="include\PosControl\ControllerSystem.h" />
+    <ClInclude Include="include\PosControl\ControllerType.h" />
     <ClInclude Include="include\PosControl\Controller_Basic.h" />
     <ClInclude Include="include\PosControl\Controller_D.h" />
     <ClInclude Include="include\PosControl\Controller_I.h" />

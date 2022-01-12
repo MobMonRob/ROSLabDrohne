@@ -1,16 +1,7 @@
 #ifndef CONTROLLABLE_H
 #define CONTROLLABLE_H
 
-
-enum class ControllerType
-{
-	UNKNOWN,
-	P,
-	I,
-	D,
-	PT,
-	PID
-};
+#include "PosControl/ControllerType.h"
 
 
 class Controllable

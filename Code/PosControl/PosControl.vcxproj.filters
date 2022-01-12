@@ -177,5 +177,11 @@
     <ClInclude Include="include\PosControl\TimedDifference.h">
       <Filter>Domain h</Filter>
     </ClInclude>
+    <ClInclude Include="include\PosControl\ControllerType.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\ActionAdapter_Mock.h">
+      <Filter>Adapter h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

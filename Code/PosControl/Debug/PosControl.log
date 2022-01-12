@@ -1,7 +1,6 @@
 ﻿  PosControl.cpp
-  ActionAdapter.cpp
   ControllerSystem.cpp
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\PosControl\src\ControllerSystem.cpp(30,20): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\PosControl\src\ControllerSystem.cpp(163,20): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\PosControl\src\ControllerSystem.cpp(39,20): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\PosControl\src\ControllerSystem.cpp(156,20): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
   Code wird generiert...
   PosControl.vcxproj -> C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\PosControl.exe

@@ -97,4 +97,3 @@ void ActionAdapter::addState(State Entry)
 		0);
 }
 
-
