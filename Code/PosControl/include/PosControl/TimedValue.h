@@ -1,11 +1,10 @@
 #ifndef TimedValue_H
 #define TimedValue_H
 
-#include <iostream>
-
-#include "PosControl/Unit.h"
 #include "PosControl/Value.h"
 #include "PosControl/Timestamp.h"
+
+#include "PosControl/Unit.h"
 
 
 class TimedValue : public Value, public Timestamp
@@ -19,3 +18,4 @@ public:
 };
 
 #endif // TimedValue_H
+

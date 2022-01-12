@@ -8,7 +8,6 @@ Controller_PT::Controller_PT(Unit UnitInput, Unit UnitOutput, double kP, double 
 };
 
 
-
 TimedValue Controller_PT::getOutput()
 {
 	if (this->getInputAddr() != nullptr)

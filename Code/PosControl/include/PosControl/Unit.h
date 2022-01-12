@@ -17,6 +17,8 @@ protected:
 	std::string UnitName_;
 };
 
+
+// move into Unit.cpp?
 const Unit Unit_Invalid("INVALID");
 
 const Unit Unit_Length("m/s");

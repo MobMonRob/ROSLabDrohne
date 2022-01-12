@@ -37,10 +37,6 @@ bool Controller_PID::setK(double k, ControllerType Type)
 }
 
 
-
-
-
-
 TimedValue Controller_PID::getOutput()
 {
 	return this->ControlP_.getOutput() + 

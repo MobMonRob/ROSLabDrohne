@@ -3,6 +3,9 @@
 
 #include "PosControl/Outputable.h"
 
+#include "PosControl/Unit.h"
+#include "PosControl/TimedValue.h"
+
 
 class Output : public Outputable
 {

@@ -1,5 +1,7 @@
 #include "PosControl/Vector3D.h"
 
+#include<math.h>
+
 
 Vector3D Vector3D::operator+(const Vector3D& V)
 {
@@ -48,6 +50,20 @@ bool Vector3D::operator==(const Vector3D& V)
 // TODO add calculation
 Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 {
+	double sinX = sin(AngleX);
+	double cosX = cos(AngleX);
+	double sinY = sin(AngleY);
+	double cosY = cos(AngleY);
+	double sinZ = sin(AngleZ);
+	double cosZ = cos(AngleZ);
+
+
+
+
+
+
+
+
 	return Vector3D(this->Unit_, 0, 0, 0);
 }
 

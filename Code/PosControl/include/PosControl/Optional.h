@@ -1,6 +1,7 @@
 #ifndef OPTIONAL_H
 #define OPTIONAL_H
 
+
 template <typename DataType>
 class Optional
 {

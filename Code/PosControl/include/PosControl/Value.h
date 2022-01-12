@@ -1,8 +1,6 @@
 #ifndef VALUE_H
 #define VALUE_H
 
-#include <iostream>
-
 #include "PosControl/Unit.h"
 
 
@@ -23,3 +21,4 @@ protected:
 };
 
 #endif // VALUE_H
+

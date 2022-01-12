@@ -45,10 +45,3 @@ TimedValue TimedValue::operator-(const TimedValue& V)
 	return ReturnItem;
 }
 
-
-
-
-
-
-
-

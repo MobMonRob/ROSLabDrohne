@@ -1,12 +1,10 @@
 #include "PosControl/Controller_D.h"
 
 
-
 Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr)
 	: Controller_Basic(UnitInput, UnitOutput, ControllerType::D, kI, InputAddr), InputLast_(UnitInput)
 {
 };
-
 
 
 TimedValue Controller_D::getOutput()

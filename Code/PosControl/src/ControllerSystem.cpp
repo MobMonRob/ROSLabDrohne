@@ -1,12 +1,16 @@
 #include "PosControl/ControllerSystem.h"
 
+#include "PosControl/Controller_P.h"
+#include "PosControl/Controller_I.h"
+#include "PosControl/Controller_D.h"
+#include "PosControl/Controller_PID.h"
+#include "PosControl/Controller_PT.h"
 
 
 ControllerSystem::ControllerSystem(Unit Unit)
 	: Output(Unit), Difference_(Unit)
 {
 }
-
 
 ControllerSystem::~ControllerSystem()
 {
@@ -35,7 +39,6 @@ ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
 		Controller_PT* KnotPT = nullptr;
 
 
-
 		switch (Type)
 		{
 		case ControllerType::P:
@@ -48,14 +51,12 @@ ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
 			KnotPID = static_cast<Controller_PID*>(Knot);
 
 			ReturnItem.addController(KnotPID->getOutputUnit(), KnotPID->getKP(), KnotPID->getKI(), KnotPID->getKD());
-
 			break;
 
 		case ControllerType::PT:
 			KnotPT = static_cast<Controller_PT*>(Knot);
 
 			ReturnItem.addController(KnotPT->getOutputUnit(), KnotPT->getK(), KnotPT->getT1());
-
 			break;
 
 		default:
@@ -67,17 +68,6 @@ ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
 
 	return ReturnItem;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -94,6 +84,7 @@ bool ControllerSystem::setK(int ID, ControllerType Type, double K)
 
 	return ReturnBool;
 }
+
 
 void ControllerSystem::addController(Unit UnitOutput, double K, ControllerType Type)
 {
@@ -145,10 +136,7 @@ TimedValue ControllerSystem::getOutput()
 }
 
 
-
-
-
-
+// private Methods
 void ControllerSystem::addControllable(ControlledOutput* ControlAddr)
 {
 	this->Knots_.push_back(ControlAddr);

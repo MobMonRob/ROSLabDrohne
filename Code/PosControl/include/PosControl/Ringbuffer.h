@@ -14,7 +14,6 @@ public:
 
 	void addItem(DataType Item);
 
-
 	Optional<DataType> getData(int Index = 0);
 	size_t getSize() { return this->Buffer_.size(); };
 
@@ -31,7 +30,6 @@ inline Ringbuffer<DataType>::Ringbuffer(size_t MaxElements)
 }
 
 
-
 template<typename DataType>
 inline void Ringbuffer<DataType>::addItem(DataType Item)
 {
@@ -42,7 +40,6 @@ inline void Ringbuffer<DataType>::addItem(DataType Item)
 		this->Buffer_.erase(this->Buffer_.begin());
 	}
 }
-
 
 
 template<typename DataType>
@@ -59,6 +56,5 @@ inline Optional<DataType> Ringbuffer<DataType>::getData(int Index)
 	return ReturnItem;
 }
 
-
-
 #endif // RINGBUFFER_H
+

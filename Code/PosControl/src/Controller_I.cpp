@@ -1,12 +1,10 @@
 #include "PosControl/Controller_I.h"
 
 
-
 Controller_I::Controller_I(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr, double InitTimedValue)
 	: Controller_Basic(UnitInput, UnitOutput, ControllerType::I, kI, InputAddr), Sum_(UnitOutput)
 {
 };
-
 
 
 TimedValue Controller_I::getOutput()
@@ -23,5 +21,4 @@ TimedValue Controller_I::getOutput()
 
 	return this->Sum_;
 }
-
 

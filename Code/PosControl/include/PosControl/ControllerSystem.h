@@ -3,18 +3,13 @@
 
 #include <vector>
 
-//#include "PosControl/Unit.h"
-//#include "PosControl/TimedValue.h"
-//#include "PosControl/Output.h"
-#include "PosControl/TimedDifference.h"
+#include "PosControl/Output.h"
 
-//#include "PosControl/ControlledOutput.h"
-#include "PosControl/Controller_Input.h"
-//#include "PosControl/Controller_P.h"
-//#include "PosControl/Controller_I.h"
-//#include "PosControl/Controller_D.h"
-#include "PosControl/Controller_PID.h"
-#include "PosControl/Controller_PT.h"
+#include "PosControl/Unit.h"
+#include "PosControl/Value.h"
+#include "PosControl/TimedValue.h"
+#include "PosControl/ControlledOutput.h"
+#include "PosControl/TimedDifference.h"
 
 
 class ControllerSystem : public Output
@@ -24,10 +19,6 @@ public:
 	~ControllerSystem();
 
 	ControllerSystem operator= (const ControllerSystem& CS);
-
-
-
-
 
 	bool setSetpoint(Value V) { return this->Difference_.setSetpoint(V); };
 	bool setFeedback(TimedValue V) { return this->Difference_.setFeedback(V); };

@@ -4,8 +4,8 @@
 #include "PosControl/Input.h"
 #include "PosControl/ControlledOutput.h"
 
-
-
+#include "PosControl/Unit.h"
+#include "PosControl/TimedValue.h"
 
 
 class Controller_Basic : public Input, public ControlledOutput

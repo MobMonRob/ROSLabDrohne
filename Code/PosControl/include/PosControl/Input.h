@@ -2,6 +2,8 @@
 #define INPUT_H
 
 #include "PosControl/Inputable.h"
+
+#include "PosControl/Unit.h"
 #include "PosControl/Outputable.h"
 
 

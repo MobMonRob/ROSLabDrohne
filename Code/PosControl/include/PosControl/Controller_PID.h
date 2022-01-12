@@ -1,13 +1,16 @@
 #ifndef CONTROLLER_PID_H
 #define CONTROLLER_PID_H
 
+#include "PosControl/Input.h"
+#include "PosControl/ControlledOutput.h"
 
 #include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
-#include "PosControl/ControlledOutput.h"
+#include "PosControl/Outputable.h"
 #include "PosControl/Controller_P.h"
 #include "PosControl/Controller_I.h"
 #include "PosControl/Controller_D.h"
+
 
 class Controller_PID : public Input, public ControlledOutput
 {

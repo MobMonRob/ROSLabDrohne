@@ -1,10 +1,10 @@
 #ifndef CONTROLLER_D_H
 #define CONTROLLER_D_H
 
-#include "PosControl/TimedValue.h"
 #include "PosControl/Controller_Basic.h"
 
-
+#include "PosControl/Unit.h"
+#include "PosControl/TimedValue.h"
 
 
 class Controller_D : public Controller_Basic

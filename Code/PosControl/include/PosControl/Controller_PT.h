@@ -1,10 +1,11 @@
 #ifndef CONTROLLER_PT_H
 #define CONTROLLER_PT_H
 
+#include "PosControl/Controller_Basic.h"
+
 #include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
 #include "PosControl/Outputable.h"
-#include "PosControl/Controller_Basic.h"
 
 
 class Controller_PT : public Controller_Basic

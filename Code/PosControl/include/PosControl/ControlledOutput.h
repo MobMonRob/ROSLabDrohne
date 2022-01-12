@@ -4,6 +4,8 @@
 #include "PosControl/Controllable.h"
 #include "PosControl/Output.h"
 
+#include "PosControl/Unit.h"
+
 
 class ControlledOutput : public Controllable, public Output
 {
