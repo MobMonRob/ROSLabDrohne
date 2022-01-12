@@ -46,8 +46,6 @@ bool Vector3D::operator==(const Vector3D& V)
 }
 
 
-
-// TODO add calculation
 Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 {
 	double sinX = sin(AngleX);
@@ -57,14 +55,18 @@ Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 	double sinZ = sin(AngleZ);
 	double cosZ = cos(AngleZ);
 
+	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
+	double X = this->getX() * (cosX * cosY)
+		+ this->getY() * (cosX * sinY * sinZ - sinX * cosZ)
+		+ this->getZ() * (cosX * sinY * cosZ + sinX * sinZ);
+	double Y = this->getX() * (sinY * cosZ)
+		+ this->getY() * (sinX * sinY * sinZ - cosX * cosZ)
+		+ this->getZ() * (sinX * sinY * cosZ + cosX * sinZ);
+	double Z = this->getX() * (-sinY)
+		+ this->getY() * (cosY * sinZ)
+		+ this->getZ() * (cosY * cosZ);
 
 
-
-
-
-
-
-	return Vector3D(this->Unit_, 0, 0, 0);
+	return Vector3D(this->getUnit(), X, Y, Z);
 }
-
 
