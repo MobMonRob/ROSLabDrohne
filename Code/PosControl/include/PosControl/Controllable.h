@@ -1,28 +1,30 @@
 #ifndef CONTROLLABLE_H
 #define CONTROLLABLE_H
 
-#include "PosControl/Unit.h"
-#include "PosControl/TimedValue.h"
-#include "PosControl/Output.h"
 
-class Controllable : public Output
+enum class ControllerType
+{
+	UNKNOWN,
+	P,
+	I,
+	D,
+	PT,
+	PID
+};
+
+
+class Controllable
 {
 public:
-	Controllable(Unit UnitInput, Unit UnitOutput, double k = 1.0, Outputable* InputAddr = nullptr);
+	Controllable(ControllerType Type);
 
-	void setIntputAddr(Outputable* InputAddr) { this->Inputable_ = InputAddr; };
-	void setK(double k) { this->k_ = k; };
+	virtual bool setK(double k, ControllerType Type = ControllerType::UNKNOWN) { return false; };
 
-	Unit getInputUnit() { return this->Input_; };
-	Outputable* getInputAddr() { return this->Inputable_; };
-	virtual TimedValue getOutputTimedValue() { return TimedValue(this->getOutputUnit()); };
-
-protected:
-	double k_;
+	ControllerType getType() { return this->Type_; };
+	virtual double getK(ControllerType Type = ControllerType::UNKNOWN) { return 0.0; };
 
 private:
-	Unit Input_;
-	Outputable* Inputable_ = nullptr;
+	ControllerType Type_;
 };
 
 #endif // CONTROLLABLE_H

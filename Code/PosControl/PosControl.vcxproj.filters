@@ -53,6 +53,18 @@
     <ClCompile Include="src\StateHandler.cpp">
       <Filter>Application src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Domain src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inputable.cpp">
+      <Filter>Domain src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller_Basic.cpp">
+      <Filter>Domain src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimedDifference.cpp">
+      <Filter>Domain src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Abstraction src">
@@ -148,6 +160,21 @@
       <Filter>Adapter h</Filter>
     </ClInclude>
     <ClInclude Include="include\PosControl\Output.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\Inputable.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\Input.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\Controller_Basic.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\ControlledOutput.h">
+      <Filter>Domain h</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\TimedDifference.h">
       <Filter>Domain h</Filter>
     </ClInclude>
   </ItemGroup>

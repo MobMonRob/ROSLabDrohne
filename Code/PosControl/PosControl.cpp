@@ -18,8 +18,8 @@ int main()
     ControllerSystem CS1(Unit_Acceleration);
 
     
-    CS1.addControllerI(Unit_Velocity, 1.0);
-    CS1.addControllerI(Unit_Length, 1.0);
+    CS1.addController(Unit_Velocity, 1.0, ControllerType::I);
+    CS1.addController(Unit_Length, 1.0, ControllerType::I);
 
     
     double a = 1.0;
@@ -27,14 +27,14 @@ int main()
     
 
     
-    CS1.setSetpointValue(TimedValue(Unit_Acceleration, a));
+    CS1.setSetpoint(TimedValue(Unit_Acceleration, a));
 
     for (double t = 0.0; t <= tmax; t += 0.001)
     {
-        bool Result = CS1.setFeedbackTimedValue(TimedValue(Unit_Acceleration, 0.0, t));
+        bool Result = CS1.setFeedback(TimedValue(Unit_Acceleration, 0.0, t));
 
 
-        TimedValue Out = CS1.getOutputTimedValue();
+        TimedValue Out = CS1.getOutput();
 
 
         if (false)
@@ -51,7 +51,7 @@ int main()
     }
     
     
-    TimedValue Out = CS1.getOutputTimedValue();
+    TimedValue Out = CS1.getOutput();
     double Calc = 0.5 * a * tmax * tmax;
     double Diff = Out.getValue() - Calc;
 

@@ -10,7 +10,7 @@ public:
 	Output(Unit UnitOutput) : Output_(UnitOutput) {};
 
 	Unit getOutputUnit() { return this->Output_; };
-	virtual TimedValue getOutputTimedValue() { return TimedValue(Unit_Invalid); };
+	virtual TimedValue getOutput() { return TimedValue(Unit_Invalid); };
 
 protected:
 	void setOutputUnit(Unit UnitOutput) { this->Output_ = UnitOutput; };

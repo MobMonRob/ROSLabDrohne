@@ -12,7 +12,7 @@ public:
 	bool setInput(TimedValue V);
 
 	Unit getOutputUnit() { return this->Input_.getUnit(); };
-	TimedValue getOutputTimedValue() { return this->Input_; };
+	TimedValue getOutput() { return this->Input_; };
 
 private:
 	TimedValue Input_;

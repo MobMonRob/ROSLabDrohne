@@ -4,15 +4,16 @@
 #include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
 #include "PosControl/Outputable.h"
-#include "PosControl/Controllable.h"
+#include "PosControl/Controller_Basic.h"
 
 
-class Controller_PT : public Controllable
+class Controller_PT : public Controller_Basic
 {
 public:
 	Controller_PT(Unit UnitInput, Unit UnitOutput, double kP = 1.0, double T1 = 1.0, Outputable* TimedValueableAddr = nullptr);
 
-	TimedValue getOutputTimedValue();
+	double getT1() { return this->T1_; };
+	TimedValue getOutput();
 
 private:
 	double T1_;

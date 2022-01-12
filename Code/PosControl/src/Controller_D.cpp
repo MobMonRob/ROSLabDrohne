@@ -3,13 +3,13 @@
 
 
 Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr)
-	: Controllable(UnitInput, UnitOutput, kI, InputAddr), InputLast_(UnitInput)
+	: Controller_Basic(UnitInput, UnitOutput, ControllerType::D, kI, InputAddr), InputLast_(UnitInput)
 {
 };
 
 
 
-TimedValue Controller_D::getOutputTimedValue()
+TimedValue Controller_D::getOutput()
 {
 	double Diff = 0.0;
 	double Time = this->InputLast_.getTime();
@@ -17,7 +17,7 @@ TimedValue Controller_D::getOutputTimedValue()
 
 	if (this->getInputAddr() != nullptr)
 	{
-		TimedValue Input = this->getInputAddr()->getOutputTimedValue();
+		TimedValue Input = this->getInputAddr()->getOutput();
 		
 
 		Time = Input.getTime();

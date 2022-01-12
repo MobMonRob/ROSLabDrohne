@@ -2,7 +2,7 @@
 
 
 Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, double kP, double kI, double kD, Outputable* InputAddr)
-	: Controllable(UnitInput, UnitOutput, 0.0), // TODO not sure what to do with K of Controllable?
+	: Input(UnitInput, InputAddr), ControlledOutput(ControllerType::PID ,UnitOutput),
 	ControlP_(UnitInput, UnitOutput, kP, InputAddr),
 	ControlI_(UnitInput, UnitOutput, kI, InputAddr),
 	ControlD_(UnitInput, UnitOutput, kD, InputAddr)
@@ -10,11 +10,41 @@ Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, double kP, doubl
 }
 
 
-
-TimedValue Controller_PID::getOutputTimedValue()
+bool Controller_PID::setK(double k, ControllerType Type)
 {
-	return this->ControlP_.getOutputTimedValue() + 
-		this->ControlI_.getOutputTimedValue() + 
-		this->ControlD_.getOutputTimedValue();
+	bool ReturnBool = false;
+
+
+	switch (Type)
+	{
+	case ControllerType::P:
+		ReturnBool = this->setKP(k, Type);
+		break;
+
+	case ControllerType::I:
+		ReturnBool = this->setKI(k, Type);
+		break;
+
+	case ControllerType::D:
+		ReturnBool = this->setKD(k, Type);
+		break;
+
+	default:
+		break;
+	}
+
+	return ReturnBool;
+}
+
+
+
+
+
+
+TimedValue Controller_PID::getOutput()
+{
+	return this->ControlP_.getOutput() + 
+		this->ControlI_.getOutput() + 
+		this->ControlD_.getOutput();
 }
 
