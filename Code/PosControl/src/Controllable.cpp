@@ -1,10 +1,8 @@
 #include "PosControl/Controllable.h"
 
 
-
-Controllable::Controllable(Unit UnitInput, Unit UnitOutput, double k, Outputable* InputAddr)
-	: Outputable(UnitOutput), Input_(UnitInput)
+Controllable::Controllable(ControllerType Type)
+	: Type_(Type)
 {
-	this->k_ = k;
-	this->setIntputAddr(InputAddr);
 };
+

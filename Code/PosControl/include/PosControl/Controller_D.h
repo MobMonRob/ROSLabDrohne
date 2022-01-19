@@ -1,18 +1,18 @@
 #ifndef CONTROLLER_D_H
 #define CONTROLLER_D_H
 
+#include "PosControl/Controller_Basic.h"
+
+#include "PosControl/Unit.h"
 #include "PosControl/TimedValue.h"
-#include "PosControl/Controllable.h"
 
 
-
-
-class Controller_D : public Controllable
+class Controller_D : public Controller_Basic
 {
 public:
 	Controller_D(Unit UnitInput, Unit UnitOutput, double kD = 1.0, Outputable* TimedValueableAddr = nullptr);
 
-	TimedValue getOutputTimedValue();
+	TimedValue getOutput();
 
 private:
 	TimedValue InputLast_;

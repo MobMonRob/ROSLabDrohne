@@ -1,5 +1,7 @@
 #include "PosControl/Vector3D.h"
 
+#include<math.h>
+
 
 Vector3D Vector3D::operator+(const Vector3D& V)
 {
@@ -9,7 +11,7 @@ Vector3D Vector3D::operator+(const Vector3D& V)
 	}
 	else
 	{
-		return Vector3D(Unit(UNIT_INVALID), 0, 0, 0);
+		return Vector3D(Unit_Invalid, 0, 0, 0);
 	}
 }
 
@@ -21,7 +23,7 @@ Vector3D Vector3D::operator-(const Vector3D& V)
 	}
 	else
 	{
-		return Vector3D(Unit(UNIT_INVALID), 0, 0, 0);
+		return Vector3D(Unit_Invalid, 0, 0, 0);
 	}
 }
 
@@ -44,11 +46,27 @@ bool Vector3D::operator==(const Vector3D& V)
 }
 
 
-
-// TODO add calculation
 Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 {
-	return Vector3D(this->Unit_, 0, 0, 0);
-}
+	double sinX = sin(AngleX);
+	double cosX = cos(AngleX);
+	double sinY = sin(AngleY);
+	double cosY = cos(AngleY);
+	double sinZ = sin(AngleZ);
+	double cosZ = cos(AngleZ);
 
+	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
+	double X = this->getX() * (cosX * cosY)
+		+ this->getY() * (cosX * sinY * sinZ - sinX * cosZ)
+		+ this->getZ() * (cosX * sinY * cosZ + sinX * sinZ);
+	double Y = this->getX() * (sinY * cosZ)
+		+ this->getY() * (sinX * sinY * sinZ - cosX * cosZ)
+		+ this->getZ() * (sinX * sinY * cosZ + cosX * sinZ);
+	double Z = this->getX() * (-sinY)
+		+ this->getY() * (cosY * sinZ)
+		+ this->getZ() * (cosY * cosZ);
+
+
+	return Vector3D(this->getUnit(), X, Y, Z);
+}
 

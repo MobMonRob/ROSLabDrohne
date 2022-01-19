@@ -3,44 +3,42 @@
 
 #include <vector>
 
+#include "PosControl/Output.h"
+
 #include "PosControl/Unit.h"
+#include "PosControl/Value.h"
 #include "PosControl/TimedValue.h"
-#include "PosControl/Outputable.h"
-#include "PosControl/Controllable.h"
-#include "PosControl/Controller_Input.h"
-#include "PosControl/Controller_P.h"
-#include "PosControl/Controller_I.h"
-#include "PosControl/Controller_D.h"
-#include "PosControl/Controller_PID.h"
-#include "PosControl/Controller_PT.h"
+#include "PosControl/ControlledOutput.h"
+#include "PosControl/TimedDifference.h"
 
 
-
-class ControllerSystem : public Outputable
+class ControllerSystem : public Output
 {
 public:
-	ControllerSystem(Unit UnitInput);
+	ControllerSystem(Unit Unit);
+	~ControllerSystem();
 
-	bool setSetpointTimedValue(TimedValue V);
-	bool setFeedbackTimedValue(TimedValue V);
+	ControllerSystem operator= (const ControllerSystem& CS);
 
-	void addControllerP(Unit UnitOutput, double K);
-	void addControllerI(Unit UnitOutput, double K);
-	void addControllerD(Unit UnitOutput, double K);
-	void addControllerPID(Unit UnitOutput, double KP, double KI, double KD);
-	void addControllerPT(Unit UnitOutput, double K, double T);
+	bool setSetpoint(Value V) { return this->Difference_.setSetpoint(V); };
+	bool setFeedback(TimedValue V) { return this->Difference_.setFeedback(V); };
+	bool setK(int ID, ControllerType Type, double K);
 
-	TimedValue getOutputTimedValue() { return this->getKnotAddrLast()->getOutputTimedValue(); };
+	void addController(Unit UnitOutput, double K, ControllerType Type);
+	void addController(Unit UnitOutput, double KP, double KI, double KD);
+	void addController(Unit UnitOutput, double K, double T);
+
+	Value getSetpoint() { return this->Difference_.getSetpoint(); };
+	TimedValue getOutput();
 
 private:
-	void addControllable(Controllable* ControlAddr);
-	Outputable* getKnotAddrLast();
-	bool calcError();
+	void addControllable(ControlledOutput* ControlAddr);
+	ControlledOutput* getKnot(int ID);
+	ControlledOutput* getKnotAddrLast();
+	Output* getOutputAddrLast();
 	
-	std::vector<Controllable*> Knots_;
-	Controller_Input Error_;
-	TimedValue Setpoint_;
-	TimedValue Feedback_;
+	std::vector<ControlledOutput*> Knots_;
+	TimedDifference Difference_;
 };
 
 #endif // CONTROLLERSYSTEM_H

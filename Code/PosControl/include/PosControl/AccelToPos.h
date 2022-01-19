@@ -8,14 +8,14 @@
 #include "PosControl/Controller_I.h"
 
 
-class AccelToPos : Outputable
+class AccelToPos : public Outputable
 {
 public:
 	AccelToPos(double InitPos = 0.0, double InitVel = 0.0);
 
 	bool setInput(TimedValue V) { return this->Input_.setInput(V); };
 
-	TimedValue getOutputValue() { return this->VelToPos_.getOutputTimedValue(); };
+	TimedValue getOutputValue() { return this->VelToPos_.getOutput(); };
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
 private:

@@ -1,120 +1,189 @@
 #include "PosControl/ControllerSystem.h"
 
+#include "PosControl/Controller_P.h"
+#include "PosControl/Controller_I.h"
+#include "PosControl/Controller_D.h"
+#include "PosControl/Controller_PID.h"
+#include "PosControl/Controller_PT.h"
+
+#include <iostream>
 
 
-ControllerSystem::ControllerSystem(Unit UnitInput)
-	: Outputable(Unit()), Error_(UnitInput), Setpoint_(UnitInput), Feedback_(UnitInput)
+ControllerSystem::ControllerSystem(Unit Unit)
+	: Output(Unit), Difference_(Unit)
 {
 }
 
-
-
-bool ControllerSystem::setSetpointTimedValue(TimedValue V)
+ControllerSystem::~ControllerSystem()
 {
-	bool ReturnTimedValue = false;
+	std::cout << "Starting Destructor..." << std::endl;
 
-
-	if (V.getUnit() == this->Error_.getOutputUnit())
+	for (int i = this->Knots_.size() - 1; i >= 0; i--)
 	{
-		this->Setpoint_ = V;
+		// ERROR OCCURS!
+		// Some Problems with delete.
 
-		ReturnTimedValue = this->calcError();
+		std::cout << "Deleting Knot at " << i << "..." << std::endl;
+
+		delete this->Knots_.at(i);
+		std::cout << "Deleted Knot at " << i << "." << std::endl;
+	}
+}
+
+
+ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
+{
+	ControllerSystem ReturnItem(this->getOutputUnit());
+
+
+	for (int i = 0; i < this->Knots_.size(); i++)
+	{
+		ControlledOutput* Knot = this->getKnot(i);
+		ControllerType Type = Knot->getType();
+		Controller_PID* KnotPID = nullptr;
+		Controller_PT* KnotPT = nullptr;
+
+
+		switch (Type)
+		{
+		case ControllerType::P:
+		case ControllerType::I:
+		case ControllerType::D:
+			ReturnItem.addController(Knot->getOutputUnit(), Knot->getK(), Type);
+			break;
+
+		case ControllerType::PID:
+			KnotPID = static_cast<Controller_PID*>(Knot);
+
+			ReturnItem.addController(KnotPID->getOutputUnit(), KnotPID->getKP(), KnotPID->getKI(), KnotPID->getKD());
+			break;
+
+		case ControllerType::PT:
+			KnotPT = static_cast<Controller_PT*>(Knot);
+
+			ReturnItem.addController(KnotPT->getOutputUnit(), KnotPT->getK(), KnotPT->getT1());
+			break;
+
+		default:
+			break;
+		}
 	}
 
-	return ReturnTimedValue;
+	ReturnItem.setSetpoint(this->getSetpoint());
+
+	return ReturnItem;
 }
 
-bool ControllerSystem::setFeedbackTimedValue(TimedValue V)
+
+
+bool ControllerSystem::setK(int ID, ControllerType Type, double K)
 {
-	bool ReturnTimedValue = false;
+	bool ReturnBool = false;
+	Controllable* KnotPtr = this->getKnot(ID);
 
 
-	if (V.getUnit() == this->Error_.getOutputUnit())
+	if (KnotPtr != nullptr)
 	{
-		this->Feedback_ = V;
-
-		ReturnTimedValue = this->calcError();
+		ReturnBool = KnotPtr->setK(K, Type);
 	}
 
-	return ReturnTimedValue;
+	return ReturnBool;
 }
 
 
-
-
-
-
-
-void ControllerSystem::addControllerP(Unit UnitOutput, double K)
+void ControllerSystem::addController(Unit UnitOutput, double K, ControllerType Type)
 {
-	Outputable* KnotPrev = this->getKnotAddrLast();
+	Output* KnotPrev = this->getOutputAddrLast();
 
 
-	this->addControllable(new Controller_P(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+	switch (Type)
+	{
+	case ControllerType::P:
+		this->addControllable(new Controller_P(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+
+		break;
+
+	case ControllerType::I:
+		this->addControllable(new Controller_I(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+
+		break;
+
+	case ControllerType::D:
+		this->addControllable(new Controller_D(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
+
+		break;
+
+	default:
+		break;
+	}
 }
 
-void ControllerSystem::addControllerI(Unit UnitOutput, double K)
+void ControllerSystem::addController(Unit UnitOutput, double KP, double KI, double KD)
 {
-	Outputable* KnotPrev = this->getKnotAddrLast();
-
-
-	this->addControllable(new Controller_I(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
-}
-
-void ControllerSystem::addControllerD(Unit UnitOutput, double K)
-{
-	Outputable* KnotPrev = this->getKnotAddrLast();
-
-
-	this->addControllable(new Controller_D(KnotPrev->getOutputUnit(), UnitOutput, K, KnotPrev));
-}
-
-void ControllerSystem::addControllerPID(Unit UnitOutput, double KP, double KI, double KD)
-{
-	Outputable* KnotPrev = this->getKnotAddrLast();
+	Outputable* KnotPrev = this->getOutputAddrLast();
 
 
 	this->addControllable(new Controller_PID(KnotPrev->getOutputUnit(), UnitOutput, KP, KI, KD, KnotPrev));
 }
 
-
-void ControllerSystem::addControllerPT(Unit UnitOutput, double K, double T)
+void ControllerSystem::addController(Unit UnitOutput, double K, double T)
 {
-	Outputable* KnotPrev = this->getKnotAddrLast();
+	Outputable* KnotPrev = this->getOutputAddrLast();
 
 
 	this->addControllable(new Controller_PT(KnotPrev->getOutputUnit(), UnitOutput, K, T, KnotPrev));
 }
 
 
+TimedValue ControllerSystem::getOutput()
+{
+	return this->getOutputAddrLast()->getOutput();
+}
 
 
-
-
-
-
-void ControllerSystem::addControllable(Controllable* ControlAddr)
+// private Methods
+void ControllerSystem::addControllable(ControlledOutput* ControlAddr)
 {
 	this->Knots_.push_back(ControlAddr);
 	this->setOutputUnit(ControlAddr->getOutputUnit());
 }
 
-Outputable* ControllerSystem::getKnotAddrLast()
+ControlledOutput* ControllerSystem::getKnot(int ID)
 {
-	if (this->Knots_.size() > 0)
+	ControlledOutput* ReturnAddr = nullptr;
+
+
+	if (ID >= 0 && ID < this->Knots_.size())
 	{
-		return this->Knots_.at(this->Knots_.size()-1);
+		ReturnAddr = this->Knots_.at(ID);
 	}
-	else
-	{
-		return &this->Error_;
-	}
+
+	return ReturnAddr;
 }
 
-bool ControllerSystem::calcError()
+ControlledOutput* ControllerSystem::getKnotAddrLast()
 {
-	return this->Error_.setInput(TimedValue(this->Error_.getOutputUnit(), this->Setpoint_.getValue() - this->Feedback_.getValue(), this->Feedback_.getTime()));
+	ControlledOutput* ReturnAddr = nullptr;
+
+
+	if (!this->Knots_.empty())
+	{
+		ReturnAddr = this->getKnot(this->Knots_.size() - 1);
+	}
+
+	return ReturnAddr;
 }
 
+Output* ControllerSystem::getOutputAddrLast()
+{
+	Output* ReturnAddr = &this->Difference_;
 
+
+	if (!this->Knots_.empty())
+	{
+		ReturnAddr = this->getKnot(this->Knots_.size() - 1);
+	}
+
+	return ReturnAddr;
+}
 

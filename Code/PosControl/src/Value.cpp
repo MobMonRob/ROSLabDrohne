@@ -27,5 +27,3 @@ Value Value::operator-(const Value& V)
 	return ReturnItem;
 }
 
-
-

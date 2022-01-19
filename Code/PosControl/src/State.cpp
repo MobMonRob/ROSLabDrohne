@@ -1,21 +1,21 @@
 #include "PosControl/State.h"
 
 
-Unit State::UnitTranslative = Unit("m/s²");
-Unit State::UnitAngular = Unit("°");
+
+
 
 
 State::State(Vector3D Translative, Vector3D Angular, Timestamp Time)
-	: Translative_(State::UnitTranslative), Angular_(State::UnitAngular)
+	: Accelerations_(Unit_Acceleration), Angles_(Unit_AngleDeg)
 {
-	if (Translative.getUnit() == State::UnitTranslative)
+	if (Translative.getUnit() == Unit_Acceleration)
 	{
-		this->Translative_ = Translative;
+		this->Accelerations_ = Translative;
 	}
 
-	if (Angular.getUnit() == State::UnitAngular)
+	if (Angular.getUnit() == Unit_AngleDeg)
 	{
-		this->Angular_ = Angular;
+		this->Angles_ = Angular;
 	}
 	
 	this->Time_ = Time;
@@ -26,8 +26,8 @@ bool State::operator==(const State& S)
 	bool ReturnBool = true;
 
 
-	ReturnBool &= (this->getVector_Translative() == S.Translative_);
-	ReturnBool &= (this->getVector_Angular() == S.Angular_);
+	ReturnBool &= (this->getVector_Translative() == S.Accelerations_);
+	ReturnBool &= (this->getVector_Angular() == S.Angles_);
 	ReturnBool &= (this->getTimestamp() == S.Time_);
 
 	return ReturnBool;

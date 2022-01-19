@@ -3,15 +3,19 @@
 
 #include "PosControl/Outputable.h"
 
+#include "PosControl/Unit.h"
+#include "PosControl/TimedValue.h"
+
 
 class Controller_Input : public Outputable
 {
 public:
-	Controller_Input(Unit UnitOutput) : Outputable(UnitOutput) {};
+	Controller_Input(Unit UnitOutput) : Outputable(), Input_(UnitOutput) {};
 
 	bool setInput(TimedValue V);
 
-	TimedValue getOutputTimedValue() { return this->Input_; };
+	Unit getOutputUnit() { return this->Input_.getUnit(); };
+	TimedValue getOutput() { return this->Input_; };
 
 private:
 	TimedValue Input_;

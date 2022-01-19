@@ -2,47 +2,42 @@
 
 #include <iostream>
 
-#include "PosControl/Controller_Input.h"
-#include "PosControl/Controller_Input.h"
-#include "PosControl/Controller_P.h"
-#include "PosControl/Controller_I.h"
-#include "PosControl/Controller_D.h"
-#include "PosControl/Controller_PT.h"
-#include "PosControl/Controller_PID.h"
 #include "PosControl/ControllerSystem.h"
 
 #include "PosControl/Ringbuffer.h"
 #include "PosControl/Vector3D.h"
+
+#include "PosControl/ActionAdapter.h"
 
 
 int main()
 {
     std::cout << "Hello World!\n";
 
-    Unit U0("m/s²");
-    Unit U1("m/s");
-    Unit U2("m");
+    
+    ControllerSystem CS1(Unit_Acceleration);
 
-    ControllerSystem CS1(U0);
+    
+    CS1.addController(Unit_Velocity, 1.0, ControllerType::I);
+    CS1.addController(Unit_Length, 1.0, ControllerType::I);
 
-    CS1.addControllerI(U1, 1.0);
-    CS1.addControllerI(U2, 1.0);
-
-
+    
     double a = 1.0;
-    double tmax = 1.0;
+    double tmax = 0.1;
+    
 
-    CS1.setSetpointTimedValue(TimedValue(U0, a));
+    
+    CS1.setSetpoint(TimedValue(Unit_Acceleration, a));
 
     for (double t = 0.0; t <= tmax; t += 0.001)
     {
-        bool Result = CS1.setFeedbackTimedValue(TimedValue(U0, 0.0, t));
+        bool Result = CS1.setFeedback(TimedValue(Unit_Acceleration, 0.0, t));
 
 
-        TimedValue Out = CS1.getOutputTimedValue();
+        TimedValue Out = CS1.getOutput();
 
 
-        if (false)
+        if (true)
         {
             double Calc = 0.5 * a * t * t;
             double Diff = Out.getValue() - Calc;
@@ -54,9 +49,10 @@ int main()
         }
 
     }
+    
+    TimedValue Out = CS1.getOutput();
 
 
-    TimedValue Out = CS1.getOutputTimedValue();
     double Calc = 0.5 * a * tmax * tmax;
     double Diff = Out.getValue() - Calc;
 
@@ -64,8 +60,21 @@ int main()
     std::cout << "CS1.Out = " << Out.getValue() << std::endl;
     std::cout << "calc = " << Calc << std::endl;
     std::cout << "CS1.Diff = " << Diff << " (" << 100 * Diff / Calc << "%)" << std::endl;
+    
 
 
+
+    std::cout << std::endl << std::endl;
+    std::cout << "ControllerSystem Info:" << std::endl;
+
+
+
+
+
+
+
+
+    std::cout << "Destructor..." << std::endl;
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
