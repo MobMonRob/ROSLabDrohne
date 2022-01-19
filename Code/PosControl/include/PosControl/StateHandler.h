@@ -1,0 +1,21 @@
+#ifndef STATEHANDLER_H
+#define STATEHANDLER_H
+
+#include "PosControl/State.h"
+#include "PosControl/Optional.h"
+#include "PosControl/Ringbuffer.h"
+
+
+class StateHandler : private Ringbuffer<State>
+{
+public:
+	StateHandler(int MaxEntries = 1) : Ringbuffer<State>(MaxEntries) {};
+
+	void addEntry(State State) { this->addItem(State); };
+
+	State getAvgState();
+
+private:
+};
+
+#endif // STATEHANDLER_H

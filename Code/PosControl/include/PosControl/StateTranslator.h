@@ -1,0 +1,6 @@
+#ifndef STATETRANSLATOR_H
+#define STATETRANSLATOR_H
+
+
+
+#endif // STATETRANSLATOR_H
