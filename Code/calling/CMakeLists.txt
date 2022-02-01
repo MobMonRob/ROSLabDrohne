@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(coex)
+project(calling)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,17 +8,10 @@ project(coex)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(
-  catkin REQUIRED
-  COMPONENTS
-    message_generation
-    roscpp
-    rospy
-    std_msgs
-    geometry_msgs
-    mavros_msgs
-    sensor_msgs
-    
-    calling
+	catkin REQUIRED COMPONENTS
+		roscpp
+		rospy
+		std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -76,13 +69,10 @@ find_package(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-    std_msgs
-    geometry_msgs
-    mavros_msgs
-    sensor_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -115,8 +105,8 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-  LIBRARIES coexController
-  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs mavros_msgs sensor_msgs 
+	LIBRARIES calling_lib
+	CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -127,64 +117,18 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
-  include/coex
-  ~/catkin_ws/src/calling/include
-  ~/catkin_ws/src/calling/include/calling
-  ~/catkin_ws/src/calling/src
-  ${catkin_INCLUDE_DIRS}
+# include
+	include
+	include/calling
+	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-set(INCLUDE_calling
-	"../calling/include/calling/Calling.h"
-	"../calling/include/calling/Callable.h"
-	"../calling/include/calling/Caller.h"
-)
-
-
-add_library(coexController
-	include/coex/coexControl.h
-	src/coexControl.cpp
-	
-	# extern calling
-	~/catkin_ws/src/calling/include/calling/Calling.h
-	~/catkin_ws/src/calling/include/calling/Callable.h
-	~/catkin_ws/src/calling/include/calling/Caller.h
-	~/catkin_ws/src/calling/src/Caller.cpp
-	
-	
-	
-	
-	
-	
-	include/coex/coexState.h
-	src/coexState.cpp
-	include/coex/coexBattery.h
-	src/coexBattery.cpp
-	include/coex/coexOrientation.h
-	src/coexOrientation.cpp
-	
-	#coex_C
-	include/coex/coexTransmitable.h
-  	src/coexTransmitable.cpp
-	include/coex/coexState.h
-	src/coexState.cpp
-	include/coex/coexBattery.h
-	src/coexBattery.cpp
-  	#coexRC
-	include/coex/JoystickAxis.h
-	src/JoystickAxis.cpp
-	include/coex/Joystick.h
-	src/Joystick.cpp
-	include/coex/coexRC_Receiver.h
-	src/coexRC_Receiver.cpp
-	include/coex/coexRC_Transmitter.h
-	src/coexRC_Transmitter.cpp
-	#coexMC (ManualControl
-	include/coex/coexMC.h
-	src/coexMC.cpp
-	${INCLUDE_calling}
+add_library(calling_lib
+	include/calling/Calling.h
+	include/calling/Callable.h
+	include/calling/Caller.h
+	src/Caller.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -195,12 +139,7 @@ add_library(coexController
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-#add_executable(KeyNode src/KeyNode.cpp)
-add_executable(AccelNode src/AccelReader.cpp)
-add_executable(ArmNode src/ArmNode.cpp)
-add_executable(BatteryNode src/BatteryNode.cpp)
-
-
+# add_executable(${PROJECT_NAME}_node src/calling_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -210,28 +149,13 @@ add_executable(BatteryNode src/BatteryNode.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(KeyNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-#add_dependencies(KeyNode coex_generate_messages_cpp)
-add_dependencies(AccelNode coex_generate_messages_cpp)
-add_dependencies(ArmNode coex_generate_messages_cpp)
-add_dependencies(BatteryNode coex_generate_messages_cpp calling_lib)
-
-add_dependencies(coexController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coex_generate_messages_cpp calling_lib)
-
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-
-#target_link_libraries(KeyNode ${catkin_LIBRARIES})
-target_link_libraries(AccelNode ${catkin_LIBRARIES})
-target_link_libraries(ArmNode ${catkin_LIBRARIES})
-target_link_libraries(BatteryNode ${catkin_LIBRARIES})
-
-
-target_link_libraries(coexController ${catkin_LIBRARIES} calling_lib)
-
+target_link_libraries(calling_lib ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -260,7 +184,7 @@ target_link_libraries(coexController ${catkin_LIBRARIES} calling_lib)
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 # )
-install(TARGETS coexController 
+install(TARGETS calling_lib 
 	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
@@ -271,8 +195,7 @@ install(TARGETS coexController
 #   FILES_MATCHING PATTERN "*.h"
 #   PATTERN ".svn" EXCLUDE
 # )
-
-install(DIRECTORY include/coex/
+install(DIRECTORY include/calling/
 	DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
@@ -287,7 +210,7 @@ install(DIRECTORY include/coex/
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_coex.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_calling.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

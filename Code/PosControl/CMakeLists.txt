@@ -17,6 +17,9 @@ find_package(
     geometry_msgs
     mavros_msgs
     sensor_msgs
+    
+    calling
+    coex
 )
 
 ## System dependencies are found with CMake's conventions
@@ -109,10 +112,12 @@ find_package(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+	INCLUDE_DIRS
+		include
+		../coex/include
 #  LIBRARIES ${PROJECT_NAME}
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+	CATKIN_DEPENDS roscpp rospy std_msgs
+#  DEPENDS
 )
 
 ###########
@@ -125,6 +130,12 @@ include_directories(
   include
   include/PosControl
   src
+  ~/catkin_ws/src/coex/include
+  ~/catkin_ws/src/coex/include/coex
+  ~/catkin_ws/src/coex/src
+  ~/catkin_ws/src/calling/include
+  ~/catkin_ws/src/calling/include/calling
+  ~/catkin_ws/src/calling/src
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -149,18 +160,31 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+set(INCLUDE_calling
+	"../calling/include/calling/Calling.h"
+	"../calling/include/calling/Callable.h"
+	"../calling/include/calling/Caller.h"
+)
+
+set(INCLUDE_coexControl
+	"../coex/include/coex/coexControl.h"
+)
+
+
+
+
+
 add_executable(BridgeNode 
-	src/RosBridge.cpp
+	src/RosBridge.cpp	
 	include/PosControl/PosBridge.h
 	src/PosBridge.cpp
-	include/PosControl/Transmitable.h
-	#src/Transmitable.cpp
-	include/PosControl/ActionTransmitter.h
-	src/ActionTransmitter.cpp
-	include/PosControl/ActionAdapter.h
-	src/ActionAdapter.cpp
+	include/PosControl/ActionDirection.h
+	include/PosControl/ActionAdapter_Mock.h
+	src/ActionAdapter_Mock.cpp
 	include/PosControl/StateBuilder.h
 	src/StateBuilder.cpp
+	${INCLUDE_coexControl}
+	${INCLUDE_calling}
 )
 
 
@@ -173,9 +197,10 @@ add_executable(BridgeNode
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(BridgeNode ${catkin_LIBRARIES})
+target_link_libraries(BridgeNode ${catkin_LIBRARIES} coexController)
 
 #############
 ## Install ##
