@@ -1,18 +1,11 @@
 #ifndef ACTIONADAPTER_H
 #define ACTIONADAPTER_H
 
+#include "Transmitable.h"
 
-#include "PosControl/ControllerType.h"
-#include "PosControl/Transmitable.h"
-#include "PosControl/State.h"
-
-enum ActionDirection
-{
-	DirX,
-	DirY,
-	DirZ
-
-};
+#include "ActionDirection.h"
+#include "ControllerType.h"
+#include "State.h"
 
 
 class ActionAdapter
@@ -33,3 +26,5 @@ private:
 };
 
 #endif // ACTIONADAPTER_H
+
+

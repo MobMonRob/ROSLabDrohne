@@ -3,22 +3,13 @@
 
 
 
+#include "ActionDirection.h"
+#include "ControllerSystem.h"
 
-#include "PosControl/ControllerSystem.h"
+#include "AccelToPos.h"
+#include "StateHandler.h"
 
-#include "PosControl/AccelToPos.h"
-#include "PosControl/StateHandler.h"
-
-#include "PosControl/Transmitable.h"
-
-
-enum ActionDirection
-{
-	DirX,
-	DirY,
-	DirZ
-
-};
+#include "Transmitable.h"
 
 
 class ActionAdapter

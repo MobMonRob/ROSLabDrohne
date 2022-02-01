@@ -18,6 +18,11 @@ bool ActionAdapter::setPos_Abs(double X, double Y, double Z)
 	SaveX = X;
 	SaveY = Y;
 	SaveZ = Z;
+	
+	if (SaveZ < 0)
+	{
+		SaveZ = 0;
+	}
 
 	this->ActionReceiver_->transmitAction(SaveX, SaveY, SaveZ, 0);
 
@@ -45,6 +50,6 @@ bool ActionAdapter::setK(ActionDirection Direction, ControllerType Type, double 
 
 void ActionAdapter::addState(State Entry)
 {
-
+	
 }
 

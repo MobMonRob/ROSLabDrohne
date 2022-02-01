@@ -21,7 +21,7 @@ protected:
 // move into Unit.cpp?
 const Unit Unit_Invalid("INVALID");
 
-const Unit Unit_Length("m/s");
+const Unit Unit_Length("m");
 const Unit Unit_Velocity("m/s");
 const Unit Unit_Acceleration("m/s²");
 
