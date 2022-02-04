@@ -124,9 +124,11 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/threading.cpp
-# )
+set(INCLUDE_threading_H
+	"../threading/include/threading/rosThread.h"
+	"../threading/include/threading/AutoClient.h"
+	"../threading/include/threading/AutoPublisher.h"
+)
 
 add_library(threading_lib INTERFACE)
 

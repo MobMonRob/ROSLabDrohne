@@ -8,7 +8,8 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	: Joystick_(1027, 2003, 1500,
 				1024, 2003, 1500,
 				1031, 2003, 1500,
-				1024, 2003, 1500)
+				1024, 2003, 1500),
+	Pub_("mavros/setpoint_position/local", 20, 10, true)
 {
 	ROS_INFO("Started coexControl");
 	
@@ -47,19 +48,34 @@ coexControl::~coexControl()
 	delete this->Battery_;
 	delete this->State_;
 	
+	this->setArmState(false);
+	this->setMode("MANUAL");
+	
 	ROS_INFO("Terminated coexControl");
 }
 
 
 mavros_msgs::ManualControl coexControl::getRC_normalized()
 {
-	mavros_msgs::ManualControl Msg = this->RC_Receiver_->getCtrMsg_normalized();
+	mavros_msgs::ManualControl Msg;
 	
 	
-	Msg.x /= this->RC_Soft_;
-	Msg.y /= this->RC_Soft_;
-	Msg.z /= this->RC_Soft_;
-	Msg.r /= this->RC_Soft_;
+	if (this->RC_Receiver_ != nullptr)
+	{
+		Msg = this->RC_Receiver_->getCtrMsg_normalized();
+		
+		Msg.x /= this->RC_Soft_;
+		Msg.y /= this->RC_Soft_;
+		Msg.z /= this->RC_Soft_;
+		Msg.r /= this->RC_Soft_;
+	}
+	else
+	{
+		Msg.x = 1500;
+		Msg.y = 1500;
+		Msg.z = 1000;
+		Msg.r = 1500;
+	}
 	
 	return Msg;
 };
@@ -72,15 +88,70 @@ bool coexControl::call(Calling* Caller)
 	
 	if (Caller == this->RC_Receiver_)
 	{
-		this->transmit(this->getRC_normalized());
+		//this->transmit(this->getRC_normalized());
 		
-		ROS_INFO("Thrust = %f.", this->getRC_normalized().z);
+		//ROS_INFO("Thrust = %f.", this->getRC_normalized().z);
+		
+		//Caller::call();
+		
+		
+		//this->transmitAction(0.0, 0.0, 0.08, 0.0);
+		
+		
+		
+		// Test
+		mavros_msgs::ManualControl ManMsg = this->getRC_normalized();
+		geometry_msgs::PoseStamped pose;
+		
+		
+		pose.pose.position.x = 0;
+		pose.pose.position.y = 0;
+		pose.pose.position.z = ManMsg.z;
+		
+		this->Pub_.runOnce(pose);
+		// Test End
+		
+		
+		
 		
 		ReturnBool = true;
 	}
 	
+	
+	
+	
 	return ReturnBool;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+void coexControl::transmit(mavros_msgs::ManualControl Msg)
+{
+	if (this->xC_ != nullptr)
+	{
+		this->xC_->transmitAction(Msg);
+	}
+}
+
+
+
+
+
+void coexControl::landing()
+{
+
+}
+
 
 
 

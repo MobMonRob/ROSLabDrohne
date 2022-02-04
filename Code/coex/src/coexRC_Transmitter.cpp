@@ -1,6 +1,6 @@
 #include "coex/coexRC_Transmitter.h"
 
-#include "mavros_msgs/OverrideRCIn.h""
+#include <mavros_msgs/OverrideRCIn.h>
 
 
 coexRC_Transmitter::coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery)

@@ -1,18 +1,21 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(calling)
+project(Application)
 
 find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
 		rospy
 		std_msgs
+		
+		Abstraction
+		Domain
 )
 
 ###################################
 ## catkin specific configuration ##
 ###################################
 catkin_package(
-	LIBRARIES calling_lib
+	LIBRARIES Application_lib
 	CATKIN_DEPENDS roscpp rospy std_msgs
 )
 
@@ -21,29 +24,30 @@ catkin_package(
 ###########
 include_directories(
 	include
-	include/calling
+	../Abstraction/include
+	../Domain/include
 	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-add_library(calling_lib
-	include/calling/Calling.h
-	include/calling/Callable.h
-	include/calling/Caller.h
-	src/Caller.cpp
+add_library(Application_lib
+	include/Application/Header.h
+	src/AccelToPos.cpp
+	src/State.cpp
+	src/StateHandler.cpp
 )
 
-target_link_libraries(calling_lib ${catkin_LIBRARIES})
+target_link_libraries(Application_lib ${catkin_LIBRARIES})
 
 #############
 ## Install ##
 #############
-install(TARGETS calling_lib 
+install(TARGETS Application_lib 
 	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 
-install(DIRECTORY include/calling/
+install(DIRECTORY include/Application/
 	DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
 

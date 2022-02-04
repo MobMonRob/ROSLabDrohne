@@ -8,18 +8,34 @@
 
 
 coexMC::coexMC(coexState *State, coexBattery *Battery)
-	: coexTransmitable(State, Battery)
+	: coexTransmitable(State, Battery),
+	Pub_("mavros/manual_control/send", 30, 10, true)
 {
 	ROS_INFO("Started coexMC");
 	
-	this->PubMC_ = this->nh_.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
+	
+	
+	mavros_msgs::ManualControl Msg;
+	
+	Msg.x = 0;
+	Msg.y = 0;
+	Msg.z = 0.05;
+	Msg.r = 0;
+	
+	this->Pub_.setPayload(Msg);
+	
+	
+	
+	//this->PubMC_ = this->nh_.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
 }
 
 
 void coexMC::transmit(mavros_msgs::ManualControl Msg)
 {
-	bool Valid = true;	
+	bool Valid = true;
 	
+	
+	this->Pub_.setPayload(Msg);
 	
 	// For Intervalls see Header File!
 	if (Msg.x >= -1 && Msg.x <= 1)
@@ -63,7 +79,9 @@ void coexMC::transmit(mavros_msgs::ManualControl Msg)
 	
 	if (Valid)
 	{
-		this->PubMC_.publish(Msg);
+		//ROS_INFO("Send ControlMsg: %f, %f, %f, %f.", Msg.x, Msg.y, Msg.z, Msg.r);
+		
+		//this->PubMC_.publish(Msg);
 	}
 }
 

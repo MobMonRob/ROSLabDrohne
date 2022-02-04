@@ -5,7 +5,7 @@
 
 #include <sensor_msgs/Imu.h>
 
-#include <PosControl/ActionAdapter.h>
+#include "Adapter/ActionAdapter.h"
 
 
 class StateBuilder

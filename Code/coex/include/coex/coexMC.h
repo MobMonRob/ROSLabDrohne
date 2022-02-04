@@ -5,6 +5,8 @@
 
 #include <mavros_msgs/ManualControl.h>
 
+#include "threading/AutoPublisher.h"
+
 #include "coexTransmitable.h"
 #include "coexState.h"
 #include "coexBattery.h"
@@ -29,6 +31,8 @@ private:
 private:
 	ros::NodeHandle nh_;
 	ros::Publisher PubMC_;									// Publisher to mavros
+	
+	AutoPublisher<mavros_msgs::ManualControl> Pub_;
 };
 
 #endif // COEXMC_H

@@ -3,8 +3,8 @@
 
 #include <set>
 
-#include "calling/Calling.h"
-#include "calling/Callable.h"
+#include "Calling.h"
+#include "Callable.h"
 
 
 class Caller : public Calling

@@ -19,6 +19,7 @@ void callbackState(const mavros_msgs::State::ConstPtr& msg)
 
 
 coexState::coexState()
+	: ClMode_("mavros/set_mode", 10)
 {
 	ROS_INFO("Started coexState");
 	
@@ -26,7 +27,7 @@ coexState::coexState()
 	
 	this->initSystemStatus();
 	
-	//this->SubState_ = this->nh_.subscribe<mavros_msgs::State>("mavros/state", 10, callbackState);
+	this->SubState_ = this->nh_.subscribe<mavros_msgs::State>("mavros/state", 10, callbackState);
 }
 
 
@@ -124,11 +125,6 @@ bool coexState::setArmState(bool arming)
 
 
 
-bool coexState::getConnected()
-{
-	return this->State_.connected;
-}
-
 bool coexState::getArmed()
 {
 	bool ReturnBool = false;
@@ -138,14 +134,24 @@ bool coexState::getArmed()
 	{
 		ReturnBool = this->State_.armed;
 	}
+	else
+	{
+		this->setArmState(false);
+	}
 	
 	return ReturnBool;
 }
 
+
 std::string coexState::getSystemStatus()
 {
+	return this->getSystemStatus(this->State_.system_status);
+}
+
+std::string coexState::getSystemStatus(int StatusID)
+{
 	std::string ReturnString = "UNKNOWN?";
-	std::map<int, std::string>::iterator it = this->SystemStatus_.find(this->State_.system_status);
+	std::map<int, std::string>::iterator it = this->SystemStatus_.find(StatusID);
 	
 	
 	if (it != this->SystemStatus_.end())
@@ -159,6 +165,26 @@ std::string coexState::getSystemStatus()
 
 void coexState::cbState(const mavros_msgs::State::ConstPtr& State)
 {
+	if (State->connected != this->getConnected())
+	{
+		ROS_INFO("Vehicle %s.", (State->connected ? "connected" : "disconnected"));
+	}
+	
+	if (State->mode != this->getMode())
+	{
+		ROS_INFO("Vehicle Mode changed to %s.", State->mode.c_str());
+	}
+	
+	if (State->armed != this->getArmed())
+	{
+		ROS_INFO("Vehicle %s.", (State->armed ? "armed" : "disarmed"));
+	}
+	
+	if (State->system_status != this->State_.system_status)
+	{
+		ROS_INFO("Vehicle SystemStatus changed to %s.", this->getSystemStatus(State->system_status).c_str());
+	}
+	
 	this->State_ = *State;
 	
 	this->call();

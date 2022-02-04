@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>calling</name>
+  <name>Domain</name>
   <version>0.0.0</version>
-  <description>The calling package</description>
+  <description>The Domain package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <maintainer email="maag@todo.todo">maag</maintainer>
@@ -18,6 +18,8 @@
 	<depend>roscpp</depend>
 	<depend>rospy</depend>
 	<depend>std_msgs</depend>
+	
+	<depend>Abstraction</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
