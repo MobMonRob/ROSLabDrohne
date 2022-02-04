@@ -24,7 +24,7 @@ private:
 	ros::Subscriber SubBattery_;
 	
 	double Thershold_Warning_;
-	ros::Duration Intervall_Info_;
+	double Intervall_Info_;
 	
 	sensor_msgs::BatteryState Battery_;
 };

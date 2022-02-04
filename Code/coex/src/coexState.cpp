@@ -4,8 +4,6 @@
 #include <mavros_msgs/SetMode.h>
 
 
-
-
 coexState *coex_State = nullptr;
 
 
@@ -28,7 +26,7 @@ coexState::coexState()
 	
 	this->initSystemStatus();
 	
-	this->SubState_ = this->nh_.subscribe<mavros_msgs::State>("mavros/state", 10, callbackState);
+	//this->SubState_ = this->nh_.subscribe<mavros_msgs::State>("mavros/state", 10, callbackState);
 }
 
 

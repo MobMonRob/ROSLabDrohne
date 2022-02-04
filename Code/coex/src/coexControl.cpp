@@ -1,7 +1,7 @@
 #include "coex/coexControl.h"
 
-#include "coexRC_Transmitter.h"
-#include "coexMC.h"
+#include "coex/coexRC_Transmitter.h"
+#include "coex/coexMC.h"
 
 
 coexControl::coexControl(bool OutRC, int RC_Soft)

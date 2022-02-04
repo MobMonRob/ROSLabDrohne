@@ -5,7 +5,7 @@
 
 #include "coex/coexControl.h"
 
-#include "ActionAdapter_Mock.h"
+#include "Adapter/ActionAdapter_Mock.h"
 //#include "ActionAdapter.h"
 #include "StateBuilder.h"
 

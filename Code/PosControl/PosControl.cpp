@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include "PosControl/ControllerSystem.h"
+#include "Domain/ControllerSystem.h"
 
-#include "PosControl/Ringbuffer.h"
-#include "PosControl/Vector3D.h"
+#include "Abstraction/Ringbuffer.h"
+#include "Abstraction/Vector3D.h"
 
-#include "PosControl/ActionAdapter.h"
+#include "Adapter/ActionAdapter_Mock.h"
 
 
 int main()

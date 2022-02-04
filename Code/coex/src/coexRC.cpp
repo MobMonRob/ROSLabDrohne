@@ -1,5 +1,8 @@
 #include "coex/coexRC.h"
 
+#ifdef MOCK_ROS_H
+#include "ros/ros_Talker.h"
+#endif
 
 coexRC *coex_RC = nullptr;
 

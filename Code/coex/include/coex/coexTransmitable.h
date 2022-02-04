@@ -1,9 +1,9 @@
 #ifndef COEXTRANSMITABLE_H
 #define COEXTRANSMITABLE_H
 
-#include <mavros_msgs/ManualControl.h>
+#include "mavros_msgs/ManualControl.h"
 
-#include "Transmitable.h"
+#include "Adapter/Transmitable.h"
 #include "coexState.h"
 #include "coexBattery.h"
 
