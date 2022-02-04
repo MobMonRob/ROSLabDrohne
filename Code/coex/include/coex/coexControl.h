@@ -3,9 +3,9 @@
 
 #include <ros/ros.h>
 
-#include <mavros_msgs/ManualControl.h>
+#include "mavros_msgs/ManualControl.h"
 
-#include <geometry_msgs/PoseStamped.h> // Test
+#include "geometry_msgs/PoseStamped.h" // Test
 
 #include "calling/Callable.h"
 #include "calling/Caller.h"
@@ -57,7 +57,6 @@ private:
 	Joystick Joystick_;
 	int RC_Soft_;
 	coexTransmitable *xC_ = nullptr;
-	
 	AutoPublisher<geometry_msgs::PoseStamped> Pub_; // Test
 };
 

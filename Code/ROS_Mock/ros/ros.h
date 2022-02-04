@@ -85,6 +85,7 @@ public:
 	public:
 		Duration(double Duration = 0) {};
 
+		operator double() { return 0; };
 	};
 
 	class Time

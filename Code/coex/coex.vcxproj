@@ -145,7 +145,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="coex.cpp" />
-    <ClCompile Include="src\Caller.cpp" />
     <ClCompile Include="src\coexBattery.cpp" />
     <ClCompile Include="src\coexControl.cpp" />
     <ClCompile Include="src\coexMC.cpp" />
@@ -169,9 +168,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\coex\Callable.h" />
-    <ClInclude Include="include\coex\Caller.h" />
-    <ClInclude Include="include\coex\Calling.h" />
     <ClInclude Include="include\coex\coexBattery.h" />
     <ClInclude Include="include\coex\coexControl.h" />
     <ClInclude Include="include\coex\coexMC.h" />
