@@ -1,0 +1,42 @@
+\newSec[ArchAbstr]{Abstraction Layer}{2}
+
+Der \textit{Abstraction Layer} stellt als Teil der \clean\ die Ebene dar, in der allgemein gültige Typen oder Definitionen abgelegt werden können. Nachfolgend werden die Klassen beschrieben, die in diesem Projekt zu dem \textit{Abstraction Layer} gehören. Sofern nicht anders betitelt, handelt es sich bei den Klassen um Klassen vom Typ \VO.
+
+
+
+\newSec{Optional}{4}
+Die Klasse \textit{Optional} soll dem Ringbuffer ermöglichen, das Nichtvorhandensein von Einträgen darstellen zu können. Diese Klasse ist als \textit{template} implementiert und enthält neben dem Speicherplatz für die generische Instanz einen bool'schen Wert als Validierung.
+Hiermit wird das Arbeit mit \textit{Null-pointern} im Kontext desr Klasse \textit{Ringbuffer} vermieden.
+
+
+\newSec{Ringbuffer}{4}
+Die Klasse \textit{Ringbuffer} soll einen Ringspeicher abbilden. Hier wird nicht -wie ner Name vermuten lässt- ein Ringspeicher im SInne einer ringförmig verketteten Liste implementiert. Diese Klasse Kapselt einen \textit{STL} vom Typ \textit{std::vector<T>}, wobei bei Überschreiten der maximalen Anzahl an Elementen das vordere Elemente entfernt wird.
+\note{Die Implementierung der Klasse \textit{std::vector<T>} sieht vor, neue Elemente an das Ende anzuhängen.}
+Bei der Klasse \textit{Ringbuffer} handelt es sich nicht im ein \VO, da \missing[bitte begründen ;)].
+
+
+\newSec{TimedValue}{4}
+Die Klasse \textit{TimedValue} soll einen mit einem Zeitstemlep versehenen Wert abbilden. Dies wird durch das Erben von den Klassen \textit{Timestamp} und \textit{Value} umgesetzt.
+
+
+
+\newSec{Timestamp}{4}
+Mit der Klasse \textit{Timestamp} wird ein Zeitstempel eingeführt. Alle \ROS-Nachrichten beinhalten durch die Kapselung der \textit{std\_msgs::Header}-Klasse einen Zeitstempel.
+
+
+\newSec{Unit}{4}
+Mit \textit{Unit} werden Einheiten umgesetzt, um eine korrekte Übergabe von \textit{Value}-Instanzen zur Laufzeit zu gewährleisten.
+
+
+\newSec{Value}{4}
+Die Klasse \textit{Value} bildet einen Wert ab. Sie besteht aus einer \textit{Unit} und einem dazugehöigen Zahlenwert.
+
+
+\newSec{Vector3D}{4}
+Bei der Klasse \textit{Vector3D} handelt es sich um die Abbildung eines Vektors im dreidimensionalen Raum. Zusätzlich wird dem Vektor eine Einheit zugewiesen.
+Zudem werden in dieser Klasse grundlegende mathematische Operationen für Vektoren implementiert.
+
+
+
+
+
