@@ -98,9 +98,6 @@
     <ClInclude Include="include\Domain\Outputable.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Domain\Ringbuffer.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="include\Domain\TimedDifference.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>

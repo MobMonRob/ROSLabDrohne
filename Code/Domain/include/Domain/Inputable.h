@@ -7,7 +7,7 @@
 class Inputable
 {
 public:
-	virtual Unit getInputUnit() { return Unit_Invalid; };
+	virtual Unit getInputUnit() = 0;
 };
 
 #endif // INPUTABLE_H

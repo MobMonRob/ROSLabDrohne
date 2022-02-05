@@ -8,8 +8,8 @@
 class Outputable
 {
 public:
-	virtual Unit getOutputUnit() { return Unit_Invalid; };
-	virtual TimedValue getOutput() { return TimedValue(Unit_Invalid); };
+	virtual Unit getOutputUnit() = 0;
+	virtual TimedValue getOutput() = 0;
 };
 
 #endif // OUTPUTABLE_H

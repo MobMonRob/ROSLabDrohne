@@ -174,7 +174,6 @@
     <ClInclude Include="include\Domain\Inputable.h" />
     <ClInclude Include="include\Domain\Output.h" />
     <ClInclude Include="include\Domain\Outputable.h" />
-    <ClInclude Include="include\Domain\Ringbuffer.h" />
     <ClInclude Include="include\Domain\TimedDifference.h" />
   </ItemGroup>
   <ItemGroup>

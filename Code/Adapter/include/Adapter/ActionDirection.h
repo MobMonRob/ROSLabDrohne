@@ -2,7 +2,7 @@
 #define ACTIONDIRECTION_H
 
 
-enum ActionDirection
+enum class ActionDirection
 {
 	DirX,
 	DirY,

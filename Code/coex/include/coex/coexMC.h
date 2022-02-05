@@ -30,7 +30,6 @@ private:
 	void transmit(mavros_msgs::ManualControl Msg);			// from Transmitable
 	
 private:
-	ros::NodeHandle nh_;
 	ros::Publisher PubMC_;									// Publisher to mavros
 	
 	AutoPublisher<mavros_msgs::ManualControl> Pub_;

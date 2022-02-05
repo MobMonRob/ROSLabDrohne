@@ -51,6 +51,8 @@ private:
 	void landing();
 	
 private:
+	coexState *State_;
+	coexBattery *Battery_;
 	coexOrientation *Orientation_ = nullptr;
 	coexRC_Receiver *RC_Receiver_ = nullptr;
 	Joystick Joystick_;
