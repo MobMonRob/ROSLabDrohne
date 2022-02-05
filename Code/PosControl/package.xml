@@ -60,7 +60,7 @@
   
   <depend>calling</depend>
   <depend>coex</depend>
-  
+  <depend>Adapter</depend>
   
   
   

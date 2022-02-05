@@ -43,7 +43,11 @@ add_library(Domain_lib
 	src/TimedDifference.cpp
 )
 
-target_link_libraries(Domain_lib ${catkin_LIBRARIES})
+## Add cmake target dependencies of the executable
+add_dependencies(Domain_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Abstraction_lib)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(Domain_lib ${catkin_LIBRARIES} Abstraction_lib)
 
 #############
 ## Install ##

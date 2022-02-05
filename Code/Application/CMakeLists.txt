@@ -37,7 +37,11 @@ add_library(Application_lib
 	src/StateHandler.cpp
 )
 
-target_link_libraries(Application_lib ${catkin_LIBRARIES})
+## Add cmake target dependencies of the executable
+add_dependencies(Application_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib Abstraction_lib)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(Application_lib ${catkin_LIBRARIES} Domain_lib Abstraction_lib)
 
 #############
 ## Install ##
