@@ -24,6 +24,9 @@
     <ClCompile Include="src\ActionAdapter_Mock.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Transmitable_Mock.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Adapter\ActionAdapter.h">
@@ -36,6 +39,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\Adapter\Transmitable.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Transmitable_Mock.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,10 +12,11 @@ int main(int argc, char** argv)
 	
 	while(ros::ok())
 	{
-		Bridge.spin();
+
 	}
 	
 	ROS_INFO("Terminated Node: RosBridge");
 	
 	return 0;
 }
+

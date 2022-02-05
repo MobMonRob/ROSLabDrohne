@@ -15,7 +15,7 @@
 class ControllerSystem : public Output
 {
 public:
-	ControllerSystem(Unit Unit);
+	ControllerSystem(Unit InputUnit);
 	~ControllerSystem();
 
 	ControllerSystem operator= (const ControllerSystem& CS);

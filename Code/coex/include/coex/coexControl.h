@@ -1,20 +1,19 @@
 #ifndef COEXCONTROL_H
 #define COEXCONTROL_H
 
+#define DEBUG
+
 #include <ros/ros.h>
 
 #include "mavros_msgs/ManualControl.h"
 
-#include "geometry_msgs/PoseStamped.h" // Test
-
+#include "threading/AutoPublisher.h"
 #include "calling/Callable.h"
 #include "calling/Caller.h"
-#include "coexTransmitable.h"
-#include "coexOrientation.h"
-#include "coexRC_Receiver.h"
 
-#include "threading/AutoPublisher.h"
-
+#include "coex/coexTransmitable.h"
+#include "coex/coexOrientation.h"
+#include "coex/coexRC_Receiver.h"
 
 
 class coexControl : public coexTransmitable, public Caller, public Callable
@@ -57,7 +56,6 @@ private:
 	Joystick Joystick_;
 	int RC_Soft_;
 	coexTransmitable *xC_ = nullptr;
-	AutoPublisher<geometry_msgs::PoseStamped> Pub_; // Test
 };
 
 #endif // COEXCONTROL_H

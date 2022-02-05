@@ -1,5 +1,5 @@
-#ifndef ACTIONADAPTER_H
-#define ACTIONADAPTER_H
+#ifndef ACTIONADAPTER_MOCK_H
+#define ACTIONADAPTER_MOCK_H
 
 #include "Domain/ControllerType.h"
 #include "Application/State.h"
@@ -8,10 +8,10 @@
 #include "Adapter/ActionDirection.h"
 
 
-class ActionAdapter
+class ActionAdapter_Mock
 {
 public:
-	ActionAdapter(Transmitable *Transmitable);
+	ActionAdapter_Mock(Transmitable *Transmitable);
 
 	bool setPos_Abs(double X, double Y, double Z);
 	bool setPos_Diff(double DiffX, double DiffY, double DiffZ);
@@ -25,6 +25,6 @@ private:
 	double SaveX = 0, SaveY = 0, SaveZ = 0;
 };
 
-#endif // ACTIONADAPTER_H
+#endif // ACTIONADAPTER_MOCK_H
 
 

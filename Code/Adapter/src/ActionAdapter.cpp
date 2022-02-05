@@ -1,7 +1,6 @@
-#ifndef DEBUG
 #include "Adapter/ActionAdapter.h"
 
-
+#include <iostream>
 
 
 
@@ -11,11 +10,19 @@ ActionAdapter::ActionAdapter(Transmitable *Transmitable)
 	ControlY_(Unit_Length),
 	ControlZ_(Unit_Length)
 {
+	std::cout << "Starting ActionAdapter..." << std::endl;
+
 	this->ControlX_.addController(Unit_AngleRad, 1.0, 0.0, 0.0);
 	this->ControlY_.addController(Unit_AngleRad, 1.0, 0.0, 0.0);
 	this->ControlZ_.addController(Unit_Percent, 1.0, 0.0, 0.0);
+
+	std::cout << "Started ActionAdapter" << std::endl;
 }
 
+ActionAdapter::~ActionAdapter()
+{
+	std::cout << "Termintating ActionAdapter..." << std::endl;
+}
 
 
 
@@ -60,6 +67,30 @@ bool ActionAdapter::setPos_Diff(double DiffX, double DiffY, double DiffZ)
 	return ReturnBool;
 }
 
+bool ActionAdapter::setK_Abs(ActionDirection Direction, ControllerType Type, double K)
+{
+	bool ReturnBool = false;
+
+	switch (Direction)
+	{
+	case ActionDirection::DirX:
+		ReturnBool = this->ControlX_.setK(0, Type, K);
+		break;
+
+	case ActionDirection::DirY:
+		ReturnBool = this->ControlY_.setK(0, Type, K);
+		break;
+
+	case ActionDirection::DirZ:
+		ReturnBool = this->ControlZ_.setK(0, Type, K);
+		break;
+
+	default:
+		break;
+	};
+
+	return ReturnBool;
+}
 
 
 
@@ -77,15 +108,16 @@ void ActionAdapter::addState(State Entry)
 	this->StateHandler_.addEntry(Entry);
 
 	State StateAvg = this->StateHandler_.getAvgState();
+	Timestamp Time = StateAvg.getTimestamp();
 	Vector3D Angle = StateAvg.getVector_Angular();
 	Vector3D Accel = StateAvg.getVector_Translative().rotate(
 		-Angle.getX(),
 		-Angle.getY(),
 		-Angle.getZ());
 
-	this->PosX_.setInput(TimedValue(Unit_Acceleration, Accel.getX(), Entry.getTimestamp()));
-	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY(), Entry.getTimestamp()));
-	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ(), Entry.getTimestamp()));
+	this->PosX_.setInput(TimedValue(Unit_Acceleration, Accel.getX(), Time));
+	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY(), Time));
+	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ(), Time));
 
 	this->ControlX_.setFeedback(this->PosX_.getOutputValue());
 	this->ControlY_.setFeedback(this->PosY_.getOutputValue());
@@ -97,5 +129,3 @@ void ActionAdapter::addState(State Entry)
 		this->ControlZ_.getOutput().getValue(),
 		0);
 }
-
-#endif

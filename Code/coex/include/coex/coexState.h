@@ -23,6 +23,7 @@ class coexState : public Caller
 {
 public:
 	coexState();
+	~coexState();
 	
 	bool setMode(std::string Mode);
 	bool setArmState(bool arming);

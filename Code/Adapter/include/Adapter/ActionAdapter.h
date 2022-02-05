@@ -14,6 +14,7 @@ class ActionAdapter
 {
 public:
 	ActionAdapter(Transmitable *Transmitable);
+	~ActionAdapter();
 
 	bool setPos_Abs(double X, double Y, double Z);
 	bool setPos_Diff(double DiffX, double DiffY, double DiffZ);

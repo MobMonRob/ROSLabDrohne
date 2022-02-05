@@ -1,11 +1,19 @@
 // coex.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 //
-
+#define DEBUG
 #include <iostream>
+
+
+#include "coex/coexControl.h"
+
+
 
 int main()
 {
     std::cout << "Hello World!\n";
+
+    coexControl Controller;
+
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

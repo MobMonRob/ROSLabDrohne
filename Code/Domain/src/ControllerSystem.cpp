@@ -9,24 +9,24 @@
 #include "Domain/Controller_PT.h"
 
 
-ControllerSystem::ControllerSystem(Unit Unit)
-	: Output(Unit), Difference_(Unit)
+ControllerSystem::ControllerSystem(Unit InputUnit)
+	: Output(InputUnit), Difference_(InputUnit)
 {
+	std::cout << "Starting ControllerSystem..." << std::endl;
 }
 
 ControllerSystem::~ControllerSystem()
 {
-	std::cout << "Starting Destructor..." << std::endl;
+	std::cout << "Termintating ControllerSystem..." << std::endl;
 
-	for (int i = this->Knots_.size() - 1; i >= 0; i--)
+	// An Error occurs when deleting... So we might not use it.
+	if (false)
 	{
-		// ERROR OCCURS!
-		// Some Problems with delete.
-
-		std::cout << "Deleting Knot at " << i << "..." << std::endl;
-
-		delete this->Knots_.at(i);
-		std::cout << "Deleted Knot at " << i << "." << std::endl;
+		for (int i = this->Knots_.size() - 1; i >= 0; i--)
+		{
+			delete this->Knots_.at(i);
+			this->Knots_.erase(this->Knots_.end());
+		}
 	}
 }
 

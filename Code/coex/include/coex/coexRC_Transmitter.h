@@ -14,7 +14,8 @@
 class coexRC_Transmitter : public coexTransmitable
 {
 public:
-	coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery);	
+	coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery);
+	~coexRC_Transmitter();
 	
 private:
 	void transmit(mavros_msgs::ManualControl Msg);			// from Transmitable

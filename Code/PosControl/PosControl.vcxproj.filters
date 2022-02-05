@@ -4,10 +4,10 @@
     <ClCompile Include="src\PosBridge.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\RosBridge.cpp">
+    <ClCompile Include="src\StateBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\StateBuilder.cpp">
+    <ClCompile Include="PosControl.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

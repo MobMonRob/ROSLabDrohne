@@ -1,10 +1,10 @@
 #include "coex/coexMC.h"
 
-#include <mavros_msgs/State.h>
-#include <mavros_msgs/ManualControl.h>
-#include <mavros_msgs/CommandBool.h>
-#include <mavros_msgs/SetMode.h>
-#include <mavros/px4_custom_mode.h>
+#include "mavros_msgs/State.h"
+#include "mavros_msgs/ManualControl.h"
+#include "mavros_msgs/CommandBool.h"
+#include "mavros_msgs/SetMode.h"
+#include "mavros/px4_custom_mode.h"
 
 
 coexMC::coexMC(coexState *State, coexBattery *Battery)
@@ -12,7 +12,6 @@ coexMC::coexMC(coexState *State, coexBattery *Battery)
 	Pub_("mavros/manual_control/send", 30, 10, true)
 {
 	ROS_INFO("Started coexMC");
-	
 	
 	
 	mavros_msgs::ManualControl Msg;
@@ -27,6 +26,15 @@ coexMC::coexMC(coexState *State, coexBattery *Battery)
 	
 	
 	//this->PubMC_ = this->nh_.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
+}
+
+coexMC::~coexMC()
+{
+	ROS_INFO("Termintating coexMC...");
+
+	this->Pub_.stop();
+
+	ROS_INFO("Terminated coexMC");
 }
 
 

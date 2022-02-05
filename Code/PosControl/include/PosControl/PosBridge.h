@@ -6,7 +6,7 @@
 #include "coex/coexControl.h"
 
 #include "Adapter/ActionAdapter_Mock.h"
-//#include "ActionAdapter.h"
+//#include "Adapter/ActionAdapter.h"
 #include "StateBuilder.h"
 
 
@@ -17,8 +17,6 @@ public:
 	~PosBridge();
 	
 	void receiveKey(char Key);
-	
-	void spin();
 	
 private:
 	ros::NodeHandle nh_;

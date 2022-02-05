@@ -25,7 +25,9 @@ private:
 
 template<class T>
 AutoPublisher<T>::AutoPublisher(std::string Topic, double Frequency, int Queue, bool AutoStart)
-	: RosThread<T>(Frequency)
+#ifdef DEBUG
+	: RosThread<T>("AutoPublisher", Frequency)
+#endif
 {
 	this->Pub_ = this->nh_.advertise<T>(Topic, Queue, true);
 	

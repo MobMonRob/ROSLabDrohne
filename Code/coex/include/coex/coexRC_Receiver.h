@@ -14,6 +14,7 @@ class coexRC_Receiver : public Caller
 {
 public:
 	coexRC_Receiver(Joystick *Joystick);
+	~coexRC_Receiver();
 	
 	mavros_msgs::ManualControl getCtrMsg_normalized();
 	double getTime() { return this->RCIn_.header.stamp.toSec();};

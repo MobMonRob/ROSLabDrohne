@@ -24,6 +24,7 @@ class coexMC : public coexTransmitable
 {
 public:
 	coexMC(coexState *State, coexBattery *Battery);
+	~coexMC();
 	
 private:
 	void transmit(mavros_msgs::ManualControl Msg);			// from Transmitable

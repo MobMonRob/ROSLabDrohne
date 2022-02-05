@@ -2,9 +2,6 @@
 
 
 
-
-
-
 coexBattery *coex_Battery = nullptr;
 
 void callbackBattery(const sensor_msgs::BatteryState::ConstPtr& msg)
@@ -38,6 +35,10 @@ coexBattery::coexBattery(double Thershold_Warning, double Intervall_Info)
 	this->SubBattery_ = this->nh_.subscribe("mavros/battery", 5, callbackBattery);
 }
 
+coexBattery::~coexBattery()
+{
+	ROS_INFO("Termintating coexBattery...");
+}
 
 
 double coexBattery::getVoltage()

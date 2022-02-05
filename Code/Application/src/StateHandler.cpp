@@ -32,12 +32,3 @@ State StateHandler::getAvgState()
 }
 
 
-
-
-
-
-
-
-
-
-

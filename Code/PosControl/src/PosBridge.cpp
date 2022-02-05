@@ -1,7 +1,7 @@
 #include <PosControl/PosBridge.h>
 
 #include "std_msgs/Char.h"
-#include <sensor_msgs/BatteryState.h>
+#include "sensor_msgs/BatteryState.h"
 
 
 /* 
@@ -26,21 +26,29 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 PosBridge::PosBridge()
 {
-	ROS_INFO("Started PosBridge");
+	ROS_INFO("Starting PosBridge...");
 	
 	PosBridge_ = this;
 	
+	std::cout << "new ActionAdapter" << std::endl;
 	this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
+	std::cout << "new StateBuilder" << std::endl;
 	this->StateBuilder_ = new StateBuilder(this->ActionAdapter_);
 	
 	this->SubKeys_ = this->nh_.subscribe("KeyReader", 50, callbackKeys);
+
+	ROS_INFO("Started PosBridge");
 }
 
 
 PosBridge::~PosBridge()
 {
+	ROS_INFO("Terminating PosBridge...");
+
 	delete this->StateBuilder_;
 	delete this->ActionAdapter_;
+
+	ROS_INFO("Terminated PosBridge");
 }
 
 
@@ -101,17 +109,5 @@ void PosBridge::receiveKey(char Key)
 		break;
 	}
 }
-
-void PosBridge::spin()
-{
-	ros::spinOnce();
-	
-	this->StateBuilder_->spin();
-	
-	ros::spinOnce();
-}
-
-
-
 
 

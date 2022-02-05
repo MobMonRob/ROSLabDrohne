@@ -73,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <SourcePath>./src;$(SourcePath)</SourcePath>
+    <SourcePath>$(VC_SourcePath)/src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,8 +95,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../coex/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;TimedDifference.obj;AccelToPos.obj;State.obj;StateHandler.obj;ActionAdapter.obj;ActionAdapter_Mock.obj;termios.obj;coexState.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../threading/Debug;../calling/Debug;../coex/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;TimedDifference.obj;AccelToPos.obj;State.obj;StateHandler.obj;ActionAdapter.obj;termios.obj;ros_Talker.obj;Caller.obj;coexBattery.obj;coexState.obj;coexTransmitable.obj;JoystickAxis.obj;Joystick.obj;coexMC.obj;coexRC_Receiver.obj;coexRC_Transmitter.obj;coexOrientation.obj;coexControl.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,8 +144,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
-    <ClCompile Include="src\RosBridge.cpp" />
     <ClCompile Include="src\StateBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>

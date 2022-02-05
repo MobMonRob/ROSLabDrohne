@@ -22,12 +22,21 @@ coexState::coexState()
 	: ClMode_("mavros/set_mode", 10)
 {
 	ROS_INFO("Started coexState");
-	
+
 	coex_State = this;
 	
 	this->initSystemStatus();
 	
-	this->SubState_ = this->nh_.subscribe<mavros_msgs::State>("mavros/state", 10, callbackState);
+	this->SubState_ = this->nh_.subscribe("mavros/state", 10, callbackState);
+}
+
+coexState::~coexState()
+{
+	ROS_INFO("Termintating coexState...");
+
+	this->ClMode_.stop();
+
+	ROS_INFO("Terminated coexState");
 }
 
 

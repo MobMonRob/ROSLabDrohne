@@ -14,58 +14,25 @@
 
 namespace mavros_msgs
 {
+	class RCIn : public Msg
+	{
+	public:
 
-struct RCIn
-{
-  typedef RCIn Type;
+		RCIn() :rssi(0), channels() {};
+		RCIn(const RCIn& _alloc) : rssi(0), channels() {};
 
-  RCIn()
-    : header()
-    , rssi(0)
-    , channels()  {
-    }
-  RCIn(const RCIn& _alloc)
-    : header()
-    , rssi(0)
-    , channels()  {
-  (void)_alloc;
-    }
+		int rssi;
+		std::vector<int> channels;
 
-
-
-   typedef  Header  _header_type;
-  _header_type header;
-
-   typedef uint8_t _rssi_type;
-  _rssi_type rssi;
-
-   typedef std::vector<int>  _channels_type;
-  _channels_type channels;
+		typedef mavros_msgs::RCIn* Ptr;
+		typedef mavros_msgs::RCIn* ConstPtr;
+		typedef mavros_msgs::RCIn* RCInPtr;
+		typedef mavros_msgs::RCIn* RCInConstPtr;
 
 
 
 
-
-  typedef mavros_msgs::RCIn* Ptr;
-  typedef mavros_msgs::RCIn* ConstPtr;
-
-}; // struct RCIn_
-
-typedef ::mavros_msgs::RCIn RCIn;
-
-typedef mavros_msgs::RCIn* RCInPtr;
-typedef mavros_msgs::RCIn* RCInConstPtr;
-
-// constants requiring out of line definition
-
-
-
-
-
-
-
-
-
+	}; // RCIn	
 } // namespace mavros_msgs
 
 

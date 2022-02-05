@@ -15,6 +15,11 @@ coexRC_Transmitter::coexRC_Transmitter(Joystick *Joystick, coexState *State, coe
 	this->PubRC_ = this->nh_.advertise<mavros_msgs::OverrideRCIn>("mavros/rc/override", 10);
 }
 
+coexRC_Transmitter::~coexRC_Transmitter()
+{
+	ROS_INFO("Termintating coexRC_Transmitter...");
+}
+
 
 void coexRC_Transmitter::transmit(mavros_msgs::ManualControl Msg)
 {

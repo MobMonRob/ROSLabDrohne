@@ -8,8 +8,7 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	: Joystick_(1027, 2003, 1500,
 				1024, 2003, 1500,
 				1031, 2003, 1500,
-				1024, 2003, 1500),
-	Pub_("mavros/setpoint_position/local", 20, 10, true)
+				1024, 2003, 1500)
 {
 	ROS_INFO("Started coexControl");
 	
@@ -43,13 +42,19 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 
 coexControl::~coexControl()
 {
-	delete this->xC_;
-	delete this->Orientation_;
-	delete this->Battery_;
-	delete this->State_;
-	
+	ROS_INFO("Terminating coexControl...");
+
 	this->setArmState(false);
 	this->setMode("MANUAL");
+
+	delete this->xC_;
+	this->xC_ = nullptr;
+	delete this->Orientation_;
+	this->Orientation_ = nullptr;
+	delete this->Battery_;
+	this->Battery_ = nullptr;
+	delete this->State_;
+	this->State_ = nullptr;
 	
 	ROS_INFO("Terminated coexControl");
 }
@@ -96,20 +101,6 @@ bool coexControl::call(Calling* Caller)
 		
 		
 		//this->transmitAction(0.0, 0.0, 0.08, 0.0);
-		
-		
-		
-		// Test
-		mavros_msgs::ManualControl ManMsg = this->getRC_normalized();
-		geometry_msgs::PoseStamped pose;
-		
-		
-		pose.pose.position.x = 0;
-		pose.pose.position.y = 0;
-		pose.pose.position.z = ManMsg.z;
-		
-		this->Pub_.runOnce(pose);
-		// Test End
 		
 		
 		

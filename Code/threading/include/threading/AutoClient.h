@@ -25,7 +25,9 @@ private:
 
 template<class T>
 AutoClient<T>::AutoClient(std::string Service, double Frequency, bool AutoStart)
-	: RosThread<T>(Frequency)
+#ifdef DEBUG
+	: RosThread<T>("AutoClient", Frequency)
+#endif
 {
 	this->Client_ = this->nh_.serviceClient<T>(Service);
 	

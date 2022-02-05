@@ -169,6 +169,7 @@
     <ClInclude Include="include\Domain\Controller_P.h" />
     <ClInclude Include="include\Domain\Controller_PID.h" />
     <ClInclude Include="include\Domain\Controller_PT.h" />
+    <ClInclude Include="include\Domain\Header.h" />
     <ClInclude Include="include\Domain\Input.h" />
     <ClInclude Include="include\Domain\Inputable.h" />
     <ClInclude Include="include\Domain\Output.h" />

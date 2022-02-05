@@ -23,6 +23,11 @@ coexRC_Receiver::coexRC_Receiver(Joystick *Joystick)
 	this->SubRC_ = this->nh_.subscribe("mavros/rc/in", 100, callbackRC);
 }
 
+coexRC_Receiver::~coexRC_Receiver()
+{
+	ROS_INFO("Termintating coexRC_Receiver...");
+}
+
 
 mavros_msgs::ManualControl coexRC_Receiver::getCtrMsg_normalized()
 {

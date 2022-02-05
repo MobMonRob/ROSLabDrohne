@@ -12,7 +12,8 @@ class coexBattery : public Caller
 {
 public:
 	coexBattery(double Thershold_Warning = 15.0, double Intervall_Info = 60.0);
-	
+	~coexBattery();
+
 	double getVoltage();
 	double getPercentage();
 	double getTime() { return this->Battery_.header.stamp.toSec();};

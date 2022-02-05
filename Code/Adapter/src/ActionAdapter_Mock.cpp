@@ -1,20 +1,20 @@
-#ifdef DEBUG
 #include "Adapter/ActionAdapter_Mock.h"
 
+#include <iostream>
 
 
 
-
-ActionAdapter::ActionAdapter(Transmitable *Transmitable)
+ActionAdapter_Mock::ActionAdapter_Mock(Transmitable *Transmitable)
 	: ActionReceiver_(Transmitable)
 {
+	std::cout << "using ActionAdapter_Mock..." << std::endl;
 }
 
 
 
 
 
-bool ActionAdapter::setPos_Abs(double X, double Y, double Z)
+bool ActionAdapter_Mock::setPos_Abs(double X, double Y, double Z)
 {
 	SaveX = X;
 	SaveY = Y;
@@ -30,7 +30,7 @@ bool ActionAdapter::setPos_Abs(double X, double Y, double Z)
 	return true;
 }
 
-bool ActionAdapter::setPos_Diff(double DiffX, double DiffY, double DiffZ)
+bool ActionAdapter_Mock::setPos_Diff(double DiffX, double DiffY, double DiffZ)
 {
 	SaveX += DiffX;
 	SaveY += DiffY;
@@ -40,7 +40,7 @@ bool ActionAdapter::setPos_Diff(double DiffX, double DiffY, double DiffZ)
 }
 
 
-bool ActionAdapter::setK(ActionDirection Direction, ControllerType Type, double K)
+bool ActionAdapter_Mock::setK(ActionDirection Direction, ControllerType Type, double K)
 {
 	return true;
 }
@@ -49,10 +49,9 @@ bool ActionAdapter::setK(ActionDirection Direction, ControllerType Type, double 
 
 
 
-void ActionAdapter::addState(State Entry)
+void ActionAdapter_Mock::addState(State Entry)
 {
 	
 }
 
-#endif
 

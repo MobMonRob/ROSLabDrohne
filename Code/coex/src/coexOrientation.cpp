@@ -35,6 +35,11 @@ coexOrientation::coexOrientation(double Threshold_AccelZ)
 	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 10, callbackGroundClearance);
 }
 
+coexOrientation::~coexOrientation()
+{
+	ROS_INFO("Termintating coexOrientation...");
+}
+
 
 double coexOrientation::getGroundClearance()
 {

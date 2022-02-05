@@ -146,12 +146,14 @@
     <ClCompile Include="Adapter.cpp" />
     <ClCompile Include="src\ActionAdapter.cpp" />
     <ClCompile Include="src\ActionAdapter_Mock.cpp" />
+    <ClCompile Include="Transmitable_Mock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Adapter\ActionAdapter.h" />
     <ClInclude Include="include\Adapter\ActionAdapter_Mock.h" />
     <ClInclude Include="include\Adapter\ActionDirection.h" />
     <ClInclude Include="include\Adapter\Transmitable.h" />
+    <ClInclude Include="Transmitable_Mock.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstraction\Abstraction.vcxproj">

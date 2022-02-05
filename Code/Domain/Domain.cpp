@@ -3,9 +3,16 @@
 
 #include <iostream>
 
+#include "Domain/Header.h"
+
 int main()
 {
     std::cout << "Hello World!\n";
+
+    ControllerSystem Sys(Unit_Acceleration);
+
+
+    Sys.addController(Unit_Velocity, 1.0, ControllerType::P);
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

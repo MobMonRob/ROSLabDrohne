@@ -3,8 +3,6 @@
 
 #include <ros/ros.h>
 
-#include <thread>
-
 #include "threading/Thread.h"
 
 
@@ -13,12 +11,13 @@ class RosThread : public Thread<T>
 {
 public:
 	RosThread(double Frequency = 1);
+	RosThread(std::string Descriptor, double Frequency = 1);
 	
-	void setFrequency(double Frequency) { this->Rate_ = ros::Rate(Frequency); };
+	inline void setFrequency(double Frequency) { this->Rate_ = ros::Rate(Frequency); };
 	T setPayload(T Payload);
 	
-	T getPayload() const { return this->Payload_; };
-	ros::Rate getRate() const { return this->Rate_; };
+	inline T getPayload() const { return this->Payload_; };
+	inline ros::Rate getRate() const { return this->Rate_; };
 	
 	T runOnce() override;
 	virtual T runOnce(T Payload) = 0;
@@ -40,22 +39,47 @@ RosThread<T>::RosThread(double Frequency)
 {
 }
 
+template<class T>
+RosThread<T>::RosThread(std::string Descriptor, double Frequency)
+{
+	std::cout << "New Thread \"" << Descriptor << "\" at " << this << std::endl;
+
+	this->setFrequency(Frequency);
+}
+
 
 template<class T>
 T RosThread<T>::setPayload(T Payload)
 {
-    this->Payload_ = Payload;
+	T ReturnLoad = this->getPayload();
 	
-    return this->runOnce();
+
+	if (this->lock())
+	{
+		this->Payload_ = Payload;
+		ReturnLoad = this->runOnce(this->getPayload());
+	}
+	this->unlock();
+
+	return Payload;
 }
 
 template<class T>
 T RosThread<T>::runOnce()
 {
-    T Payload = this->getPayload();
+	T ReturnLoad;
+
+
+	if (this->getNext())
+	{
+		if (this->lock())
+		{
+			ReturnLoad = this->runOnce(this->getPayload());
+		}
+		this->unlock();
+	}
 	
-	
-    return this->runOnce(Payload);
+	return ReturnLoad;
 }
 
 
@@ -70,7 +94,11 @@ void RosThread<T>::run(RosThread<T>* Instance)
     	
         while (Instance->getNext())
         {
-            Instance->runOnce();
+			if (Instance->lock())
+			{
+				Instance->runOnce();
+			}
+			Instance->unlock();
             
         	Rate.sleep();
         }

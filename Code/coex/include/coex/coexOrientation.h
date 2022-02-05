@@ -15,6 +15,7 @@ class coexOrientation : public Caller
 {
 public:
 	coexOrientation(double Threshold_AccelZ = 0.2);
+	~coexOrientation();
 	
 	double getGroundClearance();
 	double getGroundClearance_deangled();
