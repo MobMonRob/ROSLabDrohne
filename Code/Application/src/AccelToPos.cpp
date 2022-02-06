@@ -1,9 +1,6 @@
 #include "Application/AccelToPos.h"
 
 
-
-
-
 AccelToPos::AccelToPos(double InitPos, double InitVel)
 	: Outputable(),
 	Input_(Unit_Acceleration),
@@ -11,9 +8,4 @@ AccelToPos::AccelToPos(double InitPos, double InitVel)
 	VelToPos_(Unit_Velocity, Unit_Length, 1.0, &AccelToVel_, InitPos)
 {
 }
-
-
-
-
-
 

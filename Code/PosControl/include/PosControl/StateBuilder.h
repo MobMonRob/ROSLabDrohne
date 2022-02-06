@@ -1,29 +1,33 @@
 #ifndef STATEBUILDER_H
 #define STATEBUILDER_H
 
-#include <ros/ros.h>
 
-#include <sensor_msgs/Imu.h>
-
+#include "Application/State.h"
+#include "Application/StateHandler.h"
 #include "Adapter/ActionAdapter.h"
+#include "calling/Callable.h"
+#include "coex/coexControl.h"
 
 
-class StateBuilder
+class StateBuilder : public Callable
 {
 public:
-	StateBuilder(ActionAdapter *Actions);
-	
-	static void callbackMavRos(const sensor_msgs::Imu::ConstPtr& msg);
-	
-	
-	void spin();
+	StateBuilder(coexControl* Controller, ActionAdapter *Actions);
+	~StateBuilder();
+
+	State translateState(State State);
+	bool call(Calling* Caller) override;
+
+private:
+	void createHandler();
+	void deleteHandler();
 	
 private:
-	ros::NodeHandle nh_;
-	ros::Subscriber SubMavRos_;
-	ros::Subscriber SubRange_;
-	
+	coexControl *Controller_;
 	ActionAdapter *Actions_;
+
+	StateHandler *Handler_ = nullptr;
+	State StateAvg_;
 };
 
 #endif // STATEBUILDER_H

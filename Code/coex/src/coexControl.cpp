@@ -23,7 +23,7 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	this->Battery_ = new coexBattery();
 	this->Battery_->addCallable(this);
 	
-	this->Orientation_ = new coexOrientation(1.0);
+	this->Orientation_ = new coexOrientation(this->State_, 1.0);
 	this->Orientation_->addCallable(this);
 	
 	this->RC_Receiver_ = new coexRC_Receiver(&this->Joystick_);
@@ -90,24 +90,46 @@ bool coexControl::call(Calling* Caller)
 {
 	bool ReturnBool = false;
 	
-	
-	if (Caller == this->RC_Receiver_)
+
+	if (this->CounterIdle_ < this->CounterOverflow_)
 	{
-		mavros_msgs::ManualControl Msg = this->getRC_normalized();
-
-		Msg.x /= 4;
-		Msg.y /= 4;
-		Msg.z /= 4;
-		Msg.r /= 4;
-		
-		ROS_INFO("Thrust = %f.", Msg.z);
-		
-		this->transmit(Msg);
-
-		ReturnBool = true;
+		this->CounterIdle_++;
 	}
-	
-	
+	else
+	{
+		if (Caller == this->Orientation_)
+		{
+
+
+
+
+			Caller::call();
+		}
+		else if (Caller == this->RC_Receiver_)
+		{
+			mavros_msgs::ManualControl Msg = this->getRC_normalized();
+
+			ROS_INFO("Thrust = %f.", Msg.z);
+
+			this->transmit(Msg);
+
+			ReturnBool = true;
+		}
+		else if (Caller == this->State_)
+		{
+			if (this->State_->getArmed())
+			{
+				ROS_INFO("Voctor Suspention Lin: %s", this->Orientation_->getSuspentionLinear().getString());
+				ROS_INFO("Voctor Suspention Ang: %s", this->Orientation_->getSuspentionAngular().getString());
+			}
+
+
+		}
+		else if (Caller == this->Battery_)
+		{
+
+		}
+	}
 	
 	
 	return ReturnBool;

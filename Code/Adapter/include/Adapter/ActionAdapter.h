@@ -19,7 +19,8 @@ public:
 	bool setPos_Abs(double X, double Y, double Z);
 	bool setPos_Diff(double DiffX, double DiffY, double DiffZ);
 	bool setK_Abs(ActionDirection Direction, ControllerType Type, double K);
-
+	Vector3D getSetpoint();
+	Vector3D getStatepoint();
 
 	void addState(State Entry);
 

@@ -94,9 +94,21 @@ bool ActionAdapter::setK_Abs(ActionDirection Direction, ControllerType Type, dou
 
 
 
+Vector3D ActionAdapter::getSetpoint()
+{
+	return Vector3D(Unit_Length, 
+		this->ControlX_.getSetpoint().getValue(), 
+		this->ControlY_.getSetpoint().getValue(), 
+		this->ControlZ_.getSetpoint().getValue());
+}
+
+Vector3D ActionAdapter::getStatepoint()
+{
+	State StateAvg = this->StateHandler_.getAvgState();
 
 
-
+	return StateAvg.getVector_Translative();
+}
 
 
 

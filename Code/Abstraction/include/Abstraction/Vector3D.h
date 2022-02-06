@@ -1,6 +1,8 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
+#include <string>
+
 #include "Abstraction/Unit.h"
 
 
@@ -22,6 +24,7 @@ public:
 	double getX() { return this->X_; };
 	double getY() { return this->Y_; };
 	double getZ() { return this->Z_; };
+	std::string getString();
 
 	Vector3D rotate(double AngleX, double AngleY, double AngleZ);
 

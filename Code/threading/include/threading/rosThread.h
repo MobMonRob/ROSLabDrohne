@@ -100,6 +100,7 @@ void RosThread<T>::run(RosThread<T>* Instance)
 			}
 			Instance->unlock();
             
+			ros::spinOnce();
         	Rate.sleep();
         }
     }

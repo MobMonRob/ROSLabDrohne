@@ -6,7 +6,7 @@
 #include "coex/coexControl.h"
 
 #include "Adapter/ActionAdapter_Mock.h"
-//#include "Adapter/ActionAdapter.h"
+#include "Adapter/ActionAdapter.h"
 #include "StateBuilder.h"
 
 
@@ -21,7 +21,6 @@ public:
 private:
 	ros::NodeHandle nh_;
 	ros::Subscriber SubKeys_;
-	ros::Subscriber SubPower_;
 	
 	coexControl coexController_;
 	ActionAdapter *ActionAdapter_;

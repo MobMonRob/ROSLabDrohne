@@ -23,7 +23,10 @@ void callbackGroundClearance(const sensor_msgs::Range::ConstPtr& msg)
 
 
 
-coexOrientation::coexOrientation(double Threshold_AccelZ)
+coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
+	: Pos_(Unit_Acceleration, Unit_Length),
+	Ang_(Unit_AngleVelDeg, Unit_AngleDeg),
+	State_(State)
 {
 	ROS_INFO("Started coexOrientation");
 	
@@ -70,30 +73,18 @@ double coexOrientation::getGroundClearance_deangled()
 	
 	
 	
-	return 0;
+	return this->getGroundClearance();
 }
-
-
-mavros_msgs::ManualControl coexOrientation::getPosition()
-{
-	// TODO
-	
-	
-	
-	
-	
-	return mavros_msgs::ManualControl();
-}
-
-
-
-
 
 
 void coexOrientation::cbIMU(const sensor_msgs::Imu::ConstPtr& IMU)
 {
-	this->IMU_ = *IMU;
-	
+	this->Pos_.setLock(!this->State_->getArmed());
+	this->Ang_.setLock(!this->State_->getArmed());
+
+	this->Pos_.setInput(this->translate(IMU->linear_acceleration, Unit_Acceleration), IMU->header.stamp.toSec());
+	this->Ang_.setInput(this->translate(IMU->angular_velocity, Unit_AngleVelDeg), IMU->header.stamp.toSec());
+
 	this->call();
 }
 

@@ -27,6 +27,9 @@
     <ClCompile Include="src\StateHandler.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\AngVelToAng.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application\AccelToPos.h">
@@ -39,6 +42,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\Application\StateTranslator.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Application\AngVelToAng.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Application\Wrapper3D.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

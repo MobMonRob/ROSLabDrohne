@@ -14,7 +14,7 @@ public:
 	State(Vector3D Translative, Vector3D Angular, Value GroundClearance, Timestamp Time);
 
 	bool operator==(const State& S);
-
+	State operator-(const State& S);
 
 	Vector3D getVector_Translative() { return this->Accelerations_; };
 	Vector3D getVector_Angular() { return this->Angles_; };

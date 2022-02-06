@@ -45,6 +45,21 @@ bool Vector3D::operator==(const Vector3D& V)
 	return ReturnBool;
 }
 
+std::string Vector3D::getString()
+{
+	std::string ReturnString = "Vector [";
+
+
+	ReturnString.append(this->getUnit().getUnit());
+	ReturnString.append("], x=");
+	ReturnString.append(std::to_string(this->getX()));
+	ReturnString.append("], y=");
+	ReturnString.append(std::to_string(this->getY()));
+	ReturnString.append("], z=");
+	ReturnString.append(std::to_string(this->getZ()));
+
+	return ReturnString;
+}
 
 Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 {

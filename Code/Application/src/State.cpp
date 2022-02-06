@@ -39,6 +39,12 @@ bool State::operator==(const State& S)
 	return ReturnBool;
 }
 
-
+State State::operator-(const State& S)
+{
+	return State(this->getVector_Translative() - S.Accelerations_,
+		this->getVector_Angular() - S.Angles_,
+		this->getGroundClearance() - S.GroundClearance_,
+		this->getTimestamp());
+}
 
 

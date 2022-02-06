@@ -26,7 +26,9 @@ const Unit Unit_Velocity("m/s");
 const Unit Unit_Acceleration("m/s²");
 
 const Unit Unit_AngleDeg("°");
+const Unit Unit_AngleVelDeg("°/s");
 const Unit Unit_AngleRad("rad");
+const Unit Unit_AngleVelRad("rad/s");
 
 const Unit Unit_Percent("%");
 

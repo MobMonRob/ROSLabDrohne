@@ -7,6 +7,8 @@
 
 #include "mavros_msgs/ManualControl.h"
 
+#include "Abstraction/Vector3D.h"
+
 #include "threading/AutoPublisher.h"
 #include "calling/Callable.h"
 #include "calling/Caller.h"
@@ -32,10 +34,8 @@ public:
 	
 	double getBatteryPercentage() { return this->Battery_->getPercentage(); };
 	
-	
-	
-	
-	
+	Vector3D getPosLinear() { return this->Orientation_->getPosLinear(); };
+	Vector3D getPosAngular() { return this->Orientation_->getPosAngular(); };
 	double getGroundClearance() { return this->Orientation_->getGroundClearance(); };
 	double getGroundClearance_deangled() { return this->Orientation_->getGroundClearance_deangled(); };
 	
@@ -43,7 +43,7 @@ public:
 	
 	double getTime() { return 0;};
 	
-	bool call(Calling* Caller);
+	bool call(Calling* Caller) override;
 	
 private:
 	void transmit(mavros_msgs::ManualControl Msg);
@@ -58,6 +58,9 @@ private:
 	Joystick Joystick_;
 	int RC_Soft_;
 	coexTransmitable *xC_ = nullptr;
+
+	int CounterIdle_ = 0;
+	const int CounterOverflow_ = 100;
 };
 
 #endif // COEXCONTROL_H
