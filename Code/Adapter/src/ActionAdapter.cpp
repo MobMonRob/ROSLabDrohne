@@ -119,9 +119,9 @@ void ActionAdapter::addState(State Entry)
 	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY(), Time));
 	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ(), Time));
 
-	this->ControlX_.setFeedback(this->PosX_.getOutputValue());
-	this->ControlY_.setFeedback(this->PosY_.getOutputValue());
-	this->ControlZ_.setFeedback(this->PosZ_.getOutputValue());
+	this->ControlX_.setFeedback(this->PosX_.getOutput());
+	this->ControlY_.setFeedback(this->PosY_.getOutput());
+	this->ControlZ_.setFeedback(this->PosZ_.getOutput());
 
 	this->ActionReceiver_->transmitAction(
 		this->ControlX_.getOutput().getValue(),

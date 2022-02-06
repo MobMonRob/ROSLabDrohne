@@ -76,10 +76,10 @@ mavros_msgs::ManualControl coexControl::getRC_normalized()
 	}
 	else
 	{
-		Msg.x = 1500;
-		Msg.y = 1500;
-		Msg.z = 1000;
-		Msg.r = 1500;
+		Msg.x = 0;
+		Msg.y = 0;
+		Msg.z = 0;
+		Msg.r = 0;
 	}
 	
 	return Msg;
@@ -93,18 +93,17 @@ bool coexControl::call(Calling* Caller)
 	
 	if (Caller == this->RC_Receiver_)
 	{
-		//this->transmit(this->getRC_normalized());
+		mavros_msgs::ManualControl Msg = this->getRC_normalized();
+
+		Msg.x /= 4;
+		Msg.y /= 4;
+		Msg.z /= 4;
+		Msg.r /= 4;
 		
-		//ROS_INFO("Thrust = %f.", this->getRC_normalized().z);
+		ROS_INFO("Thrust = %f.", Msg.z);
 		
-		//Caller::call();
-		
-		
-		//this->transmitAction(0.0, 0.0, 0.08, 0.0);
-		
-		
-		
-		
+		this->transmit(Msg);
+
 		ReturnBool = true;
 	}
 	

@@ -23,7 +23,7 @@ public:
 	bool setKD(double k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlD_.setK(k, Type); };
 
 
-
+	double getK(ControllerType Type = ControllerType::UNKNOWN);
 	double getKP() { return this->ControlP_.getK(); };
 	double getKI() { return this->ControlI_.getK(); };
 	double getKD() { return this->ControlD_.getK(); };

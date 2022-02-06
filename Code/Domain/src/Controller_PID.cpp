@@ -37,6 +37,29 @@ bool Controller_PID::setK(double k, ControllerType Type)
 }
 
 
+
+double Controller_PID::getK(ControllerType Type)
+{
+	double ReturnValue = 0.0;
+
+
+	switch (Type)
+	{
+	case ControllerType::P:
+		ReturnValue = this->getKP();
+		break;
+	case ControllerType::I:
+		ReturnValue = this->getKI();
+		break;
+	case ControllerType::D:
+		ReturnValue = this->getKD();
+		break;
+	default:
+		break;
+	}
+
+	return ReturnValue;
+}
 TimedValue Controller_PID::getOutput()
 {
 	return this->ControlP_.getOutput() + 

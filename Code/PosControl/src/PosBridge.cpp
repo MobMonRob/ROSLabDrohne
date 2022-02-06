@@ -25,6 +25,7 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 
 PosBridge::PosBridge()
+	: coexController_(false, 4)
 {
 	ROS_INFO("Starting PosBridge...");
 	
@@ -95,8 +96,11 @@ void PosBridge::receiveKey(char Key)
 		//this->coexController_.transmitDifference(0, 0, 0, -0.01);		// Yarn is not implemented in ActionAdapter
 		break;
 		
-	case 't':	// Takeoff (Arm Vehicle)
+	case 'o':	// Mode Change to "OFFBOARD" (Arm Vehicle)
 		this->coexController_.setMode("OFFBOARD");
+		break;
+
+	case 't':	// Takeoff (Arm Vehicle)
 		this->coexController_.setArmState(true);
 		break;
 	case 'g':	// Ground (Disrm Vehicle)

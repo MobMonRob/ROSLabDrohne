@@ -15,7 +15,7 @@ public:
 
 	bool setInput(TimedValue V) { return this->Input_.setInput(V); };
 
-	TimedValue getOutputValue() { return this->VelToPos_.getOutput(); };
+	TimedValue getOutput() { return this->VelToPos_.getOutput(); };
 	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
 
 private:
