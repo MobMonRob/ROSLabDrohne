@@ -41,7 +41,7 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 
 
 % Codes
-\usepackage{xcolor}					% Color
+\usepackage[dvipsnames]{xcolor}	% Color
 \usepackage{listings}				%Weiteres Verzeichnis
 \lstset{captionpos=b}				% Caption after Code
 
@@ -157,9 +157,10 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 	tabsize=2
 }
 
-
-
-
+\newcommand{\CodePkg}[1]{\texttt{\textit{\textcolor{RedViolet}{#1}}}}
+\newcommand{\CodeClass}[1]{\texttt{\textcolor{BlueGreen}{#1}}}
+\newcommand{\CodeMeth}[1]{\texttt{#1}}
+\newcommand{\CodeVar}[1]{\texttt{#1}}
 
 
 
