@@ -41,27 +41,36 @@ State StateBuilder::translateState(State InState)
 
 bool StateBuilder::call(Calling* Caller)
 {
-	Vector3D Linear = this->Controller_->getPosLinear();
-	Vector3D Angular = this->Controller_->getPosAngular();
-	Value GroundClearance(Unit_Length, this->Controller_->getGroundClearance());
-	Timestamp Time(this->Controller_->getTime());
-	State BuildingState(Linear, Angular, GroundClearance, Time);
+	bool ReturnBool = false;
 
 
-	if (this->Controller_->getArmed())
+	if (Caller == this->Controller_)
 	{
-		this->deleteHandler();
+		Vector3D Linear = this->Controller_->getPosLinear();
+		Vector3D Angular = this->Controller_->getPosAngular();
+		Value GroundClearance(Unit_Length, this->Controller_->getGroundClearance());
+		Timestamp Time(this->Controller_->getTime());
+		State BuildingState(Linear, Angular, GroundClearance, Time);
 
-		Actions_->addState(BuildingState);
+
+		if (this->Controller_->getArmed())
+		{
+			this->deleteHandler();
+
+			Actions_->addState(BuildingState - this->StateAvg_);
+			//Actions_->addState(BuildingState);
+		}
+		else
+		{
+			this->createHandler();
+
+			this->Handler_->addEntry(BuildingState);
+		}
+
+		ReturnBool = true;
 	}
-	else
-	{
-		this->createHandler();
 
-		this->Handler_->addEntry(BuildingState);
-	}
-
-	return true;
+	return ReturnBool;
 }
 
 

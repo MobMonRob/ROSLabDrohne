@@ -137,16 +137,6 @@ bool coexControl::call(Calling* Caller)
 
 
 
-
-
-
-
-
-
-
-
-
-
 void coexControl::transmit(mavros_msgs::ManualControl Msg)
 {
 	if (this->xC_ != nullptr)

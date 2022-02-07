@@ -7,22 +7,11 @@
 #include "mavros/px4_custom_mode.h"
 
 
-coexMC::coexMC(coexState *State, coexBattery *Battery)
+coexMC::coexMC(coexState *State, coexBattery *Battery, int Frequency)
 	: coexTransmitable(State, Battery),
-	Pub_("mavros/manual_control/send", 30, 10, true)
+	Pub_("mavros/manual_control/send", Frequency, 10, true)
 {
 	ROS_INFO("Started coexMC");
-	
-	
-	mavros_msgs::ManualControl Msg;
-	
-	Msg.x = 0;
-	Msg.y = 0;
-	Msg.z = 0.05;
-	Msg.r = 0;
-	
-	this->Pub_.setPayload(Msg);
-	
 }
 
 coexMC::~coexMC()
@@ -81,6 +70,8 @@ void coexMC::transmit(mavros_msgs::ManualControl Msg)
 	
 	if (Valid)
 	{
+		ROS_INFO("Transmit: x=%f, y=%f, z=%f, r=%f", Msg.x, Msg.y, Msg.z, Msg.r);
+
 		this->Pub_.setPayload(Msg);
 	}
 }

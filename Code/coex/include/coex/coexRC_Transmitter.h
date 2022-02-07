@@ -17,7 +17,7 @@
 class coexRC_Transmitter : public coexTransmitable
 {
 public:
-	coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery);
+	coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery, int Frequency = 100);
 	~coexRC_Transmitter();
 	
 private:

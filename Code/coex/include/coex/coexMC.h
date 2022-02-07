@@ -23,7 +23,7 @@
 class coexMC : public coexTransmitable
 {
 public:
-	coexMC(coexState *State, coexBattery *Battery);
+	coexMC(coexState *State, coexBattery *Battery, int Frequency = 100);
 	~coexMC();
 	
 private:

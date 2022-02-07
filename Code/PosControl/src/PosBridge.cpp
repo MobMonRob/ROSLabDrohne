@@ -47,6 +47,7 @@ PosBridge::~PosBridge()
 {
 	ROS_INFO("Terminating PosBridge...");
 
+	this->coexController_.deleteCallable(this->StateBuilder_);
 	delete this->StateBuilder_;
 	delete this->ActionAdapter_;
 
@@ -104,11 +105,21 @@ void PosBridge::receiveKey(char Key)
 	case 't':	// Takeoff (Arm Vehicle)
 		this->coexController_.setArmState(true);
 		break;
+
 	case 'g':	// Ground (Disrm Vehicle)
 		this->coexController_.setMode("MANUAL");
 		this->coexController_.setArmState(false);
 		break;
-	
+		
+	case 'p':	// Info
+		ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString());
+		ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString());
+		break;
+
+	case 'q':	// Destructor
+		this->~PosBridge();
+		break;
+
 	default:
 		ROS_INFO("unprocessable Key: %c", Key);
 		break;

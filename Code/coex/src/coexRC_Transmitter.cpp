@@ -3,10 +3,10 @@
 #include <mavros_msgs/OverrideRCIn.h>
 
 
-coexRC_Transmitter::coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery)
+coexRC_Transmitter::coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery, int Frequency)
 	: coexTransmitable(State, Battery),
 	Joystick_(Joystick),
-	Pub_("mavros/rc/override", 30, 10, false)
+	Pub_("mavros/rc/override", Frequency, 10, false)
 {
 	ROS_INFO("Started coexRC_Transmitter");
 }
