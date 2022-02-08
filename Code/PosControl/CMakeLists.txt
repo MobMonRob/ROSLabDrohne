@@ -61,10 +61,27 @@ add_executable(BridgeNode
 	src/StateBuilder.cpp
 )
 
+add_executable(TestPose
+	src/TestPose.cpp
+)
+
+add_executable(TestMC
+	src/TestMC.cpp
+)
+
+add_executable(TestRC
+	src/TestRC.cpp
+)
+
 ## Add cmake target dependencies of the executable
 add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
+add_dependencies(TestPose ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(TestMC ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(TestRC ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(BridgeNode ${catkin_LIBRARIES} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
-
+target_link_libraries(TestPose ${catkin_LIBRARIES})
+target_link_libraries(TestMC ${catkin_LIBRARIES})
+target_link_libraries(TestRC ${catkin_LIBRARIES})
 

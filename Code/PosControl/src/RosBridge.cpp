@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 	
 	while(ros::ok())
 	{
-
+		ros::spinOnce();
 	}
 	
 	ROS_INFO("Terminated Node: RosBridge");

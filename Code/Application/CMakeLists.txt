@@ -33,6 +33,7 @@ include_directories(
 add_library(Application_lib
 	include/Application/Header.h
 	src/AccelToPos.cpp
+	src/AngVelToAng.cpp
 	src/State.cpp
 	src/StateHandler.cpp
 )

@@ -54,6 +54,9 @@ include_directories(
 	include
 	../calling/include
 	../threading/include
+	../Abstraction/include
+	../Domain/include
+	../Application/include
 	../Adapter/include
 	${catkin_INCLUDE_DIRS}
 )
@@ -76,10 +79,10 @@ add_library(coexController
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(coexController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coex_generate_messages_cpp threading_lib calling_lib)
+add_dependencies(coexController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coex_generate_messages_cpp threading_lib calling_lib Application_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(coexController ${catkin_LIBRARIES} threading_lib calling_lib)
+target_link_libraries(coexController ${catkin_LIBRARIES} threading_lib calling_lib Application_lib)
 
 
 #############

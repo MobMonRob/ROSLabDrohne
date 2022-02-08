@@ -99,11 +99,9 @@ bool coexControl::call(Calling* Caller)
 	{
 		if (Caller == this->Orientation_)
 		{
-
-
-
-
 			Caller::call();
+
+			ReturnBool = true;
 		}
 		else if (Caller == this->RC_Receiver_)
 		{
@@ -111,23 +109,13 @@ bool coexControl::call(Calling* Caller)
 
 			ROS_INFO("Thrust = %f.", Msg.z);
 
-			this->transmit(Msg);
-
 			ReturnBool = true;
 		}
 		else if (Caller == this->State_)
 		{
-			if (this->State_->getArmed())
-			{
-				ROS_INFO("Voctor Suspention Lin: %s", this->Orientation_->getSuspentionLinear().getString());
-				ROS_INFO("Voctor Suspention Ang: %s", this->Orientation_->getSuspentionAngular().getString());
-			}
-
-
 		}
 		else if (Caller == this->Battery_)
 		{
-
 		}
 	}
 	

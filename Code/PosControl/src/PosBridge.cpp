@@ -25,7 +25,7 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 
 PosBridge::PosBridge()
-	: coexController_(false, 4)
+	: coexController_(true, 4)
 {
 	ROS_INFO("Starting PosBridge...");
 	
@@ -112,8 +112,8 @@ void PosBridge::receiveKey(char Key)
 		break;
 		
 	case 'p':	// Info
-		ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString());
-		ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString());
+		ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString().c_str());
+		ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString().c_str());
 		break;
 
 	case 'q':	// Destructor
