@@ -43,6 +43,8 @@ T AutoClient<T>::runOnce(T Payload)
 {
 	this->Client_.call(Payload);
 	
+	ROS_INFO("Called Service %s from runOnce(T Payload).", this->Client_.getService());
+
 	return Payload;
 }
 

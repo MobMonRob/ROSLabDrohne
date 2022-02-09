@@ -68,7 +68,7 @@ T RosThread<T>::setPayload(T Payload)
 template<class T>
 T RosThread<T>::runOnce()
 {
-	T ReturnLoad;
+	T ReturnLoad = this->getPayload();
 
 
 	if (this->getNext())
@@ -89,7 +89,7 @@ void RosThread<T>::run(RosThread<T>* Instance)
     	ros::Rate Rate = Instance->getRate();
     	
     	
-        while (Instance->getNext())
+        while (ros::ok() && Instance->isRunning())
         {
 			Instance->runOnce();
             

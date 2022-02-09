@@ -30,12 +30,13 @@ public:
 	bool setArmState(bool arming);
 	
 	bool getConnected();
-	const std::string getMode() { return this->State_.mode; };
+	std::string getMode() const { return this->State_.mode; };
 	bool getArmState();
-	const bool getManualInput() { return this->State_.manual_input; };
+	bool getManualInput() const { return this->State_.manual_input; };
+	int getSystemStatusID() const { return this->State_.system_status; };
 	std::string getSystemStatus();
 	std::string getSystemStatus(int StatusID);
-	const double getTime() { return this->State_.header.stamp.toSec();};
+	double getTime() { return this->State_.header.stamp.toSec();};
 	
 	void waitNextState();
 

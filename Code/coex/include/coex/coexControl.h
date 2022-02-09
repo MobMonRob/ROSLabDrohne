@@ -42,7 +42,7 @@ public:
 	
 	mavros_msgs::ManualControl getRC_normalized();
 	
-	double getTime() { return 0;};
+	double getTime() { return 0;};			// TODO!!
 	
 	bool call(Calling* Caller) override;
 	

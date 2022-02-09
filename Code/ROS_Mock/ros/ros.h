@@ -1,6 +1,8 @@
 #ifndef MOCK_ROS_H
 #define MOCK_ROS_H
 
+#define DEBUG
+
 
 #include <string>
 
@@ -47,6 +49,7 @@ public:
 	{
 	public:
 		bool call(Msg) { return false; };
+		std::string getService() { return std::string(); };
 	};
 
 	class NodeHandle

@@ -55,6 +55,7 @@ bool coexState::setMode(std::string Mode)
 		Cmd.request.base_mode = 0;
 		Cmd.request.custom_mode = Mode.c_str();
 		
+		this->setModeAuto(false);
 		Cmd = this->ClMode_.setPayload(Cmd);
 		this->setModeAuto(Mode == coexMode_Offboard);
 		ros::spinOnce();
@@ -173,7 +174,7 @@ bool coexState::getArmState()
 
 std::string coexState::getSystemStatus()
 {
-	return this->getSystemStatus(this->State_.system_status);
+	return this->getSystemStatus(this->getSystemStatusID());
 }
 
 std::string coexState::getSystemStatus(int StatusID)

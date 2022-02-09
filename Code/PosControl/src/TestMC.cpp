@@ -36,6 +36,11 @@ int main(int argc, char **argv)
 	Msg.r = 0;
 	
 	
+
+    ROS_INFO("Battery_Health is %s.", Battery.getHealth().c_str());
+
+
+
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
 

@@ -19,7 +19,7 @@ public:
 	bool transmitAction(mavros_msgs::ManualControl Msg);
 	
 protected:
-	bool valid() { return (this->State_ != nullptr && this->Battery_ != nullptr); };
+	bool valid() const { return (this->State_ != nullptr && this->Battery_ != nullptr); };
 	virtual void transmit(mavros_msgs::ManualControl Msg) = 0;
 	
 	coexState *State_;
