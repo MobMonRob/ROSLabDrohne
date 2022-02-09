@@ -79,8 +79,8 @@ double coexOrientation::getGroundClearance_deangled()
 
 void coexOrientation::cbIMU(const sensor_msgs::Imu::ConstPtr& IMU)
 {
-	this->Pos_.setLock(!this->State_->getArmed());
-	this->Ang_.setLock(!this->State_->getArmed());
+	this->Pos_.setLock(!this->State_->getArmState());
+	this->Ang_.setLock(!this->State_->getArmState());
 
 	this->Pos_.setInput(this->translate(IMU->linear_acceleration, Unit_Acceleration), IMU->header.stamp.toSec());
 	this->Ang_.setInput(this->translate(IMU->angular_velocity, Unit_AngleVelDeg), IMU->header.stamp.toSec());

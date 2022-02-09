@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     ros::Time last_request = ros::Time::now();
     ros::Time Start = ros::Time::now();
 
-    while(ros::ok() && ros::Time::now() - Start <= ros::Duration(15.0))
+    while(ros::ok() && ros::Time::now() - Start <= ros::Duration(10.0))
     {
         if( current_state.mode != "OFFBOARD" &&
             (ros::Time::now() - last_request > ros::Duration(2.0))){

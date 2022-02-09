@@ -16,12 +16,11 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	 * 
 	 * 
 	 */
-	
-	this->State_ = new coexState();
-	this->State_->addCallable(this);
-	
-	this->Battery_ = new coexBattery();
+	this->Battery_ = new coexBattery(15.6, 16.8, 15.7);
 	this->Battery_->addCallable(this);
+
+	this->State_ = new coexState(this->Battery_);
+	this->State_->addCallable(this);
 	
 	this->Orientation_ = new coexOrientation(this->State_, 1.0);
 	this->Orientation_->addCallable(this);

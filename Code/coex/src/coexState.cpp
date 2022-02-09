@@ -18,8 +18,10 @@ void callbackState(const mavros_msgs::State::ConstPtr& msg)
 
 
 
-coexState::coexState()
-	: ClMode_("mavros/set_mode", 10)
+coexState::coexState(coexBattery* Battery, bool silent)
+	: ClMode_("mavros/set_mode", 10),
+	Battery_(Battery),
+	silent_(silent)
 {
 	ROS_INFO("Started coexState");
 
@@ -34,7 +36,7 @@ coexState::~coexState()
 {
 	ROS_INFO("Termintating coexState...");
 
-	this->ClMode_.stop();
+	this->setModeAuto(false);
 
 	ROS_INFO("Terminated coexState");
 }
@@ -47,29 +49,28 @@ bool coexState::setMode(std::string Mode)
 	
 	if (this->getConnected())
 	{
-		ros::ServiceClient Client = this->nh_.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
 		mavros_msgs::SetMode Cmd;
 		
 		
 		Cmd.request.base_mode = 0;
 		Cmd.request.custom_mode = Mode.c_str();
 		
-		if(Client.call(Cmd))
+		Cmd = this->ClMode_.setPayload(Cmd);
+		this->setModeAuto(Mode == coexMode_Offboard);
+		ros::spinOnce();
+
+		if (Cmd.response.mode_sent)
 		{
-			if (Cmd.response.mode_sent)
-			{
-				ROS_INFO("Mode changed to %s.", Mode.c_str());
-				
-				ReturnBool = true;
-			}
-			else
-			{
-				ROS_ERROR("Mode-Change denied!");
-			}
+			ReturnBool = true;
 		}
 		else
 		{
-			ROS_ERROR("Call denied!");
+			ROS_ERROR("Mode-Change denied!");
+
+			if (this->Battery_->getPercentageLow())
+			{
+				ROS_INFO("Possible cause: Battery low.");
+			}
 		}
 	}
 	else
@@ -80,6 +81,20 @@ bool coexState::setMode(std::string Mode)
 	return ReturnBool;
 }
 
+
+void coexState::setModeAuto(bool AutoMode)
+{
+	if (AutoMode)
+	{
+		this->ClMode_.start();
+	}
+	else
+	{
+		this->ClMode_.stop();
+	}
+}
+
+
 bool coexState::setArmState(bool arming)
 {
 	bool ReturnBool = false;
@@ -87,41 +102,31 @@ bool coexState::setArmState(bool arming)
 	
 	if (this->getConnected())
 	{
-		std::string ShallState = (arming ? "armed" : "disarmed");
-		
-		
-		if (arming != this->getArmed())
+		if (!arming || this->getMode() == coexMode_Offboard)
 		{
 			ros::ServiceClient Client = this->nh_.serviceClient<mavros_msgs::CommandBool>("mavros/cmd/arming");
 			mavros_msgs::CommandBool Cmd;
 			
 			
 			Cmd.request.value = arming;
-			Cmd.response.success = false;
 			
 			if(Client.call(Cmd))
 			{
+				ros::spinOnce();
+
 				if (Cmd.response.success)
 				{
-					ROS_INFO("Vehicle %s.", ShallState.c_str());
-					
 					ReturnBool = true;
 				}
 				else
 				{
-					ROS_ERROR("Arming denied!");
+					ROS_WARN("Arming denied!");
 				}
 			}
 			else
 			{
 				ROS_ERROR("Call denied!");
 			}
-		}
-		else
-		{
-			ROS_INFO("Vehicle already %s.", ShallState.c_str());
-			
-			ReturnBool = true;
 		}
 	}
 	else
@@ -134,7 +139,21 @@ bool coexState::setArmState(bool arming)
 
 
 
-bool coexState::getArmed()
+
+bool coexState::getConnected()
+{
+	bool ReturnBool = this->State_.connected;
+
+
+	if (!ReturnBool)
+	{
+		this->setModeAuto(false);
+	}
+
+	return ReturnBool;
+}
+
+bool coexState::getArmState()
 {
 	bool ReturnBool = false;
 	
@@ -171,27 +190,42 @@ std::string coexState::getSystemStatus(int StatusID)
 	return ReturnString;
 }
 
+void coexState::waitNextState()
+{
+	double Time = this->getTime();
+
+
+	while (ros::ok() && Time == this->getTime())
+	{
+		ros::spinOnce();
+	}
+}
+
+
 
 void coexState::cbState(const mavros_msgs::State::ConstPtr& State)
 {
-	if (State->connected != this->getConnected())
+	if (!this->silent_)
 	{
-		ROS_INFO("Vehicle %s.", (State->connected ? "connected" : "disconnected"));
-	}
-	
-	if (State->mode != this->getMode())
-	{
-		ROS_INFO("Vehicle Mode changed to %s.", State->mode.c_str());
-	}
-	
-	if (State->armed != this->getArmed())
-	{
-		ROS_INFO("Vehicle %s.", (State->armed ? "armed" : "disarmed"));
-	}
-	
-	if (State->system_status != this->State_.system_status)
-	{
-		ROS_INFO("Vehicle SystemStatus changed to %s.", this->getSystemStatus(State->system_status).c_str());
+		if (State->connected != this->getConnected())
+		{
+			ROS_INFO("Vehicle %s.", (State->connected ? "connected" : "disconnected"));
+		}
+
+		if (State->mode != this->getMode())
+		{
+			ROS_INFO("Vehicle Mode changed to %s.", State->mode.c_str());
+		}
+
+		if (State->armed != this->getArmState())
+		{
+			ROS_INFO("Vehicle %s.", (State->armed ? "armed" : "disarmed"));
+		}
+
+		if (State->system_status != this->State_.system_status)
+		{
+			ROS_INFO("Vehicle SystemStatus changed to %s.", this->getSystemStatus(State->system_status).c_str());
+		}
 	}
 	
 	this->State_ = *State;

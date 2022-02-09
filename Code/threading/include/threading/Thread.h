@@ -23,6 +23,7 @@ public:
     
 protected:
     bool lock(int MaxLoop = 1000000);
+    inline bool getLocked() { return this->Lock_; };
     inline void unlock() { this->Lock_ = false; };
     bool setRunning(bool running);
     inline bool getNext() const { return (this->Running_ && this->isRunning()); };
@@ -98,7 +99,7 @@ inline bool Thread<T>::lock(int MaxLoop)
 
     for (int i = 0; i < MaxLoop; i++)
     {
-        if (!this->Lock_)
+        if (!this->getLocked())
         {
             ReturnBool = true;
 
@@ -132,10 +133,9 @@ void Thread<T>::run(Thread<T>* Instance)
 {
     if (Instance != nullptr)
     {
-        while (Instance->lock())
+        while (Instance->getNext())
         {
             Instance->runOnce();
-            Instance->unlock();
         }
     }
 }

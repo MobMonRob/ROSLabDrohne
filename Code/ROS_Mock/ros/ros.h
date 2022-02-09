@@ -93,6 +93,7 @@ public:
 	public:
 		Time operator-(const Time& T) { return Time(); };
 		bool operator<=(const Duration& T) { return false; };
+		bool operator>(const Duration& T) { return false; };
 		static Time now() { return Time(); };
 	};
 

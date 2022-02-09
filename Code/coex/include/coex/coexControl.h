@@ -27,10 +27,11 @@ public:
 	~coexControl();
 	
 	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
+	void setModeAuto(bool AutoMode = true) { this->State_->setModeAuto(AutoMode); };
 	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
 	
 	bool getConnected() { return this->State_->getConnected(); };
-	bool getArmed() { return this->State_->getArmed(); };
+	bool getArmed() { return this->State_->getArmState(); };
 	
 	double getBatteryPercentage() { return this->Battery_->getPercentage(); };
 	
@@ -51,8 +52,8 @@ private:
 	void landing();
 	
 private:
-	coexState *State_;
 	coexBattery *Battery_;
+	coexState *State_;
 	coexOrientation *Orientation_ = nullptr;
 	coexRC_Receiver *RC_Receiver_ = nullptr;
 	Joystick Joystick_;

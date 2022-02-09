@@ -16,13 +16,14 @@ void callbackBattery(const sensor_msgs::BatteryState::ConstPtr& msg)
 
 
 
-coexBattery::coexBattery(double Thershold_Warning, double Intervall_Info)
+coexBattery::coexBattery(double Perc_thershold, double Intervall_Info)
+	: Thershold_Warning_(Perc_thershold)
 {
 	ROS_INFO("Started coexBattery");
 	
 	coex_Battery = this;
 	
-	this->nh_.param("Battery/Warning", this->Thershold_Warning_, Thershold_Warning);
+	this->nh_.param("Battery/Warning", this->Thershold_Warning_, Perc_thershold);
 	{
 		double Intervall;
 		
@@ -35,18 +36,24 @@ coexBattery::coexBattery(double Thershold_Warning, double Intervall_Info)
 	this->SubBattery_ = this->nh_.subscribe("mavros/battery", 5, callbackBattery);
 }
 
+coexBattery::coexBattery(double V_min, double V_max, double V_thershold, double Intervall_Info)
+	: coexBattery((100 * (V_thershold - V_min) / (V_max - V_min)), Intervall_Info)
+{
+}
+
+
 coexBattery::~coexBattery()
 {
 	ROS_INFO("Termintating coexBattery...");
 }
 
 
-double coexBattery::getVoltage()
+const double coexBattery::getVoltage()
 {
 	return static_cast<double>(this->Battery_.voltage);
 }
 
-double coexBattery::getPercentage()
+const double coexBattery::getPercentage()
 {
 	return static_cast<double>(this->Battery_.percentage)*100;
 }

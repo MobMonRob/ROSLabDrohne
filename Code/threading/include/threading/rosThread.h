@@ -58,6 +58,7 @@ T RosThread<T>::setPayload(T Payload)
 	{
 		this->Payload_ = Payload;
 		ReturnLoad = this->runOnce(this->getPayload());
+		ros::spinOnce();
 	}
 	this->unlock();
 
@@ -72,11 +73,7 @@ T RosThread<T>::runOnce()
 
 	if (this->getNext())
 	{
-		if (this->lock())
-		{
-			ReturnLoad = this->runOnce(this->getPayload());
-		}
-		this->unlock();
+		ReturnLoad = this->runOnce(this->getPayload());
 	}
 	
 	return ReturnLoad;
@@ -94,11 +91,7 @@ void RosThread<T>::run(RosThread<T>* Instance)
     	
         while (Instance->getNext())
         {
-			if (Instance->lock())
-			{
-				Instance->runOnce();
-			}
-			Instance->unlock();
+			Instance->runOnce();
             
 			ros::spinOnce();
         	Rate.sleep();

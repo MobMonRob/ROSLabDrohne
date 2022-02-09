@@ -11,12 +11,14 @@
 class coexBattery : public Caller
 {
 public:
-	coexBattery(double Thershold_Warning = 15.0, double Intervall_Info = 60.0);
+	coexBattery(double Perc_thershold, double Intervall_Info = 60.0);
+	coexBattery(double V_min, double V_max, double V_thershold, double Intervall_Info = 60.0);
 	~coexBattery();
 
-	double getVoltage();
-	double getPercentage();
-	double getTime() { return this->Battery_.header.stamp.toSec();};
+	const double getVoltage();
+	const double getPercentage();
+	const bool getPercentageLow() { return (this->Battery_.percentage <= this->Thershold_Warning_); };
+	const double getTime() { return this->Battery_.header.stamp.toSec();};
 	
 	void cbBattery(const sensor_msgs::BatteryState::ConstPtr& Battery);
 	

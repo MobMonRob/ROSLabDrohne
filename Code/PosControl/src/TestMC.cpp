@@ -13,21 +13,21 @@
 #include <mavros_msgs/ManualControl.h>
 #include <mavros_msgs/OverrideRCIn.h>
 
+#include "coex/coexState.h"
+#include "coex/coexBattery.h"
 
-mavros_msgs::State current_state;
-void state_cb(const mavros_msgs::State::ConstPtr& msg){
-    current_state = *msg;
-}
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "offb_node");
     ros::NodeHandle nh;
     
-    ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>("mavros/state", 10, state_cb);
+    coexBattery Battery(15.6, 16.8, 15.7);
+    coexState State(&Battery);
+    
+    
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
-    ros::ServiceClient arming_client = nh.serviceClient<mavros_msgs::CommandBool>("mavros/cmd/arming");
-    ros::ServiceClient set_mode_client = nh.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
+    ros::Publisher pub_ring = nh.advertise<mavros_msgs::ManualControl>("mavros/manual_control/control", 10);
 	
 	mavros_msgs::ManualControl Msg;
 	Msg.x = 0;
@@ -37,10 +37,10 @@ int main(int argc, char **argv)
 	
 	
     //the setpoint publishing rate MUST be faster than 2Hz
-    ros::Rate rate(200.0);
+    ros::Rate rate(20.0);
 
     // wait for FCU connection
-    while(ros::ok() && !current_state.connected){
+    while(ros::ok() && !State.getConnected()){
         ros::spinOnce();
         rate.sleep();
     }
@@ -48,68 +48,62 @@ int main(int argc, char **argv)
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
 		local_thurst_pub.publish(Msg);
+		pub_ring.publish(Msg);
         ros::spinOnce();
         rate.sleep();
     }
-
-    mavros_msgs::SetMode offb_set_mode;
-    offb_set_mode.request.custom_mode = "OFFBOARD";
 
     mavros_msgs::CommandBool arm_cmd;
     arm_cmd.request.value = true;
 
     ros::Time last_request = ros::Time::now();
     ros::Time Start = ros::Time::now();
+    
+    ROS_INFO("Battery at %f.", Battery.getPercentage());
 
+    State.setMode("OFFBOARD");
+    State.setModeAuto();
+    
+    State.waitNextState();
+    
+    
     while(ros::ok() && ros::Time::now() - Start <= ros::Duration(15.0))
     {
-        if( current_state.mode != "OFFBOARD" &&
-            (ros::Time::now() - last_request > ros::Duration(2.0))){
-            if( set_mode_client.call(offb_set_mode) &&
-                offb_set_mode.response.mode_sent){
-                ROS_INFO("Offboard enabled");
-            }
-            last_request = ros::Time::now();
-        } else {
-            if( !current_state.armed &&
-                (ros::Time::now() - last_request > ros::Duration(2.0))){
-                if( arming_client.call(arm_cmd) &&
-                    arm_cmd.response.success){
-                    ROS_INFO("Vehicle armed");
-                }
-                last_request = ros::Time::now();
-            }
-        }
-        
-        
-		local_thurst_pub.publish(Msg);
-
         ros::spinOnce();
+
+        if (State.getMode() != "OFFBOARD" && ros::Time::now() - last_request > ros::Duration(0.25))
+        {
+            State.setMode("OFFBOARD");
+
+            last_request = ros::Time::now();
+        }
+        else if (State.getMode() == "OFFBOARD" && !State.getArmState() && ros::Time::now() - last_request > ros::Duration(0.5))
+        {
+            ROS_INFO("Try Arming...");
+
+
+            State.setArmState(true);
+
+            last_request = ros::Time::now();
+        }
+        else if (ros::Time::now() - last_request > ros::Duration(1.0))
+        {
+            ROS_INFO("VehicleMode = %s", State.getMode().c_str());
+
+            last_request = ros::Time::now();
+        }
+
+
+        local_thurst_pub.publish(Msg);
+        pub_ring.publish(Msg);
+
         rate.sleep();
     }
     
     
-	{	// RESET
-		ros::Rate rate(2.0);
-		arm_cmd.request.value = false;
-		
-		while (current_state.armed)
-		{
-		    arming_client.call(arm_cmd);
-			ros::spinOnce();
-		    rate.sleep();
-		}
-		ROS_INFO("Vehicle disarmed");
-		
-		offb_set_mode.request.custom_mode = "MANUAL";
-		while (current_state.mode != "MANUAL")
-		{
-			set_mode_client.call(offb_set_mode);
-			ros::spinOnce();
-		    rate.sleep();
-		}
-		ROS_INFO("Offboard disabled");
-    }
+    State.setArmState(false);
+    State.setMode("MANUAL");
+    State.setModeAuto(false);
 	
     return 0;
 }
