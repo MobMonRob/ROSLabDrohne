@@ -29,5 +29,13 @@
 
 # Executables
 *.exe
+*.exe.recipe
 *.out
 *.app
+*.pdb
+*.idb
+
+# Logfiles
+*.log
+*.tlog
+*.lastbuildstate
