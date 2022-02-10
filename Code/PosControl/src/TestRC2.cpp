@@ -15,6 +15,7 @@
 #include "coex/Joystick.h"
 #include "coex/coexRC_Receiver.h"
 #include "coex/coexRC_Transmitter.h"
+#include "coex/coexOrientation.h"
 
 
 int main(int argc, char **argv)
@@ -30,9 +31,11 @@ int main(int argc, char **argv)
     coexState StateHandler(&Battery);
     coexRC_Receiver Receiver(&Stick);
     coexRC_Transmitter Transmitter(&StateHandler, &Stick, &Receiver);
+    coexOrientation Locator(&StateHandler, 3.5);
 	
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::OverrideRCIn>("mavros/rc/override", 10);
     ros::Rate rate(20.0);
+    const double Height = .1;
 
 	mavros_msgs::ManualControl Msg;	
     Msg.x = 0;
@@ -50,11 +53,12 @@ int main(int argc, char **argv)
     ros::Time last_request = ros::Time::now();
     ros::Time Start = ros::Time::now();
     ros::Time UpdateState = ros::Time::now();
+    ros::Time UpdateHeight = ros::Time::now();
+    ros::Time ControlHeight = ros::Time::now();
 
     ROS_INFO("Battery at %f.", Battery.getPercentage());
 
     Transmitter.setPayload(Msg);
-    Transmitter.start();
 
     while(ros::ok() && ros::Time::now() - Start <= ros::Duration(10.0))
     {
@@ -66,7 +70,40 @@ int main(int argc, char **argv)
             UpdateState = ros::Time::now();
         }
         
-        Transmitter.call(&Receiver);
+        if (ros::Time::now() - UpdateHeight > ros::Duration(0.25))
+        {
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            ROS_INFO("Thrust = %f", Msg.z);
+
+            UpdateHeight = ros::Time::now();
+        }
+
+        {   // basic controller
+            Msg.z += (Height - Locator.getGroundClearance()) / 100;
+
+            ControlHeight = ros::Time::now();
+        }
+
+
+        Transmitter.setPayload(Msg);
+
+        ros::spinOnce();
+        rate.sleep();
+    }
+
+
+    // Landing
+    while (ros::ok() && Locator.getGroundClearance() > 0)
+    {
+        if (ros::Time::now() - UpdateHeight > ros::Duration(0.25))
+        {
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            Msg.z = 0.99 * Msg.z;
+
+            UpdateHeight = ros::Time::now();
+        }
+
+        Transmitter.setPayload(Msg);
 
         ros::spinOnce();
         rate.sleep();

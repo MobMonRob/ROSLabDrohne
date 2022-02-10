@@ -40,7 +40,7 @@ mavros_msgs::OverrideRCIn coexRC_Transmitter::setPayload(mavros_msgs::ManualCont
 		mavros_msgs::OverrideRCIn RCMsg;
 		mavros_msgs::ManualControl DeNrom = this->Joystick_->denormalize(Msg);
 		
-
+		
 		RCMsg.channels[0] = DeNrom.y;
 		RCMsg.channels[1] = DeNrom.x;
 		RCMsg.channels[2] = DeNrom.z;

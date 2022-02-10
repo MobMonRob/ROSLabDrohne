@@ -60,7 +60,7 @@ double JoystickAxis::denormalize(double Value)
 	{
 		if (Value > -1)
 		{
-			Range = this->Min_ - this->Middle_;
+			Range = this->Middle_ - this->Min_;
 			
 			ReturnValue = Value * Range + this->Middle_;
 		}

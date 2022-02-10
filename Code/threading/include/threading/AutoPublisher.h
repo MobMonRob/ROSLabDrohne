@@ -43,7 +43,7 @@ template <class T>
 T AutoPublisher<T>::runOnce(T Payload)
 {
 	this->Pub_.publish(Payload);
-	
+
 	ros::spinOnce();
 	
 	return Payload;
