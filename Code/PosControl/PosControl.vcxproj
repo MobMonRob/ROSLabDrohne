@@ -147,6 +147,11 @@
     <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
     <ClCompile Include="src\StateBuilder.cpp" />
+    <ClCompile Include="src\TestMC.cpp" />
+    <ClCompile Include="src\TestPose.cpp" />
+    <ClCompile Include="src\TestRC.cpp" />
+    <ClCompile Include="src\TestRC2.cpp" />
+    <ClCompile Include="src\TestThrust.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstraction\Abstraction.vcxproj">

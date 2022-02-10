@@ -48,6 +48,9 @@
     <ClCompile Include="src\JoystickAxis.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\coexRC.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\coex\coexBattery.h">
@@ -78,6 +81,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\coex\JoystickAxis.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\coex\coexRC.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

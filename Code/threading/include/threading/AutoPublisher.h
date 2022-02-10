@@ -14,6 +14,7 @@ class AutoPublisher : public RosThread<T>
 public:
     AutoPublisher(std::string Topic, double Frequency, int Queue = 10, bool AutoStart = false);
 	
+	T runOnce() override { return RosThread<T>::runOnce(); };
     T runOnce(T Payload) override;
 	
 private:

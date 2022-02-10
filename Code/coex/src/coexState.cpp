@@ -19,8 +19,7 @@ void callbackState(const mavros_msgs::State::ConstPtr& msg)
 
 
 coexState::coexState(coexBattery* Battery, bool silent)
-	: ClMode_("mavros/set_mode", 10),
-	Battery_(Battery),
+	: Battery_(Battery),
 	silent_(silent)
 {
 	ROS_INFO("Started coexState");
@@ -36,9 +35,24 @@ coexState::~coexState()
 {
 	ROS_INFO("Termintating coexState...");
 
-	this->setModeAuto(false);
-
 	ROS_INFO("Terminated coexState");
+	ros::spinOnce();
+}
+
+
+bool coexState::operator==(const mavros_msgs::State& S)
+{
+	bool ReturnBool = true;
+
+
+	ReturnBool &= this->getConnected() == S.connected;
+	ReturnBool &= this->getArmState() == S.armed;
+	ReturnBool &= this->getGuided() == S.guided;
+	ReturnBool &= this->getManualInput() == S.manual_input;
+	ReturnBool &= this->getMode() == S.mode;
+	ReturnBool &= this->getSystemStatusID() == S.system_status;
+
+	return false;
 }
 
 
@@ -49,29 +63,33 @@ bool coexState::setMode(std::string Mode)
 	
 	if (this->getConnected())
 	{
+		ros::ServiceClient Client = this->nh_.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
 		mavros_msgs::SetMode Cmd;
 		
 		
-		Cmd.request.base_mode = 0;
 		Cmd.request.custom_mode = Mode.c_str();
 		
-		this->setModeAuto(false);
-		Cmd = this->ClMode_.setPayload(Cmd);
-		this->setModeAuto(Mode == coexMode_Offboard);
-		ros::spinOnce();
-
-		if (Cmd.response.mode_sent)
+		if (Client.call(Cmd))
 		{
-			ReturnBool = true;
+			ros::spinOnce();
+
+			if (Cmd.response.mode_sent)
+			{
+				ReturnBool = true;
+			}
+			else
+			{
+				ROS_ERROR("Mode-Change denied!");
+
+				if (this->Battery_->getPercentageLow())
+				{
+					ROS_INFO("Possible cause: Battery low.");
+				}
+			}
 		}
 		else
 		{
-			ROS_ERROR("Mode-Change denied!");
-
-			if (this->Battery_->getPercentageLow())
-			{
-				ROS_INFO("Possible cause: Battery low.");
-			}
+			ROS_ERROR("Call denied!");
 		}
 	}
 	else
@@ -83,17 +101,6 @@ bool coexState::setMode(std::string Mode)
 }
 
 
-void coexState::setModeAuto(bool AutoMode)
-{
-	if (AutoMode)
-	{
-		this->ClMode_.start();
-	}
-	else
-	{
-		this->ClMode_.stop();
-	}
-}
 
 
 bool coexState::setArmState(bool arming)
@@ -141,35 +148,6 @@ bool coexState::setArmState(bool arming)
 
 
 
-bool coexState::getConnected()
-{
-	bool ReturnBool = this->State_.connected;
-
-
-	if (!ReturnBool)
-	{
-		this->setModeAuto(false);
-	}
-
-	return ReturnBool;
-}
-
-bool coexState::getArmState()
-{
-	bool ReturnBool = false;
-	
-	
-	if (this->getConnected())
-	{
-		ReturnBool = this->State_.armed;
-	}
-	else
-	{
-		this->setArmState(false);
-	}
-	
-	return ReturnBool;
-}
 
 
 std::string coexState::getSystemStatus()
@@ -190,6 +168,25 @@ std::string coexState::getSystemStatus(int StatusID)
 	
 	return ReturnString;
 }
+
+std::string coexState::getState()
+{
+	std::string ReturnString = "PrintOut State at ";
+	std::string NL = "\n";
+	std::string Tab = "\t";
+
+
+	ReturnString.append(std::to_string(this->getTime())).append(NL);
+	ReturnString.append(Tab).append((this->getConnected() ? "" : "not ")).append("connected").append(NL);
+	ReturnString.append(Tab).append((this->getArmState() ? "" : "not ")).append("armed").append(NL);
+	ReturnString.append(Tab).append((this->getGuided() ? "" : "not ")).append("guided").append(NL);
+	ReturnString.append(Tab).append((this->getManualInput() ? "" : "not ")).append("manually inputed").append(NL);
+	ReturnString.append(Tab).append("Mode: ").append(this->getMode()).append(NL);
+	ReturnString.append(Tab).append(this->getSystemStatus());
+
+	return ReturnString;
+}
+
 
 void coexState::waitNextState()
 {

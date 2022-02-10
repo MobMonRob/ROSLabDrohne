@@ -31,11 +31,11 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	
 	if (OutRC)
 	{
-		this->xC_ = new coexRC_Transmitter(&this->Joystick_, this->State_, this->Battery_);
+		this->xC_ = new coexRC_Transmitter(this->State_, &this->Joystick_);
 	}
 	else
 	{
-		this->xC_ = new coexMC(this->State_, this->Battery_);
+		this->xC_ = new coexMC(this->State_);
 	}
 }
 

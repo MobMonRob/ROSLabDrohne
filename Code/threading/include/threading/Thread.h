@@ -15,7 +15,8 @@ public:
     Thread(std::string Descriptor);
     ~Thread();
     
-    bool start();
+    virtual bool start();
+    
     bool stop();
     
     virtual T runOnce() = 0;
@@ -30,8 +31,10 @@ protected:
     inline bool getNext() const { return (this->isRunning() && this->isThreaded()); };
     static void run(Thread<T>* Instance);
 	
-private:
+protected:
     std::thread *Thread_ = nullptr;
+
+private:
     bool Running_ = false;
 
     bool Lock_ = false;
@@ -58,6 +61,7 @@ Thread<T>::~Thread()
 }
 
 
+
 template <class T>
 bool Thread<T>::start()
 {
@@ -73,6 +77,7 @@ bool Thread<T>::start()
 
     return this->isThreaded();
 }
+
 
 template <class T>
 bool Thread<T>::stop()

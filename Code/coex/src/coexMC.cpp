@@ -7,9 +7,9 @@
 #include "mavros/px4_custom_mode.h"
 
 
-coexMC::coexMC(coexState *State, coexBattery *Battery, int Frequency)
-	: coexTransmitable(State, Battery),
-	Pub_("mavros/manual_control/send", Frequency, 10, true)
+coexMC::coexMC(coexState *State, int Frequency)
+	: coexTransmitable(State),
+	AutoPublisher<mavros_msgs::ManualControl>("mavros/manual_control/send", Frequency, 10, true)
 {
 	ROS_INFO("Started coexMC");
 }
@@ -18,7 +18,7 @@ coexMC::~coexMC()
 {
 	ROS_INFO("Termintating coexMC...");
 
-	this->Pub_.stop();
+	this->stop();
 
 	ROS_INFO("Terminated coexMC");
 }
@@ -72,7 +72,7 @@ void coexMC::transmit(mavros_msgs::ManualControl Msg)
 	{
 		ROS_INFO("Transmit: x=%f, y=%f, z=%f, r=%f", Msg.x, Msg.y, Msg.z, Msg.r);
 
-		this->Pub_.setPayload(Msg);
+		this->setPayload(Msg);
 	}
 }
 
