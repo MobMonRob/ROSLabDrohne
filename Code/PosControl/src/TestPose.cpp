@@ -38,10 +38,10 @@ int main(int argc, char **argv)
     const bool example = false;
 
 
-	geometry_msgs::PoseStamped pose;
-    pose.pose.position.x = 0;
-    pose.pose.position.y = 0;
-    pose.pose.position.z = 0.05;
+	geometry_msgs::PoseStamped Msg;
+    Msg.Msg.position.x = 0;
+    Msg.Msg.position.y = 0;
+    Msg.Msg.position.z = 0.05;
     
     
     //the setpoint publishing rate MUST be faster than 2Hz
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i)
     {
-		local_thurst_pub.publish(pose);
+		local_thurst_pub.publish(Msg);
         ros::spinOnce();
         rate.sleep();
     }
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 
 
 
-		local_thurst_pub.publish(pose);
+		local_thurst_pub.publish(Msg);
 
         ros::spinOnce();
         rate.sleep();

@@ -9,7 +9,7 @@
 #include "../std_msgs/Msg.h"
 #include "ros_Talker.h"
 
-
+#include "../mavros_msgs/PositionTarget.h"
 #include "../mavros_msgs/RCIn.h"
 #include "../mavros_msgs/State.h"
 
@@ -61,6 +61,7 @@ public:
 			return Publisher();
 		}
 
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::PositionTarget::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::RCIn::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::State::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::BatteryState::ConstPtr&)) { return Subscriber(); };
@@ -99,8 +100,11 @@ public:
 	{
 	public:
 		Time operator-(const Time& T) { return Time(); };
-		bool operator<=(const Duration& T) { return false; };
 		bool operator>(const Duration& T) { return false; };
+		bool operator<(const Duration& T) { return false; };
+		bool operator==(const Duration& T) { return false; };
+		bool operator<=(const Duration& T) { return false; };
+		bool operator>=(const Duration& T) { return false; };
 		static Time now() { return Time(); };
 	};
 

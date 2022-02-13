@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
     while(ros::ok() && ros::Time::now() - Start <= ros::Duration(10.0))
     {
-        if (ros::Time::now() - UpdateState > ros::Duration(1))
+        if (ros::Time::now() - UpdateState >= ros::Duration(1))
         {
             ROS_INFO("TestRC2");
             ROS_INFO(StateHandler.getState().c_str());
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
             UpdateState = ros::Time::now();
         }
         
-        if (ros::Time::now() - UpdateHeight > ros::Duration(0.25))
+        if (ros::Time::now() - UpdateHeight >= ros::Duration(0.25))
         {
             ROS_INFO("Ground = %f", Locator.getGroundClearance());
             ROS_INFO("Thrust = %f", Msg.z);
@@ -78,6 +78,7 @@ int main(int argc, char **argv)
             UpdateHeight = ros::Time::now();
         }
 
+        if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
         {   // basic controller
             Msg.z += (Height - Locator.getGroundClearance()) / 100;
 

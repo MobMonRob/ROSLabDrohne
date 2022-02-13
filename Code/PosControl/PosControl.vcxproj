@@ -147,6 +147,9 @@
     <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
     <ClCompile Include="src\StateBuilder.cpp" />
+    <ClCompile Include="src\TestLocalAccel.cpp" />
+    <ClCompile Include="src\TestLocalPos.cpp" />
+    <ClCompile Include="src\TestLocalVel.cpp" />
     <ClCompile Include="src\TestMC.cpp" />
     <ClCompile Include="src\TestPose.cpp" />
     <ClCompile Include="src\TestRC.cpp" />

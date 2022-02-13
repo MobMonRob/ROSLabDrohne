@@ -95,5 +95,11 @@
     <ClInclude Include="geometry_msgs\PoseStamped.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="mavros_msgs\PositionTarget.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_msgs\Point.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

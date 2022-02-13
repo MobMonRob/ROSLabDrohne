@@ -46,7 +46,11 @@ coexBattery::coexBattery(double V_min, double V_max, double V_thershold, double 
 
 coexBattery::~coexBattery()
 {
-	ROS_INFO("Termintating coexBattery...");
+	ROS_INFO("Terminating coexBattery...");
+
+	ROS_INFO("Battery at %f%", this->getPercentage());
+	ROS_INFO("Terminated coexBattery");
+	ros::spinOnce();
 }
 
 
