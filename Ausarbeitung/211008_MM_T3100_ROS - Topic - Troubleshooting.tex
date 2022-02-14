@@ -1,7 +1,7 @@
 \newSec[TopicTrouble]{Troubleshooting}{2}
 
 
-\missing[Topics anders benannt, als in DOkumentation (überall steht "/mavros" davor]
+\missing[Topics anders benannt, als in Dokumentation (überall steht "/mavros" davor]
 
 \missing[Achtung: der Regler VRA muss so eingestellt sein, dass "manual Flight" verfügbar ist. Andersfalls ist ein Start der Drohne nicht möglich.]
 
@@ -44,7 +44,7 @@ Freigegebene \Topic[s] in \texttt{mavros.launch}
 \end{lstlisting}
 
 
-\newSec[TopicTroubleRCOver]{md5-Sum des Topics OverrideRCIn}{3}
+\newSec[TopicTroubleRCOverMD5]{md5-Sum des Topics OverrideRCIn}{3}
 Nach erfolgreicher Kompilierung wird nachfolgender Laufzeitfehler ausgegeben, wenn sich ein \CodeClass{ros::Subscriber} oder ein \CodeClass{ros::Publisher} auf das \rTopic{/mavros/rc/override} anmeldet:\\
 \textcolor{red}{[ERROR] [1643616625.226584828]: Client [/mavros] wants topic /mavros/rc/override \\to have datatype/md5sum [mavros\_msgs/OverrideRCIn/73b27a463a40a3eda1f9fbb1fc86d6f3], but our version has [mavros\_msgs/OverrideRCIn/fd1e1c08fa504ec32737c41f45223398]. Dropping connection.}
 
@@ -75,6 +75,48 @@ struct MD5Sum<::mavros_msgs::OverrideRCIn_<ContainerAllocator>>
 \end{lstlisting}
 
 von dem \Pie\ kopieren und in der Definition des lokalen \ROS\ \textit{\mbox{OverrideRCIn}}-Headers ersetzen.
+
+
+
+\newSec[TopicTroubleRCOver]{Topics OverrideRCIn läuft nur mit Topic RCIn}{3}
+
+
+
+
+
+\newSec{Lösung}{4}
+
+
+
+
+
+
+
+
+
+\newSec[TopicTroubleRCOver]{Topics setpoint_altitude/thrust läuft nicht}{3}
+
+
+
+
+
+\newSec{Lösung}{4}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
