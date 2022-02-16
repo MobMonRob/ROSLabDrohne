@@ -10,6 +10,7 @@
 
 #include "coex/coexState.h"
 #include "coex/coexBattery.h"
+#include "coex/coexOrientation.h"
 
 
 int main(int argc, char **argv)
@@ -19,10 +20,12 @@ int main(int argc, char **argv)
     
     coexBattery Battery(15.6, 16.8, 15.7);
     coexState StateHandler(&Battery);
+    coexOrientation Locator(&StateHandler, 3.5);
     
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
     ros::Publisher pub_ring = nh.advertise<mavros_msgs::ManualControl>("mavros/manual_control/control", 10);
 	ros::Rate rate(20.0);
+    const double Height = .1;
 
 	mavros_msgs::ManualControl Msg;
 	Msg.x = 0;
@@ -47,6 +50,8 @@ int main(int argc, char **argv)
 
     ros::Time last_request = ros::Time::now();
     ros::Time Start = ros::Time::now();
+    ros::Time UpdateHeight = ros::Time::now();
+    ros::Time ControlHeight = ros::Time::now();
     
     ROS_INFO("Battery at %f.", Battery.getPercentage());
 
@@ -75,6 +80,21 @@ int main(int argc, char **argv)
             last_request = ros::Time::now();
         }
 
+        if (ros::Time::now() - UpdateHeight >= ros::Duration(0.25))
+        {
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            ROS_INFO("Thrust = %f", Msg.z);
+
+            UpdateHeight = ros::Time::now();
+        }
+
+        if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
+        {   // basic controller
+            Msg.z += (Height - Locator.getGroundClearance()) / 100;
+
+            ControlHeight = ros::Time::now();
+        }
+
 
         local_thurst_pub.publish(Msg);
         pub_ring.publish(Msg);
@@ -83,6 +103,26 @@ int main(int argc, char **argv)
         rate.sleep();
     }
     
+
+    // Landing
+    while (ros::ok() && Locator.getGroundClearance() > 0)
+    {
+        if (ros::Time::now() - UpdateHeight > ros::Duration(0.25))
+        {
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            Msg.z = 0.99 * Msg.z;
+
+            UpdateHeight = ros::Time::now();
+        }
+
+        local_thurst_pub.publish(Msg);
+        pub_ring.publish(Msg);
+
+        ros::spinOnce();
+        rate.sleep();
+    }
+
+
 
     // RESET
     StateHandler.setArmState(false);

@@ -44,7 +44,8 @@ int main(int argc, char **argv)
 	
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::PositionTarget>("mavros/setpoint_raw/local", 10);
     ros::Subscriber SubPos = nh.subscribe("mavros/setpoint_raw/target_local", 10, PosCallback);
-    ros::Rate rate(20.0);
+    ros::Publisher local_thurst = nh.advertise<mavros_msgs::ManualControl>("mavros/manual_control/send", 10);
+    ros::Rate rate(250.0);
     const double Height = .1;
 
     geometry_msgs::Point Pos;
@@ -54,13 +55,22 @@ int main(int argc, char **argv)
 
 	mavros_msgs::PositionTarget Msg;	
     Msg.position = Pos;
-
+    Msg.yaw = 0;
+    Msg.type_mask = mavros_msgs::PositionTarget::IGNORE_VX | mavros_msgs::PositionTarget::IGNORE_VY | mavros_msgs::PositionTarget::IGNORE_VZ
+        | mavros_msgs::PositionTarget::IGNORE_AFX | mavros_msgs::PositionTarget::IGNORE_AFY | mavros_msgs::PositionTarget::IGNORE_AFZ
+        | mavros_msgs::PositionTarget::IGNORE_YAW_RATE;
 
     mavros_msgs::ManualControl RCMsg;
     RCMsg.x = 0;
     RCMsg.y = 0;
     RCMsg.z = 0.05;
     RCMsg.r = 0;
+
+    mavros_msgs::ManualControl MCMsg;
+    MCMsg.x = 0;
+    MCMsg.y = 0;
+    MCMsg.z = -900;
+    MCMsg.r = 0;
 
     while (ros::ok() && !StateHandler.getConnected())
     {
@@ -95,6 +105,7 @@ int main(int argc, char **argv)
         if (ros::Time::now() - Alive >= ros::Duration(0.25))
         {
             StateHandler.setMode(coexMode_Offboard);
+            local_thurst_pub.publish(Msg);
 
             Alive = ros::Time::now();
         }
@@ -120,7 +131,8 @@ int main(int argc, char **argv)
         if (ros::Time::now() - UpdateHeight >= ros::Duration(0.5))
         {
             ROS_INFO("Ground = %f", Locator.getGroundClearance());
-            ROS_INFO("Thrust = %f", RCMsg.z);
+            ROS_INFO("Thrust RC = %f", RCMsg.z);
+            ROS_INFO("Thrust MC = %f", MCMsg.z);
 
             UpdateHeight = ros::Time::now();
         }
@@ -128,11 +140,14 @@ int main(int argc, char **argv)
         if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
         {   // basic controller
             RCMsg.z += (Height - Locator.getGroundClearance()) / 100;
+            MCMsg.z += (Height - Locator.getGroundClearance()) * 5;
 
             ControlHeight = ros::Time::now();
         }
 
-        local_thurst_pub.publish(Msg);
+
+
+        local_thurst.publish(MCMsg);
         Transmitter.setPayload(RCMsg);
 
         ros::spinOnce();
