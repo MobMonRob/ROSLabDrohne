@@ -101,7 +101,7 @@ void coexBattery::cbBattery(const sensor_msgs::BatteryState::ConstPtr& Battery)
 	}
 	else if ((Battery->header.stamp - this->Battery_.header.stamp) >= this->Intervall_Info_)
 	{
-		ROS_INFO("Battery at %f.", Percentage);
+		ROS_INFO("Battery at %f%", Percentage);
 	}
 	
 	this->Battery_ = *Battery;

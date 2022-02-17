@@ -63,66 +63,74 @@ add_executable(BridgeNode
 	src/StateBuilder.cpp
 )
 
+add_executable(TestPoseExample
+	src/TestPose_Example.cpp
+)
 add_executable(TestPose
 	src/TestPose.cpp
+)
+
+add_executable(TestRCOverride
+	src/TestRCOverride.cpp
+)
+add_executable(TestRCTransmitter
+	src/TestRCTransmitter.cpp
 )
 
 add_executable(TestMC
 	src/TestMC.cpp
 )
 
-add_executable(TestRC
-	src/TestRC.cpp
-)
-
-add_executable(TestRC2
-	src/TestRC2.cpp
-)
-
 add_executable(TestThrust
 	src/TestThrust.cpp
 )
 
-add_executable(TestLocalPos
-	src/TestLocalPos.cpp
+add_executable(TestPosLocalPos
+	src/TestPosLocalPos.cpp
 )
-
-add_executable(TestLocalVel
-	src/TestLocalVel.cpp
+add_executable(TestPosLocalVel
+	src/TestPosLocalVel.cpp
 )
-
-# add_executable(TestLocalAccel
-	# src/TestLocalAccel.cpp
-# )
+add_executable(TestPosLocalAccel
+	src/TestPosLocalAccel.cpp
+)
 
 
 ## Add cmake target dependencies of the executable
 add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
+
+add_dependencies(TestPoseExample ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 add_dependencies(TestPose ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-add_dependencies(TestMC ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-add_dependencies(TestRC ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-add_dependencies(TestRC2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController calling_lib threading_lib)
+
+add_dependencies(TestRCOverride ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+add_dependencies(TestRCTransmitter ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController calling_lib threading_lib)
+
+add_dependencies(TestMC ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController calling_lib threading_lib)
+
 add_dependencies(TestThrust ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-add_dependencies(TestLocalPos ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-add_dependencies(TestLocalVel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
-#add_dependencies(TestLocalAccel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+
+add_dependencies(TestPosLocalPos ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+add_dependencies(TestPosLocalVel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+add_dependencies(TestPosLocalAccel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+
+
 
 
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(BridgeNode ${catkin_LIBRARIES} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
+
 target_link_libraries(TestPose ${catkin_LIBRARIES} coexController)
-target_link_libraries(TestMC ${catkin_LIBRARIES} coexController)
-target_link_libraries(TestRC ${catkin_LIBRARIES} coexController)
-target_link_libraries(TestRC2 ${catkin_LIBRARIES} coexController calling_lib threading_lib)
+target_link_libraries(TestPoseExample ${catkin_LIBRARIES} coexController)
+
+target_link_libraries(TestRCOverride ${catkin_LIBRARIES} coexController)
+target_link_libraries(TestRCTransmitter ${catkin_LIBRARIES} coexController calling_lib threading_lib)
+
+target_link_libraries(TestMC ${catkin_LIBRARIES} coexController calling_lib threading_lib)
+
 target_link_libraries(TestThrust ${catkin_LIBRARIES} coexController)
-target_link_libraries(TestLocalPos ${catkin_LIBRARIES} coexController)
-target_link_libraries(TestLocalVel ${catkin_LIBRARIES} coexController)
-#target_link_libraries(TestLocalAccel ${catkin_LIBRARIES} coexController)
 
-
-
-
-
-
+target_link_libraries(TestPosLocalPos ${catkin_LIBRARIES} coexController)
+target_link_libraries(TestPosLocalVel ${catkin_LIBRARIES} coexController)
+target_link_libraries(TestPosLocalAccel ${catkin_LIBRARIES} coexController)
 

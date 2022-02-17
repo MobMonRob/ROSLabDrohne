@@ -61,6 +61,8 @@ public:
 			return Publisher();
 		}
 
+		
+
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::PositionTarget::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::RCIn::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::State::ConstPtr&)) { return Subscriber(); };
@@ -69,12 +71,13 @@ public:
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Joy::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Range::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Char::ConstPtr&)) { return Subscriber(); };
-
+		
 		template <class M>
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const M*))
 		{
 			return Subscriber();
 		}
+		
 
 
 		template <class M>

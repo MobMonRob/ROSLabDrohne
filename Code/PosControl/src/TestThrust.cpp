@@ -1,13 +1,5 @@
-/**
- * @file offb_node.cpp
- * @brief Offboard control example node, written with MAVROS version 0.19.x, PX4 Pro Flight
- * Stack and tested in Gazebo SITL
- */
-
 #include <ros/ros.h>
-
-#include <mavros_msgs/ManualControl.h>
-#include <mavros_msgs/Thrust.h>
+#include "mavros_msgs/Thrust.h"
 
 #include "coex/coexState.h"
 #include "coex/coexBattery.h"
@@ -23,6 +15,8 @@ int main(int argc, char **argv)
 
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 10);
     ros::Rate rate(20.0);
+    ros::Duration TestTime(10.0);
+    const double Height = .1;
 
 	mavros_msgs::Thrust Msg;	
 	Msg.thrust = 0.07;
@@ -49,7 +43,7 @@ int main(int argc, char **argv)
     StateHandler.setMode(coexMode_Offboard);
     StateHandler.waitNextState();
 
-    while(ros::ok() && ros::Time::now() - Start <= ros::Duration(10.0))
+    while(ros::ok() && ros::Time::now() - Start <= TestTime)
     {
         if (StateHandler.getMode() == coexMode_Offboard)
         {
@@ -65,6 +59,7 @@ int main(int argc, char **argv)
         }
         else if (ros::Time::now() - last_request > ros::Duration(1.0))
         {
+            ROS_INFO("TestThrust");
             ROS_INFO("VehicleMode = %s", StateHandler.getMode().c_str());
 
             last_request = ros::Time::now();

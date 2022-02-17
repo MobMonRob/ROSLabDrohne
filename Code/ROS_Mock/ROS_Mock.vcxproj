@@ -161,6 +161,7 @@
     <ClInclude Include="mavros_msgs\SetModeRequest.h" />
     <ClInclude Include="mavros_msgs\SetModeResponse.h" />
     <ClInclude Include="mavros_msgs\State.h" />
+    <ClInclude Include="mavros_msgs\Thrust.h" />
     <ClInclude Include="ros\ros.h" />
     <ClInclude Include="ros\ros_Talker.h" />
     <ClInclude Include="sensor_msgs\BatteryState.h" />

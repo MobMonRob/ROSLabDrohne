@@ -101,5 +101,8 @@
     <ClInclude Include="geometry_msgs\Point.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="mavros_msgs\Thrust.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

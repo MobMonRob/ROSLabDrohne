@@ -147,13 +147,19 @@
     <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
     <ClCompile Include="src\StateBuilder.cpp" />
-    <ClCompile Include="src\TestLocalAccel.cpp" />
-    <ClCompile Include="src\TestLocalPos.cpp" />
-    <ClCompile Include="src\TestLocalVel.cpp" />
-    <ClCompile Include="src\TestMC.cpp" />
+    <ClCompile Include="src\TestMCSend.cpp" />
+    <ClCompile Include="src\TestPosLocalAccel.cpp" />
+    <ClCompile Include="src\TestRC_Heartbeated.cpp" />
+    <ClCompile Include="src\TestPosLocalPos_MC.cpp" />
+    <ClCompile Include="src\TestPosLocalPos.cpp" />
+    <ClCompile Include="src\TestPosLocalPos_Masked.cpp" />
+    <ClCompile Include="src\TestPosLocalVel.cpp" />
+    <ClCompile Include="src\TestMCControl.cpp" />
     <ClCompile Include="src\TestPose.cpp" />
-    <ClCompile Include="src\TestRC.cpp" />
-    <ClCompile Include="src\TestRC2.cpp" />
+    <ClCompile Include="src\TestPose_Example.cpp" />
+    <ClCompile Include="src\TestRCOverride.cpp" />
+    <ClCompile Include="src\TestRCOverride_OFFBOARD.cpp" />
+    <ClCompile Include="src\TestRCTransmitter.cpp" />
     <ClCompile Include="src\TestThrust.cpp" />
   </ItemGroup>
   <ItemGroup>
