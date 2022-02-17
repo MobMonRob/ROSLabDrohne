@@ -10,7 +10,8 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 				1031, 2003, 1500,
 				1024, 2003, 1500)
 {
-	ROS_INFO("Started coexControl");
+	ROS_INFO("Starting coexControl...");
+	ros::spinOnce();
 	
 	/* Parameters:
 	 * 
@@ -37,6 +38,8 @@ coexControl::coexControl(bool OutRC, int RC_Soft)
 	{
 		this->xC_ = new coexMC(this->State_);
 	}
+
+	ROS_INFO("Started coexControl");
 }
 
 coexControl::~coexControl()

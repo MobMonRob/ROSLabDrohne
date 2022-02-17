@@ -17,6 +17,7 @@ coexMC::coexMC(coexState *State, int Frequency)
 coexMC::~coexMC()
 {
 	ROS_INFO("Termintating coexMC...");
+	ros::spinOnce();
 
 	this->stop();
 

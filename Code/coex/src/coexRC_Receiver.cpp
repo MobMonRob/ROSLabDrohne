@@ -16,7 +16,8 @@ void callbackRC(const mavros_msgs::RCIn::ConstPtr& msg)
 coexRC_Receiver::coexRC_Receiver(Joystick *Joystick)
 	: Joystick_(Joystick)
 {
-	ROS_INFO("Started coexRC_Receiver");
+	ROS_INFO("Starting coexRC_Receiver...");
+	ros::spinOnce();
 	
 	coex_RC_Receiver = this;
 
@@ -26,6 +27,8 @@ coexRC_Receiver::coexRC_Receiver(Joystick *Joystick)
 	}
 	
 	this->SubRC_ = this->nh_.subscribe("mavros/rc/in", 100, callbackRC);
+
+	ROS_INFO("Started coexRC_Receiver");
 }
 
 coexRC_Receiver::~coexRC_Receiver()

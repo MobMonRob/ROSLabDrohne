@@ -19,7 +19,8 @@ void callbackBattery(const sensor_msgs::BatteryState::ConstPtr& msg)
 coexBattery::coexBattery(double Perc_thershold, double Intervall_Info)
 	: Thershold_Warning_(Perc_thershold)
 {
-	ROS_INFO("Started coexBattery");
+	ROS_INFO("Starting coexBattery...");
+	ros::spinOnce();
 	
 	coex_Battery = this;
 
@@ -36,6 +37,8 @@ coexBattery::coexBattery(double Perc_thershold, double Intervall_Info)
 	}
 	
 	this->SubBattery_ = this->nh_.subscribe("mavros/battery", 5, callbackBattery);
+
+	ROS_INFO("Started coexBattery");
 }
 
 coexBattery::coexBattery(double V_min, double V_max, double V_thershold, double Intervall_Info)

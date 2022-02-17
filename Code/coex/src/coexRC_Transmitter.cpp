@@ -9,12 +9,15 @@ coexRC_Transmitter::coexRC_Transmitter(coexState* State, Joystick* Joystick, Cal
 	Joystick_(Joystick),
 	Caller_(Caller)
 {
-	ROS_INFO("Started coexRC_Transmitter");
+	ROS_INFO("Starting coexRC_Transmitter...");
+	ros::spinOnce();
 
 	if (this->Joystick_ == nullptr)
 	{
 		ROS_WARN("No Joystick given to coexRC_Transmitter.");
 	}
+
+	ROS_INFO("Started coexRC_Transmitter");
 }
 
 

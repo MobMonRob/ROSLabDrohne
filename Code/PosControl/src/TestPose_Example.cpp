@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 
 
     // RESET
-	ros::Rate rate(5.0);
+	rate = ros::Rate(5.0);
 	arm_cmd.request.value = false;
 		
 	while (current_state.armed)

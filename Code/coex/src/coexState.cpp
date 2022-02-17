@@ -22,13 +22,16 @@ coexState::coexState(coexBattery* Battery, bool silent)
 	: Battery_(Battery),
 	silent_(silent)
 {
-	ROS_INFO("Started coexState");
+	ROS_INFO("Starting coexState...");
+	ros::spinOnce();
 
 	coex_State = this;
 	
 	this->initSystemStatus();
 	
 	this->SubState_ = this->nh_.subscribe("mavros/state", 10, callbackState);
+
+	ROS_INFO("Started coexState");
 }
 
 coexState::~coexState()

@@ -28,7 +28,8 @@ coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
 	Ang_(Unit_AngleVelDeg, Unit_AngleDeg),
 	State_(State)
 {
-	ROS_INFO("Started coexOrientation");
+	ROS_INFO("Starting coexOrientation...");
+	ros::spinOnce();
 	
 	coex_Orientation = this;
 	
@@ -36,11 +37,13 @@ coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
 	
 	this->SubIMU_ = this->nh_.subscribe("mavros/imu/data", 100, callbackIMU);
 	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 10, callbackGroundClearance);
+
+	ROS_INFO("Started coexOrientation");
 }
 
 coexOrientation::~coexOrientation()
 {
-	ROS_INFO("Termintating coexOrientation...");
+	ROS_INFO("Termintated coexOrientation");
 }
 
 
