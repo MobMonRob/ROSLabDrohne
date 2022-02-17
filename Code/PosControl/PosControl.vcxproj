@@ -150,7 +150,7 @@
     <ClCompile Include="src\TestMCSend.cpp" />
     <ClCompile Include="src\TestPosLocalAccel.cpp" />
     <ClCompile Include="src\TestRC_Heartbeated.cpp" />
-    <ClCompile Include="src\TestPosLocalPos_MC.cpp" />
+    <ClCompile Include="src\TestMC_Heartbeated.cpp" />
     <ClCompile Include="src\TestPosLocalPos.cpp" />
     <ClCompile Include="src\TestPosLocalPos_Masked.cpp" />
     <ClCompile Include="src\TestPosLocalVel.cpp" />

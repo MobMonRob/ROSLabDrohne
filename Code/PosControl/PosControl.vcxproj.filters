@@ -43,13 +43,13 @@
     <ClCompile Include="src\TestPosLocalPos_Masked.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\TestPosLocalPos_MC.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\TestRCOverride_OFFBOARD.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="src\TestRC_Heartbeated.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TestMC_Heartbeated.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
