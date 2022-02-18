@@ -26,17 +26,16 @@ void callbackGroundClearance(const sensor_msgs::Range::ConstPtr& msg)
 coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
 	: Pos_(Unit_Acceleration, Unit_Length),
 	Ang_(Unit_AngleVelDeg, Unit_AngleDeg),
-	State_(State)
+	State_(State),
+	Threshold_AccelZ_(Threshold_AccelZ)
 {
 	ROS_INFO("Starting coexOrientation...");
 	ros::spinOnce();
 	
 	coex_Orientation = this;
 	
-	this->Threshold_AccelZ_ = Threshold_AccelZ;
-	
-	this->SubIMU_ = this->nh_.subscribe("mavros/imu/data", 100, callbackIMU);
-	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 10, callbackGroundClearance);
+	this->SubIMU_ = this->nh_.subscribe("mavros/imu/data", 1, callbackIMU);
+	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 1, callbackGroundClearance);
 
 	ROS_INFO("Started coexOrientation");
 }

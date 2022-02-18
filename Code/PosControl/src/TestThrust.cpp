@@ -3,6 +3,7 @@
 
 #include "coex/coexState.h"
 #include "coex/coexBattery.h"
+#include "coex/coexOrientation.h"
 
 
 int main(int argc, char **argv)
@@ -12,6 +13,7 @@ int main(int argc, char **argv)
 	
     coexBattery Battery(15.6, 16.8, 15.7);
     coexState StateHandler(&Battery);
+    coexOrientation Locator(&StateHandler, 3.5);
 
     ros::Publisher local_thurst_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 10);
     ros::Rate rate(20.0);
@@ -37,11 +39,12 @@ int main(int argc, char **argv)
 
     ros::Time last_request = ros::Time::now();
     ros::Time Start = ros::Time::now();
+    ros::Time UpdateState = ros::Time::now();
+    ros::Time ControlHeight = ros::Time::now();
 
-    ROS_INFO("Battery at %f.", Battery.getPercentage());
+    ROS_INFO("Battery at %f", Battery.getPercentage());
 
     StateHandler.setMode(coexMode_Offboard);
-    StateHandler.waitNextState();
 
     while(ros::ok() && ros::Time::now() - Start <= TestTime)
     {
@@ -57,14 +60,24 @@ int main(int argc, char **argv)
                 last_request = ros::Time::now();
             }
         }
-        else if (ros::Time::now() - last_request > ros::Duration(1.0))
+
+        if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
+        {   // basic controller
+            Msg.thrust += (Height - Locator.getGroundClearance()) / 100;
+
+            ControlHeight = ros::Time::now();
+        }
+
+
+        if (ros::Time::now() - UpdateState >= ros::Duration(1))
         {
             ROS_INFO("TestThrust");
-            ROS_INFO("VehicleMode = %s", StateHandler.getMode().c_str());
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            ROS_INFO("Thrust = %f", Msg.thrust);
+            ROS_INFO(StateHandler.getState().c_str());
 
-            last_request = ros::Time::now();
+            UpdateState = ros::Time::now();
         }
-        
         
 		local_thurst_pub.publish(Msg);
 

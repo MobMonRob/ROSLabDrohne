@@ -106,6 +106,13 @@ int main(int argc, char **argv)
             UpdateState = ros::Time::now();
         }
 
+        if (Locator.getGroundClearance() > 2 * Height)
+        {
+            ROS_WARN("SECURITY SHUTDOWN");
+
+            break;
+        }
+
 		local_thurst_pub.publish(Msg);
 
         ros::spinOnce();

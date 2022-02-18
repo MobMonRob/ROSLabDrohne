@@ -97,20 +97,21 @@ int main(int argc, char **argv)
             last_request = ros::Time::now();
         }
 
-        if (ros::Time::now() - UpdateState >= ros::Duration(1))
-        {
-            ROS_INFO("TestPosLocalPos");
-            ROS_INFO("Ground = %f", Locator.getGroundClearance());
-            ROS_INFO(StateHandler.getState().c_str());
-
-            UpdateState = ros::Time::now();
-        }
-        
         if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
         {   // basic controller
             MCMsg.z += (Height - Locator.getGroundClearance()) * 5;
 
             ControlHeight = ros::Time::now();
+        }
+
+        if (ros::Time::now() - UpdateState >= ros::Duration(1))
+        {
+            ROS_INFO("TextMC_Heartbeated");
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            ROS_INFO("Thrust = %f", MCMsg.z);
+            ROS_INFO(StateHandler.getState().c_str());
+
+            UpdateState = ros::Time::now();
         }
 
         local_thurst_pub.publish(MCMsg);

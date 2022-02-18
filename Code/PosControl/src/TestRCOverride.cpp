@@ -73,19 +73,22 @@ int main(int argc, char **argv)
             last_request = ros::Time::now();
         }
         
-        if (ros::Time::now() - UpdateState > ros::Duration(1.0))
-        {
-            ROS_INFO("TestRCOverride");
-            ROS_INFO(StateHandler.getState().c_str());
-
-            UpdateState = ros::Time::now();
-        }
 
         if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
         {   // basic controller
             Msg.channels[2] += (Height - Locator.getGroundClearance()) / 100;
 
             ControlHeight = ros::Time::now();
+        }
+
+        if (ros::Time::now() - UpdateState > ros::Duration(1.0))
+        {
+            ROS_INFO("TestRCOverride");
+            ROS_INFO("Ground = %f", Locator.getGroundClearance());
+            ROS_INFO("Thrust = %f", Msg.channels[2]);
+            ROS_INFO(StateHandler.getState().c_str());
+
+            UpdateState = ros::Time::now();
         }
         
 		local_thurst_pub.publish(Msg);
