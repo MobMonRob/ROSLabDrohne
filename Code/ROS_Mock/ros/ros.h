@@ -108,6 +108,10 @@ public:
 		bool operator==(const Duration& T) { return false; };
 		bool operator<=(const Duration& T) { return false; };
 		bool operator>=(const Duration& T) { return false; };
+		
+		double toSec() { return 0; };
+
+
 		static Time now() { return Time(); };
 	};
 

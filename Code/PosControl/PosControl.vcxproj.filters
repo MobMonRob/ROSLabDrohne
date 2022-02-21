@@ -52,6 +52,9 @@
     <ClCompile Include="src\TestMC_Heartbeated.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\TestPosLocalVel_Masked.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headerdateien">

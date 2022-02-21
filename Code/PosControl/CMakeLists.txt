@@ -107,6 +107,9 @@ add_executable(TestPosLocalPosMasked
 add_executable(TestPosLocalVel
 	src/TestPosLocalVel.cpp
 )
+add_executable(TestPosLocalVelMasked
+	src/TestPosLocalVel_Masked.cpp
+)
 
 add_executable(TestPosLocalAccel
 	src/TestPosLocalAccel.cpp
@@ -133,6 +136,7 @@ add_dependencies(TestThrust ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 add_dependencies(TestPosLocalPos ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 add_dependencies(TestPosLocalPosMasked ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 add_dependencies(TestPosLocalVel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
+add_dependencies(TestPosLocalVelMasked ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 add_dependencies(TestPosLocalAccel ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController)
 
 
@@ -159,5 +163,6 @@ target_link_libraries(TestThrust ${catkin_LIBRARIES} coexController)
 target_link_libraries(TestPosLocalPos ${catkin_LIBRARIES} coexController)
 target_link_libraries(TestPosLocalPosMasked ${catkin_LIBRARIES} coexController)
 target_link_libraries(TestPosLocalVel ${catkin_LIBRARIES} coexController)
+target_link_libraries(TestPosLocalVelMasked ${catkin_LIBRARIES} coexController)
 target_link_libraries(TestPosLocalAccel ${catkin_LIBRARIES} coexController)
 

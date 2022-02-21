@@ -13,7 +13,7 @@ void callbackIMU(const sensor_msgs::Imu::ConstPtr& msg)
 	}
 }
 
-void callbackGroundClearance(const sensor_msgs::Range::ConstPtr& msg)
+void callbackGround(const sensor_msgs::Range::ConstPtr& msg)
 {
 	if (coex_Orientation != nullptr)
 	{
@@ -35,7 +35,13 @@ coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
 	coex_Orientation = this;
 	
 	this->SubIMU_ = this->nh_.subscribe("mavros/imu/data", 1, callbackIMU);
-	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 1, callbackGroundClearance);
+	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 1, callbackGround);
+
+
+	if (coex_Orientation != this)
+	{
+		ROS_WARN("Instance of coexOrientation is not set as global Instance!");
+	}
 
 	ROS_INFO("Started coexOrientation");
 }

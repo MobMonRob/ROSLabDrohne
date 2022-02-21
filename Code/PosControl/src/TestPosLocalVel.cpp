@@ -26,11 +26,11 @@ int main(int argc, char** argv)
     ros::Subscriber SubPos = nh.subscribe("mavros/setpoint_raw/target_local", 10, PosCallback);
     ros::Rate rate(20.0);
     ros::Duration TestTime(10.0);
-    const double Height = .2;
+    const double Height = .15;
 
     // Values in m/s
     mavros_msgs::PositionTarget Msg;
-    Msg.velocity.z = 0.1;
+    Msg.velocity.z = 0.02;
 
 
     while (ros::ok() && !StateHandler.getConnected())
@@ -59,6 +59,8 @@ int main(int argc, char** argv)
     StateHandler.setMode(coexMode_Offboard);
     StateHandler.setArmState(true);
 
+    bool Shutdown = false;
+
     while (ros::ok() && ros::Time::now() - Start <= TestTime)
     {
         if (ros::Time::now() - Alive >= ros::Duration(0.25))
@@ -67,7 +69,6 @@ int main(int argc, char** argv)
 
             Alive = ros::Time::now();
         }
-
 
         if (!StateHandler.getArmState() && ros::Time::now() - last_request >= ros::Duration(0.5))
         {
@@ -97,36 +98,20 @@ int main(int argc, char** argv)
             ControlHeight = ros::Time::now();
         }
 
-        local_thurst_pub.publish(Msg);
+        if (Locator.getGroundClearance() > 2 * Height)
+        {
+            ROS_WARN("SECURITY SHUTDOWN - Height");
+            Shutdown = true;
 
-        ros::spinOnce();
-        rate.sleep();
-    }
+            break;
+        }
 
+        if (ros::Time::now() - Locator.getTime_Ground() > ros::Duration(0.5))
+        {
+            ROS_WARN("SECURITY SHUTDOWN - Locator Timeout");
+            Shutdown = true;
 
-    // Landing
-    Msg = mavros_msgs::PositionTarget();
-    Msg.position.z = Height;
-
-
-    ControlHeight = ros::Time::now();
-
-    while (ros::ok() && Locator.getGroundClearance() > 0)
-    {
-        if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
-        {   // basic controller
-            ROS_INFO("Ground = %f", Locator.getGroundClearance());
-            
-            if (Msg.position.z >= 0.5)
-            {
-                Msg.position.z -= 0.25;
-            }
-            else
-            {
-                Msg.position.z = 0;
-            }
-
-            ControlHeight = ros::Time::now();
+            break;
         }
 
         local_thurst_pub.publish(Msg);
@@ -135,7 +120,32 @@ int main(int argc, char** argv)
         rate.sleep();
     }
 
+    if (!Shutdown)
+    {
+        // Landing
+        ControlHeight = ros::Time::now();
+        Msg.velocity.z = -0.02;
+
+        while (ros::ok() && Locator.getGroundClearance() > 0)
+        {
+            if (ros::Time::now() - ControlHeight >= ros::Duration(0.1))
+            {   // basic controller
+                ROS_INFO("Ground = %f", Locator.getGroundClearance());
+
+                ControlHeight = ros::Time::now();
+            }
+
+            local_thurst_pub.publish(Msg);
+
+            ros::spinOnce();
+            rate.sleep();
+        }
+    }
+
     // RESET
+    Msg.velocity.z = 0;
+    local_thurst_pub.publish(Msg);
+
     StateHandler.setArmState(false);
     StateHandler.setMode(coexMode_Manual);
     StateHandler.waitNextState();
