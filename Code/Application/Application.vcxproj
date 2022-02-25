@@ -144,8 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="src\AccelToPos.cpp" />
-    <ClCompile Include="src\AngVelToAng.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\StateHandler.cpp" />
   </ItemGroup>
@@ -154,7 +152,6 @@
     <ClInclude Include="include\Application\AngVelToAng.h" />
     <ClInclude Include="include\Application\State.h" />
     <ClInclude Include="include\Application\StateHandler.h" />
-    <ClInclude Include="include\Application\StateTranslator.h" />
     <ClInclude Include="include\Application\Wrapper3D.h" />
   </ItemGroup>
   <ItemGroup>
