@@ -14,6 +14,7 @@ class AutoPublisher : public RosThread<T>
 public:
     AutoPublisher(std::string Topic, double Frequency, int Queue = 10, bool AutoStart = false);
 	
+	T runOnce() override { return RosThread<T>::runOnce(); };
     T runOnce(T Payload) override;
 	
 private:
@@ -42,7 +43,7 @@ template <class T>
 T AutoPublisher<T>::runOnce(T Payload)
 {
 	this->Pub_.publish(Payload);
-	
+
 	ros::spinOnce();
 	
 	return Payload;

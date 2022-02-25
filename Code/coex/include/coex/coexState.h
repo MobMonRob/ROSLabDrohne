@@ -25,17 +25,23 @@ public:
 	coexState(coexBattery *Battery, bool silent = false);
 	~coexState();
 	
-	bool setMode(std::string Mode);
-	void setModeAuto(bool AutoMode = true);
+	bool operator==(const mavros_msgs::State& S);
+
+
 	bool setArmState(bool arming);
+	bool setMode(std::string Mode);
 	
-	bool getConnected();
-	const std::string getMode() { return this->State_.mode; };
-	bool getArmState();
-	const bool getManualInput() { return this->State_.manual_input; };
+	coexBattery* getBattery() const { return this->Battery_; };
+	bool getConnected() const { return this->State_.connected; };
+	bool getArmState() const { return this->State_.armed; };
+	bool getGuided() const { return this->State_.guided; };
+	bool getManualInput() const { return this->State_.manual_input; };
+	std::string getMode() const { return this->State_.mode; };
+	int getSystemStatusID() const { return this->State_.system_status; };
 	std::string getSystemStatus();
 	std::string getSystemStatus(int StatusID);
-	const double getTime() { return this->State_.header.stamp.toSec();};
+	double getTime() { return this->State_.header.stamp.toSec();};
+	std::string getState();
 	
 	void waitNextState();
 
@@ -47,7 +53,6 @@ private:
 private:
 	ros::NodeHandle nh_;
 	ros::Subscriber SubState_;
-	AutoClient<mavros_msgs::SetMode> ClMode_;
 	coexBattery* Battery_;
 
 	mavros_msgs::State State_;
@@ -56,11 +61,9 @@ private:
 };
 
 
-
 const std::string coexMode_Manual = "MANUAL";
 const std::string coexMode_Offboard = "OFFBOARD";
-
-
+const std::string coexMode_Stabilized = "STABILIZED";
 
 #endif // COEXSTATE_H
 

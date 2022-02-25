@@ -28,8 +28,8 @@ public:
 	Vector3D getPosAngular() { return this->Ang_.getVector(); };
 	Vector3D getSuspentionLinear() { return this->Pos_.getVectorSuspention(); };
 	Vector3D getSuspentionAngular() { return this->Ang_.getVectorSuspention(); };
-	double getTime_Imu() { return this->IMU_.header.stamp.toSec();};
-	double getTime_Ground() { return this->GroundClearance_.header.stamp.toSec();};
+	ros::Time getTime_Imu() const { return this->IMU_.header.stamp;};
+	ros::Time getTime_Ground() const { return this->GroundClearance_.header.stamp;};
 	
 	void cbIMU(const sensor_msgs::Imu::ConstPtr& IMU);
 	void cbGroundClearance(const sensor_msgs::Range::ConstPtr& GroundClearance);

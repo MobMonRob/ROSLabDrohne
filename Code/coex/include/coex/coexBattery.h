@@ -15,13 +15,19 @@ public:
 	coexBattery(double V_min, double V_max, double V_thershold, double Intervall_Info = 60.0);
 	~coexBattery();
 
-	const double getVoltage();
-	const double getPercentage();
-	const bool getPercentageLow() { return (this->Battery_.percentage <= this->Thershold_Warning_); };
-	const double getTime() { return this->Battery_.header.stamp.toSec();};
+	double getVoltage() const;
+	double getPercentage() const;
+	bool getPercentageLow() const { return (this->getPercentage() <= this->Thershold_Warning_); };
+	int getHealthID() const { return this->Battery_.power_supply_health; };
+	std::string getHealth();
+	std::string getHealth(int HealthID);
+	double getTime() { return this->Battery_.header.stamp.toSec();};
 	
 	void cbBattery(const sensor_msgs::BatteryState::ConstPtr& Battery);
 	
+private:
+	void initHealth();
+
 private:
 	ros::NodeHandle nh_;
 	ros::Subscriber SubBattery_;
@@ -30,8 +36,8 @@ private:
 	ros::Duration Intervall_Info_;
 	
 	sensor_msgs::BatteryState Battery_;
+	std::map<int, std::string> Health_;
 };
 
 #endif // COEXBATTERY_H
-
 

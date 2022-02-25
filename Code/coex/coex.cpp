@@ -3,16 +3,29 @@
 #define DEBUG
 #include <iostream>
 
-
-#include "coex/coexControl.h"
+#include "mavros_msgs/ManualControl.h"
+#include "coex/JoystickAxis.h"
+#include "coex/Joystick.h"
 
 
 
 int main()
 {
     std::cout << "Hello World!\n";
+    JoystickAxis Axis(1000, 2000, 1500);
+    Joystick Stick(1027, 2003, 1500,
+        1024, 2003, 1500,
+        1031, 2003, 1500,
+        1024, 2003, 1500);
 
-    coexControl Controller;
+    mavros_msgs::ManualControl Msg;
+
+    for (double i = -1.0; i <= 1.0; i += 0.1)
+    {
+        std::cout << i << " => " << Axis.denormalize(i) << std::endl;
+    }
+
+
 
 }
 

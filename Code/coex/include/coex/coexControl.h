@@ -27,7 +27,6 @@ public:
 	~coexControl();
 	
 	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
-	void setModeAuto(bool AutoMode = true) { this->State_->setModeAuto(AutoMode); };
 	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
 	
 	bool getConnected() { return this->State_->getConnected(); };
@@ -42,7 +41,7 @@ public:
 	
 	mavros_msgs::ManualControl getRC_normalized();
 	
-	double getTime() { return 0;};
+	double getTime() { return 0;};			// TODO!!
 	
 	bool call(Calling* Caller) override;
 	

@@ -1,27 +1,15 @@
 #ifndef ACCELTOPOS_H
 #define ACCELTOPOS_H
 
-#include "Abstraction/Unit.h"
-#include "Abstraction/TimedValue.h"
-#include "Domain/Outputable.h"
-#include "Domain/Controller_Input.h"
-#include "Domain/Controller_I.h"
+#include "Domain/Integral2.h"
 
 
-class AccelToPos : public Outputable
+class AccelToPos : public Integral2
 {
 public:
-	AccelToPos(double InitPos = 0.0, double InitVel = 0.0);
+	AccelToPos(double InitPos = 0.0, double InitVel = 0.0)
+		: Integral2(Unit_Acceleration, Unit_Velocity, Unit_Length, InitPos, InitVel) {};
 
-	bool setInput(TimedValue V) { return this->Input_.setInput(V); };
-
-	TimedValue getOutput() { return this->VelToPos_.getOutput(); };
-	Unit getOutputUnit() { return this->VelToPos_.getOutputUnit(); };
-
-private:
-	Controller_Input Input_;
-	Controller_I AccelToVel_;
-	Controller_I VelToPos_;
 };
 
 #endif // ACCELTOPOS_H

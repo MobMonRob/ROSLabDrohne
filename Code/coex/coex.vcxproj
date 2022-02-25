@@ -149,6 +149,7 @@
     <ClCompile Include="src\coexControl.cpp" />
     <ClCompile Include="src\coexMC.cpp" />
     <ClCompile Include="src\coexOrientation.cpp" />
+    <ClCompile Include="src\coexRC.cpp" />
     <ClCompile Include="src\coexRC_Receiver.cpp" />
     <ClCompile Include="src\coexRC_Transmitter.cpp" />
     <ClCompile Include="src\coexState.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="include\coex\coexControl.h" />
     <ClInclude Include="include\coex\coexMC.h" />
     <ClInclude Include="include\coex\coexOrientation.h" />
+    <ClInclude Include="include\coex\coexRC.h" />
     <ClInclude Include="include\coex\coexRC_Receiver.h" />
     <ClInclude Include="include\coex\coexRC_Transmitter.h" />
     <ClInclude Include="include\coex\coexState.h" />

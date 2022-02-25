@@ -12,16 +12,21 @@
 class coexTransmitable : public Transmitable
 {
 public:
-	coexTransmitable() : State_(nullptr), Battery_(nullptr) {};
+	coexTransmitable() : coexTransmitable(nullptr, nullptr) {};
+	coexTransmitable(coexState* State) : coexTransmitable(State, State->getBattery()) {};
 	coexTransmitable(coexState *State, coexBattery *Battery);
 	
 	bool transmitAction(double pitch, double roll, double thrust, double yarn);
 	bool transmitAction(mavros_msgs::ManualControl Msg);
 	
 protected:
-	bool valid() { return (this->State_ != nullptr && this->Battery_ != nullptr); };
+	coexBattery* getBattery() const { return this->Battery_; };
+	coexState* getState() const { return this->State_; };
+	
+	bool valid() const { return (this->State_ != nullptr && this->Battery_ != nullptr); };
 	virtual void transmit(mavros_msgs::ManualControl Msg) = 0;
 	
+private:
 	coexState *State_;
 	coexBattery *Battery_;
 };

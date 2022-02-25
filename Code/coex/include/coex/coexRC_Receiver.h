@@ -7,7 +7,8 @@
 #include <mavros_msgs/ManualControl.h>
 
 #include "calling/Caller.h"
-#include "Joystick.h"
+
+#include "coex/Joystick.h"
 
 
 class coexRC_Receiver : public Caller
@@ -16,6 +17,8 @@ public:
 	coexRC_Receiver(Joystick *Joystick);
 	~coexRC_Receiver();
 	
+	Joystick* getJoystick() const { return this->Joystick_; };
+	mavros_msgs::RCIn getCtrMsg() const { return this->RCIn_; };
 	mavros_msgs::ManualControl getCtrMsg_normalized();
 	double getTime() { return this->RCIn_.header.stamp.toSec();};
 	
@@ -27,7 +30,7 @@ private:
 	
 	mavros_msgs::RCIn RCIn_;
 	
-	Joystick *Joystick_;	
+	Joystick* Joystick_;
 };
 
 #endif // COEXRC_RECEIVER_H

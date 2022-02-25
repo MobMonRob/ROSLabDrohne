@@ -38,7 +38,19 @@ namespace mavros_msgs
 		{
 			return s;
 		};
-
+		bool operator==(const mavros_msgs::State& rhs)
+		{
+			return this->connected == rhs.connected &&
+				this->armed == rhs.armed &&
+				this->guided == rhs.guided &&
+				this->manual_input == rhs.manual_input &&
+				this->mode == rhs.mode &&
+				this->system_status == rhs.system_status;
+		};
+		bool operator!=(const mavros_msgs::State& rhs)
+		{
+			return !(*this == rhs);
+		};
 	}; // State
 } // namespace mavros_msgs
 

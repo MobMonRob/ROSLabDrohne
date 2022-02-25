@@ -19,9 +19,14 @@ public:
 	inline T getPayload() const { return this->Payload_; };
 	inline ros::Rate getRate() const { return this->Rate_; };
 	
+
+	bool start() override;
 	T runOnce() override;
 	virtual T runOnce(T Payload) = 0;
 	
+protected:
+
+
 private:
 	static void run(RosThread<T> *Instance);
 	
@@ -47,6 +52,24 @@ RosThread<T>::RosThread(std::string Descriptor, double Frequency)
 	this->setFrequency(Frequency);
 }
 
+template <class T>
+bool RosThread<T>::start()
+{
+	if (this->Thread_ == nullptr)
+	{
+		this->setRunning(true);
+
+		this->Thread_ = new std::thread(RosThread::run, this);
+#ifdef DEBUG
+		std::cout << "Creating Thread " << this->Thread_ << std::endl;
+#endif
+	}
+
+	return this->isThreaded();
+}
+
+
+
 
 template<class T>
 T RosThread<T>::setPayload(T Payload)
@@ -68,7 +91,7 @@ T RosThread<T>::setPayload(T Payload)
 template<class T>
 T RosThread<T>::runOnce()
 {
-	T ReturnLoad;
+	T ReturnLoad = this->getPayload();
 
 
 	if (this->getNext())
@@ -89,7 +112,7 @@ void RosThread<T>::run(RosThread<T>* Instance)
     	ros::Rate Rate = Instance->getRate();
     	
     	
-        while (Instance->getNext())
+        while (ros::ok() && Instance->isRunning())
         {
 			Instance->runOnce();
             

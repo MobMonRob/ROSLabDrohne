@@ -20,19 +20,16 @@
  */
 
 
-class coexMC : public coexTransmitable
+class coexMC : public coexTransmitable, public AutoPublisher<mavros_msgs::ManualControl>
 {
 public:
-	coexMC(coexState *State, coexBattery *Battery, int Frequency = 100);
+	coexMC(coexState *State, int Frequency = 100);
 	~coexMC();
 	
 private:
 	void transmit(mavros_msgs::ManualControl Msg);			// from Transmitable
 	
 private:
-	ros::Publisher PubMC_;									// Publisher to mavros
-	
-	AutoPublisher<mavros_msgs::ManualControl> Pub_;
 };
 
 #endif // COEXMC_H

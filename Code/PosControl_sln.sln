@@ -29,7 +29,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_Application", "Applicati
 		{A80FAEBE-6013-4403-A06C-B2A178B5CF4F} = {A80FAEBE-6013-4403-A06C-B2A178B5CF4F}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_99_calling", "calling\calling.vcxproj", "{DF732D96-40FC-4C7A-9F9B-2455F00C25CF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_00b_calling", "calling\calling.vcxproj", "{DF732D96-40FC-4C7A-9F9B-2455F00C25CF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_Adapter", "Adapter\Adapter.vcxproj", "{26151999-D81F-45D6-AC46-1396BFA3F27E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -38,7 +38,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_Adapter", "Adapter\Adapt
 		{BEF7ABD1-D697-40B7-ACB1-A65A64664993} = {BEF7ABD1-D697-40B7-ACB1-A65A64664993}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_00_ROS_Mock", "ROS_Mock\ROS_Mock.vcxproj", "{DA0344DE-905A-4AE4-9254-1FE25DCBC9EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_00a_ROS_Mock", "ROS_Mock\ROS_Mock.vcxproj", "{DA0344DE-905A-4AE4-9254-1FE25DCBC9EC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_coex", "coex\coex.vcxproj", "{4EEE7732-831F-4F24-9DDB-A46A3B235B67}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -47,14 +47,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_coex", "coex\coex.vcx
 		{DA0344DE-905A-4AE4-9254-1FE25DCBC9EC} = {DA0344DE-905A-4AE4-9254-1FE25DCBC9EC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_49_keyboard", "keyboard\keyboard.vcxproj", "{07BF0CFD-5E0C-4E66-A2F2-9038FE46358D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01a_keyboard", "keyboard\keyboard.vcxproj", "{07BF0CFD-5E0C-4E66-A2F2-9038FE46358D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DA0344DE-905A-4AE4-9254-1FE25DCBC9EC} = {DA0344DE-905A-4AE4-9254-1FE25DCBC9EC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_98_threading", "threading\threading.vcxproj", "{1B5AA0CB-1DA9-42B8-A02F-D79572132752}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01b_threading", "threading\threading.vcxproj", "{1B5AA0CB-1DA9-42B8-A02F-D79572132752}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DA0344DE-905A-4AE4-9254-1FE25DCBC9EC} = {DA0344DE-905A-4AE4-9254-1FE25DCBC9EC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_04_Test_threading", "Test_threading\Test_threading.vcxproj", "{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B5AA0CB-1DA9-42B8-A02F-D79572132752} = {1B5AA0CB-1DA9-42B8-A02F-D79572132752}
 	EndProjectSection
 EndProject
 Global
@@ -145,6 +150,14 @@ Global
 		{1B5AA0CB-1DA9-42B8-A02F-D79572132752}.Release|x64.Build.0 = Release|x64
 		{1B5AA0CB-1DA9-42B8-A02F-D79572132752}.Release|x86.ActiveCfg = Release|Win32
 		{1B5AA0CB-1DA9-42B8-A02F-D79572132752}.Release|x86.Build.0 = Release|Win32
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Debug|x64.ActiveCfg = Debug|x64
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Debug|x64.Build.0 = Debug|x64
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Debug|x86.ActiveCfg = Debug|Win32
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Debug|x86.Build.0 = Debug|Win32
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Release|x64.ActiveCfg = Release|x64
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Release|x64.Build.0 = Release|x64
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Release|x86.ActiveCfg = Release|Win32
+		{2F5BA03E-FC2C-4A60-9527-794A7903CD2A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

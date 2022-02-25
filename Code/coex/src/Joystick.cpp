@@ -77,7 +77,7 @@ mavros_msgs::ManualControl Joystick::denormalize(mavros_msgs::ManualControl Msg)
 	// For Intervalls see Header File!
 	ReturnMsg.x = this->Pitch_.denormalize(Msg.x);
 	ReturnMsg.y = this->Roll_.denormalize(Msg.y);
-	ReturnMsg.z = (this->Thrust_.denormalize(Msg.z) * 2) - 1;
+	ReturnMsg.z = this->Thrust_.denormalize((Msg.z * 2) - 1);
 	ReturnMsg.r = this->Yarn_.denormalize(Msg.r);
 	
 	return ReturnMsg;

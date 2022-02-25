@@ -1,13 +1,15 @@
 #ifndef MOCK_ROS_H
 #define MOCK_ROS_H
 
+#define DEBUG
+
 
 #include <string>
 
 #include "../std_msgs/Msg.h"
 #include "ros_Talker.h"
 
-
+#include "../mavros_msgs/PositionTarget.h"
 #include "../mavros_msgs/RCIn.h"
 #include "../mavros_msgs/State.h"
 
@@ -47,6 +49,7 @@ public:
 	{
 	public:
 		bool call(Msg) { return false; };
+		std::string getService() { return std::string(); };
 	};
 
 	class NodeHandle
@@ -58,7 +61,9 @@ public:
 			return Publisher();
 		}
 
+		
 
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::PositionTarget::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::RCIn::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::State::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::BatteryState::ConstPtr&)) { return Subscriber(); };
@@ -66,7 +71,13 @@ public:
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Joy::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Range::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Char::ConstPtr&)) { return Subscriber(); };
-
+		
+		template <class M>
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const M*))
+		{
+			return Subscriber();
+		}
+		
 
 
 		template <class M>
@@ -92,8 +103,15 @@ public:
 	{
 	public:
 		Time operator-(const Time& T) { return Time(); };
-		bool operator<=(const Duration& T) { return false; };
 		bool operator>(const Duration& T) { return false; };
+		bool operator<(const Duration& T) { return false; };
+		bool operator==(const Duration& T) { return false; };
+		bool operator<=(const Duration& T) { return false; };
+		bool operator>=(const Duration& T) { return false; };
+		
+		double toSec() { return 0; };
+
+
 		static Time now() { return Time(); };
 	};
 

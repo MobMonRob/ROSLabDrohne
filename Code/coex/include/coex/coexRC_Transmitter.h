@@ -7,26 +7,33 @@
 #include <mavros_msgs/OverrideRCIn.h>
 
 #include "threading/AutoPublisher.h"
+#include "calling/Callable.h"
 
-#include "Joystick.h"
-#include "coexTransmitable.h"
-#include "coexState.h"
-#include "coexBattery.h"
+#include "coex/Joystick.h"
+#include "coex/coexTransmitable.h"
+#include "coex/coexState.h"
+#include "coex/coexBattery.h"
+#include "coex/coexRC_Receiver.h"
 
 
-class coexRC_Transmitter : public coexTransmitable
+class coexRC_Transmitter : public coexTransmitable, public Callable, public AutoPublisher<mavros_msgs::OverrideRCIn>
 {
 public:
-	coexRC_Transmitter(Joystick *Joystick, coexState *State, coexBattery *Battery, int Frequency = 100);
+	coexRC_Transmitter(coexState* State, Joystick* Joystick = nullptr, Caller* Caller = nullptr);
 	~coexRC_Transmitter();
 	
+	mavros_msgs::OverrideRCIn setPayload(mavros_msgs::ManualControl Msg);
+	
+	Joystick* getJoystick() const { return this->Joystick_; };
+	
+	bool call(Calling* Caller) override { return (AutoPublisher::runOnce() != mavros_msgs::OverrideRCIn()); };
+
 private:
-	void transmit(mavros_msgs::ManualControl Msg);			// from Transmitable
+	void transmit(mavros_msgs::ManualControl Msg) override { this->setPayload(Msg); };			// from Transmitable
 	
 private:
-	AutoPublisher<mavros_msgs::OverrideRCIn> Pub_;
-	
-	Joystick *Joystick_;
+	Caller* Caller_ = nullptr;
+	Joystick* Joystick_ = nullptr;
 };
 
 #endif // COEXRC_TRANSMITTER_H

@@ -1,26 +1,15 @@
 #ifndef ANGVELTOANG_H
 #define ANGVELTOANG_H
 
-#include "Abstraction/Unit.h"
-#include "Abstraction/TimedValue.h"
-#include "Domain/Outputable.h"
-#include "Domain/Controller_Input.h"
-#include "Domain/Controller_I.h"
+#include "Domain/Integral1.h"
 
 
-class AngVelToAng : public Outputable
+class AngVelToAng : public Integral1
 {
 public:
-	AngVelToAng(double InitAng = 0.0);
+	AngVelToAng(double InitAng = 0.0)
+		: Integral1(Unit_AngleVelDeg, Unit_AngleDeg, InitAng) {};
 
-	bool setInput(TimedValue V) { return this->Input_.setInput(V); };
-
-	TimedValue getOutput() { return this->AngVelToAng_.getOutput(); };
-	Unit getOutputUnit() { return this->AngVelToAng_.getOutputUnit(); };
-
-private:
-	Controller_Input Input_;
-	Controller_I AngVelToAng_;
 };
 
 #endif // ANGVELTOANG_H

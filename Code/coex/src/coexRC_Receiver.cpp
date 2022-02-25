@@ -14,13 +14,21 @@ void callbackRC(const mavros_msgs::RCIn::ConstPtr& msg)
 
 
 coexRC_Receiver::coexRC_Receiver(Joystick *Joystick)
+	: Joystick_(Joystick)
 {
-	ROS_INFO("Started coexRC_Receiver");
+	ROS_INFO("Starting coexRC_Receiver...");
+	ros::spinOnce();
 	
 	coex_RC_Receiver = this;
-	this->Joystick_ = Joystick;
+
+	if (this->Joystick_ == nullptr)
+	{
+		ROS_WARN("No Joystick given to coexRC_Transmitter.");
+	}
 	
 	this->SubRC_ = this->nh_.subscribe("mavros/rc/in", 100, callbackRC);
+
+	ROS_INFO("Started coexRC_Receiver");
 }
 
 coexRC_Receiver::~coexRC_Receiver()
@@ -31,7 +39,15 @@ coexRC_Receiver::~coexRC_Receiver()
 
 mavros_msgs::ManualControl coexRC_Receiver::getCtrMsg_normalized()
 {
-	return this->Joystick_->normalize(this->RCIn_);
+	mavros_msgs::ManualControl ReturnMsg;
+
+
+	if (this->Joystick_ == nullptr)
+	{
+		ReturnMsg = this->Joystick_->normalize(this->RCIn_);
+	}
+
+	return ReturnMsg;
 }
 
 
