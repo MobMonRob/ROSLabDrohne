@@ -1,10 +1,9 @@
-#include <ros/ros.h>
+#include "keyboard/KeyReader.h"
 
-#include <keyboard/KeyReader.h>
-#include <std_msgs/Char.h>
-#include <std_msgs/String.h>
-#include <sensor_msgs/Joy.h>
-#include <termios.h>
+#include "std_msgs/Char.h"
+#include "std_msgs/String.h"
+#include "sensor_msgs/Joy.h"
+#include "termios.h"
 
 
 
@@ -45,13 +44,10 @@ void KeyReader::sendKey(char Key)
 		this->close();
 		break;
 		
-	case 0:
-		break;
-		
 	default:
 		this->PubKey_.publish(msg);
 		
-		puts(Sending.c_str());
+		ROS_INFO(Sending.c_str());
 		
 		ros::spinOnce();
 		break;
@@ -81,13 +77,12 @@ void KeyReader::readingLoop()
 		}
 		if(ReadSize < 0)
 		{
-			puts("An Error occurs while reading File.");	
+			ROS_WARN("An Error occurs while reading File.");	
 			
-			perror("read():");
-			exit(-1);
+			this->close();
 		}
 		
-		Loop_.sleep();
+		this->Loop_.sleep();
 	}
 	
 	return;

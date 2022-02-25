@@ -1,187 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="PosControl.cpp" />
-    <ClCompile Include="src\Controllable.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\PosBridge.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_D.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\StateBuilder.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_I.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="PosControl.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_Input.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestThrust.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_P.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestRCOverride.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_PID.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestRCTransmitter.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller_PT.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestPose.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\ControllerSystem.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestPose_Example.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\State.cpp">
-      <Filter>Application src</Filter>
+    <ClCompile Include="src\TestPosLocalPos.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\AccelToPos.cpp">
-      <Filter>Application src</Filter>
+    <ClCompile Include="src\TestPosLocalAccel.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\TimedValue.cpp">
-      <Filter>Abstraction src</Filter>
+    <ClCompile Include="src\TestPosLocalVel.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Value.cpp">
-      <Filter>Abstraction src</Filter>
+    <ClCompile Include="src\TestMCControl.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector3D.cpp">
-      <Filter>Abstraction src</Filter>
+    <ClCompile Include="src\TestMCSend.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Outputable.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestPosLocalPos_Masked.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\ActionAdapter.cpp">
-      <Filter>Adapter src</Filter>
+    <ClCompile Include="src\TestRCOverride_OFFBOARD.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Output.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestRC_Heartbeated.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\StateHandler.cpp">
-      <Filter>Application src</Filter>
+    <ClCompile Include="src\TestMC_Heartbeated.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Input.cpp">
-      <Filter>Domain src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Inputable.cpp">
-      <Filter>Domain src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Controller_Basic.cpp">
-      <Filter>Domain src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TimedDifference.cpp">
-      <Filter>Domain src</Filter>
+    <ClCompile Include="src\TestPosLocalVel_Masked.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Abstraction src">
-      <UniqueIdentifier>{ef4e3746-e32f-4ce8-b230-36b10cf95137}</UniqueIdentifier>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{bb73d276-2744-4e00-9a4c-3f7f2c704715}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Abstraction h">
-      <UniqueIdentifier>{77a8f329-1e19-4fdd-ac1d-df02231e9fde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Domain h">
-      <UniqueIdentifier>{dd9f6629-7f8a-40f4-ab56-409e276b9fbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Domain src">
-      <UniqueIdentifier>{9ccd53a5-459e-4341-8f79-f7c09cf85fee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application h">
-      <UniqueIdentifier>{c2cd9f02-3fd6-4c6e-af84-b244327d553c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application src">
-      <UniqueIdentifier>{9dc90f74-1ceb-4bcc-a4c3-b49eb36383b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Adapter h">
-      <UniqueIdentifier>{1a982228-0f16-4dd9-8189-8b77e8102cdf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Adapter src">
-      <UniqueIdentifier>{2779adb1-69a1-4c07-8e43-2f7e01be9129}</UniqueIdentifier>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{ce45fac4-cfa3-4b3e-b6f8-ae43fff1b1cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\PosControl\Controllable.h">
-      <Filter>Domain h</Filter>
+    <ClInclude Include="include\PosControl\StateBuilder.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_D.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_I.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_Input.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_P.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_PID.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_PT.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\ControllerSystem.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Value.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Unit.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Timestamp.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Vector3D.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\TimedValue.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\AccelToPos.h">
-      <Filter>Application h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Optional.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Ringbuffer.h">
-      <Filter>Abstraction h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\State.h">
-      <Filter>Application h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Outputable.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="StateTranslator.h">
-      <Filter>Application h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Transmitable.h">
-      <Filter>Adapter h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\StateHandler.h">
-      <Filter>Application h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\ActionAdapter.h">
-      <Filter>Adapter h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Output.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Inputable.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Input.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\Controller_Basic.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\ControlledOutput.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\TimedDifference.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\ControllerType.h">
-      <Filter>Domain h</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PosControl\ActionAdapter_Mock.h">
-      <Filter>Adapter h</Filter>
+    <ClInclude Include="include\PosControl\PosBridge.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

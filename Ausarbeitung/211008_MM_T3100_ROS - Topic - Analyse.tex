@@ -29,14 +29,6 @@
 
 
 
-
-\newSec[Topics]{ROS-Topics}{2}
-
-
-
-
-
-
 \newSec[MavROS]{mavros als Abstraktionsebene}{2}
 
 \textit{mavros} ist eine Bibliothek, welche allgemein für Fluggeräte mit 4 Freiheitsgraden erstellt wurde. Zusätzlich können verschiedene Sensordaten übermittelt werden.
@@ -45,15 +37,159 @@
 
 
 
+\newSec[Topics]{ROS-Topics}{2}
+In diesem Kapitel sollen die möglicherweise für diese Studienarbeit tauglichen \Topic[s] beschrieben werden.
 
 
 
-\newSec[TopicTrouble]{Troubleshooting}{2}
 
 
-\missing[Topics anders benannt, als in DOkumentation (überall steht "/mavros" davor]
-\missing[Für "/mavros/rc/OverrideRCIn" sind unterschiedliche Versionen verfügbar]
-\missing[Achtung: der Regler VRA muss so eingestellt sein, dass "manual Flight" verfügbar ist. Andersfalls ist ein Start der Drohne nicht möglich.]
+
+
+
+
+
+
+
+
+% Mavros to Simple Offboard
+\newSec[TopicsLoopMav]{/mavros to /simple\_offboard}{3}
+
+\newSec[TopicState]{/mavros/state}{4}
+Übergibt den Zustand der \textit{State Machine} des \textit{Flight Controller}.
+
+\newSec[TopicBattery]{/mavros/battery}{4}
+Übergibt die Spannung und den Ladezustand des Akkus.
+Da der Akku ausschließlich mit dessen Spannungsversorgung an die Drohne angeschlossen wird, sind keine weiteren Daten verfügbar.
+\missing[evtl noch Stromstärke?]
+
+
+\newSec[TopicGlobal]{/mavros/global\_position/global}{4}
+Keine Informationen im Ruhezustand
+
+\newSec[TopicPose]{/mavros/local\_position/pose}{4}
+Liest Rangefinder aus (z-Position wird angeasst), ändert aber sonst keine Position.
+Typ:
+position: 
+orientation: 
+
+
+
+\newSec[TopicVelBody]{/mavros/local\_position/velocity\_body}{4}
+
+
+
+\newSec[TopicMCControl]{/mavros/manual\_position/control}{4}
+
+
+
+
+
+% Simple Offboard to Mavros
+\newSec[TopicsLoopOff]{/simple\_offboard to /mavros}{3}
+
+
+
+
+
+
+
+\newSec[TopicsUnknown]{unklar}{3}
+
+
+
+
+
+
+\newSec[TopicLocal]{/mavros/global\_position/local}{4}
+Keine Informationen im Ruhezustand
+
+\newSec[TopicHome]{/mavros/global\_position/home}{4}
+Keine Informationen im Ruhezustand
+Evtl, weil hier nichts definiert wurde?
+
+
+
+
+
+\newSec[TopicOdom]{/mavros/local\_position/odom}{4}
+
+
+
+
+
+
+
+
+% Input to Mavros, without Simple Offboard
+\newSec[TopicsControl]{externe Steuerung}{3}
+
+
+
+\newSec[TopicRCIn]{/mavros/rc/in}{4}
+Signal der Fernsteuerung. \\
+Typ: mavros::RCIn \\
+channel$[0]$ = \\
+channel$[1]$ = \\
+channel$[2]$ = \\
+channel$[3]$ = 
+
+
+\newSec[TopicOverride]{/mavros/rc/override}{4}
+Überschreibt das Signal der Fernsteuerung. Allerdings nimmt mavros vermutlich weiterhin das original-Signal /mavros/rc/in auf. Somit kommt es zu Störungen der gewünschten Motordrehzahlen. 
+Typ: mavros::OverrideRCIn
+Channel-Belegung wie \Topic{/mavros/rc/in}.
+
+
+
+
+
+
+
+
+
+
+
+% Only informational
+\newSec[TopicsInfo]{Informative Topics}{3}
+
+
+\newSec[TopicImuData]{/mavros/imu/data}{4}
+Sendet Lage und Beschleunigungsdaten.\\
+Typ: sensor_msgs::Imu \\
+orientation: Winkel um die Achsen $[°]$\\
+angular\_velocity: Geschwindigkeit entlang der Achsen $[m/s]$\\
+linear\_acceleration: Beschleunigung entlang der Achsen $[m/s²]$
+
+
+\newSec[TopicRange]{/rangefinder/data}{4}
+
+
+
+
+
+\newSec[TopicLinkFrom]{/mavlink/from}{4}
+
+
+
+
+
+
+\newSec[TopicRCOut]{/mavros/rc/out}{4}
+Gibt die PWM-Modulation der Motoren an - oder die Drehzahl. \missing[Nochmal in der Doku nachschauen.]
+Typ: mavros::RCOut
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
