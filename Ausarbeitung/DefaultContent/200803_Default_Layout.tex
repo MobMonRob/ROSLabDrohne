@@ -41,7 +41,7 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 
 
 % Codes
-\usepackage{xcolor}					% Color
+\usepackage[dvipsnames]{xcolor}	% Color
 \usepackage{listings}				%Weiteres Verzeichnis
 \lstset{captionpos=b}				% Caption after Code
 
@@ -102,11 +102,23 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 
 
 
+
+% New Colors
+\definecolor{Raspberry}{RGB}{188, 17, 66}
+
+\definecolor{CodeStyleBG}{RGB}{210, 210, 210}
+\definecolor{CodeStyleNum}{RGB}{0, 0, 0}
+\definecolor{CPPStyleKey}{RGB}{43, 151, 192}
+\definecolor{CPPStyleMeth}{RGB}{116, 83, 31}
+\definecolor{CPPStyleNum}{RGB}{0, 0, 0}
+\definecolor{CPPStyleString}{RGB}{193, 21, 21}
+\definecolor{CPPStyleComment}{RGB}{0, 128, 0}
+
 % Layout Codes
 \lstdefinestyle{Style_Java}{
 	language=Java,
 	basicstyle=\tiny,
-	backgroundcolor=\color[rgb]{.93,.93,.93},
+	backgroundcolor=\color{CodeStyleBG},
 	commentstyle=\color[rgb]{.17,.55,.17},
 	keywordstyle=\color[rgb]{1,.08,.58},
 	numberstyle=\tiny\color[rgb]{.1,.2,.3},
@@ -124,12 +136,49 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 \lstdefinestyle{Style_CPP}{
 	language=C++,
 	basicstyle=\tiny,
-	backgroundcolor=\color[rgb]{.93,.93,.93},
+	backgroundcolor=\color{CodeStyleBG},
+	commentstyle=\color{CPPStyleComment},
+	keywordstyle=\color{CPPStyleKey},
+	numberstyle=\tiny\color{CPPStyleNum},
+	stringstyle=\color{CPPStyleString},
+	numbers=left,
+	stepnumber=1,
+	breakatwhitespace=true,
+	breaklines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4
+}
+
+\lstdefinestyle{Style_Bash}{
+	language=bash,
+	basicstyle=\tiny,
+	backgroundcolor=\color{CodeStyleBG},
 	commentstyle=\color[rgb]{.17,.55,.17},
-	keywordstyle=\color[rgb]{0.7,.05,.5},
+	keywordstyle=\color[rgb]{1,.08,.58},
 	numberstyle=\tiny\color[rgb]{.1,.2,.3},
 	stringstyle=\color[rgb]{0,0,.53},
-	numbers=left,
+	numbers=none,
+	stepnumber=1,
+	breakatwhitespace=true,
+	breaklines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+
+\lstdefinestyle{Style_XML}{
+	language=XML,
+	basicstyle=\tiny,
+	backgroundcolor=\color{CodeStyleBG},
+	commentstyle=\color[rgb]{.17,.55,.17},
+	keywordstyle=\color[rgb]{1,.08,.58},
+	numberstyle=\tiny\color[rgb]{.1,.2,.3},
+	stringstyle=\color[rgb]{0,0,.53},
+	numbers=none,
 	stepnumber=1,
 	breakatwhitespace=true,
 	breaklines=true,
@@ -142,7 +191,7 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 \lstdefinestyle{Style_IOC}{
 	language=XML,
 	basicstyle=\tiny,
-	backgroundcolor=\color[rgb]{.93,.93,.93},
+	backgroundcolor=\color{CodeStyleBG},
 	commentstyle=\color[rgb]{.25,.25,.25},
 	keywordstyle=\color[rgb]{0,0,0},
 	numberstyle=\tiny\color[rgb]{0,0,0},
@@ -157,9 +206,11 @@ position=top]{caption} 				%Tabellenunterschriften, evtl. Formatieren
 	tabsize=2
 }
 
-
-
-
+\newcommand{\CodePkg}[1]{\texttt{\textit{\textcolor{RedViolet}{#1}}}}
+\newcommand{\CodeClass}[1]{\texttt{\textcolor{CPPStyleKey}{#1}}}
+\newcommand{\CodeMeth}[1]{\texttt{\textcolor{CPPStyleKey}{#1}}}
+\newcommand{\CodeStruct}[1]{\texttt{\textcolor{CPPStyleKey}{#1}}}
+\newcommand{\CodeVar}[1]{\texttt{\textcolor{CPPStyleKey}{#1}}}
 
 
 
