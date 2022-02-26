@@ -191,6 +191,18 @@ TEST(Class_FixedPoint, OpAdd_FP)
 	EXPECT_EQ(Result, 20);
 }
 
+TEST(Class_FixedPoint, OpAddReturn_FP)
+{
+	FixedPoint<-6> FP1(10);
+	FixedPoint<-6> FP2(20);
+
+	FixedPoint<-6> Result = FP1 + FP2;
+
+	FixedPoint<-6> Expection(30);
+
+	EXPECT_EQ(Result, Expection);
+}
+
 TEST(Class_FixedPoint, OpSubstract_Int)
 {
 	int Value = 10;
@@ -231,6 +243,18 @@ TEST(Class_FixedPoint, OpSubstract_FP)
 
 
 	EXPECT_EQ(Result, 0);
+}
+
+TEST(Class_FixedPoint, OpSubstractReturn_FP)
+{
+	FixedPoint<-6> FP1(10);
+	FixedPoint<-6> FP2(20);
+
+	FixedPoint<-6> Result = FP1 - FP2;
+
+	FixedPoint<-6> Expection(10);
+
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_FixedPoint, OpMultiply_Int)
@@ -275,6 +299,18 @@ TEST(Class_FixedPoint, OpMultiply_FP)
 	EXPECT_EQ(Result, 100);
 }
 
+TEST(Class_FixedPoint, OpMultiplyReturn_FP)
+{
+	FixedPoint<-6> FP1(10);
+	FixedPoint<-6> FP2(20);
+
+	FixedPoint<-6> Result = FP1 * FP2;
+
+	FixedPoint<-6> Expection(200);
+
+	EXPECT_EQ(Result, Expection);
+}
+
 TEST(Class_FixedPoint, OpDevide_Int)
 {
 	int Value = 10;
@@ -315,6 +351,18 @@ TEST(Class_FixedPoint, OpDevide_FP)
 
 
 	EXPECT_EQ(Result, 1);
+}
+
+TEST(Class_FixedPoint, OpDevideReturn_FP)
+{
+	FixedPoint<-6> FP1(10);
+	FixedPoint<-6> FP2(20);
+
+	FixedPoint<-6> Result = FP1 / FP2;
+
+	FixedPoint<-6> Expection(0.5);
+
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_FixedPoint, ConvertIncrease)
