@@ -106,10 +106,143 @@ TEST(Class_FixedPoint, InitDouble)
 	EXPECT_EQ(Result, 10.0);
 }
 
+TEST(Class_FixedPoint, OpEquals_EqualShift)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-6> FP2(Value);
+	bool Result = FP1 == FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpEquals_DifferentShift_True)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-9> FP2(Value);
+	bool Result = FP1 == FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpEquals_DifferentShift_False)
+{
+	double Value = 10.1;
+	FixedPoint<-1> FP1(Value);
+	FixedPoint<-9> FP2(Value);
+	bool Result = FP1 == FP2;
+
+
+	EXPECT_FALSE(Result);
+}
+
+TEST(Class_FixedPoint, OpUnequals_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 20;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+	bool Result = FP1 != FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+
+TEST(Class_FixedPoint, OpAdd_Int)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP += 10;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 20);
+}
+
+
+TEST(Class_FixedPoint, OpAdd_Double)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP += 10.0;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 20);
+}
+
+TEST(Class_FixedPoint, OpAdd_FP)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-6> FP2(Value);
+
+	FP1 += FP2;
+
+	double Result = FP1.getValue();
+
+
+	EXPECT_EQ(Result, 20);
+}
+
+
+TEST(Class_FixedPoint, OpSubstract_Int)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP -= 10;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 0);
+}
+
+
+TEST(Class_FixedPoint, OpSubstract_Double)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP -= 10.0;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 0);
+}
+
+TEST(Class_FixedPoint, OpSubstract_FP)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-6> FP2(Value);
+
+	FP1 -= FP2;
+
+	double Result = FP1.getValue();
+
+
+	EXPECT_EQ(Result, 0);
+}
+
 TEST(Class_FixedPoint, OpMultiply_Int)
 {
 	int Value = 10;
-	FixedPoint<-6> FP(10);
+	FixedPoint<-6> FP(Value);
 	
 
 	FP *= 10;
@@ -123,7 +256,7 @@ TEST(Class_FixedPoint, OpMultiply_Int)
 TEST(Class_FixedPoint, OpMultiply_Double)
 {
 	int Value = 10;
-	FixedPoint<-6> FP(10);
+	FixedPoint<-6> FP(Value);
 
 
 	FP *= 10.0;
@@ -147,6 +280,52 @@ TEST(Class_FixedPoint, OpMultiply_FP)
 
 	EXPECT_EQ(Result, 100);
 }
+
+
+TEST(Class_FixedPoint, OpDevide_Int)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP /= 10;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 1);
+}
+
+TEST(Class_FixedPoint, OpDevide_Double)
+{
+	int Value = 10;
+	FixedPoint<-6> FP(Value);
+
+
+	FP /= 10.0;
+
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 1);
+}
+
+TEST(Class_FixedPoint, OpDevide_FP)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-6> FP2(Value);
+
+	FP1 /= FP2;
+
+	double Result = FP1.getValue();
+
+
+	EXPECT_EQ(Result, 1);
+}
+
+
+
 
 TEST(Class_FixedPoint, ConvertIncrease)
 {
