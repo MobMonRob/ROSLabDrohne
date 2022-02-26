@@ -29,5 +29,17 @@
     <TestDuration Test="Class_FixedPoint.Convert" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt_rawNeg3" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt_rawNeg6" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_raw0" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_raw3" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_rawNeg3" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_raw6" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_rawNeg6" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10E4_raw3" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt10E7_raw6" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.ConvertRaw" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.ConvertIncrease" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.ConvertIncreaseRaw" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.ConvertDecrease" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.ConvertDecreaseRaw" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

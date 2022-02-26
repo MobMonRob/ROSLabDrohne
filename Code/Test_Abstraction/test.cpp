@@ -4,107 +4,201 @@
 #include "../Abstraction/include/Abstraction/Header.h"
 
 
+TEST(Class_FixedPoint, InitInt10_raw0)
+{
+	int Value = 10;
+	FixedPoint<0> FP(Value);
+	double Result = FP.getValueRaw();
 
-TEST(Class_FixedPoint, InitInt_raw3)
+
+	EXPECT_EQ(Result, 10);
+}
+
+
+
+TEST(Class_FixedPoint, InitInt10_raw3)
 {
 	int Value = 10;
 	FixedPoint<3> FP(Value);
+	double Result = FP.getValueRaw();
 
 
-	EXPECT_EQ(FP.getValueRaw(), Value / 1000);
+	EXPECT_EQ(Result, 0);
 }
 
-TEST(Class_FixedPoint, InitInt_rawNeg3)
+TEST(Class_FixedPoint, InitInt10E4_raw3)
+{
+	int Value = 10000;
+	FixedPoint<3> FP(Value);
+	double Result = FP.getValueRaw();
+
+
+	EXPECT_EQ(Result, 10);
+}
+
+TEST(Class_FixedPoint, InitInt10_rawNeg3)
 {
 	int Value = 10;
-	FixedPoint<-3> FP(10);
+	FixedPoint<-3> FP(Value);
+	double Result = FP.getValueRaw();
 
 
-	EXPECT_EQ(FP.getValueRaw(), Value * 1000);
+	EXPECT_EQ(Result, 10000);
 }
 
-TEST(Class_FixedPoint, InitInt_raw6)
+TEST(Class_FixedPoint, InitInt10_raw6)
 {
 	int Value = 10;
-	FixedPoint<6> FP(10);
+	FixedPoint<6> FP(Value);
+	double Result = FP.getValueRaw();
 
 
-	EXPECT_EQ(FP.getValueRaw(), 0);
+	EXPECT_EQ(Result, 0);
 }
 
-TEST(Class_FixedPoint, InitInt_rawNeg6)
+TEST(Class_FixedPoint, InitInt10E7_raw6)
+{
+	int Value = 10000000;
+	FixedPoint<6> FP(Value);
+	double Result = FP.getValueRaw();
+
+
+	EXPECT_EQ(Result, 10);
+}
+
+TEST(Class_FixedPoint, InitInt10_rawNeg6)
 {
 	int Value = 10;
 	FixedPoint<-6> FP(10);
+	double Result = FP.getValueRaw();
 
 
-	EXPECT_EQ(FP.getValueRaw(), Value * 1000000);
+	EXPECT_EQ(Result, 10000000);
 }
 
 TEST(Class_FixedPoint, InitInt)
 {
 	int Value = 10;
 	FixedPoint<-6> FP(Value);
+	double Result = FP.getValue();
 
 
-	EXPECT_EQ(FP.getValue(), Value);
+	EXPECT_EQ(Result, 10.0);
 }
 
 TEST(Class_FixedPoint, InitFloat)
 {
 	float Value = 10;
 	FixedPoint<-6> FP(Value);
+	double Result = FP.getValue();
 
 
-	EXPECT_EQ(FP.getValue(), Value);
+	EXPECT_EQ(Result, 10.0);
 }
 
 TEST(Class_FixedPoint, InitDouble)
 {
 	double Value = 10;
 	FixedPoint<-6> FP(Value);
+	double Result = FP.getValue();
 
 
-	EXPECT_EQ(FP.getValue(), Value);
+	EXPECT_EQ(Result, 10.0);
 }
 
 TEST(Class_FixedPoint, OpMultiply_Int)
 {
+	int Value = 10;
 	FixedPoint<-6> FP(10);
 	
 
 	FP *= 10;
 
-	EXPECT_EQ(FP.getValue(), 100);
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 100);
 }
 
 TEST(Class_FixedPoint, OpMultiply_Double)
 {
+	int Value = 10;
 	FixedPoint<-6> FP(10);
 
 
 	FP *= 10.0;
 
-	EXPECT_EQ(FP.getValue(), 100);
+	double Result = FP.getValue();
+
+
+	EXPECT_EQ(Result, 100);
 }
 
 TEST(Class_FixedPoint, OpMultiply_FP)
 {
-	FixedPoint<-6> FP1(10);
-	FixedPoint<-6> FP2(10);
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-6> FP2(Value);
 
 	FP1 *= FP2;
 
-	EXPECT_EQ(FP1.getValue(), 100);
+	double Result = FP1.getValue();
+
+
+	EXPECT_EQ(Result, 100);
 }
 
-TEST(Class_FixedPoint, Convert)
+TEST(Class_FixedPoint, ConvertIncrease)
 {
-	FixedPoint<-6> FP1(10);
-	FixedPoint<-9> FP2 = FixedPoint<-9>::convert(FP1);
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-3> FP2 = FixedPoint<-3>::convert(FP1);
 
-	EXPECT_EQ(FP2.getValue(), 10);
+
+	double Result = FP2.getValue();
+
+	EXPECT_EQ(Result, 10);
 }
+
+TEST(Class_FixedPoint, ConvertIncreaseRaw)
+{
+	int Value = 10;
+	FixedPoint<-6> FP1(Value);
+	FixedPoint<-3> FP2 = FixedPoint<-3>::convert(FP1);
+
+
+	double Result = FP2.getValueRaw();
+
+	EXPECT_EQ(Result, 10000);
+}
+
+TEST(Class_FixedPoint, ConvertDecrease)
+{
+	int Value = 10;
+	FixedPoint<-3> FP1(Value);
+	FixedPoint<-6> FP2 = FixedPoint<-6>::convert(FP1);
+
+
+	double Result = FP2.getValue();
+
+	EXPECT_EQ(Result, 10);
+}
+
+TEST(Class_FixedPoint, ConvertDecreaseRaw)
+{
+	int Value = 10;
+	FixedPoint<-3> FP1(Value);
+	FixedPoint<-6> FP2 = FixedPoint<-6>::convert(FP1);
+
+
+	double Result = FP2.getValueRaw();
+
+	EXPECT_EQ(Result, 10000000);
+}
+
+
+
+
 
 
 
