@@ -133,7 +133,7 @@ template<int T>
 template<int TIn>
 inline FixedPoint<T> FixedPoint<T>::operator-(const FixedPoint<TIn>& FP)
 {
-	FixedPoint<T> ReturnItem;
+	FixedPoint<T> ReturnItem(*this);
 
 	ReturnItem -= FP;
 
