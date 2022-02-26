@@ -119,14 +119,7 @@ TEST(Class_FixedPoint, InitCopy)
 	}
 
 	EXPECT_EQ(Result, Expection);
-
-
-	EXPECT_EQ(Result, 10);
 }
-
-
-
-
 
 TEST(Class_FixedPoint, OpEquals_EqualShift)
 {
