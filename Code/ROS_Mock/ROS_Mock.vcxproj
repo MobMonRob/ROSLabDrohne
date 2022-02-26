@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ros.cpp" />
     <ClCompile Include="ros\ros_Talker.cpp" />
     <ClCompile Include="ROS_Mock.cpp" />
     <ClCompile Include="termios.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="mavros_msgs\State.h" />
     <ClInclude Include="mavros_msgs\Thrust.h" />
     <ClInclude Include="ros\ros.h" />
+    <ClInclude Include="ros\rosTiming.h" />
     <ClInclude Include="ros\ros_Talker.h" />
     <ClInclude Include="sensor_msgs\BatteryState.h" />
     <ClInclude Include="sensor_msgs\Imu.h" />

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_00_Test_Abstraction.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="WeWillRockYou.TestName" Duration="1" />
+    <TestDuration Test="Class_Unit.OpEquals" Duration="1" />
+    <TestDuration Test="Class_Vector3D.OpEquals" Duration="1" />
+    <TestDuration Test="Class_Vector3D.OpEquals_FalseX" Duration="1" />
+    <TestDuration Test="Class_Vector3D.OpEquals_FalseUnit" Duration="1" />
+    <TestDuration Test="Class_Vector3D.OpEquals_FalseY" Duration="1" />
+    <TestDuration Test="Class_Vector3D.OpEquals_FalseZ" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_X" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_Y" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_Z" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

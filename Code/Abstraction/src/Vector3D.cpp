@@ -74,9 +74,9 @@ Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 	double X = this->getX() * (cosX * cosY)
 		+ this->getY() * (cosX * sinY * sinZ - sinX * cosZ)
 		+ this->getZ() * (cosX * sinY * cosZ + sinX * sinZ);
-	double Y = this->getX() * (sinY * cosZ)
-		+ this->getY() * (sinX * sinY * sinZ - cosX * cosZ)
-		+ this->getZ() * (sinX * sinY * cosZ + cosX * sinZ);
+	double Y = this->getX() * (sinX * cosY)
+		+ this->getY() * (sinX * sinY * sinZ + cosX * cosZ)
+		+ this->getZ() * (sinX * sinY * cosZ - cosX * sinZ);
 	double Z = this->getX() * (-sinY)
 		+ this->getY() * (cosY * sinZ)
 		+ this->getZ() * (cosY * cosZ);

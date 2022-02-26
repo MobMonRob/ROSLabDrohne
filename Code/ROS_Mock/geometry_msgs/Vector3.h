@@ -18,8 +18,8 @@ namespace geometry_msgs
     class Vector3 : public Msg
     {
     public:
-        Vector3() : x(0.0), y(0.0), z(0.0) {};
-        Vector3(const Vector3& _alloc) : x(_alloc.x), y(_alloc.y), z(_alloc.z) {};
+        Vector3() : Msg(), x(0.0), y(0.0), z(0.0) {};
+        Vector3(const Vector3& _alloc) : Msg(), x(_alloc.x), y(_alloc.y), z(_alloc.z) {};
 
         double x;
         double y;
