@@ -275,7 +275,7 @@ TEST(Class_FixedPoint, OpSubstractReturn_FP)
 
 	FixedPoint<-6> Result = FP1 - FP2;
 
-	FixedPoint<-6> Expection(10);
+	FixedPoint<-6> Expection(-10);
 
 
 	if (Result != Expection)
