@@ -18,5 +18,13 @@
     <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt_raw3" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt_raw6" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitFloat" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitDouble" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpMultiply_Int" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpMultiply_Double" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpMultiply_FP" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
