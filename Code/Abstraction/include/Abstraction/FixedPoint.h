@@ -98,10 +98,26 @@ template<int TIn>
 inline FixedPoint<T> FixedPoint<T>::convert(FixedPoint<TIn> FP)
 {
 	FixedPoint<T> FP_Out;
-	int Shift = T - TIn;
+	int Shift = TIn - T;
 
 
-	FP_Out.ValueRaw_ = FP.getValueRaw() * std::powl(10, Shift);
+	FP_Out.ValueRaw_ = FP.getValueRaw();
+
+	while (Shift != 0)
+	{
+		if (Shift < 0)
+		{
+			FP_Out.ValueRaw_ /= 10;
+
+			Shift++;
+		}
+		if (Shift > 0)
+		{
+			FP_Out.ValueRaw_ *= 10;
+
+			Shift--;
+		}
+	}
 
 	return FP_Out;
 }
