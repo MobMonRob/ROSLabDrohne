@@ -24,7 +24,7 @@ public:
 	static FixedPoint<T> convert(FixedPoint<TIn> FP);
 
 protected:
-	long ValueRaw_;
+	long long ValueRaw_;
 };
 
 
