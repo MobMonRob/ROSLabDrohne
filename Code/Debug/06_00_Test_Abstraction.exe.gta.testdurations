@@ -26,5 +26,8 @@
     <TestDuration Test="Class_FixedPoint.OpMultiply_Int" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpMultiply_Double" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpMultiply_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.Convert" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt_rawNeg3" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.InitInt_rawNeg6" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

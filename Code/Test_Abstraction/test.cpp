@@ -103,7 +103,7 @@ TEST(Class_FixedPoint, Convert)
 	FixedPoint<-6> FP1(10);
 	FixedPoint<-9> FP2 = FixedPoint<-9>::convert(FP1);
 
-	EXPECT_EQ(FP1.getValue(), 100);
+	EXPECT_EQ(FP2.getValue(), 10);
 }
 
 
