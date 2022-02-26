@@ -1,6 +1,7 @@
 #ifndef ABSTRACTIONHEADER_H
 #define ABSTRACTIONHEADER_H
 
+#include "Abstraction/FixedPoint.h"
 #include "Abstraction/Optional.h"
 #include "Abstraction/Ringbuffer.h"
 #include "Abstraction/TimedValue.h"
