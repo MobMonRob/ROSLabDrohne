@@ -117,7 +117,7 @@ inline FixedPoint<T> FixedPoint<T>::operator+(const FixedPoint<TIn>& FP)
 	ReturnItem += FP;
 
 
-	return FP;
+	return ReturnItem;
 }
 
 template<int T>
@@ -133,12 +133,12 @@ template<int T>
 template<int TIn>
 inline FixedPoint<T> FixedPoint<T>::operator-(const FixedPoint<TIn>& FP)
 {
-	FixedPoint<T> ReturnItem(*this);
+	FixedPoint<T> ReturnItem;
 
 	ReturnItem -= FP;
 
 
-	return FP;
+	return ReturnItem;
 }
 
 template<int T>
@@ -159,7 +159,7 @@ inline FixedPoint<T> FixedPoint<T>::operator*(const FixedPoint<TIn>& FP)
 	ReturnItem *= FP;
 
 
-	return FP;
+	return ReturnItem;
 }
 
 template<int T>
@@ -184,7 +184,7 @@ inline FixedPoint<T> FixedPoint<T>::operator/(const FixedPoint<TIn>& FP)
 	ReturnItem /= FP;
 
 
-	return FP;
+	return ReturnItem;
 }
 
 template<int T>

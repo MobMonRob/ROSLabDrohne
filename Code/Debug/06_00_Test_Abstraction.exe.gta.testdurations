@@ -15,8 +15,8 @@
     <TestDuration Test="Class_Vector3D.Rotate_Z" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="2" />
+    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="33" />
+    <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt_raw3" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt_raw6" Duration="1" />
