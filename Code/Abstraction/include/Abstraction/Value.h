@@ -9,7 +9,7 @@ class Value
 public:
 	Value(Unit Unit = Unit_Invalid, double Value = 0.0) : Unit_(Unit), Value_(Value) {};
 
-	bool operator==(const Value& V);
+	bool operator==(const Value& V) const;
 	Value operator+(const Value& V);
 	Value operator-(const Value& V);
 	Value operator/ (double Divisor);

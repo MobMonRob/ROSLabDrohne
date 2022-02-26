@@ -462,9 +462,13 @@ TEST(Class_FixedPoint, ConvertDecreaseRaw)
 TEST(Class_Unit, OpEquals)
 {
 	std::string Name = "MyName";
-	
+	Unit U1(Name);
+	Unit U2(Name);
 
-	EXPECT_TRUE(Unit(Name) == Unit(Name));
+	bool Result = U1 == U2;
+
+
+	EXPECT_TRUE(Result);
 }
 
 
@@ -472,9 +476,11 @@ TEST(Class_Vector3D, OpEquals)
 {
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 0, 0);
-	
 
-	EXPECT_TRUE(V1 == V2);
+	bool Result = V1 == V2;
+
+
+	EXPECT_TRUE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseUnit)
@@ -482,8 +488,10 @@ TEST(Class_Vector3D, OpEquals_FalseUnit)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Velocity, 0, 0, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseX)
@@ -491,8 +499,10 @@ TEST(Class_Vector3D, OpEquals_FalseX)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 1, 0, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseY)
@@ -500,8 +510,10 @@ TEST(Class_Vector3D, OpEquals_FalseY)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 1, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseZ)
@@ -509,86 +521,134 @@ TEST(Class_Vector3D, OpEquals_FalseZ)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 0, 1);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, Rotate_0)
 {
 	Vector3D V1(Unit_Length, 1, 2, 3);
-	Vector3D V2 = V1.rotate(0, 0, 0);
-	bool Equals = V2 == V1;
+
+	Vector3D Result = V1.rotate(0, 0, 0);
+
+	Vector3D Expection(Unit_Length, 1, 2, 3);
 
 
-	if (!Equals)
+	if (Result != Expection)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_Vector3D, Rotate_X90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(Angle, 0, 0);
-	bool Equals = V2 == Vector3D(Unit_Length, 0, 0, -1);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(Angle, 0, 0);
+
+	Vector3D Expection(Unit_Length, 1, -3, 2);
 
 
-	if (!Equals)
+	if (Result != Expection)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expection);
+}
+
+TEST(Class_Vector3D, Rotate_X180)
+{
+	double Angle = PI;
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(Angle, 0, 0);
+
+	Vector3D Expection(Unit_Length, 1, -2, -3);
+
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_Vector3D, Rotate_Y90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 1, 0, 0);
-	Vector3D V2 = V1.rotate(0, Angle, 0);
-	bool Equals = V2 == Vector3D(Unit_Length, 1, 0, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(0, Angle, 0);
+
+	Vector3D Expection(Unit_Length, 3, 2, -1);
 
 
-	if (!Equals)
+	if (Result != Expection)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expection);
+}
+
+TEST(Class_Vector3D, Rotate_Y180)
+{
+	double Angle = PI / 2;
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(0, Angle, 0);
+
+	Vector3D Expection(Unit_Length, -1, 2, -3);
+
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_Vector3D, Rotate_Z90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(0, 0, Angle);
-	bool Equals = V2 == Vector3D(Unit_Length, 1, 0, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(0, 0, Angle);
+
+	Vector3D Expection(Unit_Length, -2, 1, 3);
 
 
-	if (!Equals)
+	if (Result != Expection)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expection);
 }
 
 TEST(Class_Vector3D, Rotate_Z180)
 {
 	double Angle = PI;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(0, 0, Angle);
-	bool Equals = V2 == Vector3D(Unit_Length, 0, -1, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotate(0, 0, Angle);
+
+	Vector3D Expection(Unit_Length, -1, -2, 3);
 
 
-	if (!Equals)
+	if (Result != Expection)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expection);
 }
 

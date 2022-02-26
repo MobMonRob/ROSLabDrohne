@@ -3,6 +3,20 @@
 #include<math.h>
 
 
+
+bool Vector3D::operator==(const Vector3D& V) const
+{
+	bool ReturnBool = true;
+
+
+	ReturnBool &= (this->Unit_ == V.Unit_);
+	ReturnBool &= (this->X_ == V.X_);
+	ReturnBool &= (this->Y_ == V.Y_);
+	ReturnBool &= (this->Z_ == V.Z_);
+
+	return ReturnBool;
+}
+
 Vector3D Vector3D::operator+(const Vector3D& V)
 {
 	if (this->Unit_ == V.Unit_)
@@ -32,18 +46,6 @@ Vector3D Vector3D::operator/(double Divisor)
 	return Vector3D(this->Unit_, this->X_/ Divisor, this->Y_/ Divisor, this->Z_ / Divisor);
 }
 
-bool Vector3D::operator==(const Vector3D& V)
-{
-	bool ReturnBool = true;
-
-
-	ReturnBool &= (this->getUnit() == V.Unit_);
-	ReturnBool &= (this->getX() == V.X_);
-	ReturnBool &= (this->getY() == V.Y_);
-	ReturnBool &= (this->getZ() == V.Z_);
-
-	return ReturnBool;
-}
 
 std::string Vector3D::getString()
 {
