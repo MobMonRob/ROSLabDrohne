@@ -110,7 +110,7 @@ TEST(Class_FixedPoint, InitCopy)
 
 	FixedPoint<-6> Result(FP);
 
-	FixedPoint<-6> Expection(30);
+	FixedPoint<-6> Expection(10);
 
 
 	if (Result != Expection)
