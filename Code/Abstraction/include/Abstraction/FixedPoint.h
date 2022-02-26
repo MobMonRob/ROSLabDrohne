@@ -12,13 +12,33 @@ public:
 	FixedPoint<T>(double Value);
 
 	template<int TIn>
+	bool operator==(const FixedPoint<TIn>& FP) const;
+
+	template<int TIn>
+	bool operator!=(const FixedPoint<TIn>& FP) const { return !this->operator==(FP); };
+
+	template<int TIn>
+	void operator+=(const FixedPoint<TIn>& FP) ;
+	void operator+=(int Value) { this->operator+=(FixedPoint<T>(Value)); };
+	void operator+=(double Value) { this->operator+=(FixedPoint<T>(Value)); };
+
+	template<int TIn>
+	void operator-=(const FixedPoint<TIn>& FP);
+	void operator-=(int Value) { this->operator-=(FixedPoint<T>(Value)); };
+	void operator-=(double Value) { this->operator-=(FixedPoint<T>(Value)); };
+
+	template<int TIn>
 	void operator*=(const FixedPoint<TIn>& FP);
 	void operator*=(int Value);
-	void operator*=(double Value);
+	void operator*=(double Value) { this->operator*=(FixedPoint<T>(Value)); };
 
+	template<int TIn>
+	void operator/=(const FixedPoint<TIn>& FP);
+	void operator/=(int Value);
+	void operator/=(double Value) { this->operator/=(FixedPoint<T>(Value)); };
 
-	long getValueRaw() const { return this->ValueRaw_; };
-	double getValue();
+	long long getValueRaw() const { return this->ValueRaw_; };
+	double getValue() const;
 
 	template<int TIn>
 	static FixedPoint<T> convert(FixedPoint<TIn> FP);
@@ -50,6 +70,45 @@ inline FixedPoint<T>::FixedPoint(double Value)
 }
 
 
+template<int T>
+template<int TIn>
+inline bool FixedPoint<T>::operator==(const FixedPoint<TIn>& FP) const
+{
+	bool ReturnBool = false;
+
+
+	if (T == TIn)
+	{
+		ReturnBool = this->getValueRaw() == FP.getValueRaw();
+	}
+	if (T < TIn || (T > TIn && T - TIn < 6))
+	{
+		FixedPoint<T> InValue = FixedPoint<T>::convert(FP);
+
+
+		ReturnBool = this->operator==(InValue);
+	}
+
+	return ReturnBool;
+}
+
+template<int T>
+template<int TIn>
+inline void FixedPoint<T>::operator+=(const FixedPoint<TIn>& FP)
+{
+	FixedPoint<T> InValue = FixedPoint<T>::convert(FP);
+
+	this->ValueRaw_ += InValue.getValueRaw();
+}
+
+template<int T>
+template<int TIn>
+inline void FixedPoint<T>::operator-=(const FixedPoint<TIn>& FP)
+{
+	FixedPoint<T> InValue = FixedPoint<T>::convert(FP);
+
+	this->ValueRaw_ -= InValue.getValueRaw();
+}
 
 template<int T>
 template<int TIn>
@@ -58,7 +117,6 @@ inline void FixedPoint<T>::operator*=(const FixedPoint<TIn>& FP)
 	this->ValueRaw_ *= FP.ValueRaw_;
 	this->ValueRaw_ *= std::powl(10, TIn);
 }
-
 template<int T>
 inline void FixedPoint<T>::operator*=(int Value)
 {
@@ -66,19 +124,24 @@ inline void FixedPoint<T>::operator*=(int Value)
 }
 
 template<int T>
-inline void FixedPoint<T>::operator*=(double Value)
+template<int TIn>
+inline void FixedPoint<T>::operator/=(const FixedPoint<TIn>& FP)
 {
-	this->operator*=(FixedPoint<T>(Value));
+	this->ValueRaw_ *= std::powl(10, -TIn);
+	this->ValueRaw_ /= FP.ValueRaw_;
+}
+template<int T>
+inline void FixedPoint<T>::operator/=(int Value)
+{
+	this->ValueRaw_ = this->getValueRaw() / Value;
 }
 
 
 
 
 
-
-
 template<int T>
-inline double FixedPoint<T>::getValue()
+inline double FixedPoint<T>::getValue() const
 {
 	double ReturnValue = this->getValueRaw();
 

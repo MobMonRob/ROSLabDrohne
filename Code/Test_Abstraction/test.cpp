@@ -14,8 +14,6 @@ TEST(Class_FixedPoint, InitInt10_raw0)
 	EXPECT_EQ(Result, 10);
 }
 
-
-
 TEST(Class_FixedPoint, InitInt10_raw3)
 {
 	int Value = 10;
@@ -151,7 +149,6 @@ TEST(Class_FixedPoint, OpUnequals_EqualShift)
 	EXPECT_TRUE(Result);
 }
 
-
 TEST(Class_FixedPoint, OpAdd_Int)
 {
 	int Value = 10;
@@ -165,7 +162,6 @@ TEST(Class_FixedPoint, OpAdd_Int)
 
 	EXPECT_EQ(Result, 20);
 }
-
 
 TEST(Class_FixedPoint, OpAdd_Double)
 {
@@ -195,7 +191,6 @@ TEST(Class_FixedPoint, OpAdd_FP)
 	EXPECT_EQ(Result, 20);
 }
 
-
 TEST(Class_FixedPoint, OpSubstract_Int)
 {
 	int Value = 10;
@@ -209,7 +204,6 @@ TEST(Class_FixedPoint, OpSubstract_Int)
 
 	EXPECT_EQ(Result, 0);
 }
-
 
 TEST(Class_FixedPoint, OpSubstract_Double)
 {
@@ -281,7 +275,6 @@ TEST(Class_FixedPoint, OpMultiply_FP)
 	EXPECT_EQ(Result, 100);
 }
 
-
 TEST(Class_FixedPoint, OpDevide_Int)
 {
 	int Value = 10;
@@ -323,9 +316,6 @@ TEST(Class_FixedPoint, OpDevide_FP)
 
 	EXPECT_EQ(Result, 1);
 }
-
-
-
 
 TEST(Class_FixedPoint, ConvertIncrease)
 {
@@ -374,7 +364,6 @@ TEST(Class_FixedPoint, ConvertDecreaseRaw)
 
 	EXPECT_EQ(Result, 10000000);
 }
-
 
 
 

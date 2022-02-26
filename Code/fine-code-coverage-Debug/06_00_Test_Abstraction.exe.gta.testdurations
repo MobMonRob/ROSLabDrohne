@@ -14,7 +14,7 @@
     <TestDuration Test="Class_Vector3D.Rotate_Y" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="2" />
     <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
@@ -41,5 +41,18 @@
     <TestDuration Test="Class_FixedPoint.ConvertIncreaseRaw" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertDecrease" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertDecreaseRaw" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpEquals_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpEquals_DifferentShift_True" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpEquals_DifferentShift_False" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpUnequals_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAdd_Int" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAdd_Double" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAdd_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstract_Int" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstract_Double" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstract_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpDevide_Int" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpDevide_Double" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpDevide_FP" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
