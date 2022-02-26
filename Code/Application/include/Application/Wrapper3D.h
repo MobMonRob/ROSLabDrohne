@@ -85,11 +85,11 @@ inline void Wrapper3D<AccelToPos>::setInput(Vector3D Input, Timestamp Time)
 		Vector3D InputAdapted = Input - this->getVectorSuspention();
 
 
-		this->X_.setInput(TimedValue(Input.getUnit(), InputAdapted.getX(), Time));
+		this->X_.setInput(TimedValue(Input.getUnit(), InputAdapted.getX().getValue(), Time));
 		this->X_.getOutput();
-		this->Y_.setInput(TimedValue(Input.getUnit(), InputAdapted.getY(), Time));
+		this->Y_.setInput(TimedValue(Input.getUnit(), InputAdapted.getY().getValue(), Time));
 		this->Y_.getOutput();
-		this->Z_.setInput(TimedValue(Input.getUnit(), InputAdapted.getZ(), Time));
+		this->Z_.setInput(TimedValue(Input.getUnit(), InputAdapted.getZ().getValue(), Time));
 		this->Z_.getOutput();
 	}
 }
@@ -119,11 +119,11 @@ inline void Wrapper3D<AngVelToAng>::setInput(Vector3D Input, Timestamp Time)
 		Vector3D InputAdapted = Input - this->Collector_.at(0);
 
 
-		this->X_.setInput(TimedValue(Input.getUnit(), InputAdapted.getX(), Time));
+		this->X_.setInput(TimedValue(Input.getUnit(), InputAdapted.getX().getValue(), Time));
 		this->X_.getOutput();
-		this->Y_.setInput(TimedValue(Input.getUnit(), InputAdapted.getY(), Time));
+		this->Y_.setInput(TimedValue(Input.getUnit(), InputAdapted.getY().getValue(), Time));
 		this->Y_.getOutput();
-		this->Z_.setInput(TimedValue(Input.getUnit(), InputAdapted.getZ(), Time));
+		this->Z_.setInput(TimedValue(Input.getUnit(), InputAdapted.getZ().getValue(), Time));
 		this->Z_.getOutput();
 	}
 }
