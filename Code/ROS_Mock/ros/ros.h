@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include "rosTiming.h"
 #include "../std_msgs/Msg.h"
 #include "ros_Talker.h"
 
@@ -21,14 +22,14 @@
 #include "../std_msgs/Char.h"
 
 
-class ros
+namespace ros
 {
-public:
-	static void init(int argc, char** argv, std::string Str) {};
-	static bool ok() { return false; };
-	static void spin() {};
-	static void spinOnce() {};
-	static void shutdown() {};
+
+	void init(int argc, char** argv, std::string Str);
+	bool ok();
+	void spin();
+	void spinOnce();
+	void shutdown();
 
 
 	class Publisher
@@ -89,43 +90,6 @@ public:
 		void param(std::string Name, double& Reference, double AltValue) { Reference = AltValue; };
 
 
-	};
-
-	class Duration
-	{
-	public:
-		Duration(double Duration = 0) {};
-
-		operator double() { return 0; };
-	};
-
-	class Time
-	{
-	public:
-		Time operator-(const Time& T) { return Time(); };
-		bool operator>(const Duration& T) { return false; };
-		bool operator<(const Duration& T) { return false; };
-		bool operator==(const Duration& T) { return false; };
-		bool operator<=(const Duration& T) { return false; };
-		bool operator>=(const Duration& T) { return false; };
-		
-		double toSec() { return 0; };
-
-
-		static Time now() { return Time(); };
-	};
-
-
-
-
-	class Rate
-	{
-	public:
-		Rate() {};
-		Rate(int i) {};
-
-
-		void sleep() {};
 	};
 
 };
