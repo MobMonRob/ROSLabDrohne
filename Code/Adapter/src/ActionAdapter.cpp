@@ -123,13 +123,13 @@ void ActionAdapter::addState(State Entry)
 	Timestamp Time = StateAvg.getTimestamp();
 	Vector3D Angle = StateAvg.getVector_Angular();
 	Vector3D Accel = StateAvg.getVector_Translative().rotate(
-		-Angle.getX(),
-		-Angle.getY(),
-		-Angle.getZ());
+		-Angle.getX().getValue(),
+		-Angle.getY().getValue(),
+		-Angle.getZ().getValue());
 
-	this->PosX_.setInput(TimedValue(Unit_Acceleration, Accel.getX(), Time));
-	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY(), Time));
-	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ(), Time));
+	this->PosX_.setInput(TimedValue(Unit_Acceleration, Accel.getX().getValue(), Time));
+	this->PosY_.setInput(TimedValue(Unit_Acceleration, Accel.getY().getValue(), Time));
+	this->PosZ_.setInput(TimedValue(Unit_Acceleration, Accel.getZ().getValue(), Time));
 
 	this->ControlX_.setFeedback(this->PosX_.getOutput());
 	this->ControlY_.setFeedback(this->PosY_.getOutput());

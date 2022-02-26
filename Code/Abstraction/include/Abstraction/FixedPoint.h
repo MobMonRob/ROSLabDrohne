@@ -2,6 +2,8 @@
 #define FIXEDPOINT_H
 
 
+#include <cmath>
+
 template<int T>
 class FixedPoint
 {
