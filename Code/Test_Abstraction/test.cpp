@@ -104,6 +104,30 @@ TEST(Class_FixedPoint, InitDouble)
 	EXPECT_EQ(Result, 10.0);
 }
 
+TEST(Class_FixedPoint, InitCopy)
+{
+	FixedPoint<-6> FP(10);
+
+	FixedPoint<-6> Result(FP);
+
+	FixedPoint<-6> Expection(30);
+
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getValue() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expection);
+
+
+	EXPECT_EQ(Result, 10);
+}
+
+
+
+
+
 TEST(Class_FixedPoint, OpEquals_EqualShift)
 {
 	int Value = 10;
@@ -200,6 +224,12 @@ TEST(Class_FixedPoint, OpAddReturn_FP)
 
 	FixedPoint<-6> Expection(30);
 
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getValue() << std::endl;
+	}
+
 	EXPECT_EQ(Result, Expection);
 }
 
@@ -253,6 +283,12 @@ TEST(Class_FixedPoint, OpSubstractReturn_FP)
 	FixedPoint<-6> Result = FP1 - FP2;
 
 	FixedPoint<-6> Expection(10);
+
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getValue() << std::endl;
+	}
 
 	EXPECT_EQ(Result, Expection);
 }
@@ -308,6 +344,12 @@ TEST(Class_FixedPoint, OpMultiplyReturn_FP)
 
 	FixedPoint<-6> Expection(200);
 
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getValue() << std::endl;
+	}
+
 	EXPECT_EQ(Result, Expection);
 }
 
@@ -361,6 +403,12 @@ TEST(Class_FixedPoint, OpDevideReturn_FP)
 	FixedPoint<-6> Result = FP1 / FP2;
 
 	FixedPoint<-6> Expection(0.5);
+
+
+	if (Result != Expection)
+	{
+		std::cout << Result.getValue() << std::endl;
+	}
 
 	EXPECT_EQ(Result, Expection);
 }
