@@ -54,5 +54,9 @@
     <TestDuration Test="Class_FixedPoint.OpDevide_Int" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpDevide_Double" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpDevide_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAddReturn_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstractReturn_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpMultiplyReturn_FP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpDevideReturn_FP" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
