@@ -9,7 +9,7 @@ class Unit
 public:
 	Unit(std::string Name) { this->UnitName_ = Name; };
 
-	bool operator== (const Unit& U) { return this->UnitName_ == U.UnitName_; };
+	bool operator== (const Unit& U) const { return this->UnitName_ == U.UnitName_; };
 
 	std::string getUnit() { return this->UnitName_; };
 

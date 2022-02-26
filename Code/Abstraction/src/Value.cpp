@@ -1,13 +1,13 @@
 #include "Abstraction/Value.h"
 
 
-bool Value::operator==(const Value& V)
+bool Value::operator==(const Value& V) const
 {
 	bool ReturnBool = true;
 
 
-	ReturnBool &= (this->getValue() == V.Value_);
-	ReturnBool &= (this->getUnit() == V.Unit_);
+	ReturnBool &= (this->Value_ == V.Value_);
+	ReturnBool &= (this->Unit_ == V.Unit_);
 
 	return ReturnBool;
 }
