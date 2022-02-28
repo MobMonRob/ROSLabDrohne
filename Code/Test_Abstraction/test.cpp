@@ -166,6 +166,84 @@ TEST(Class_FixedPoint, OpUnequals_EqualShift)
 	EXPECT_TRUE(Result);
 }
 
+TEST(Class_FixedPoint, OpSmaller_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 20;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 < FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpSmallerEquals_Smaller_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 20;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 <= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpSmallerEquals_Equal_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 <= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreater_EqualShift)
+{
+	int Value1 = 20;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 > FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreaterEquals_Smaller_EqualShift)
+{
+	int Value1 = 20;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 >= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreaterEquals_Equal_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 >= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
 TEST(Class_FixedPoint, OpAdd_Int)
 {
 	int Value = 10;
