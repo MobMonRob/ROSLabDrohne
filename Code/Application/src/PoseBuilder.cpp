@@ -57,7 +57,11 @@ void PoseBuilder::updatePose(State State)
 	if (this->getTime() > Timestamp())
 	{
 		{
-			Vector3D Acceleration = State.getVector_Translative();
+			Vector3D Orientation = this->getOrientation();
+			Vector3D Acceleration = State.getVector_Translative().rotate(
+				Orientation.getX().getValue(),
+				Orientation.getY().getValue(), 
+				Orientation.getZ().getValue());
 			
 
 			this->PositionX_.setInput(TimedValue(Acceleration.getUnit(), Acceleration.getX(), State.getTimestamp()), true);

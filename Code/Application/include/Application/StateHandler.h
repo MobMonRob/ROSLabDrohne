@@ -15,9 +15,9 @@ public:
 
 	void addEntry(State State) { this->addItem(State); };
 
+	int getSize() { return Ringbuffer::getSize(); };
 	State getAvgState();
 
-private:
 };
 
 #endif // STATEHANDLER_H

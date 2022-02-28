@@ -7,13 +7,21 @@
 #include "Abstraction/Timestamp.h"
 
 
+/* Expects following Units:
+ * Translative			Unit_Acceleration
+ * Angular				Unit_AngleVelRad
+ * GroundClearance		Unit_Length
+ */
+
 class State
 {
 public:
-	State() : State(Vector3D(Unit_Acceleration), Vector3D(Unit_AngleDeg), Value(Unit_Length), Timestamp()) {};
+	State() : State(Vector3D(Unit_Acceleration), Vector3D(Unit_AngleVelRad), Value(Unit_Length), Timestamp()) {};
 	State(Vector3D Translative, Vector3D Angular, Value GroundClearance, Timestamp Time);
 
 	bool operator==(const State& S);
+	bool operator==(const State& S) const;
+	void operator+=(const State& S);
 	State operator-(const State& S);
 
 	Vector3D getVector_Translative() { return this->Accelerations_; };

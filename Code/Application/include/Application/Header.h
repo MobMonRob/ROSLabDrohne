@@ -5,7 +5,7 @@
 #include "Application/AngVelToAng.h"
 #include "Application/State.h"
 #include "Application/StateHandler.h"
-#include "Application/StateTranslator.h"
+#include "Application/PoseBuilder.h"
 
 #endif // APPLICATIONHEADER_H
 

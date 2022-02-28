@@ -3,6 +3,13 @@
 #include<math.h>
 
 
+bool Vector3D::operator==(const Vector3D& V)
+{
+	const Vector3D Item = *this;
+
+
+	return Item == V;
+}
 
 bool Vector3D::operator==(const Vector3D& V) const
 {
@@ -47,6 +54,18 @@ Vector3D Vector3D::operator/(FixedPoint<Accuracy_Vector> Divisor)
 
 	return Vector3D(this->Unit_, this->X_/ Divisor, this->Y_/ Divisor, this->Z_ / Divisor);
 }
+
+void Vector3D::operator+=(const Vector3D& V)
+{
+	if (V.getUnit() == this->getUnit())
+	{
+		this->X_ += V.X_;
+		this->Y_ += V.Y_;
+		this->Z_ += V.Z_;
+	}
+}
+
+
 
 
 std::string Vector3D::getString()

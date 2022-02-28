@@ -11,7 +11,8 @@ class Timestamp
 public:
 	Timestamp(FixedPoint<Accuracy_Time> Time = FixedPoint<Accuracy_Time>()) : Time_(Time) {};
 
-	bool operator==(const Timestamp& T) { return this->getTime() == T.Time_; };
+	bool operator==(const Timestamp& T) { return this->Time_ == T.Time_; };
+	bool operator==(const Timestamp& T) const { return this->Time_ == T.Time_; };
 	bool operator!=(const Timestamp& T) { return !this->operator==(T); };
 	bool operator<(const Timestamp& T) { return this->getTime() < T.Time_; };
 	bool operator<=(const Timestamp& T) { return this->getTime() <= T.Time_; };

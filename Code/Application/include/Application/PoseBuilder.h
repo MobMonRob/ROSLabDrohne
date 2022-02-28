@@ -20,7 +20,7 @@
 class PoseBuilder
 {
 public:
-	PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_Value> InitY, FixedPoint<Accuracy_Value> InitZ);
+	PoseBuilder(FixedPoint<Accuracy_Value> InitX = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitY = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitZ = FixedPoint<Accuracy_Value>());
 
 	Pose getPose();
 	Timestamp getTime() const { return this->Time_; };

@@ -14,8 +14,11 @@
 #include "Domain/ControllerType.h"
 #include "Domain/Input.h"
 #include "Domain/Inputable.h"
+#include "Domain/Integral1.h"
+#include "Domain/Integral2.h"
 #include "Domain/Output.h"
 #include "Domain/Outputable.h"
+#include "Domain/Pose.h"
 #include "Domain/TimedDifference.h"
 
 #endif // DOMAINHEADER_H

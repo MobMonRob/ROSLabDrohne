@@ -5,10 +5,8 @@
 State StateHandler::getAvgState()
 {
 	int BufferSize = this->getSize();
-	Vector3D Tran(Unit_Length);
-	Vector3D Ang(Unit_AngleDeg);
-	Value GroundClear(Unit_Length);
-	FixedPoint<Accuracy_Time> Time = 0;
+	State Sum;
+
 
 	for (int i = 0; i < BufferSize; i++)
 	{
@@ -17,18 +15,14 @@ State StateHandler::getAvgState()
 
 		if (Data.getValid())
 		{
-			Tran = Tran + Data.getData().getVector_Translative();
-			Ang = Ang + Data.getData().getVector_Angular();
-			GroundClear = GroundClear + Data.getData().getGroundClearance();
-
-			if (Data.getData().getTimestamp().getTime() > Time)
-			{
-				Time = Data.getData().getTimestamp().getTime();
-			}
+			Sum += Data.getData();
 		}
 	}
 
-	return State(Tran / BufferSize, Ang / BufferSize, GroundClear / BufferSize, Timestamp(Time));
+	return State(Sum.getVector_Translative() / BufferSize, 
+		Sum.getVector_Angular() / BufferSize, 
+		Sum.getGroundClearance() / BufferSize, 
+		Sum.getTimestamp());
 }
 
 

@@ -18,13 +18,15 @@ public:
 	Vector3D(Unit Unit, FixedPoint<Accuracy_Vector> X, FixedPoint<Accuracy_Vector> Y, FixedPoint<Accuracy_Vector> Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
 	
 	
+	bool operator== (const Vector3D& V);
 	bool operator== (const Vector3D& V) const;
 	bool operator!= (const Vector3D& V) const { return !(*this == V); };
 	Vector3D operator+ (const Vector3D& V);
 	Vector3D operator- (const Vector3D& V);
 	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Accuracy_Vector>(Divisor); };
 	Vector3D operator/ (FixedPoint<Accuracy_Vector> Divisor);
-	
+	void operator+= (const Vector3D& V);
+
 	Unit getUnit() const { return this->Unit_; };
 	FixedPoint<Accuracy_Vector> getX() const { return this->X_; };
 	FixedPoint<Accuracy_Vector> getY() const { return this->Y_; };

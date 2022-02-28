@@ -110,15 +110,15 @@ TEST(Class_FixedPoint, InitCopy)
 
 	FixedPoint<-6> Result(FP);
 
-	FixedPoint<-6> Expection(10);
+	FixedPoint<-6> Expectation(10);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpEquals_EqualShift)
@@ -293,15 +293,15 @@ TEST(Class_FixedPoint, OpAddReturn_FP)
 
 	FixedPoint<-6> Result = FP1 + FP2;
 
-	FixedPoint<-6> Expection(30);
+	FixedPoint<-6> Expectation(30);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpSubstract_Int)
@@ -353,15 +353,15 @@ TEST(Class_FixedPoint, OpSubstractReturn_FP)
 
 	FixedPoint<-6> Result = FP1 - FP2;
 
-	FixedPoint<-6> Expection(-10);
+	FixedPoint<-6> Expectation(-10);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpMultiply_Int)
@@ -413,15 +413,15 @@ TEST(Class_FixedPoint, OpMultiplyReturn_FP)
 
 	FixedPoint<-6> Result = FP1 * FP2;
 
-	FixedPoint<-6> Expection(200);
+	FixedPoint<-6> Expectation(200);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpDevide_Int)
@@ -473,15 +473,15 @@ TEST(Class_FixedPoint, OpDevideReturn_FP)
 
 	FixedPoint<-6> Result = FP1 / FP2;
 
-	FixedPoint<-6> Expection(0.5);
+	FixedPoint<-6> Expectation(0.5);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, ConvertIncrease)
@@ -611,15 +611,15 @@ TEST(Class_Vector3D, Rotate_0)
 
 	Vector3D Result = V1.rotate(0, 0, 0);
 
-	Vector3D Expection(Unit_Length, 1, 2, 3);
+	Vector3D Expectation(Unit_Length, 1, 2, 3);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_X90)
@@ -629,15 +629,15 @@ TEST(Class_Vector3D, Rotate_X90)
 
 	Vector3D Result = V1.rotateX(Angle);
 
-	Vector3D Expection(Unit_Length, 1, -3, 2);
+	Vector3D Expectation(Unit_Length, 1, -3, 2);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_X180)
@@ -647,15 +647,15 @@ TEST(Class_Vector3D, Rotate_X180)
 
 	Vector3D Result = V1.rotateX(Angle);
 
-	Vector3D Expection(Unit_Length, 1, -2, -3);
+	Vector3D Expectation(Unit_Length, 1, -2, -3);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Y90)
@@ -665,15 +665,15 @@ TEST(Class_Vector3D, Rotate_Y90)
 
 	Vector3D Result = V1.rotateY(Angle);
 
-	Vector3D Expection(Unit_Length, 3, 2, -1);
+	Vector3D Expectation(Unit_Length, 3, 2, -1);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Y180)
@@ -683,15 +683,15 @@ TEST(Class_Vector3D, Rotate_Y180)
 
 	Vector3D Result = V1.rotateY(Angle);
 
-	Vector3D Expection(Unit_Length, -1, 2, -3);
+	Vector3D Expectation(Unit_Length, -1, 2, -3);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Z90)
@@ -701,15 +701,15 @@ TEST(Class_Vector3D, Rotate_Z90)
 
 	Vector3D Result = V1.rotateZ(Angle);
 
-	Vector3D Expection(Unit_Length, -2, 1, 3);
+	Vector3D Expectation(Unit_Length, -2, 1, 3);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Z180)
@@ -719,14 +719,14 @@ TEST(Class_Vector3D, Rotate_Z180)
 
 	Vector3D Result = V1.rotateZ(Angle);
 
-	Vector3D Expection(Unit_Length, -1, -2, 3);
+	Vector3D Expectation(Unit_Length, -1, -2, 3);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 

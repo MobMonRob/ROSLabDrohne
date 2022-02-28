@@ -6,14 +6,16 @@
 
 
 State::State(Vector3D Translative, Vector3D Angular, Value GroundClearance, Timestamp Time)
-	: Accelerations_(Unit_Acceleration), Angles_(Unit_AngleDeg), GroundClearance_(Unit_Length)
+	: Accelerations_(Unit_Acceleration),
+	Angles_(Unit_AngleVelRad),
+	GroundClearance_(Unit_Length)
 {
 	if (Translative.getUnit() == Unit_Acceleration)
 	{
 		this->Accelerations_ = Translative;
 	}
 
-	if (Angular.getUnit() == Unit_AngleDeg)
+	if (Angular.getUnit() == Unit_AngleVelRad)
 	{
 		this->Angles_ = Angular;
 	}
@@ -25,6 +27,7 @@ State::State(Vector3D Translative, Vector3D Angular, Value GroundClearance, Time
 	
 	this->Time_ = Time;
 }
+
 
 bool State::operator==(const State& S)
 {
@@ -39,12 +42,37 @@ bool State::operator==(const State& S)
 	return ReturnBool;
 }
 
+bool State::operator==(const State& S) const
+{
+	bool ReturnBool = true;
+
+
+	ReturnBool &= (this->Accelerations_ == S.Accelerations_);
+	ReturnBool &= (this->Angles_ == S.Angles_);
+	ReturnBool &= (this->GroundClearance_ == S.GroundClearance_);
+	ReturnBool &= (this->Time_ == S.Time_);
+
+	return ReturnBool;
+}
+
+void State::operator+=(const State& S)
+{
+	this->Accelerations_ += S.Accelerations_;
+	this->Angles_ += S.Angles_;
+	this->GroundClearance_ += S.GroundClearance_;
+	
+	if (this->Time_ < S.Time_)
+	{
+		this->Time_ = S.Time_;
+	}
+}
+
 State State::operator-(const State& S)
 {
 	return State(this->getVector_Translative() - S.Accelerations_,
 		this->getVector_Angular() - S.Angles_,
 		this->getGroundClearance() - S.GroundClearance_,
-		this->getTimestamp());
+		S.Time_);
 }
 
 

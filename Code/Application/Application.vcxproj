@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="include\Application\AccelToPos.h" />
     <ClInclude Include="include\Application\AngVelToAng.h" />
+    <ClInclude Include="include\Application\Header.h" />
     <ClInclude Include="include\Application\PoseBuilder.h" />
     <ClInclude Include="include\Application\State.h" />
     <ClInclude Include="include\Application\StateHandler.h" />

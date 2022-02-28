@@ -47,5 +47,8 @@
     <ClInclude Include="include\Application\PoseBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\Application\Header.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

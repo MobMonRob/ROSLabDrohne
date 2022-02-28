@@ -16,7 +16,7 @@ bool Integral1::setInput(TimedValue V, bool AutoCalculation)
 
 	if (AutoCalculation)
 	{
-		this->Input_.getOutput();
+		this->getOutput();
 	}
 
 	return ReturnBool;
