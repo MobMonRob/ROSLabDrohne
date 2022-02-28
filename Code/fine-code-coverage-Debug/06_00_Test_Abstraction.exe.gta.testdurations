@@ -2,45 +2,6 @@
 <GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_00_Test_Abstraction.exe</Executable>
   <TestDurations>
-<<<<<<< createFixedPoint
-    <TestDuration Test="TestCaseName.TestName" Duration="1" />
-    <TestDuration Test="WeWillRockYou.TestName" Duration="1" />
-    <TestDuration Test="Class_Unit.OpEquals" Duration="1" />
-    <TestDuration Test="Class_Vector3D.OpEquals" Duration="1" />
-    <TestDuration Test="Class_Vector3D.OpEquals_FalseX" Duration="1" />
-    <TestDuration Test="Class_Vector3D.OpEquals_FalseUnit" Duration="1" />
-    <TestDuration Test="Class_Vector3D.OpEquals_FalseY" Duration="1" />
-    <TestDuration Test="Class_Vector3D.OpEquals_FalseZ" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_X" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Y" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Z" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
-<<<<<<< createFixedPoint
-    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
-=======
-<<<<<<< createFixedPoint
-    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="31" />
->>>>>>> Edited Tests for Vector3D and Added FixedPoint to Vector3D
-    <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
-=======
-    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="3" />
->>>>>>> Edited Tests for Vector3D and Added FixedPoint to Vector3D
-    <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt_raw3" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt_raw6" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitFloat" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitDouble" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpMultiply_Int" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpMultiply_Double" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpMultiply_FP" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.Convert" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt_rawNeg3" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt_rawNeg6" Duration="1" />
-=======
->>>>>>> Fixed current Tests for Vector3D
     <TestDuration Test="Class_FixedPoint.InitInt10_raw0" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10_raw3" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10E4_raw3" Duration="1" />
@@ -56,6 +17,12 @@
     <TestDuration Test="Class_FixedPoint.OpEquals_DifferentShift_True" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpEquals_DifferentShift_False" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpUnequals_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSmaller_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSmallerEquals_Smaller_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSmallerEquals_Equal_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpGreater_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Smaller_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Equal_EqualShift" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpAdd_Int" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpAdd_Double" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpAdd_FP" Duration="1" />
@@ -72,22 +39,6 @@
     <TestDuration Test="Class_FixedPoint.OpDevide_Double" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpDevide_FP" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpDevideReturn_FP" Duration="1" />
-<<<<<<< createFixedPoint
-    <TestDuration Test="Class_FixedPoint.InitCopy" Duration="1" />
-<<<<<<< createFixedPoint
-    <TestDuration Test="Class_FixedPoint.OpSmaller_EqualShift" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpSmallerEquals_Smaller_EqualShift" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpSmallerEquals_Equal_EqualShift" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpGreater_EqualShift" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Smaller_EqualShift" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Equal_EqualShift" Duration="1" />
-=======
-=======
-    <TestDuration Test="Class_Vector3D.Rotate_X180" Duration="39" />
-    <TestDuration Test="Class_Vector3D.Rotate_Y180" Duration="3" />
->>>>>>> Edited Tests for Vector3D and Added FixedPoint to Vector3D
->>>>>>> Edited Tests for Vector3D and Added FixedPoint to Vector3D
-=======
     <TestDuration Test="Class_FixedPoint.ConvertIncrease" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertIncreaseRaw" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertDecrease" Duration="1" />
@@ -101,10 +52,9 @@
     <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_X180" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="35" />
+    <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Y180" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
->>>>>>> Fixed current Tests for Vector3D
   </TestDurations>
 </GtaTestDurations>

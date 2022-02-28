@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;Pose.obj;TimedDifference.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -144,12 +144,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="src\PoseBuilder.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application\AccelToPos.h" />
     <ClInclude Include="include\Application\AngVelToAng.h" />
+    <ClInclude Include="include\Application\PoseBuilder.h" />
     <ClInclude Include="include\Application\State.h" />
     <ClInclude Include="include\Application\StateHandler.h" />
     <ClInclude Include="include\Application\Wrapper3D.h" />

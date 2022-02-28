@@ -9,9 +9,14 @@ const int Accuracy_Time = -4;
 class Timestamp
 {
 public:
-	Timestamp(FixedPoint<Accuracy_Time> Time = 0.0) : Time_(Time) {};
+	Timestamp(FixedPoint<Accuracy_Time> Time = FixedPoint<Accuracy_Time>()) : Time_(Time) {};
 
 	bool operator==(const Timestamp& T) { return this->getTime() == T.Time_; };
+	bool operator!=(const Timestamp& T) { return !this->operator==(T); };
+	bool operator<(const Timestamp& T) { return this->getTime() < T.Time_; };
+	bool operator<=(const Timestamp& T) { return this->getTime() <= T.Time_; };
+	bool operator>(const Timestamp& T) { return this->getTime() > T.Time_; };
+	bool operator>=(const Timestamp& T) { return this->getTime() >= T.Time_; };
 
 	FixedPoint<Accuracy_Time> getTime() { return this->Time_; };
 
