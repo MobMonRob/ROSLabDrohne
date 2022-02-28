@@ -14,9 +14,15 @@ public:
 
 	template<int TIn>
 	bool operator==(const FixedPoint<TIn>& FP) const;
+	bool operator==(const FixedPoint<T>& FP) const { return this->ValueRaw_ == FP.ValueRaw_; };
 
 	template<int TIn>
 	bool operator!=(const FixedPoint<TIn>& FP) const { return !this->operator==(FP); };
+
+	bool operator<(const FixedPoint<T>& FP) const { return this->ValueRaw_ < FP.ValueRaw_; };
+	bool operator<=(const FixedPoint<T>& FP) const { return this->ValueRaw_ <= FP.ValueRaw_; };
+	bool operator>(const FixedPoint<T>& FP) const { return this->ValueRaw_ > FP.ValueRaw_; };
+	bool operator>=(const FixedPoint<T>& FP) const { return this->ValueRaw_ >= FP.ValueRaw_; };
 
 	template<int TIn>
 	FixedPoint<T> operator+(const FixedPoint<TIn>& FP);
@@ -51,6 +57,7 @@ public:
 
 	template<int TIn>
 	static FixedPoint<T> convert(FixedPoint<TIn> FP);
+	
 
 protected:
 	long long ValueRaw_;
@@ -107,6 +114,7 @@ inline bool FixedPoint<T>::operator==(const FixedPoint<TIn>& FP) const
 
 	return ReturnBool;
 }
+
 
 template<int T>
 template<int TIn>
@@ -248,6 +256,9 @@ inline FixedPoint<T> FixedPoint<T>::convert(FixedPoint<TIn> FP)
 
 	return FP_Out;
 }
+
+
+
 
 #endif // FIXEDPOINT_H
 
