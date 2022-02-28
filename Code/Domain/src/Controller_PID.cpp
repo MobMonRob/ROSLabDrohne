@@ -1,7 +1,7 @@
 #include "Domain/Controller_PID.h"
 
 
-Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, double kP, double kI, double kD, Outputable* InputAddr)
+Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kP, FixedPoint<Accuracy_K> kI, FixedPoint<Accuracy_K> kD, Outputable* InputAddr)
 	: Input(UnitInput, InputAddr), ControlledOutput(ControllerType::PID ,UnitOutput),
 	ControlP_(UnitInput, UnitOutput, kP, InputAddr),
 	ControlI_(UnitInput, UnitOutput, kI, InputAddr),
@@ -10,7 +10,7 @@ Controller_PID::Controller_PID(Unit UnitInput, Unit UnitOutput, double kP, doubl
 }
 
 
-bool Controller_PID::setK(double k, ControllerType Type)
+bool Controller_PID::setK(FixedPoint<Accuracy_K> k, ControllerType Type)
 {
 	bool ReturnBool = false;
 
@@ -38,9 +38,9 @@ bool Controller_PID::setK(double k, ControllerType Type)
 
 
 
-double Controller_PID::getK(ControllerType Type)
+FixedPoint<Accuracy_K> Controller_PID::getK(ControllerType Type)
 {
-	double ReturnValue = 0.0;
+	FixedPoint<Accuracy_K> ReturnValue = 0.0;
 
 
 	switch (Type)

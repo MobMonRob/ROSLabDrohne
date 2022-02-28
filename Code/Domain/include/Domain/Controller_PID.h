@@ -15,18 +15,18 @@
 class Controller_PID : public Input, public ControlledOutput
 {
 public:
-	Controller_PID(Unit UnitInput, Unit UnitOutput, double kP = 1.0, double kI = 1.0, double kD = 1.0, Outputable* InputAddr = nullptr);
+	Controller_PID(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kP = 1.0, FixedPoint<Accuracy_K> kI = 1.0, FixedPoint<Accuracy_K> kD = 1.0, Outputable* InputAddr = nullptr);
 
-	bool setK(double k, ControllerType Type = ControllerType::UNKNOWN);
-	bool setKP(double k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlP_.setK(k, Type); };
-	bool setKI(double k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlI_.setK(k, Type); };
-	bool setKD(double k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlD_.setK(k, Type); };
+	bool setK(FixedPoint<Accuracy_K> k, ControllerType Type = ControllerType::UNKNOWN);
+	bool setKP(FixedPoint<Accuracy_K> k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlP_.setK(k, Type); };
+	bool setKI(FixedPoint<Accuracy_K> k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlI_.setK(k, Type); };
+	bool setKD(FixedPoint<Accuracy_K> k, ControllerType Type = ControllerType::UNKNOWN) { return this->ControlD_.setK(k, Type); };
 
 
-	double getK(ControllerType Type = ControllerType::UNKNOWN);
-	double getKP() { return this->ControlP_.getK(); };
-	double getKI() { return this->ControlI_.getK(); };
-	double getKD() { return this->ControlD_.getK(); };
+	FixedPoint<Accuracy_K> getK(ControllerType Type = ControllerType::UNKNOWN);
+	FixedPoint<Accuracy_K> getKP() { return this->ControlP_.getK(); };
+	FixedPoint<Accuracy_K> getKI() { return this->ControlI_.getK(); };
+	FixedPoint<Accuracy_K> getKD() { return this->ControlD_.getK(); };
 	TimedValue getOutput();
 
 private:

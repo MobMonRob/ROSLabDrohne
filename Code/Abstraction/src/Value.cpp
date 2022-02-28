@@ -40,6 +40,6 @@ Value Value::operator-(const Value& V)
 
 Value Value::operator/(double Divisor)
 {
-	return Value(this->getUnit(), this->getValue() / Divisor);
+	return Value(this->getUnit(), this->getValue() / FixedPoint<Accuracy_Value>(Divisor));
 }
 

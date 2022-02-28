@@ -8,27 +8,27 @@
 
 
 const double PI = 3.1415926535897932;
-const int Vector_Accuracy = -6;
+const int Accuracy_Vector = -6;
 
 class Vector3D
 {
 public:
 	Vector3D(Unit Unit) : Vector3D(Unit, 0.0, 0.0, 0.0) {};
 	Vector3D(Unit Unit, double X, double Y, double Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
-	Vector3D(Unit Unit, FixedPoint<Vector_Accuracy> X, FixedPoint<Vector_Accuracy> Y, FixedPoint<Vector_Accuracy> Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
+	Vector3D(Unit Unit, FixedPoint<Accuracy_Vector> X, FixedPoint<Accuracy_Vector> Y, FixedPoint<Accuracy_Vector> Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
 	
 	
 	bool operator== (const Vector3D& V) const;
 	bool operator!= (const Vector3D& V) const { return !(*this == V); };
 	Vector3D operator+ (const Vector3D& V);
 	Vector3D operator- (const Vector3D& V);
-	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Vector_Accuracy>(Divisor); };
-	Vector3D operator/ (FixedPoint<Vector_Accuracy> Divisor);
+	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Accuracy_Vector>(Divisor); };
+	Vector3D operator/ (FixedPoint<Accuracy_Vector> Divisor);
 	
 	Unit getUnit() const { return this->Unit_; };
-	FixedPoint<Vector_Accuracy> getX() const { return this->X_; };
-	FixedPoint<Vector_Accuracy> getY() const { return this->Y_; };
-	FixedPoint<Vector_Accuracy> getZ() const { return this->Z_; };
+	FixedPoint<Accuracy_Vector> getX() const { return this->X_; };
+	FixedPoint<Accuracy_Vector> getY() const { return this->Y_; };
+	FixedPoint<Accuracy_Vector> getZ() const { return this->Z_; };
 	std::string getString();
 
 	Vector3D rotate(double AngleX, double AngleY, double AngleZ);
@@ -38,9 +38,9 @@ public:
 
 private:
 	Unit Unit_;
-	FixedPoint<Vector_Accuracy> X_;
-	FixedPoint<Vector_Accuracy> Y_;
-	FixedPoint<Vector_Accuracy> Z_;
+	FixedPoint<Accuracy_Vector> X_;
+	FixedPoint<Accuracy_Vector> Y_;
+	FixedPoint<Accuracy_Vector> Z_;
 };
 
 #endif // VECTOR3D_H

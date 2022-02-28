@@ -1,7 +1,7 @@
 #include "Domain/Controller_PT.h"
 
 
-Controller_PT::Controller_PT(Unit UnitInput, Unit UnitOutput, double kP, double T1, Outputable* InputAddr)
+Controller_PT::Controller_PT(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kP, FixedPoint<Accuracy_K> T1, Outputable* InputAddr)
 	: Controller_Basic(UnitInput, UnitOutput, ControllerType::PT, kP, InputAddr), OutputLast_(UnitOutput)
 {
 	this->T1_ = T1;
@@ -13,13 +13,14 @@ TimedValue Controller_PT::getOutput()
 	if (this->getInputAddr() != nullptr)
 	{
 		TimedValue Input = this->getInputAddr()->getOutput();
-		double DiffTime = Input.getTime() - this->OutputLast_.getTime();
-		double Out_Calc = this->OutputLast_.getValue();
+		FixedPoint<Accuracy_Time> DiffTime = Input.getTime() - this->OutputLast_.getTime();
+		FixedPoint<Accuracy_Value> Out_Calc = this->OutputLast_.getValue();
+		FixedPoint<Accuracy_Value> One(1);
 
-		if (DiffTime > 0)
+		if (DiffTime > FixedPoint<Accuracy_Time>(0))
 		{
-			Out_Calc = 1 / ((this->T1_ / DiffTime) + 1)
-				* (this->k_ * Input.getValue() - this->OutputLast_.getValue())
+			Out_Calc = One / ((FixedPoint<Accuracy_Value>::convert(this->T1_) / FixedPoint<Accuracy_Value>::convert(DiffTime)) + One)
+				* (FixedPoint<Accuracy_Value>::convert(this->k_) * Input.getValue() - this->OutputLast_.getValue())
 				+ this->OutputLast_.getValue();
 		}
 

@@ -1,7 +1,7 @@
 #include "Domain/Controller_D.h"
 
 
-Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputable* InputAddr)
+Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kI, Outputable* InputAddr)
 	: Controller_Basic(UnitInput, UnitOutput, ControllerType::D, kI, InputAddr), InputLast_(UnitInput)
 {
 };
@@ -9,9 +9,9 @@ Controller_D::Controller_D(Unit UnitInput, Unit UnitOutput, double kI, Outputabl
 
 TimedValue Controller_D::getOutput()
 {
-	double Diff = 0.0;
-	double Time = this->InputLast_.getTime();
-	double DiffTime = 1.0;
+	FixedPoint<Accuracy_Value> Diff = 0.0;
+	FixedPoint<Accuracy_Time> Time = this->InputLast_.getTime();
+	FixedPoint<Accuracy_Time> DiffTime = 1.0;
 
 	if (this->getInputAddr() != nullptr)
 	{
@@ -31,6 +31,6 @@ TimedValue Controller_D::getOutput()
 		DiffTime = 1.0;
 	}
 
-	return TimedValue(this->getOutputUnit(), (Diff / DiffTime) * this->k_, Time);
+	return TimedValue(this->getOutputUnit(), (Diff / FixedPoint<Accuracy_Value>::convert(DiffTime)) * FixedPoint<Accuracy_Value>::convert(this->k_), Time);
 }
 

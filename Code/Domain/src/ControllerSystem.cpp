@@ -76,7 +76,7 @@ ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
 
 
 
-bool ControllerSystem::setK(int ID, ControllerType Type, double K)
+bool ControllerSystem::setK(int ID, ControllerType Type, FixedPoint<Accuracy_K> K)
 {
 	bool ReturnBool = false;
 	Controllable* KnotPtr = this->getKnot(ID);
@@ -91,7 +91,7 @@ bool ControllerSystem::setK(int ID, ControllerType Type, double K)
 }
 
 
-void ControllerSystem::addController(Unit UnitOutput, double K, ControllerType Type)
+void ControllerSystem::addController(Unit UnitOutput, FixedPoint<Accuracy_K> K, ControllerType Type)
 {
 	Output* KnotPrev = this->getOutputAddrLast();
 
@@ -118,7 +118,7 @@ void ControllerSystem::addController(Unit UnitOutput, double K, ControllerType T
 	}
 }
 
-void ControllerSystem::addController(Unit UnitOutput, double KP, double KI, double KD)
+void ControllerSystem::addController(Unit UnitOutput, FixedPoint<Accuracy_K> KP, FixedPoint<Accuracy_K> KI, FixedPoint<Accuracy_K> KD)
 {
 	Outputable* KnotPrev = this->getOutputAddrLast();
 
@@ -126,7 +126,7 @@ void ControllerSystem::addController(Unit UnitOutput, double KP, double KI, doub
 	this->addControllable(new Controller_PID(KnotPrev->getOutputUnit(), UnitOutput, KP, KI, KD, KnotPrev));
 }
 
-void ControllerSystem::addController(Unit UnitOutput, double K, double T)
+void ControllerSystem::addController(Unit UnitOutput, FixedPoint<Accuracy_K> K, FixedPoint<Accuracy_K> T)
 {
 	Outputable* KnotPrev = this->getOutputAddrLast();
 

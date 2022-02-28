@@ -136,8 +136,8 @@ void ActionAdapter::addState(State Entry)
 	this->ControlZ_.setFeedback(this->PosZ_.getOutput());
 
 	this->ActionReceiver_->transmitAction(
-		this->ControlX_.getOutput().getValue(),
-		this->ControlY_.getOutput().getValue(),
-		this->ControlZ_.getOutput().getValue(),
+		this->ControlX_.getOutput().getValue().getValue(),
+		this->ControlY_.getOutput().getValue().getValue(),
+		this->ControlZ_.getOutput().getValue().getValue(),
 		0);
 }

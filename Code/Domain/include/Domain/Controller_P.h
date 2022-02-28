@@ -10,7 +10,7 @@
 class Controller_P : public Controller_Basic
 {
 public:
-	Controller_P(Unit UnitInput, Unit UnitOutput, double kP = 1.0, Outputable* InputAddr = nullptr);
+	Controller_P(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kP = 1.0, Outputable* InputAddr = nullptr);
 
 	TimedValue getOutput();
 };

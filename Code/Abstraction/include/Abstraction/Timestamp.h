@@ -2,17 +2,21 @@
 #define Timestamp_H
 
 
+#include "Abstraction/FixedPoint.h"
+
+const int Accuracy_Time = -4;
+
 class Timestamp
 {
 public:
-	Timestamp(double Time = 0.0) : Time_(Time) {};
+	Timestamp(FixedPoint<Accuracy_Time> Time = 0.0) : Time_(Time) {};
 
 	bool operator==(const Timestamp& T) { return this->getTime() == T.Time_; };
 
-	double getTime() { return this->Time_; };
+	FixedPoint<Accuracy_Time> getTime() { return this->Time_; };
 
 protected:
-	double Time_;
+	FixedPoint<Accuracy_Time> Time_;
 };
 
 #endif // Timestamp_H

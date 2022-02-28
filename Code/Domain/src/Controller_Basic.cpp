@@ -1,13 +1,13 @@
 #include "Domain/Controller_Basic.h"
 
 
-Controller_Basic::Controller_Basic(Unit UnitInput, Unit UnitOutput, ControllerType Type, double k, Outputable* InputAddr)
+Controller_Basic::Controller_Basic(Unit UnitInput, Unit UnitOutput, ControllerType Type, FixedPoint<Accuracy_K> k, Outputable* InputAddr)
 	: Input(UnitInput, InputAddr), ControlledOutput(Type, UnitOutput), k_(k)
 {
 };
 
 
-bool Controller_Basic::setK(double k, ControllerType Type)
+bool Controller_Basic::setK(FixedPoint<Accuracy_K> k, ControllerType Type)
 {
 	bool ReturnBool = false;
 

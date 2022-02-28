@@ -1,7 +1,7 @@
 #include "Domain/Controller_P.h"
 
 
-Controller_P::Controller_P(Unit UnitInput, Unit UnitOutput, double kP, Outputable* InputAddr)
+Controller_P::Controller_P(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kP, Outputable* InputAddr)
 	: Controller_Basic(UnitInput, UnitOutput, ControllerType::P, kP, InputAddr)
 {
 };
@@ -9,15 +9,15 @@ Controller_P::Controller_P(Unit UnitInput, Unit UnitOutput, double kP, Outputabl
 
 TimedValue Controller_P::getOutput()
 {
-	double Output = 0.0;
-	double TimeStamp = 0.0;
+	FixedPoint<Accuracy_Value> Output;
+	FixedPoint<Accuracy_Time> TimeStamp;
 
 	if (this->getInputAddr() != nullptr)
 	{
 		TimedValue Input = this->getInputAddr()->getOutput();
 		
 		
-		Output = Input.getValue() * this->k_;
+		Output = Input.getValue() * FixedPoint<Accuracy_Value>::convert(this->k_);
 		TimeStamp = Input.getTime();
 	}
 

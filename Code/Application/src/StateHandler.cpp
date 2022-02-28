@@ -8,7 +8,7 @@ State StateHandler::getAvgState()
 	Vector3D Tran(Unit_Length);
 	Vector3D Ang(Unit_AngleDeg);
 	Value GroundClear(Unit_Length);
-	double Time = 0;
+	FixedPoint<Accuracy_Time> Time = 0;
 
 	for (int i = 0; i < BufferSize; i++)
 	{

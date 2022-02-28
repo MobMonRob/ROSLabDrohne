@@ -41,7 +41,7 @@ Vector3D Vector3D::operator-(const Vector3D& V)
 	}
 }
 
-Vector3D Vector3D::operator/(FixedPoint<Vector_Accuracy> Divisor)
+Vector3D Vector3D::operator/(FixedPoint<Accuracy_Vector> Divisor)
 {
 
 
@@ -95,12 +95,12 @@ Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 
 Vector3D Vector3D::rotateX(double Angle)
 {
-	FixedPoint<Vector_Accuracy> sin(sin(Angle));
-	FixedPoint<Vector_Accuracy> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
 
-	FixedPoint<Vector_Accuracy> Y = this->getY() * cos
+	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
 		- this->getZ() * sin;
-	FixedPoint<Vector_Accuracy> Z = this->getZ() * cos
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
 		+ this->getY() * sin;
 
 
@@ -109,13 +109,13 @@ Vector3D Vector3D::rotateX(double Angle)
 
 Vector3D Vector3D::rotateY(double Angle)
 {
-	FixedPoint<Vector_Accuracy> sin(sin(Angle));
-	FixedPoint<Vector_Accuracy> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
 
 	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
-	FixedPoint<Vector_Accuracy> X = this->getX() * cos
+	FixedPoint<Accuracy_Vector> X = this->getX() * cos
 		+ this->getZ() * sin;
-	FixedPoint<Vector_Accuracy> Z = this->getZ() * cos
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
 		- this->getX() * sin;
 
 
@@ -124,12 +124,12 @@ Vector3D Vector3D::rotateY(double Angle)
 
 Vector3D Vector3D::rotateZ(double Angle)
 {
-	FixedPoint<Vector_Accuracy> sin(sin(Angle));
-	FixedPoint<Vector_Accuracy> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
 
-	FixedPoint<Vector_Accuracy> X = this->getX() * cos
+	FixedPoint<Accuracy_Vector> X = this->getX() * cos
 		- this->getY() * sin;
-	FixedPoint<Vector_Accuracy> Y = this->getY() * cos
+	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
 		+ this->getX() * sin;
 
 

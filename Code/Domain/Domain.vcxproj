@@ -157,6 +157,7 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
+    <ClCompile Include="src\Pose.cpp" />
     <ClCompile Include="src\TimedDifference.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="include\Domain\Integral2.h" />
     <ClInclude Include="include\Domain\Output.h" />
     <ClInclude Include="include\Domain\Outputable.h" />
+    <ClInclude Include="include\Domain\Pose.h" />
     <ClInclude Include="include\Domain\TimedDifference.h" />
   </ItemGroup>
   <ItemGroup>
