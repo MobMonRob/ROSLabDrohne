@@ -158,41 +158,69 @@ TEST(Class_StateHandler, Init)
 
 
 
-TEST(Class_PoseBuilder, AccelRot_X_4s)
+TEST(Class_PoseBuilder, AccelRot_X_10s)
 {
-	PoseBuilder PB;
-
-	Vector3D ResultPosition = PB.getPosition();
-	Vector3D ResultOrientation = PB.getOrientation();
-
-	Vector3D ExpectationPosition(Unit_Length, 0, 0, 0);
-	Vector3D ExpectationOrientation(Unit_AngleRad, 0, 0, 0);
-
-	if (ResultPosition != ExpectationPosition)
-	{
-		std::cout << "Position: " << ResultPosition.getString() << std::endl;
-	}
-
-	if (ResultOrientation != ExpectationOrientation)
-	{
-		std::cout << "Orientation: " << ResultOrientation.getString() << std::endl;
-	}
-
-
-	EXPECT_EQ(ResultPosition, ExpectationPosition);
-	EXPECT_EQ(ResultOrientation, ExpectationOrientation);
-}
-
-TEST(Class_PoseBuilder, AccelPos_X_4s)
-{
-	int t_max = 4;
+	const int t_max = 10;
+	const int StepFactor = 50;
+	double ErrorMax = 0.01;		// [%]
 	PoseBuilder PB;
 	std::vector<Vector3D> Results;
+	std::vector<Vector3D> Expectations;
 
 
-	for (int t = 0; t <= t_max*1000; t++)
+	for (int t = 0; t <= t_max * StepFactor; t++)
 	{
-		double Time = static_cast<double>(t) / 1000;
+		double Time = static_cast<double>(t) / StepFactor;
+		State S(
+			Vector3D(Unit_Acceleration, 0, 0, 0),
+			Vector3D(Unit_AngleVelRad, 1, 0, 0),
+			Value(Unit_Length, 0),
+			Timestamp(FixedPoint<Accuracy_Time>(Time))
+		);
+
+		PB.updatePose(S);
+
+		if (t % StepFactor == 0)
+		{
+			Results.push_back(PB.getOrientation());
+		}
+	}
+
+	for (int i = 0; i <= t_max; i++)
+	{
+		Expectations.push_back(Vector3D(Unit_AngleRad, i, 0, 0));
+	}
+
+	for (int i = 1; i <= t_max; i++)
+	{
+		const FixedPoint<Accuracy_Value> Result = Results.at(i).getX();
+		const FixedPoint<Accuracy_Value> ExpectatedValue = Expectations.at(i).getX();
+		double Error = 100 * std::abs(Result.getValue() / ExpectatedValue.getValue() - 1);
+		bool Expectation = Error <= ErrorMax;
+
+
+		if (!Expectation)
+		{
+			std::cout << "Position Error " << i << ": " << Error << std::endl;
+		}
+
+		EXPECT_TRUE(Expectation);
+	}
+}
+
+TEST(Class_PoseBuilder, AccelPos_X_10s)
+{
+	const int t_max = 10;
+	const int StepFactor = 50;
+	double ErrorMax = 0.1;		// [%]
+	PoseBuilder PB;
+	std::vector<Vector3D> Results;
+	std::vector<Vector3D> Expectations;
+
+
+	for (int t = 0; t <= t_max* StepFactor; t++)
+	{
+		double Time = static_cast<double>(t) / StepFactor;
 		State S(
 			Vector3D(Unit_Acceleration, 1, 0, 0),
 			Vector3D(Unit_AngleVelRad, 0, 0, 0),
@@ -202,63 +230,35 @@ TEST(Class_PoseBuilder, AccelPos_X_4s)
 
 		PB.updatePose(S);
 
-		if (t % 1000 == 0)
+		if (t % StepFactor == 0)
 		{
 			Results.push_back(PB.getPosition());
 		}
 	}
 
-
-
-	Vector3D ResultPosition = PB.getPosition();
-	Vector3D ResultOrientation = PB.getOrientation();
-
-	std::vector<Vector3D> Expectations;
-
 	for (int i = 0; i <= t_max; i++)
 	{
-		Expectations.push_back(Vector3D(Unit_Length, i*i, 0, 0));
+		Expectations.push_back(Vector3D(Unit_Length, 0.5*i*i, 0, 0));
 	}
 
-	for (int i = 0; i <= t_max; i++)
+	for (int i = 1; i <= t_max; i++)
 	{
-		if (Results.at(i) != Expectations.at(i))
+		const FixedPoint<Accuracy_Value> Result = Results.at(i).getX();
+		const FixedPoint<Accuracy_Value> ExpectatedValue = Expectations.at(i).getX();
+		double Error = 100 * std::abs(Result.getValue() / ExpectatedValue.getValue() - 1);
+		bool Expectation = Error <= ErrorMax;
+
+
+		if (!Expectation)
 		{
-			std::cout << "Position" << i << ": " << Results.at(i).getString() << std::endl;
+			std::cout << "Position Error " << i << ": " << Error << std::endl;
 		}
 
-
-		EXPECT_EQ(Results.at(i), Expectations.at(i));
+		EXPECT_TRUE(Expectation);
 	}
 }
 
-/*
-TEST(Class_PoseBuilder, AccelRot_X_4s)
-{
-	PoseBuilder PB;
-
-	Vector3D ResultPosition = PB.getPosition();
-	Vector3D ResultOrientation = PB.getOrientation();
 
 
 
 
-
-	Vector3D ExpectationPosition(Unit_Length, 0, 0, 0);
-	Vector3D ExpectationOrientation(Unit_AngleRad, 0, 0, 0);
-
-	if (ResultPosition != ExpectationPosition)
-	{
-		std::cout << "Position: " << ResultPosition.getString() << std::endl;
-	}
-
-	if (ResultOrientation != ExpectationOrientation)
-	{
-		std::cout << "Orientation: " << ResultOrientation.getString() << std::endl;
-	}
-
-
-	EXPECT_EQ(ResultPosition, ExpectationPosition);
-	EXPECT_EQ(ResultOrientation, ExpectationOrientation);
-}
-*/
