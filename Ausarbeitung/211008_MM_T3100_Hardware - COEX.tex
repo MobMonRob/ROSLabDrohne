@@ -1,0 +1,235 @@
+\newSec[HWCOEX]{COEX Drohne}{2}
+
+Bei dem für die \DHBW\ neu angeschafften \Quad\ handelt es sich um das Modell \Clover\ des Unternehmens \textit{Copter Express} (\COEX).
+
+Das Modell \Clover\ wurde vom Hersteller zur Ausbildung und Forschung an \Quad[n] entwickelt. Das Modell besitzt einen Rahmen, welche die Rotoren bei Kollisionen schützten soll.
+
+
+
+
+Interner Flight Controller, ROS Kommunikation via Pie 4.
+
+
+
+
+Probleme bei Inbetriebnahme - Beispielprogramm des Herstellers bringt nicht das erwartete Ergebnis.
+
+
+
+
+
+\newSec{Geometrie}{3}
+
+
+\newSec[Geom-Rot]{Anordnung der Rotoren}{4}
+
+
+X
+
+
+
+
+\newSec[Control]{Control Stack}{3}
+
+\missing[Bezeichnung auf deutsch?]
+
+\newSec[PX]{Flight Controller}{4}
+PX4 Racer
+
+
+\newSec[Pie]{On Board Computer}{4}
+\Pie\
+
+
+
+\newSec{Funkfernsteuerung}{3}
+s-Bus ??
+
+
+
+
+
+\newSec{Sensorik}{3}
+
+
+
+\newSec{Gyroskop}{4}
+
+
+
+\newSec[Laser]{Laser-Abstandsmessung}{4}
+
+
+
+\newSec{Bodenkamera}{4}
+
+
+\newSec{GPS}{4}
+
+
+
+
+
+
+
+
+
+\newSec[Build]{Aufbau des Bausatzes}{3}
+
+
+
+
+
+\newSec{Aufbau}{4}
+
+\missing[Bilder vom Aufbau]
+
+
+
+
+\newSec[BuildTrouble]{Troubleshooting}{4}
+
+\newSec{Platinenfehler}{5}
+
+
+
+
+\newSec{Bus-System des RC Empfängers}{5}
+
+
+
+
+\newSec[Build]{Inbetriebnahme}{3}
+
+
+\newSec{Konfiguration des Flight Controllers}{4}
+
+
+
+
+\newSec[TopicTrouble]{Troubleshooting}{4}
+
+
+\missing[Topics anders benannt, als in Dokumentation (überall steht "/mavros" davor]
+
+\missing[Achtung: der Regler VRA muss so eingestellt sein, dass "manual Flight" verfügbar ist. Andersfalls ist ein Start der Drohne nicht möglich.]
+
+
+\newSec[TopicTroubleBlacklist]{Clover ist faul}{5}
+Um Ressourcen zu sparen werden einige \Topic[s] nicht vom \Pie\ verarbeitet \bzw\ weitergegeben.
+
+\texttt{Lösung}\\
+Unterdrückte \Topic[s] müssen 
+\missing[ungetested!]
+
+https://clover.coex.tech/en/mavros.html
+
+Freigegebene \Topic[s] in \texttt{mavros.launch}
+
+\begin{lstlisting}[style=Style_XML, numbers=none, caption={[Freigegebene Topics] Freigegebene \Topic[s] in \texttt{mavros.launch}}]
+<rosparam param="plugin_whitelist">
+	- altitude
+	- command
+	- distance_sensor
+	- ftp
+	- global_position
+	- imu
+	- local_position
+	- manual_control
+	# - mocap_pose_estimate
+	 - param
+	 - px4flow
+	 - rc_io
+	 - setpoint_attitude
+	- setpoint_position
+	- setpoint_raw
+	- setpoint_velocity
+	- sys_status
+	- sys_time
+	- vision_pose_estimate
+	# - vision_speed_estimate
+	# - waypoint
+</rosparam>
+\end{lstlisting}
+
+
+\newSec[TopicTroubleRCOverMD5]{md5-Sum des Topics OverrideRCIn}{5}
+Nach erfolgreicher Kompilierung wird nachfolgender Laufzeitfehler ausgegeben, wenn sich ein \CodeClass{ros::Subscriber} oder ein \CodeClass{ros::Publisher} auf das \rTopic{/mavros/rc/override} anmeldet:\\
+\textcolor{red}{[ERROR] [1643616625.226584828]: Client [/mavros] wants topic /mavros/rc/override \\to have datatype/md5sum [mavros\_msgs/OverrideRCIn/73b27a463a40a3eda1f9fbb1fc86d6f3], but our version has [mavros\_msgs/OverrideRCIn/fd1e1c08fa504ec32737c41f45223398]. Dropping connection.}
+
+\texttt{Lösung}\\
+Definition von \\\CodeMeth{struct MD5Sum<::mavros\_msgs::OverrideRCIn\_<ContainerAllocator>>} \\aus 
+
+\begin{lstlisting}[style=Style_Bash, caption=Befehl zum Öffnen des \textit{OverrideRCIn}-Headers]
+sudo nano /opt/ros/noetic/include/mavros_msgs/OverrideRCIn.h
+\end{lstlisting}
+
+\begin{lstlisting}[style=Style_CPP, numbers=none, caption=Definition des Struct \CodeStruct{MD5Sum} für das Template \textit{OverrideRCIn}]
+template<class ContainerAllocator>
+struct MD5Sum<::mavros_msgs::OverrideRCIn_<ContainerAllocator>>
+{
+	static const char* value()
+	{
+		return "73b27a463a40a3eda1f9fbb1fc86d6f3";
+	}
+
+	static const char* value(const ::mavros_msgs::OverrideRCIn_<ContainerAllocator>&)
+	{
+		return value();
+	}
+	
+	static const uint64_t static_value1 = 0x73b27a463a40a3edULL;
+	static const uint64_t static_value2 = 0xa1f9fbb1fc86d6f3ULL;
+};
+\end{lstlisting}
+
+von dem \Pie\ kopieren und in der Definition des lokalen \ROS\ \textit{\mbox{OverrideRCIn}}-Headers ersetzen.
+
+
+
+\newSec[TopicTroubleRCOver]{Topics OverrideRCIn läuft nur mit Topic RCIn}{5}
+
+
+
+
+
+\texttt{Lösung}\\
+
+
+
+
+
+
+
+
+
+\newSec[TopicTroubleRCOver]{Topics setpoint\_altitude/thrust läuft nicht}{3}
+
+
+
+
+
+\newSec{Lösung}{4}
+
+
+
+
+
+
+\newSec[Build]{Mögliche Lösung der Aufgabenstellung}{3}
+
+
+
+\newSec[COEXPkg]{COEX-Package}{4}
+Für die Interaktion mit der COEX-Drohne wurden diverse Klassen erstellt, um einzelne Aspekte der Interaktion mit der Drohne umsetzen zu können.
+
+
+
+
+
+\newSec[COEXPkg]{geeignete Topics}{4}
+
+Mit dem \rTopic{blablub} \missing\ kann eine Regelung in der XY-Ebene umgesetzt werden. Die Höhenregelung kann mit set\_attitude/thrust eingeführt werden.
+Somit wäre der Versuch für nachfolgende Studierende sehr viel sicherer und so.
+
+
