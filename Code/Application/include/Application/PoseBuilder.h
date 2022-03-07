@@ -22,6 +22,9 @@ class PoseBuilder
 public:
 	PoseBuilder(FixedPoint<Accuracy_Value> InitX = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitY = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitZ = FixedPoint<Accuracy_Value>());
 
+
+	void setPosition(Vector3D Position, Vector3D Uncertainty);
+
 	Pose getPose();
 	Timestamp getTime() const { return this->Time_; };
 	Vector3D getPosition();

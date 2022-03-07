@@ -24,7 +24,7 @@ public:
 	void operator+=(const State& S);
 	State operator-(const State& S);
 
-	Vector3D getVector_Translative() { return this->Accelerations_; };
+	Vector3D getVector_Linear() { return this->Accelerations_; };
 	Vector3D getVector_Angular() { return this->Angles_; };
 	Value getGroundClearance() { return this->GroundClearance_; };
 	Timestamp getTimestamp() { return this->Time_; };

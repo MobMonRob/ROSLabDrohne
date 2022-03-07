@@ -7,7 +7,7 @@
 
 #include "Adapter/ActionAdapter_Mock.h"
 #include "Adapter/ActionAdapter.h"
-#include "StateBuilder.h"
+#include "Application/StateBuilder.h"
 
 
 class PosBridge

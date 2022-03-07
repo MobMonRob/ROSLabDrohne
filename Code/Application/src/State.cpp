@@ -34,7 +34,7 @@ bool State::operator==(const State& S)
 	bool ReturnBool = true;
 
 
-	ReturnBool &= (this->getVector_Translative() == S.Accelerations_);
+	ReturnBool &= (this->getVector_Linear() == S.Accelerations_);
 	ReturnBool &= (this->getVector_Angular() == S.Angles_);
 	ReturnBool &= (this->getGroundClearance() == S.GroundClearance_);
 	ReturnBool &= (this->getTimestamp() == S.Time_);
@@ -69,10 +69,10 @@ void State::operator+=(const State& S)
 
 State State::operator-(const State& S)
 {
-	return State(this->getVector_Translative() - S.Accelerations_,
+	return State(this->getVector_Linear() - S.Accelerations_,
 		this->getVector_Angular() - S.Angles_,
 		this->getGroundClearance() - S.GroundClearance_,
-		S.Time_);
+		(this->getTimestamp() > S.Time_ ? this->getTimestamp() : S.Time_));
 }
 
 

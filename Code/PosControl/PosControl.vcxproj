@@ -146,7 +146,6 @@
   <ItemGroup>
     <ClCompile Include="PosControl.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
-    <ClCompile Include="src\StateBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstraction\Abstraction.vcxproj">
@@ -179,7 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PosControl\PosBridge.h" />
-    <ClInclude Include="include\PosControl\StateBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

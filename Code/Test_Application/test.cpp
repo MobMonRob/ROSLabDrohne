@@ -23,7 +23,7 @@ TEST(Class_State, Substract)
 
 
 	State State3 = State1 - State2;
-	Vector3D StateAccel = State3.getVector_Translative();
+	Vector3D StateAccel = State3.getVector_Linear();
 	Vector3D StateVelRot = State3.getVector_Angular();
 	Value StateGround = State3.getGroundClearance();
 	Timestamp StateTime = State3.getTimestamp();

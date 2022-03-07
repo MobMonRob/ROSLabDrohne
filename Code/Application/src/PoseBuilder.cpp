@@ -58,7 +58,7 @@ void PoseBuilder::updatePose(State State)
 	{
 		{
 			Vector3D Orientation = this->getOrientation();
-			Vector3D Acceleration = State.getVector_Translative().rotate(
+			Vector3D Acceleration = State.getVector_Linear().rotate(
 				Orientation.getX().getValue(),
 				Orientation.getY().getValue(), 
 				Orientation.getZ().getValue());
@@ -84,9 +84,6 @@ void PoseBuilder::updatePose(State State)
 
 	this->Time_ = State.getTimestamp();
 }
-
-
-
 
 
 

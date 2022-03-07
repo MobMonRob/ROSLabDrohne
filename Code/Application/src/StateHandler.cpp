@@ -19,7 +19,7 @@ State StateHandler::getAvgState()
 		}
 	}
 
-	return State(Sum.getVector_Translative() / BufferSize, 
+	return State(Sum.getVector_Linear() / BufferSize, 
 		Sum.getVector_Angular() / BufferSize, 
 		Sum.getGroundClearance() / BufferSize, 
 		Sum.getTimestamp());

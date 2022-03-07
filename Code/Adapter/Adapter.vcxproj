@@ -152,7 +152,6 @@
     <ClInclude Include="include\Adapter\ActionAdapter.h" />
     <ClInclude Include="include\Adapter\ActionAdapter_Mock.h" />
     <ClInclude Include="include\Adapter\ActionDirection.h" />
-    <ClInclude Include="include\Adapter\Transmitable.h" />
     <ClInclude Include="Transmitable_Mock.h" />
   </ItemGroup>
   <ItemGroup>

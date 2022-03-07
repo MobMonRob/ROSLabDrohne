@@ -38,9 +38,6 @@
     <ClInclude Include="include\Adapter\ActionDirection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Adapter\Transmitable.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Transmitable_Mock.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>

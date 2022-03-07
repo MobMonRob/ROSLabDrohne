@@ -144,17 +144,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="src\ControllerMain.cpp" />
     <ClCompile Include="src\PoseBuilder.cpp" />
+    <ClCompile Include="src\PoseController.cpp" />
     <ClCompile Include="src\State.cpp" />
+    <ClCompile Include="src\StateBuilder.cpp" />
     <ClCompile Include="src\StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application\AccelToPos.h" />
     <ClInclude Include="include\Application\AngVelToAng.h" />
+    <ClInclude Include="include\Application\ControllerMain.h" />
     <ClInclude Include="include\Application\Header.h" />
     <ClInclude Include="include\Application\PoseBuilder.h" />
+    <ClInclude Include="include\Application\PoseController.h" />
     <ClInclude Include="include\Application\State.h" />
+    <ClInclude Include="include\Application\StateBuilder.h" />
     <ClInclude Include="include\Application\StateHandler.h" />
+    <ClInclude Include="include\Application\Transmitable.h" />
     <ClInclude Include="include\Application\Wrapper3D.h" />
   </ItemGroup>
   <ItemGroup>

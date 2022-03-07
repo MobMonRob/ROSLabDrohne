@@ -21,7 +21,7 @@ ActionAdapter::ActionAdapter(Transmitable *Transmitable)
 
 ActionAdapter::~ActionAdapter()
 {
-	std::cout << "Termintating ActionAdapter..." << std::endl;
+	std::cout << "Termintated ActionAdapter" << std::endl;
 }
 
 
@@ -107,7 +107,7 @@ Vector3D ActionAdapter::getStatepoint()
 	State StateAvg = this->StateHandler_.getAvgState();
 
 
-	return StateAvg.getVector_Translative();
+	return StateAvg.getVector_Linear();
 }
 
 
@@ -122,7 +122,7 @@ void ActionAdapter::addState(State Entry)
 	State StateAvg = this->StateHandler_.getAvgState();
 	Timestamp Time = StateAvg.getTimestamp();
 	Vector3D Angle = StateAvg.getVector_Angular();
-	Vector3D Accel = StateAvg.getVector_Translative().rotate(
+	Vector3D Accel = StateAvg.getVector_Linear().rotate(
 		-Angle.getX().getValue(),
 		-Angle.getY().getValue(),
 		-Angle.getZ().getValue());

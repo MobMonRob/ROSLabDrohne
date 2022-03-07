@@ -5,9 +5,9 @@
 #include "Application/AccelToPos.h"
 #include "Application/State.h"
 #include "Application/StateHandler.h"
+#include "Application/Transmitable.h"
 
 #include "Adapter/ActionDirection.h"
-#include "Adapter/Transmitable.h"
 
 
 class ActionAdapter

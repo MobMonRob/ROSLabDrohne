@@ -3,7 +3,8 @@
 
 #include <mavros_msgs/ManualControl.h>
 
-#include "Adapter/Transmitable.h"
+#include "Abstraction/FixedPoint.h"
+#include "Application/Transmitable.h"
 
 #include "coex/coexState.h"
 #include "coex/coexBattery.h"
@@ -16,7 +17,7 @@ public:
 	coexTransmitable(coexState* State) : coexTransmitable(State, State->getBattery()) {};
 	coexTransmitable(coexState *State, coexBattery *Battery);
 	
-	bool transmitAction(double pitch, double roll, double thrust, double yarn);
+	bool transmitAction(FixedPoint<Accuracy_Value> pitch, FixedPoint<Accuracy_Value> roll, FixedPoint<Accuracy_Value> thrust, FixedPoint<Accuracy_Value> yarn);
 	bool transmitAction(mavros_msgs::ManualControl Msg);
 	
 protected:

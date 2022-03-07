@@ -3,8 +3,8 @@
 
 #include "Domain/ControllerType.h"
 #include "Application/State.h"
+#include "Application/Transmitable.h"
 
-#include "Adapter/Transmitable.h"
 #include "Adapter/ActionDirection.h"
 
 

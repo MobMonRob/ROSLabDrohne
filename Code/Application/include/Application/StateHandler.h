@@ -18,6 +18,8 @@ public:
 	int getSize() { return Ringbuffer::getSize(); };
 	State getAvgState();
 
+	void clear() { Ringbuffer<State>::clear(); };
+
 };
 
 #endif // STATEHANDLER_H

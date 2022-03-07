@@ -34,8 +34,8 @@ PosBridge::PosBridge()
 	std::cout << "new ActionAdapter" << std::endl;
 	this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
 	std::cout << "new StateBuilder" << std::endl;
-	this->StateBuilder_ = new StateBuilder(&this->coexController_, this->ActionAdapter_);
-	this->coexController_.addCallable(this->StateBuilder_);
+	//this->StateBuilder_ = new StateBuilder(&this->coexController_, this->ActionAdapter_);
+	//this->coexController_.addCallable(this->StateBuilder_);
 	
 	this->SubKeys_ = this->nh_.subscribe("KeyReader", 50, callbackKeys);
 
@@ -47,8 +47,8 @@ PosBridge::~PosBridge()
 {
 	ROS_INFO("Terminating PosBridge...");
 
-	this->coexController_.deleteCallable(this->StateBuilder_);
-	delete this->StateBuilder_;
+	//this->coexController_.deleteCallable(this->StateBuilder_);
+	//delete this->StateBuilder_;
 	delete this->ActionAdapter_;
 
 	ROS_INFO("Terminated PosBridge");

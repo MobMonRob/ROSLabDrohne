@@ -6,9 +6,7 @@
     <TestDuration Test="Class_StateHandler.MaxEntries10" Duration="3" />
     <TestDuration Test="Class_StateHandler.Average_Single" Duration="1" />
     <TestDuration Test="Class_StateHandler.Init" Duration="1" />
-    <TestDuration Test="Class_PoseBuilder.AccelRot_X_4s" Duration="1" />
-    <TestDuration Test="Class_PoseBuilder.AccelPos_X_4s" Duration="37" />
-    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="115" />
-    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="100" />
+    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="85" />
+    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="91" />
   </TestDurations>
 </GtaTestDurations>
