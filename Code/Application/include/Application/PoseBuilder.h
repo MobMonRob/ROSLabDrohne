@@ -24,6 +24,7 @@ public:
 
 
 	void setPosition(Vector3D Position, Vector3D Uncertainty);
+	void setOrientation(Vector3D Orientation, Vector3D Uncertainty);
 
 	Pose getPose();
 	Timestamp getTime() const { return this->Time_; };
