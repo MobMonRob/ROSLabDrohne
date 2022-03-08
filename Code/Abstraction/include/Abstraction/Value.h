@@ -4,7 +4,6 @@
 #include "Abstraction/FixedPoint.h"
 #include "Abstraction/Unit.h"
 
-const int Accuracy_Value = -6;
 
 class Value
 {

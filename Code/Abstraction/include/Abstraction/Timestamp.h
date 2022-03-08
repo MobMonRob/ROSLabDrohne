@@ -4,7 +4,7 @@
 
 #include "Abstraction/FixedPoint.h"
 
-const int Accuracy_Time = -4;
+
 
 class Timestamp
 {

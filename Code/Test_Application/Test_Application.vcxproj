@@ -35,6 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Transmitable_Mock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
@@ -44,6 +45,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Transmitable_Mock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -62,13 +64,13 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../Abstraction/include;../Domain/include;../Application/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../gmock/include;../Abstraction/include;../Domain/include;../Application/include;../cpp_mock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;Pose.obj;TimedDifference.obj;State.obj;StateHandler.obj;PoseBuilder.obj;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../Application/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gmock_lib.obj;Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;Pose.obj;TimedDifference.obj;State.obj;StateHandler.obj;PoseBuilder.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../gmock/Debug;../Abstraction/Debug;../Domain/Debug;../Application/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

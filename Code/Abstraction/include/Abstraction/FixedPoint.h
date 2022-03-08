@@ -4,6 +4,12 @@
 
 #include <cmath>
 
+
+
+const int Accuracy_Value = -6;
+const int Accuracy_Time = -4;
+const int Accuracy_Vector = Accuracy_Value;
+
 template<int T>
 class FixedPoint
 {

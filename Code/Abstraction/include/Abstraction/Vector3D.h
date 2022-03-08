@@ -8,7 +8,7 @@
 
 
 const double PI = 3.1415926535897932;
-const int Accuracy_Vector = -6;
+
 
 class Vector3D
 {

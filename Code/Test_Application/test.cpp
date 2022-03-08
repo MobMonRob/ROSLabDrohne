@@ -1,9 +1,12 @@
 #include "pch.h"
 
-#include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
 
 #include "Application/Header.h"
 
+
+#include "Transmitable_Mock.h"
 
 
 
@@ -257,6 +260,41 @@ TEST(Class_PoseBuilder, AccelPos_X_10s)
 		EXPECT_TRUE(Expectation);
 	}
 }
+
+
+
+
+
+TEST(Class_PoseController, callTransmitter)
+{
+	
+	Transmittable_Mock Transmitter;
+	{	// Train Mock
+		
+	}
+	PoseController PC(&Transmitter);
+
+	Timestamp Pose_Time(0.0);
+	Vector3D Pose_Position(Unit_Length);
+	Vector3D Pose_Orientation(Unit_Length);
+	Pose P(Pose_Time, Pose_Position, Pose_Orientation);
+
+
+	PC.updatePose(P);
+	
+
+
+	EXPECT_CALL(Transmittable_Mock, transmitAction()).Times(1);
+}
+
+
+
+
+
+
+
+
+
 
 
 
