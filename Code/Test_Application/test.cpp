@@ -254,7 +254,7 @@ TEST(Class_PoseBuilder, AccelPos_X_10s)
 
 		if (!Expectation)
 		{
-			std::cout << "Position Error " << i << ": " << Error << std::endl;
+			std::cout << "Position Error " << i << ": " << Error << "%." << std::endl;
 		}
 
 		EXPECT_TRUE(Expectation);
@@ -270,7 +270,8 @@ TEST(Class_PoseController, callTransmitter)
 	
 	MockTransmitable Transmitter;
 	{	// Train Mock
-		ON_CALL(Transmitter, transmitAction(0, 0, 0, 0)).WillByDefault(testing::Return(true));
+		ON_CALL(Transmitter, transmitAction(testing::_, testing::_, testing::_, testing::_)).WillByDefault(testing::Return(true));
+		EXPECT_CALL(Transmitter, transmitAction).Times(1);
 	}
 	PoseController PC(&Transmitter);
 
@@ -282,10 +283,11 @@ TEST(Class_PoseController, callTransmitter)
 
 	std::cout << "TransmitterAddress = " << &Transmitter << std::endl;
 
-	bool Result = PC.updatePose(P);
 	
 
-	EXPECT_CALL(Transmitter, transmitAction).Times(1);
+	
+
+	bool Result = PC.updatePose(P);
 }
 
 

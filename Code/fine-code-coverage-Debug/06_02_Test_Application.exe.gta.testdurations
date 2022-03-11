@@ -3,11 +3,11 @@
   <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_02_Test_Application.exe</Executable>
   <TestDurations>
     <TestDuration Test="Class_State.Substract" Duration="1" />
-    <TestDuration Test="Class_StateHandler.MaxEntries10" Duration="4" />
+    <TestDuration Test="Class_StateHandler.MaxEntries10" Duration="2" />
     <TestDuration Test="Class_StateHandler.Average_Single" Duration="1" />
     <TestDuration Test="Class_StateHandler.Init" Duration="1" />
-    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="165" />
-    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="161" />
-    <TestDuration Test="Class_PoseController.callTransmitter" Duration="2" />
+    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="92" />
+    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="94" />
+    <TestDuration Test="Class_PoseController.callTransmitter" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

@@ -1,25 +1,27 @@
 #ifndef POSECONTROLLER_H
 #define POSECONTROLLER_H
 
-#include "Domain/Pose.h"
+#include "DroneController/PoseControlable.h"
+
 #include "Domain/ControllerSystem.h"
+#include "DroneController/Transmitable.h"
 
-#include "Application/Transmitable.h"
 
-
-class PoseController
+class PoseController : public PoseControlable
 {
 public:
 	PoseController(Transmitable* Transmitter);
 
-	bool updatePose(Pose P);
+	void setPose(Pose P);
+	bool feedbackPose(Pose P);
+
+	void reset() override {};
 
 private:
 	ControllerSystem ControlX_;
 	ControllerSystem ControlY_;
 	ControllerSystem ControlZ_;
-	
-	Transmitable* Transmitter_;
+	ControllerSystem ControlR_;
 };
 
 #endif // POSECONTROLLER_H

@@ -24,7 +24,7 @@ void callbackGround(const sensor_msgs::Range::ConstPtr& msg)
 
 
 coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
-	: Pos_(Unit_Acceleration, Unit_Length),
+	: Pos_(Unit_Acceleration, Unit_Velocity, Unit_Length),
 	Ang_(Unit_AngleVelDeg, Unit_AngleDeg),
 	State_(State),
 	Threshold_AccelZ_(Threshold_AccelZ)
@@ -87,11 +87,13 @@ double coexOrientation::getGroundClearance_deangled()
 
 void coexOrientation::cbIMU(const sensor_msgs::Imu::ConstPtr& IMU)
 {
+	/*
 	this->Pos_.setLock(!this->State_->getArmState());
 	this->Ang_.setLock(!this->State_->getArmState());
 
 	this->Pos_.setInput(this->translate(IMU->linear_acceleration, Unit_Acceleration), Timestamp(IMU->header.stamp.toSec()));
 	this->Ang_.setInput(this->translate(IMU->angular_velocity, Unit_AngleVelDeg), Timestamp(IMU->header.stamp.toSec()));
+	*/
 
 	this->call();
 }
