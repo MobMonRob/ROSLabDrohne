@@ -6,7 +6,7 @@
 #include "Application/Header.h"
 
 
-#include "Transmitable_Mock.h"
+#include "MockTransmitable.h"
 
 
 
@@ -268,9 +268,9 @@ TEST(Class_PoseBuilder, AccelPos_X_10s)
 TEST(Class_PoseController, callTransmitter)
 {
 	
-	Transmittable_Mock Transmitter;
+	MockTransmitable Transmitter;
 	{	// Train Mock
-		
+		ON_CALL(Transmitter, transmitAction(0, 0, 0, 0)).WillByDefault(testing::Return(true));
 	}
 	PoseController PC(&Transmitter);
 
@@ -280,11 +280,12 @@ TEST(Class_PoseController, callTransmitter)
 	Pose P(Pose_Time, Pose_Position, Pose_Orientation);
 
 
-	PC.updatePose(P);
+	std::cout << "TransmitterAddress = " << &Transmitter << std::endl;
+
+	bool Result = PC.updatePose(P);
 	
 
-
-	EXPECT_CALL(Transmittable_Mock, transmitAction()).Times(1);
+	EXPECT_CALL(Transmitter, transmitAction).Times(1);
 }
 
 

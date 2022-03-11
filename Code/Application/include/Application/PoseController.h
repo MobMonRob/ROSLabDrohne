@@ -12,7 +12,7 @@ class PoseController
 public:
 	PoseController(Transmitable* Transmitter);
 
-	void updatePose(Pose P);
+	bool updatePose(Pose P);
 
 private:
 	ControllerSystem ControlX_;

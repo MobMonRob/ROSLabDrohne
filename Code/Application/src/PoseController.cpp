@@ -22,7 +22,7 @@ PoseController::PoseController(Transmitable* Transmitter)
 
 
 
-void PoseController::updatePose(Pose P)
+bool PoseController::updatePose(Pose P)
 {
 	Timestamp Time = P.getTime();
 	Vector3D Position = P.getPosition();
@@ -32,10 +32,12 @@ void PoseController::updatePose(Pose P)
 	this->ControlY_.setFeedback(TimedValue(Unit_Length, Position.getY(), Time));
 	this->ControlZ_.setFeedback(TimedValue(Unit_Length, Position.getZ(), Time));
 
-	this->Transmitter_->transmitAction(
-		this->ControlX_.getOutput().getValue(),
-		this->ControlY_.getOutput().getValue(),
-		this->ControlZ_.getOutput().getValue(),
-		FixedPoint<Accuracy_Value>());
+	std::cout << "Calling transmitAction with Item " << this->Transmitter_ << "..." << std::endl;
+
+	return this->Transmitter_->transmitAction(
+		this->ControlX_.getOutput().getValue().getValue(),
+		this->ControlY_.getOutput().getValue().getValue(),
+		this->ControlZ_.getOutput().getValue().getValue(),
+		0);
 }
 

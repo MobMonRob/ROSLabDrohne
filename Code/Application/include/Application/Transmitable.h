@@ -7,7 +7,7 @@
 class Transmitable
 {
 public:
-	virtual bool transmitAction(FixedPoint<Accuracy_Value> pitch, FixedPoint<Accuracy_Value> roll, FixedPoint<Accuracy_Value> thrust, FixedPoint<Accuracy_Value> yarn) = 0;
+	virtual bool transmitAction(double pitch, double roll, double thrust, double yarn) = 0;
 };
 
 #endif // TRANSMITABLE_H

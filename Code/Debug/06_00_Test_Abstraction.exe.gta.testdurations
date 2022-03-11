@@ -43,7 +43,7 @@
     <TestDuration Test="Class_FixedPoint.ConvertIncreaseRaw" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertDecrease" Duration="1" />
     <TestDuration Test="Class_FixedPoint.ConvertDecreaseRaw" Duration="1" />
-    <TestDuration Test="Class_Unit.OpEquals" Duration="1" />
+    <TestDuration Test="Class_Unit.OpEquals" Duration="2" />
     <TestDuration Test="Class_Vector3D.OpEquals" Duration="1" />
     <TestDuration Test="Class_Vector3D.OpEquals_FalseUnit" Duration="1" />
     <TestDuration Test="Class_Vector3D.OpEquals_FalseX" Duration="1" />

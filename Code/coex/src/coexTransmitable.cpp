@@ -8,7 +8,7 @@ coexTransmitable::coexTransmitable(coexState *State, coexBattery *Battery)
 }
 
 
-bool coexTransmitable::transmitAction(FixedPoint<Accuracy_Value> pitch, FixedPoint<Accuracy_Value> roll, FixedPoint<Accuracy_Value> thrust, FixedPoint<Accuracy_Value> yarn)
+bool coexTransmitable::transmitAction(double pitch, double roll, double thrust, double yarn)
 {
 	mavros_msgs::ManualControl Msg;
 	/*
@@ -19,10 +19,10 @@ bool coexTransmitable::transmitAction(FixedPoint<Accuracy_Value> pitch, FixedPoi
 	r	yaw		counter-clockwise	clockwise
 	*/
 	
-	Msg.x = pitch.getValue();
-	Msg.y = roll.getValue();
-	Msg.z = thrust.getValue();
-	Msg.r = yarn.getValue();
+	Msg.x = pitch;
+	Msg.y = roll;
+	Msg.z = thrust;
+	Msg.r = yarn;
 	
 	return this->transmitAction(Msg);
 }

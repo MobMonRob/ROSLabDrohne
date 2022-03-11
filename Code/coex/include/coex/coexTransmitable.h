@@ -17,7 +17,7 @@ public:
 	coexTransmitable(coexState* State) : coexTransmitable(State, State->getBattery()) {};
 	coexTransmitable(coexState *State, coexBattery *Battery);
 	
-	bool transmitAction(FixedPoint<Accuracy_Value> pitch, FixedPoint<Accuracy_Value> roll, FixedPoint<Accuracy_Value> thrust, FixedPoint<Accuracy_Value> yarn);
+	bool transmitAction(double pitch, double roll, double thrust, double yarn);
 	bool transmitAction(mavros_msgs::ManualControl Msg);
 	
 protected:
