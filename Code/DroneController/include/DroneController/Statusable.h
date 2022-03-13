@@ -19,7 +19,7 @@ public:
 	bool isSafe();
 
 protected:
-	callbackStatus
+	callbackStatus;
 
 
 

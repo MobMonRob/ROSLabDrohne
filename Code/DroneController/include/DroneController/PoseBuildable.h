@@ -20,7 +20,7 @@ public:
 	virtual Vector3D getOrientation() = 0;
 	virtual Vector3D getOrientationUncertainty() const = 0;
 
-	virtual bool updatePose(IMUState State) { return false; };
+	virtual bool updatePose(IMUState State) = 0;
 };
 
 #endif // POSEBUILDABLE_H

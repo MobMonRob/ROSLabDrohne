@@ -12,8 +12,8 @@ class PoseController : public PoseControlable
 public:
 	PoseController(Transmitable* Transmitter);
 
-	void setPose(Pose P);
-	bool feedbackPose(Pose P);
+	void setPose(Pose P) override;
+	bool feedbackPose(Pose P) override;
 
 	void reset() override {};
 

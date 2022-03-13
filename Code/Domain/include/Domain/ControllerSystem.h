@@ -32,12 +32,13 @@ public:
 	Value getSetpoint() { return this->Difference_.getSetpoint(); };
 	TimedValue getOutput();
 
-private:
+protected:
 	void addControllable(ControlledOutput* ControlAddr);
 	ControlledOutput* getKnot(int ID);
 	ControlledOutput* getKnotAddrLast();
 	Output* getOutputAddrLast();
 	
+private:
 	std::vector<ControlledOutput*> Knots_;
 	TimedDifference Difference_;
 };
