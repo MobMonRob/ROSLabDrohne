@@ -8,6 +8,8 @@ TEST(Class_FixedPoint, InitInt10_raw0)
 {
 	int Value = 10;
 	FixedPoint<0> FP(Value);
+
+
 	double Result = FP.getValueRaw();
 
 
