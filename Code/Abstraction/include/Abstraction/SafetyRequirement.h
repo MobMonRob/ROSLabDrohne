@@ -5,7 +5,7 @@
 class SafetyRequirement
 {
 public:
-	virtual bool isMet() = 0;
+	virtual bool meets() { return true; };
 };
 
 #endif // SAFETYREQUIREMENT_H

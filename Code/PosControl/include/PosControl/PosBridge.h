@@ -5,9 +5,9 @@
 
 #include "coex/coexControl.h"
 
-#include "Adapter/ActionAdapter_Mock.h"
-#include "Adapter/ActionAdapter.h"
-#include "Application/StateBuilder.h"
+//#include "Adapter/ActionAdapter_Mock.h"
+//#include "Adapter/ActionAdapter.h"
+//#include "Application/StateBuilder.h"
 
 
 class PosBridge
@@ -23,8 +23,8 @@ private:
 	ros::Subscriber SubKeys_;
 	
 	coexControl coexController_;
-	ActionAdapter *ActionAdapter_;
-	StateBuilder *StateBuilder_;
+	//ActionAdapter *ActionAdapter_;
+	//StateBuilder *StateBuilder_;
 };
 
 #endif // POSBRIDGE_H

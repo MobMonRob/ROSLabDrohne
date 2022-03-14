@@ -14,7 +14,7 @@
 
 namespace ardrone_autonomy
 {
-class Navdata : Msg
+class Navdata : public Msg
 {
 public:
 

@@ -9,7 +9,7 @@
 class SafetyProvider
 {
 public:
-	bool isSafe();
+	bool meetsRequirements();
 
 protected:
 	void addRequirement(SafetyRequirement Requirement) { this->Requirements_.push_back(Requirement); };

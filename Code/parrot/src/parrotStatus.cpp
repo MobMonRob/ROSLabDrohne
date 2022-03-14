@@ -9,7 +9,8 @@
 
 parrotStatus::parrotStatus(parrotBattery* Battery)
 	: Statusable(Battery),
-	Status_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this))
+	nh_(),
+	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this))
 {
 	ROS_INFO("Starting parrotStatus...");
 	ros::spinOnce();

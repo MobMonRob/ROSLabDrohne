@@ -18,9 +18,8 @@
 class parrotControl : public DroneControlable
 {
 public:
-	parrotControl() {};
-	~parrotControl();
 	
+	/*
 	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
 	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
 	
@@ -37,23 +36,14 @@ public:
 	mavros_msgs::ManualControl getRC_normalized();
 	
 	double getTime() { return 0;};			// TODO!!
-	
-private:
-	void transmit(mavros_msgs::ManualControl Msg);
-	
-	void landing();
-	
-private:
-	coexBattery *Battery_;
-	coexState *State_;
-	coexOrientation *Orientation_ = nullptr;
-	coexRC_Receiver *RC_Receiver_ = nullptr;
-	Joystick Joystick_;
-	int RC_Soft_;
-	coexTransmitable *xC_ = nullptr;
+	*/
 
-	int CounterIdle_ = 0;
-	const int CounterOverflow_ = 100;
+private:
+	//void transmit(mavros_msgs::ManualControl Msg);
+	
+	//void landing();
+	
+private:
 };
 
 #endif // PARROTCONTROL_H

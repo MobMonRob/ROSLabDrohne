@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../Abstraction/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -148,8 +148,10 @@
     <ClCompile Include="src\PoseControlable.cpp" />
     <ClCompile Include="src\IMUState.cpp" />
     <ClCompile Include="src\Pose.cpp" />
+    <ClCompile Include="src\Statusable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DroneController\PercentageOK.h" />
     <ClInclude Include="include\DroneController\PoseControlable.h" />
     <ClInclude Include="include\DroneController\Batteryable.h" />
     <ClInclude Include="include\DroneController\DroneControlable.h" />
@@ -160,6 +162,7 @@
     <ClInclude Include="include\DroneController\PoseBuildable.h" />
     <ClInclude Include="include\DroneController\Statusable.h" />
     <ClInclude Include="include\DroneController\Transmitable.h" />
+    <ClInclude Include="include\DroneController\VoltageOK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

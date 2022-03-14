@@ -1,8 +1,10 @@
 #ifndef BATTERYABLE_H
 #define BATTERYABLE_H
 
+#include "Abstraction/SafetyProvider.h"
 
-class Batteryable
+
+class Batteryable : public SafetyProvider
 {
 public:
 	Batteryable(double VoltageThreshold = 42.0) : VoltageThreshold_(VoltageThreshold) {};

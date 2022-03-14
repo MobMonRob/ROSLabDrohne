@@ -30,6 +30,9 @@
     <ClCompile Include="src\IMUable.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Statusable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DroneController\Batteryable.h">
@@ -60,6 +63,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\DroneController\PoseControlable.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DroneController\VoltageOK.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DroneController\PercentageOK.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

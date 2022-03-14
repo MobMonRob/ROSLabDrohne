@@ -95,8 +95,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../threading/Debug;../calling/Debug;../coex/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;State.obj;StateHandler.obj;ActionAdapter.obj;termios.obj;ros_Talker.obj;ros.obj;Caller.obj;coexBattery.obj;coexState.obj;coexTransmitable.obj;JoystickAxis.obj;Joystick.obj;coexMC.obj;coexRC_Receiver.obj;coexRC_Transmitter.obj;coexOrientation.obj;coexControl.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../threading/Debug;../calling/Debug;../coex/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;IMUState.obj;StateHandler.obj;termios.obj;ros_Talker.obj;ros.obj;Caller.obj;coexBattery.obj;coexState.obj;coexTransmitable.obj;JoystickAxis.obj;Joystick.obj;coexMC.obj;coexRC_Receiver.obj;coexRC_Transmitter.obj;coexOrientation.obj;coexControl.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

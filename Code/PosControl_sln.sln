@@ -85,6 +85,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_01_DroneController", "Dr
 		{A80FAEBE-6013-4403-A06C-B2A178B5CF4F} = {A80FAEBE-6013-4403-A06C-B2A178B5CF4F}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_03_Test_Adapter", "Test_Adapter\Test_Adapter.vcxproj", "{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -221,6 +223,14 @@ Global
 		{65C48F3B-7A6D-4D8C-8C6E-0F8CA175441F}.Release|x64.Build.0 = Release|x64
 		{65C48F3B-7A6D-4D8C-8C6E-0F8CA175441F}.Release|x86.ActiveCfg = Release|Win32
 		{65C48F3B-7A6D-4D8C-8C6E-0F8CA175441F}.Release|x86.Build.0 = Release|Win32
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Debug|x64.ActiveCfg = Debug|x64
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Debug|x64.Build.0 = Debug|x64
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Debug|x86.ActiveCfg = Debug|Win32
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Debug|x86.Build.0 = Debug|Win32
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Release|x64.ActiveCfg = Release|x64
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Release|x64.Build.0 = Release|x64
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Release|x86.ActiveCfg = Release|Win32
+		{89017FEA-7FF6-4A92-A894-5840B8C0AEFA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -65,5 +65,11 @@
     <ClInclude Include="include\Abstraction\SafetyRequirement.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\Abstraction\SafetyChecker.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Abstraction\SafetyTranslative.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

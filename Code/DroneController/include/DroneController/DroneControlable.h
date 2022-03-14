@@ -1,13 +1,14 @@
 #ifndef DRONECONTROLABLE_H
 #define DRONECONTROLABLE_H
 
+#include "Abstraction/SafetyProvider.h"
+
 #include "DroneController/Statusable.h"
 #include "DroneController/Batteryable.h"
 #include "DroneController/IMUable.h"
 
 
-
-class DroneControlable
+class DroneControlable : public SafetyProvider
 {
 public:
 	DroneControlable(Statusable* Status, Batteryable* Battery, IMUable* IMU)

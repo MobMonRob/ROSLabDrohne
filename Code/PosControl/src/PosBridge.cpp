@@ -32,7 +32,7 @@ PosBridge::PosBridge()
 	PosBridge_ = this;
 	
 	std::cout << "new ActionAdapter" << std::endl;
-	this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
+	//this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
 	std::cout << "new StateBuilder" << std::endl;
 	//this->StateBuilder_ = new StateBuilder(&this->coexController_, this->ActionAdapter_);
 	//this->coexController_.addCallable(this->StateBuilder_);
@@ -49,7 +49,7 @@ PosBridge::~PosBridge()
 
 	//this->coexController_.deleteCallable(this->StateBuilder_);
 	//delete this->StateBuilder_;
-	delete this->ActionAdapter_;
+	//delete this->ActionAdapter_;
 
 	ROS_INFO("Terminated PosBridge");
 }
@@ -67,27 +67,27 @@ void PosBridge::receiveKey(char Key)
 	switch (Key)
 	{
 	case 'w':
-		this->ActionAdapter_->setPos_Diff(0.01, 0, 0);
+		//this->ActionAdapter_->setPos_Diff(0.01, 0, 0);
 		break;
 	
 	case 's':
-		this->ActionAdapter_->setPos_Diff(-0.01, 0, 0);
+		//this->ActionAdapter_->setPos_Diff(-0.01, 0, 0);
 		break;
 		
 	case 'a':
-		this->ActionAdapter_->setPos_Diff(0, 0.01, 0);
+		//this->ActionAdapter_->setPos_Diff(0, 0.01, 0);
 		break;
 		
 	case 'd':
-		this->ActionAdapter_->setPos_Diff(0, -0.01, 0);
+		//this->ActionAdapter_->setPos_Diff(0, -0.01, 0);
 		break;
 		
 	case 'i':
-		this->ActionAdapter_->setPos_Diff(0, 0, 0.01);
+		//this->ActionAdapter_->setPos_Diff(0, 0, 0.01);
 		break;
 		
 	case 'k':
-		this->ActionAdapter_->setPos_Diff(0, 0, -0.01);
+		//this->ActionAdapter_->setPos_Diff(0, 0, -0.01);
 		break;
 		
 	case 'j':

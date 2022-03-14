@@ -153,8 +153,10 @@
     <ClInclude Include="include\Abstraction\Header.h" />
     <ClInclude Include="include\Abstraction\Optional.h" />
     <ClInclude Include="include\Abstraction\Ringbuffer.h" />
+    <ClInclude Include="include\Abstraction\SafetyChecker.h" />
     <ClInclude Include="include\Abstraction\SafetyProvider.h" />
     <ClInclude Include="include\Abstraction\SafetyRequirement.h" />
+    <ClInclude Include="include\Abstraction\SafetyTranslative.h" />
     <ClInclude Include="include\Abstraction\TimedValue.h" />
     <ClInclude Include="include\Abstraction\Timestamp.h" />
     <ClInclude Include="include\Abstraction\Unit.h" />

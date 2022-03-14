@@ -20,8 +20,6 @@ class IMUable
 public:
 	IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 
-
-
 	Vector3D getLinearAcceleration() { return this->State_.getVector_Linear(); };
 	Vector3D getRotationalVelocity() { return this->State_.getVector_Angular(); };
 	Value getGroundClearance() { return this->State_.getGroundClearance(); };

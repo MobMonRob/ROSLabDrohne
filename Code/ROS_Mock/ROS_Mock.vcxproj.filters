@@ -113,5 +113,8 @@
     <ClInclude Include="ardrone_autonomy\Navdata.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="geometry_msgs\Twist.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

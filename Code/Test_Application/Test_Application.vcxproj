@@ -68,8 +68,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>gmock_lib.lib;Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;Pose.obj;TimedDifference.obj;State.obj;StateHandler.obj;PoseBuilder.obj;PoseController.obj;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../gmock/Debug;../Abstraction/Debug;../Domain/Debug;../Application/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gmock_lib.lib;Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;IMUable;IMUState.obj;Pose.obj;PoseControlable.obj;PoseController.obj;Statusable.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../gmock/Debug;../Abstraction/Debug;../Domain/Debug;../DroneController/Debug;../Application/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

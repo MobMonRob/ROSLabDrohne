@@ -23,6 +23,8 @@ private:
 	bool transmitAction(double pitch, double roll, double thrust, double yarn) override;			// from Transmitable
 	
 private:
+	ros::NodeHandle nh_;
+	ros::Publisher Pub_;
 };
 
 #endif // PARROT_TRANSMITTER_H

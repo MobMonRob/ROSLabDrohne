@@ -14,16 +14,11 @@
 
 #include "parrot/parrotBattery.h"
 
-/* https://dev.px4.io/v1.10_noredirect/en/ros/mavros_offboard.html
- * PX4 has a timeout of 500ms between two Offboard commands. => The publishing rate must be faster than 2 Hz.
- * If this timeout is exceeded, the commander will fall back to the last mode the vehicle was in before entering Offboard mode.
- */
-
 
 class parrotStatus : public Statusable
 {
 public:
-	parrotStatus(parrotBattery* Battery) : Statusable(Battery) {};
+	parrotStatus(parrotBattery* Battery);
 	~parrotStatus();
 	
 
@@ -37,16 +32,10 @@ private:
 
 private:
 	ros::NodeHandle nh_;
-	ros::Subscriber SubStatus_;
+	ros::Subscriber Sub_;
 
 	ardrone_autonomy::Navdata Status_;
 };
 
-
-const std::string coexMode_Manual = "MANUAL";
-const std::string coexMode_Offboard = "OFFBOARD";
-const std::string coexMode_Stabilized = "STABILIZED";
-
 #endif // PARROTSTATUS_H
-
 
