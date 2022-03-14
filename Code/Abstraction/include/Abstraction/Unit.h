@@ -9,7 +9,7 @@ class Unit
 public:
 	Unit(std::string Name) { this->UnitName_ = Name; };
 
-	bool operator== (const Unit& U) { return this->UnitName_ == U.UnitName_; };
+	bool operator== (const Unit& U) const { return this->UnitName_ == U.UnitName_; };
 
 	std::string getUnit() { return this->UnitName_; };
 
@@ -20,6 +20,8 @@ protected:
 
 // move into Unit.cpp?
 const Unit Unit_Invalid("INVALID");
+
+const Unit Unit_None("");
 
 const Unit Unit_Length("m");
 const Unit Unit_Velocity("m/s");

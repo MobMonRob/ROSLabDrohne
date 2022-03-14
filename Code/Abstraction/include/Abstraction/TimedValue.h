@@ -1,6 +1,7 @@
 #ifndef TimedValue_H
 #define TimedValue_H
 
+
 #include "Abstraction/Value.h"
 #include "Abstraction/Timestamp.h"
 
@@ -10,8 +11,7 @@
 class TimedValue : public Value, public Timestamp
 {
 public:
-	TimedValue(Unit Unit, double ValueValue, Timestamp Time) : Value(Unit, ValueValue), Timestamp(Time) {};
-	TimedValue(Unit Unit, double ValueValue = 0.0, double Time = 0.0) : Value(Unit, ValueValue), Timestamp(Time) {};
+	TimedValue(Unit Unit, FixedPoint<Accuracy_Value> ValueValue = FixedPoint<Accuracy_Value>(), Timestamp Time = Timestamp()) : Value(Unit, ValueValue), Timestamp(Time) {};
 
 	TimedValue operator+(const TimedValue& V);
 	TimedValue operator-(const TimedValue& V);	

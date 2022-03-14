@@ -18,27 +18,18 @@
     <ClCompile Include="Application.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\State.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StateHandler.cpp">
+    <ClCompile Include="src\PoseController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Application\AccelToPos.h">
+    <ClInclude Include="include\Application\Header.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Application\State.h">
+    <ClInclude Include="include\Application\PoseController.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Application\StateHandler.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Application\AngVelToAng.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Application\Wrapper3D.h">
+    <ClInclude Include="include\Application\ActionDirection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

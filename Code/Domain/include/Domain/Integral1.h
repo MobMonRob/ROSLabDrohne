@@ -12,9 +12,9 @@
 class Integral1 : public Outputable
 {
 public:
-	Integral1(Unit UnitInput, Unit UnitOutput, double InitOut = 0.0);
+	Integral1(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_Value> InitOut = 0.0);
 
-	bool setInput(TimedValue V) { return this->Input_.setInput(V); };
+	bool setInput(TimedValue V, bool AutoCalculation = true);
 
 	TimedValue getOutput() { return this->Integral_.getOutput(); };
 	Unit getOutputUnit() { return this->Integral_.getOutputUnit(); };

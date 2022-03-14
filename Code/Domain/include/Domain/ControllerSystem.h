@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Abstraction/FixedPoint.h"
 #include "Abstraction/Unit.h"
 #include "Abstraction/Value.h"
 #include "Abstraction/TimedValue.h"
@@ -22,21 +23,22 @@ public:
 
 	bool setSetpoint(Value V) { return this->Difference_.setSetpoint(V); };
 	bool setFeedback(TimedValue V) { return this->Difference_.setFeedback(V); };
-	bool setK(int ID, ControllerType Type, double K);
+	bool setK(int ID, ControllerType Type, FixedPoint<Accuracy_K> K);
 
-	void addController(Unit UnitOutput, double K, ControllerType Type);
-	void addController(Unit UnitOutput, double KP, double KI, double KD);
-	void addController(Unit UnitOutput, double K, double T);
+	void addController(Unit UnitOutput, FixedPoint<Accuracy_K> K, ControllerType Type);
+	void addController(Unit UnitOutput, FixedPoint<Accuracy_K> KP, FixedPoint<Accuracy_K> KI, FixedPoint<Accuracy_K> KD);
+	void addController(Unit UnitOutput, FixedPoint<Accuracy_K> K, FixedPoint<Accuracy_K> T);
 
 	Value getSetpoint() { return this->Difference_.getSetpoint(); };
 	TimedValue getOutput();
 
-private:
+protected:
 	void addControllable(ControlledOutput* ControlAddr);
 	ControlledOutput* getKnot(int ID);
 	ControlledOutput* getKnotAddrLast();
 	Output* getOutputAddrLast();
 	
+private:
 	std::vector<ControlledOutput*> Knots_;
 	TimedDifference Difference_;
 };

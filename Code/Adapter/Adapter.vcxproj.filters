@@ -18,30 +18,27 @@
     <ClCompile Include="Adapter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\ActionAdapter.cpp">
+    <ClCompile Include="src\PoseBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\ActionAdapter_Mock.cpp">
+    <ClCompile Include="src\StateBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Transmitable_Mock.cpp">
+    <ClCompile Include="src\StateHandler.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Adapter\ActionAdapter.h">
+    <ClInclude Include="include\Adapter\Header.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Adapter\ActionAdapter_Mock.h">
+    <ClInclude Include="include\Adapter\PoseBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Adapter\ActionDirection.h">
+    <ClInclude Include="include\Adapter\StateBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Adapter\Transmitable.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Transmitable_Mock.h">
+    <ClInclude Include="include\Adapter\StateHandler.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

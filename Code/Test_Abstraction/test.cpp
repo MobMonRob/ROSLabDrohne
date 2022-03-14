@@ -8,6 +8,8 @@ TEST(Class_FixedPoint, InitInt10_raw0)
 {
 	int Value = 10;
 	FixedPoint<0> FP(Value);
+
+
 	double Result = FP.getValueRaw();
 
 
@@ -110,15 +112,15 @@ TEST(Class_FixedPoint, InitCopy)
 
 	FixedPoint<-6> Result(FP);
 
-	FixedPoint<-6> Expection(10);
+	FixedPoint<-6> Expectation(10);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpEquals_EqualShift)
@@ -161,6 +163,84 @@ TEST(Class_FixedPoint, OpUnequals_EqualShift)
 	FixedPoint<-6> FP1(Value1);
 	FixedPoint<-6> FP2(Value2);
 	bool Result = FP1 != FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpSmaller_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 20;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 < FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpSmallerEquals_Smaller_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 20;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 <= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpSmallerEquals_Equal_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 <= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreater_EqualShift)
+{
+	int Value1 = 20;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 > FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreaterEquals_Smaller_EqualShift)
+{
+	int Value1 = 20;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 >= FP2;
+
+
+	EXPECT_TRUE(Result);
+}
+
+TEST(Class_FixedPoint, OpGreaterEquals_Equal_EqualShift)
+{
+	int Value1 = 10;
+	int Value2 = 10;
+	FixedPoint<-6> FP1(Value1);
+	FixedPoint<-6> FP2(Value2);
+
+	bool Result = FP1 >= FP2;
 
 
 	EXPECT_TRUE(Result);
@@ -215,15 +295,15 @@ TEST(Class_FixedPoint, OpAddReturn_FP)
 
 	FixedPoint<-6> Result = FP1 + FP2;
 
-	FixedPoint<-6> Expection(30);
+	FixedPoint<-6> Expectation(30);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpSubstract_Int)
@@ -275,15 +355,15 @@ TEST(Class_FixedPoint, OpSubstractReturn_FP)
 
 	FixedPoint<-6> Result = FP1 - FP2;
 
-	FixedPoint<-6> Expection(-10);
+	FixedPoint<-6> Expectation(-10);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpMultiply_Int)
@@ -335,15 +415,15 @@ TEST(Class_FixedPoint, OpMultiplyReturn_FP)
 
 	FixedPoint<-6> Result = FP1 * FP2;
 
-	FixedPoint<-6> Expection(200);
+	FixedPoint<-6> Expectation(200);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, OpDevide_Int)
@@ -395,15 +475,15 @@ TEST(Class_FixedPoint, OpDevideReturn_FP)
 
 	FixedPoint<-6> Result = FP1 / FP2;
 
-	FixedPoint<-6> Expection(0.5);
+	FixedPoint<-6> Expectation(0.5);
 
 
-	if (Result != Expection)
+	if (Result != Expectation)
 	{
 		std::cout << Result.getValue() << std::endl;
 	}
 
-	EXPECT_EQ(Result, Expection);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_FixedPoint, ConvertIncrease)
@@ -462,9 +542,13 @@ TEST(Class_FixedPoint, ConvertDecreaseRaw)
 TEST(Class_Unit, OpEquals)
 {
 	std::string Name = "MyName";
-	
+	Unit U1(Name);
+	Unit U2(Name);
 
-	EXPECT_TRUE(Unit(Name) == Unit(Name));
+	bool Result = U1 == U2;
+
+
+	EXPECT_TRUE(Result);
 }
 
 
@@ -472,9 +556,11 @@ TEST(Class_Vector3D, OpEquals)
 {
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 0, 0);
-	
 
-	EXPECT_TRUE(V1 == V2);
+	bool Result = V1 == V2;
+
+
+	EXPECT_TRUE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseUnit)
@@ -482,8 +568,10 @@ TEST(Class_Vector3D, OpEquals_FalseUnit)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Velocity, 0, 0, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseX)
@@ -491,8 +579,10 @@ TEST(Class_Vector3D, OpEquals_FalseX)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 1, 0, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseY)
@@ -500,8 +590,10 @@ TEST(Class_Vector3D, OpEquals_FalseY)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 1, 0);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, OpEquals_FalseZ)
@@ -509,86 +601,134 @@ TEST(Class_Vector3D, OpEquals_FalseZ)
 	Vector3D V1(Unit_Length, 0, 0, 0);
 	Vector3D V2(Unit_Length, 0, 0, 1);
 
+	bool Result = V1 == V2;
 
-	EXPECT_TRUE(!(V1 == V2));
+
+	EXPECT_FALSE(Result);
 }
 
 TEST(Class_Vector3D, Rotate_0)
 {
 	Vector3D V1(Unit_Length, 1, 2, 3);
-	Vector3D V2 = V1.rotate(0, 0, 0);
-	bool Equals = V2 == V1;
+
+	Vector3D Result = V1.rotate(0, 0, 0);
+
+	Vector3D Expectation(Unit_Length, 1, 2, 3);
 
 
-	if (!Equals)
+	if (Result != Expectation)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_X90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(Angle, 0, 0);
-	bool Equals = V2 == Vector3D(Unit_Length, 0, 0, -1);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateX(Angle);
+
+	Vector3D Expectation(Unit_Length, 1, -3, 2);
 
 
-	if (!Equals)
+	if (Result != Expectation)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expectation);
+}
+
+TEST(Class_Vector3D, Rotate_X180)
+{
+	double Angle = PI;
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateX(Angle);
+
+	Vector3D Expectation(Unit_Length, 1, -2, -3);
+
+
+	if (Result != Expectation)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Y90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 1, 0, 0);
-	Vector3D V2 = V1.rotate(0, Angle, 0);
-	bool Equals = V2 == Vector3D(Unit_Length, 1, 0, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateY(Angle);
+
+	Vector3D Expectation(Unit_Length, 3, 2, -1);
 
 
-	if (!Equals)
+	if (Result != Expectation)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expectation);
+}
+
+TEST(Class_Vector3D, Rotate_Y180)
+{
+	double Angle = PI;
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateY(Angle);
+
+	Vector3D Expectation(Unit_Length, -1, 2, -3);
+
+
+	if (Result != Expectation)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Z90)
 {
 	double Angle = PI / 2;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(0, 0, Angle);
-	bool Equals = V2 == Vector3D(Unit_Length, 1, 0, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateZ(Angle);
+
+	Vector3D Expectation(Unit_Length, -2, 1, 3);
 
 
-	if (!Equals)
+	if (Result != Expectation)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_Vector3D, Rotate_Z180)
 {
 	double Angle = PI;
-	Vector3D V1(Unit_Length, 0, 1, 0);
-	Vector3D V2 = V1.rotate(0, 0, Angle);
-	bool Equals = V2 == Vector3D(Unit_Length, 0, -1, 0);
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1.rotateZ(Angle);
+
+	Vector3D Expectation(Unit_Length, -1, -2, 3);
 
 
-	if (!Equals)
+	if (Result != Expectation)
 	{
-		std::cout << V2.getString() << std::endl;
+		std::cout << Result.getString() << std::endl;
 	}
 
-	EXPECT_TRUE(Equals);
+	EXPECT_EQ(Result, Expectation);
 }
 

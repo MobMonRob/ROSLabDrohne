@@ -53,5 +53,8 @@
     <ClInclude Include="include\Abstraction\FixedPoint.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\Abstraction\Header.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

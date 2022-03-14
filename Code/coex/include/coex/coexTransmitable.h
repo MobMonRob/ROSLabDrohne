@@ -3,7 +3,8 @@
 
 #include <mavros_msgs/ManualControl.h>
 
-#include "Adapter/Transmitable.h"
+#include "Abstraction/FixedPoint.h"
+#include "DroneController/Transmitable.h"
 
 #include "coex/coexState.h"
 #include "coex/coexBattery.h"

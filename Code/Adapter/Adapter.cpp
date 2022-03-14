@@ -3,17 +3,12 @@
 
 #include <iostream>
 
-#include "Transmitable_Mock.h"
-#include "Adapter/Header.h"
-
 
 
 int main()
 {
     std::cout << "Hello World!\n";
 
-    Transmitable_Mock Trans;
-    ActionAdapter Adapter(&Trans);
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

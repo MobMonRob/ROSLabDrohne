@@ -3,6 +3,27 @@
 #include<math.h>
 
 
+bool Vector3D::operator==(const Vector3D& V)
+{
+	const Vector3D Item = *this;
+
+
+	return Item == V;
+}
+
+bool Vector3D::operator==(const Vector3D& V) const
+{
+	bool ReturnBool = true;
+
+
+	ReturnBool &= (this->Unit_ == V.Unit_);
+	ReturnBool &= (this->X_ == V.X_);
+	ReturnBool &= (this->Y_ == V.Y_);
+	ReturnBool &= (this->Z_ == V.Z_);
+
+	return ReturnBool;
+}
+
 Vector3D Vector3D::operator+(const Vector3D& V)
 {
 	if (this->Unit_ == V.Unit_)
@@ -27,23 +48,25 @@ Vector3D Vector3D::operator-(const Vector3D& V)
 	}
 }
 
-Vector3D Vector3D::operator/(double Divisor)
+Vector3D Vector3D::operator/(FixedPoint<Accuracy_Vector> Divisor)
 {
+
+
 	return Vector3D(this->Unit_, this->X_/ Divisor, this->Y_/ Divisor, this->Z_ / Divisor);
 }
 
-bool Vector3D::operator==(const Vector3D& V)
+void Vector3D::operator+=(const Vector3D& V)
 {
-	bool ReturnBool = true;
-
-
-	ReturnBool &= (this->getUnit() == V.Unit_);
-	ReturnBool &= (this->getX() == V.X_);
-	ReturnBool &= (this->getY() == V.Y_);
-	ReturnBool &= (this->getZ() == V.Z_);
-
-	return ReturnBool;
+	if (V.getUnit() == this->getUnit())
+	{
+		this->X_ += V.X_;
+		this->Y_ += V.Y_;
+		this->Z_ += V.Z_;
+	}
 }
+
+
+
 
 std::string Vector3D::getString()
 {
@@ -52,36 +75,86 @@ std::string Vector3D::getString()
 
 	ReturnString.append(this->getUnit().getUnit());
 	ReturnString.append("], x=");
-	ReturnString.append(std::to_string(this->getX()));
+	ReturnString.append(std::to_string(this->getX().getValue()));
 	ReturnString.append("], y=");
-	ReturnString.append(std::to_string(this->getY()));
+	ReturnString.append(std::to_string(this->getY().getValue()));
 	ReturnString.append("], z=");
-	ReturnString.append(std::to_string(this->getZ()));
+	ReturnString.append(std::to_string(this->getZ().getValue()));
 
 	return ReturnString;
 }
 
 Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 {
-	double sinX = sin(AngleX);
-	double cosX = cos(AngleX);
-	double sinY = sin(AngleY);
-	double cosY = cos(AngleY);
-	double sinZ = sin(AngleZ);
-	double cosZ = cos(AngleZ);
+	/*
+	FixedPoint<Vector_Accuracy> sinX(sin(AngleX));
+	FixedPoint<Vector_Accuracy> cosX(cos(AngleX));
+	FixedPoint<Vector_Accuracy> sinY(sin(AngleY));
+	FixedPoint<Vector_Accuracy> cosY(cos(AngleY));
+	FixedPoint<Vector_Accuracy> sinZ(sin(AngleZ));
+	FixedPoint<Vector_Accuracy> cosZ(cos(AngleZ));
 
 	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
-	double X = this->getX() * (cosX * cosY)
+	FixedPoint<Vector_Accuracy> X = this->getX() * (cosX * cosY)
 		+ this->getY() * (cosX * sinY * sinZ - sinX * cosZ)
 		+ this->getZ() * (cosX * sinY * cosZ + sinX * sinZ);
-	double Y = this->getX() * (sinX * cosY)
+	FixedPoint<Vector_Accuracy> Y = this->getX() * (sinX * cosY)
 		+ this->getY() * (sinX * sinY * sinZ + cosX * cosZ)
 		+ this->getZ() * (sinX * sinY * cosZ - cosX * sinZ);
-	double Z = this->getX() * (-sinY)
+	FixedPoint<Vector_Accuracy> Z = this->getX() * (sinY * FixedPoint<Vector_Accuracy>(-1))
 		+ this->getY() * (cosY * sinZ)
 		+ this->getZ() * (cosY * cosZ);
 
 
 	return Vector3D(this->getUnit(), X, Y, Z);
+	*/
+
+	return this->rotateX(AngleX).rotateY(AngleY).rotateZ(AngleZ);
 }
+
+Vector3D Vector3D::rotateX(double Angle)
+{
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+
+	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
+		- this->getZ() * sin;
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
+		+ this->getY() * sin;
+
+
+	return Vector3D(this->getUnit(), this->getX(), Y, Z);
+}
+
+Vector3D Vector3D::rotateY(double Angle)
+{
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+
+	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
+	FixedPoint<Accuracy_Vector> X = this->getX() * cos
+		+ this->getZ() * sin;
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
+		- this->getX() * sin;
+
+
+	return Vector3D(this->getUnit(), X, this->getY(), Z);
+}
+
+Vector3D Vector3D::rotateZ(double Angle)
+{
+	FixedPoint<Accuracy_Vector> sin(sin(Angle));
+	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+
+	FixedPoint<Accuracy_Vector> X = this->getX() * cos
+		- this->getY() * sin;
+	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
+		+ this->getX() * sin;
+
+
+	return Vector3D(this->getUnit(), X, Y, this->getZ());
+}
+
+
+
 
