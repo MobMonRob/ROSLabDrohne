@@ -12,9 +12,9 @@
 class parrotBattery : public Batteryable
 {
 public:
-	coexBattery(double Perc_thershold, double Intervall_Info = 60.0);
-	coexBattery(double V_min, double V_max, double V_thershold, double Intervall_Info = 60.0);
-	~coexBattery();
+	parrotBattery(double Perc_thershold, double Intervall_Info = 60.0);
+	parrotBattery(double V_min, double V_max, double V_thershold, double Intervall_Info = 60.0);
+	~parrotBattery();
 
 	double getVoltage() const;
 	double getPercentage() const;

@@ -27,6 +27,9 @@
     <ClCompile Include="src\Vector3D.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\SafetyProvider.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Abstraction\Optional.h">
@@ -54,6 +57,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\Abstraction\Header.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Abstraction\SafetyProvider.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Abstraction\SafetyRequirement.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

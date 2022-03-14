@@ -16,16 +16,10 @@ public:
 	virtual Timestamp getTime() = 0;
 	virtual bool getArmState() { return false; };
 
-	bool isSafe();
+	virtual bool isSafe() { return false; };
 
 protected:
-	callbackStatus;
-
-
-
-
-
-
+	Batteryable* getBattery() const { return &this->Batteryable_; };
 
 private:
 	Batteryable* Batteryable_;

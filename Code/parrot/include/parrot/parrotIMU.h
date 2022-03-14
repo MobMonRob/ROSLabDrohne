@@ -16,8 +16,8 @@
 class parrotIMU : public IMUable
 {
 public:
-	coexOrientation(coexState *State, double Threshold_AccelZ = 0.2);
-	~coexOrientation();
+	parrotIMU(Statusable *Status, double Threshold_AccelZ = 0.2);
+	~parrotIMU();
 	
 	double getGroundClearance();
 	double getGroundClearance_deangled();
@@ -38,7 +38,7 @@ private:
 	ros::NodeHandle nh_;
 	ros::Subscriber SubIMU_;
 	ros::Subscriber SubGroundClearance_;
-	coexState* State_;
+	State* State_;
 	
 	sensor_msgs::Imu IMU_;
 	Wrapper3D<AccelToPos> Pos_;

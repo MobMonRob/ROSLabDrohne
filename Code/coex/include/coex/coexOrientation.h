@@ -24,10 +24,10 @@ public:
 	
 	double getGroundClearance();
 	double getGroundClearance_deangled();
-	//Vector3D getPosLinear() { return this->Pos_.getVector(); };
-	//Vector3D getPosAngular() { return this->Ang_.getVector(); };
-	//Vector3D getSuspentionLinear() { return this->Pos_.getVectorSuspention(); };
-	//Vector3D getSuspentionAngular() { return this->Ang_.getVectorSuspention(); };
+	Vector3D getPosLinear() { return Vector3D(Unit_Length); };
+	Vector3D getPosAngular() { return Vector3D(Unit_AngleDeg); };
+	Vector3D getSuspentionLinear() { return Vector3D(Unit_Length); };
+	Vector3D getSuspentionAngular() { return Vector3D(Unit_AngleDeg); };
 	ros::Time getTime_Imu() const { return this->IMU_.header.stamp;};
 	ros::Time getTime_Ground() const { return this->GroundClearance_.header.stamp;};
 	

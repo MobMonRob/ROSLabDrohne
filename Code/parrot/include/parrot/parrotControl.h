@@ -18,10 +18,8 @@
 class parrotControl : public DroneControlable
 {
 public:
-	coexControl(bool OutRC) : coexControl(OutRC, 4) {};
-	coexControl(int RC_Soft) : coexControl(false, RC_Soft) {};
-	coexControl(bool OutRC = false, int RC_Soft = 4);
-	~coexControl();
+	parrotControl() {};
+	~parrotControl();
 	
 	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
 	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
@@ -39,8 +37,6 @@ public:
 	mavros_msgs::ManualControl getRC_normalized();
 	
 	double getTime() { return 0;};			// TODO!!
-	
-	bool call(Calling* Caller) override;
 	
 private:
 	void transmit(mavros_msgs::ManualControl Msg);

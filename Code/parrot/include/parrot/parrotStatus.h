@@ -10,7 +10,7 @@
 
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/SetMode.h>
-
+#include "ardrone_autonomy/Navdata.h"
 
 #include "parrot/parrotBattery.h"
 

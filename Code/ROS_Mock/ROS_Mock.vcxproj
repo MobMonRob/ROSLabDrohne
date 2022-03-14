@@ -147,6 +147,7 @@
     <ClCompile Include="termios.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ardrone_autonomy\Navdata.h" />
     <ClInclude Include="geometry_msgs\Point.h" />
     <ClInclude Include="geometry_msgs\PoseStamped.h" />
     <ClInclude Include="geometry_msgs\Quaternion.h" />

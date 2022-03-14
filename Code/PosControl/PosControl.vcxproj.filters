@@ -7,6 +7,8 @@
     <ClCompile Include="PosControl.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headerdateien">
