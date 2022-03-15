@@ -34,7 +34,7 @@ private:
 	ros::NodeHandle nh_;
 	ros::Subscriber Sub_;
 
-	ardrone_autonomy::Navdata Status_;
+	long Status_;
 };
 
 #endif // PARROTSTATUS_H

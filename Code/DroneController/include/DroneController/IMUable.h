@@ -3,6 +3,8 @@
 
 #include <mutex>
 
+#include "DroneController/Timeable.h"
+
 #include "Abstraction/Value.h"
 #include "Abstraction/Timestamp.h"
 #include "Abstraction/Vector3D.h"
@@ -15,7 +17,7 @@
 
 
 
-class IMUable
+class IMUable : public Timeable
 {
 public:
 	IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
@@ -23,7 +25,7 @@ public:
 	Vector3D getLinearAcceleration() { return this->State_.getVector_Linear(); };
 	Vector3D getRotationalVelocity() { return this->State_.getVector_Angular(); };
 	Value getGroundClearance() { return this->State_.getGroundClearance(); };
-	Timestamp getTime() { return this->State_.getTimestamp(); };
+	Timestamp getTime() override { return this->State_.getTimestamp(); };
 
 protected:
 	IMUState getState() const { return this->State_; };

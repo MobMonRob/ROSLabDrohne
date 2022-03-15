@@ -1,17 +1,17 @@
 #include "parrot/parrotBattery.h"
 
-#include "DroneController/PercentageOK.h"
 
 
 
 
-parrotBattery::parrotBattery(double Perc_thershold, double Intervall_Info)
-	: Sub_(this->nh_.subscribe("mavros/battery", 5, &parrotBattery::callbackNavdata, this))
+
+parrotBattery::parrotBattery(double PercentageThershold, double Intervall_Info)
+	: Batteryable(PercentageThershold),
+	Sub_(this->nh_.subscribe("mavros/battery", 5, &parrotBattery::callbackNavdata, this)),
+	Percentage_(0.0)
 {
 	ROS_INFO("Starting parrotBattery...");
 	ros::spinOnce();
-	
-	this->addRequirement(PercentageOK(this, 10.0));
 
 	ROS_INFO("Started parrotBattery");
 }
@@ -31,6 +31,8 @@ parrotBattery::~parrotBattery()
 
 void parrotBattery::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
+	this->Time_ = Timestamp(navdataPtr->header.stamp.toSec());
+	this->Percentage_ = navdataPtr->batteryPercent;
 }
 
 

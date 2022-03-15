@@ -10,7 +10,8 @@
 parrotStatus::parrotStatus(parrotBattery* Battery)
 	: Statusable(Battery),
 	nh_(),
-	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this))
+	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this)),
+	Status_(-1)
 {
 	ROS_INFO("Starting parrotStatus...");
 	ros::spinOnce();
@@ -36,5 +37,6 @@ parrotStatus::~parrotStatus()
 
 void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
-	this->Status_ = *navdataPtr;
+	this->Status_ = navdataPtr->state;
+	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
 }

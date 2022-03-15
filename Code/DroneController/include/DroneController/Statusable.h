@@ -2,12 +2,13 @@
 #define STATUSABLE_H
 
 #include "Abstraction/SafetyProvider.h"
+#include "DroneController/Timeable.h"
 
 #include "Abstraction/Timestamp.h"
 #include "DroneController/Batteryable.h"
 
 
-class Statusable : public SafetyProvider
+class Statusable : public SafetyProvider, public Timeable
 {
 public:
 	Statusable(Batteryable* Batteryable);
