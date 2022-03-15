@@ -172,6 +172,7 @@
     <ClInclude Include="sensor_msgs\Imu.h" />
     <ClInclude Include="sensor_msgs\Joy.h" />
     <ClInclude Include="sensor_msgs\Range.h" />
+    <ClInclude Include="std_msgs\Empty.h" />
     <ClInclude Include="std_msgs\Msg.h" />
     <ClInclude Include="std_msgs\Char.h" />
     <ClInclude Include="std_msgs\String.h" />

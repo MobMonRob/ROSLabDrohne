@@ -22,6 +22,7 @@
 #include "../sensor_msgs/Range.h"
 
 #include "../std_msgs/Char.h"
+#include "../std_msgs/Empty.h"
 
 #include "../../DroneController/include/DroneController/Batteryable.h"
 #include "../../DroneController/include/DroneController/Statusable.h"
@@ -42,6 +43,7 @@ namespace ros
 	{
 	public:
 		void publish(Msg Message) {};
+		void publish(std_msgs::Empty Message) {};
 
 	};
 

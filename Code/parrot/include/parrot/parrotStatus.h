@@ -21,20 +21,21 @@ public:
 	parrotStatus(parrotBattery* Battery);
 	~parrotStatus();
 	
+	bool setArmState(bool ArmState) override;
+
+	bool isGrounded() override { return this->getStatusID() == 2; };
+	bool isFlying() override { return (this->getStatusID() == 3 || this->getStatusID() == 7); };
 
 
-	Timestamp getTime() override { return Timestamp();};
-	
+	bool reset();
 	
 private:
+	void initSystemStatus() override;
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
-
 
 private:
 	ros::NodeHandle nh_;
 	ros::Subscriber Sub_;
-
-	long Status_;
 };
 
 #endif // PARROTSTATUS_H
