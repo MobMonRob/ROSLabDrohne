@@ -114,13 +114,13 @@ Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
 
 Vector3D Vector3D::rotateX(double Angle)
 {
-	FixedPoint<Accuracy_Vector> sin(sin(Angle));
-	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle));
 
-	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
-		- this->getZ() * sin;
-	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
-		+ this->getY() * sin;
+	FixedPoint<Accuracy_Vector> Y = this->getY() * COS
+		- this->getZ() * SIN;
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * COS
+		+ this->getY() * SIN;
 
 
 	return Vector3D(this->getUnit(), this->getX(), Y, Z);
@@ -128,14 +128,14 @@ Vector3D Vector3D::rotateX(double Angle)
 
 Vector3D Vector3D::rotateY(double Angle)
 {
-	FixedPoint<Accuracy_Vector> sin(sin(Angle));
-	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle));
 
 	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
-	FixedPoint<Accuracy_Vector> X = this->getX() * cos
-		+ this->getZ() * sin;
-	FixedPoint<Accuracy_Vector> Z = this->getZ() * cos
-		- this->getX() * sin;
+	FixedPoint<Accuracy_Vector> X = this->getX() * COS
+		+ this->getZ() * SIN;
+	FixedPoint<Accuracy_Vector> Z = this->getZ() * COS
+		- this->getX() * SIN;
 
 
 	return Vector3D(this->getUnit(), X, this->getY(), Z);
@@ -143,13 +143,13 @@ Vector3D Vector3D::rotateY(double Angle)
 
 Vector3D Vector3D::rotateZ(double Angle)
 {
-	FixedPoint<Accuracy_Vector> sin(sin(Angle));
-	FixedPoint<Accuracy_Vector> cos(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle));
 
-	FixedPoint<Accuracy_Vector> X = this->getX() * cos
-		- this->getY() * sin;
-	FixedPoint<Accuracy_Vector> Y = this->getY() * cos
-		+ this->getX() * sin;
+	FixedPoint<Accuracy_Vector> X = this->getX() * COS
+		- this->getY() * SIN;
+	FixedPoint<Accuracy_Vector> Y = this->getY() * COS
+		+ this->getX() * SIN;
 
 
 	return Vector3D(this->getUnit(), X, Y, this->getZ());

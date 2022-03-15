@@ -17,7 +17,6 @@
   
 	<depend>roscpp</depend>
 	<depend>rospy</depend>
-	<depend>std_msgs</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

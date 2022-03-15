@@ -10,6 +10,7 @@
 #include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
 #include "DroneController/Statusable.h"
+#include "DroneController/Timeable.h"
 #include "DroneController/Transmitable.h"
 #include "DroneController/VoltageOK.h"
 

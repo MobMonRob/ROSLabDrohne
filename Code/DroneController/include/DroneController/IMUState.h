@@ -1,7 +1,6 @@
 #ifndef IMUSTATE_H
 #define IMUSTATE_H
 
-
 #include "Abstraction/Value.h"
 #include "Abstraction/Vector3D.h"
 #include "Abstraction/Timestamp.h"

@@ -5,7 +5,6 @@ find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
 		rospy
-		std_msgs
 )
 
 ###################################
@@ -28,6 +27,7 @@ include_directories(
 ## Declare a C++ library
 add_library(Abstraction_lib
 	include/Abstraction/Header.h
+	src/SafetyProvider.cpp
 	src/TimedValue.cpp
 	src/Value.cpp
 	src/Vector3D.cpp

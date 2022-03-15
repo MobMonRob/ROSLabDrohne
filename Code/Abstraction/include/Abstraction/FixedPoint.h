@@ -16,7 +16,6 @@ class FixedPoint
 public:
 	FixedPoint<T>() : ValueRaw_(0) {};
 	FixedPoint<T>(int Value);
-	FixedPoint<T>(float Value) : FixedPoint(static_cast<double>(Value)) {};
 	FixedPoint<T>(double Value);
 	FixedPoint<T>(const FixedPoint<T>& FP);
 
@@ -66,6 +65,8 @@ public:
 	template<int TIn>
 	static FixedPoint<T> convert(FixedPoint<TIn> FP);
 	
+private:
+	static long long powl10(int Power);
 
 protected:
 	long long ValueRaw_;
@@ -79,18 +80,25 @@ inline FixedPoint<T>::FixedPoint(int Value)
 
 	if (T < 0)
 	{
-		this->ValueRaw_ *= std::powl(10, -T);
+		this->ValueRaw_ *= FixedPoint<T>::powl10(-T);
 	}
 	if (T > 0)
 	{
-		this->ValueRaw_ /= std::powl(10, T);
+		this->ValueRaw_ /= FixedPoint<T>::powl10(T);
 	}
 }
 
 template<int T>
 inline FixedPoint<T>::FixedPoint(double Value)
 {
-	this->ValueRaw_ = Value / std::pow(10, T);
+	if (T < 0)
+	{
+		this->ValueRaw_ = Value * FixedPoint<T>::powl10(-T);
+	}
+	if (T > 0)
+	{
+		this->ValueRaw_ = Value / FixedPoint<T>::powl10(T);
+	}
 }
 
 template<int T>
@@ -183,7 +191,15 @@ template<int TIn>
 inline void FixedPoint<T>::operator*=(const FixedPoint<TIn>& FP)
 {
 	this->ValueRaw_ *= FP.ValueRaw_;
-	this->ValueRaw_ *= std::powl(10, TIn);
+
+	if (T < 0)
+	{
+		this->ValueRaw_ /= FixedPoint<T>::powl10(-T);
+	}
+	if (T > 0)
+	{
+		this->ValueRaw_ *= FixedPoint<T>::powl10(T);
+	}
 }
 template<int T>
 inline void FixedPoint<T>::operator*=(int Value)
@@ -207,7 +223,7 @@ template<int T>
 template<int TIn>
 inline void FixedPoint<T>::operator/=(const FixedPoint<TIn>& FP)
 {
-	this->ValueRaw_ *= std::powl(10, -TIn);
+	this->ValueRaw_ *= FixedPoint<T>::powl10(-TIn);
 	this->ValueRaw_ /= FP.ValueRaw_;
 }
 template<int T>
@@ -226,9 +242,13 @@ inline double FixedPoint<T>::getValue() const
 	double ReturnValue = this->getValueRaw();
 
 
-	if (T != 0)
+	if (T < 0)
 	{
-		ReturnValue *= std::powl(10, T);
+		ReturnValue /= FixedPoint<T>::powl10(-T);
+	}
+	if (T > 0)
+	{
+		ReturnValue *= FixedPoint<T>::powl10(T);
 	}
 
 	return ReturnValue;
@@ -266,6 +286,19 @@ inline FixedPoint<T> FixedPoint<T>::convert(FixedPoint<TIn> FP)
 }
 
 
+template<int T>
+inline long long FixedPoint<T>::powl10(int Power)
+{
+	long long ReturnValue = 1;
+
+
+	for (int i = Power; i > 0; i--)
+	{
+		ReturnValue *= 10;
+	}
+
+	return ReturnValue;
+}
 
 
 #endif // FIXEDPOINT_H
