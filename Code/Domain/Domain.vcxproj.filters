@@ -118,7 +118,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\Domain\Controller_D.h-base" />
-    <None Include="include\Domain\Controller_D.h-theirs" />
+    <Text Include="CMakeLists.txt">
+      <Filter>Ressourcendateien</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="package.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

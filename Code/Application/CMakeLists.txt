@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(Application)
 
+add_compile_options(-std=c++11)
+
 find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
@@ -9,6 +11,7 @@ find_package(
 		
 		Abstraction
 		Domain
+		DroneController
 )
 
 ###################################
@@ -26,23 +29,21 @@ include_directories(
 	include
 	../Abstraction/include
 	../Domain/include
+	../DroneController/include
 	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 add_library(Application_lib
 	include/Application/Header.h
-	src/AccelToPos.cpp
-	src/AngVelToAng.cpp
-	src/State.cpp
-	src/StateHandler.cpp
+	src/PoseController.cpp
 )
 
 ## Add cmake target dependencies of the executable
 add_dependencies(Application_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib Abstraction_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Application_lib ${catkin_LIBRARIES} Domain_lib Abstraction_lib)
+target_link_libraries(Application_lib ${catkin_LIBRARIES} DroneController_lib Domain_lib Abstraction_lib)
 
 #############
 ## Install ##

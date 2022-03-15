@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(Domain)
 
+add_compile_options(-std=c++11)
+
 find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
@@ -40,6 +42,8 @@ add_library(Domain_lib
 	src/Controller_PT.cpp
 	src/ControllerSystem.cpp
 	src/Input.cpp
+	src/Integral1.cpp
+	src/Integral2.cpp
 	src/TimedDifference.cpp
 )
 

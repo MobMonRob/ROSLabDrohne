@@ -181,13 +181,15 @@
     <ClInclude Include="include\Domain\TimedDifference.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\Domain\Controller_D.h-base" />
-    <None Include="include\Domain\Controller_D.h-theirs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Abstraction\Abstraction.vcxproj">
       <Project>{a80faebe-6013-4403-a06c-b2a178b5cf4f}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="package.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

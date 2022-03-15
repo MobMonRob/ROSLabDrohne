@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(Abstraction)
 
+add_compile_options(-std=c++11)
+
 find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
@@ -12,7 +14,7 @@ find_package(
 ###################################
 catkin_package(
 	LIBRARIES Abstraction_lib
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
