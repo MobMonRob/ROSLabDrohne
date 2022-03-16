@@ -17,29 +17,10 @@ Probleme bei Inbetriebnahme - Beispielprogramm des Herstellers bringt nicht das 
 
 
 
-
-\newSec{Geometrie}{3}
-
-
-\newSec[Geom-Rot]{Anordnung der Rotoren}{4}
-
-
-X
-
-
-
-
 \newSec[Control]{Control Stack}{3}
+Als \textit{Flight Controller} wird das Modell \textit{PX4 Racer} genutzt. Die Firmware, sowie weitere Software zur Interaktion mit der Drohne \Clover\ werden von \textit{Dronecode Foundation} bereitgestellt.
 
-\missing[Bezeichnung auf deutsch?]
-
-\newSec[PX]{Flight Controller}{4}
-PX4 Racer
-
-
-\newSec[Pie]{On Board Computer}{4}
-\Pie\
-
+Die Anbindung an \ROS wird durch einen \Pie\ realisiert. Hierbei wird der On-Board Computer als \textit{roscore} genutzt.
 
 
 \newSec{Funkfernsteuerung}{3}
@@ -51,20 +32,16 @@ s-Bus ??
 
 \newSec{Sensorik}{3}
 
+\missing[EIn bisschen Einleitung.]
 
 
-\newSec{Gyroskop}{4}
+\begin{itemize}
+\item Gyroskop
+\item Laser-Abstandsmessung zum Boden
+\item GPS
+\item Bodenkamera
+\end{itemize}
 
-
-
-\newSec[Laser]{Laser-Abstandsmessung}{4}
-
-
-
-\newSec{Bodenkamera}{4}
-
-
-\newSec{GPS}{4}
 
 
 
@@ -87,14 +64,6 @@ s-Bus ??
 
 
 
-\newSec[BuildTrouble]{Troubleshooting}{4}
-
-\newSec{Platinenfehler}{5}
-
-
-
-
-\newSec{Bus-System des RC Empfängers}{5}
 
 
 
@@ -106,51 +75,95 @@ s-Bus ??
 
 
 
+\newSec{Testflug}{4}
 
-\newSec[TopicTrouble]{Troubleshooting}{4}
 
 
-\missing[Topics anders benannt, als in Dokumentation (überall steht "/mavros" davor]
+\comp{coexExample}
+\missing[Verweis auf Example Code]
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newSec[Build]{Mögliche Lösung der Aufgabenstellung}{3}
+
+
+
+\newSec[COEXPkg]{COEX-Package}{4}
+Für die Interaktion mit der \COEX-Drohne wurden diverse Klassen erstellt, um einzelne Aspekte der Interaktion mit der Drohne umsetzen zu können.
+
+Nach dem Wechsel auf die andere Drohne wurde die Aktualisierung dieses Package nicht weiter verfolgt. Sofern eine Einbindung der \COEX-Drohne in die Ergebnisse dieser \Arbeit\ durchgeführt werden soll, müss dieses Package entsprechend angepasst werden.
+
+
+
+\newSec[COEXPkg]{geeignete Topics}{4}
+
+Mit dem \rTopic{blablub} \missing\ kann eine Regelung in der XY-Ebene umgesetzt werden. Die Höhenregelung kann mit set\_attitude/thrust eingeführt werden.
+Somit wäre der Versuch für nachfolgende Studierende sehr viel sicherer und so.
+
+
+\missing\
+
+
+
+\newSec[CoexLiteratur]{hilfreiche Literatur}{4}
+Nachfolgend sollen Internetseiten genannt werden, welche die Einarbeitung in den Umgang mit der \COEX-Drohne vereinfachen können.
+
+\begin{itemize}
+\item https://clover.coex.tech/en/wifi.html
+
+\item https://clover.coex.tech/en/simple\_offboard.html
+\item https://docs.px4.io/master/en/ros/mavros\_offboard.html
+\item https://docs.px4.io/master/en/flight\_modes/offboard.html
+
+\item https://mavlink.io/en/services/manual\_control.html
+\item http://wiki.ros.org/mavros\#mavros.2FPlugins.manual\_control
+
+\item https://mavlink.io/en/messages/common.html\#SET\_POSITION\_TARGET\_LOCAL\_NED
+\end{itemize}
+
+Spezifische Verweise sind im Quellcode des \COEX-Package hinterlegt.
+
+
+
+\newSec[COEXTrouble]{Troubleshooting}{4}
+
+
 
 \missing[Achtung: der Regler VRA muss so eingestellt sein, dass "manual Flight" verfügbar ist. Andersfalls ist ein Start der Drohne nicht möglich.]
 
 
-\newSec[TopicTroubleBlacklist]{Clover ist faul}{5}
-Um Ressourcen zu sparen werden einige \Topic[s] nicht vom \Pie\ verarbeitet \bzw\ weitergegeben.
+
+
+
+\newSec{Platinenfehler}{5}
+
+\missing[Hier anmerken, dass das Problem bisher nicht behoben wurde => Wirkt sich nur auf LED-Streifen aus.]
+
+
+
+
+
+\newSec{Bus-System des RC Empfängers}{5}
+\missing[RC-Empfänger gibt per default i-Bus aus, PX4 erwartet s-Bus.]
+
+\missing[Bild von Oszilloskop]
+
 
 \texttt{Lösung}\\
-Unterdrückte \Topic[s] müssen 
-\missing[ungetested!]
+\missing[i-Bus und s-Bus werden durch Halten des Knopfens getauscht. Verweis auf Homepage angeben?]
 
-https://clover.coex.tech/en/mavros.html
 
-Freigegebene \Topic[s] in \texttt{mavros.launch}
 
-\begin{lstlisting}[style=Style_XML, numbers=none, caption={[Freigegebene Topics] Freigegebene \Topic[s] in \texttt{mavros.launch}}]
-<rosparam param="plugin_whitelist">
-	- altitude
-	- command
-	- distance_sensor
-	- ftp
-	- global_position
-	- imu
-	- local_position
-	- manual_control
-	# - mocap_pose_estimate
-	 - param
-	 - px4flow
-	 - rc_io
-	 - setpoint_attitude
-	- setpoint_position
-	- setpoint_raw
-	- setpoint_velocity
-	- sys_status
-	- sys_time
-	- vision_pose_estimate
-	# - vision_speed_estimate
-	# - waypoint
-</rosparam>
-\end{lstlisting}
 
 
 \newSec[TopicTroubleRCOverMD5]{md5-Sum des Topics OverrideRCIn}{5}
@@ -184,52 +197,6 @@ struct MD5Sum<::mavros_msgs::OverrideRCIn_<ContainerAllocator>>
 \end{lstlisting}
 
 von dem \Pie\ kopieren und in der Definition des lokalen \ROS\ \textit{\mbox{OverrideRCIn}}-Headers ersetzen.
-
-
-
-\newSec[TopicTroubleRCOver]{Topics OverrideRCIn läuft nur mit Topic RCIn}{5}
-
-
-
-
-
-\texttt{Lösung}\\
-
-
-
-
-
-
-
-
-
-\newSec[TopicTroubleRCOver]{Topics setpoint\_altitude/thrust läuft nicht}{3}
-
-
-
-
-
-\newSec{Lösung}{4}
-
-
-
-
-
-
-\newSec[Build]{Mögliche Lösung der Aufgabenstellung}{3}
-
-
-
-\newSec[COEXPkg]{COEX-Package}{4}
-Für die Interaktion mit der COEX-Drohne wurden diverse Klassen erstellt, um einzelne Aspekte der Interaktion mit der Drohne umsetzen zu können.
-
-
-
-
-
-\newSec[COEXPkg]{geeignete Topics}{4}
-
-Mit dem \rTopic{blablub} \missing\ kann eine Regelung in der XY-Ebene umgesetzt werden. Die Höhenregelung kann mit set\_attitude/thrust eingeführt werden.
-Somit wäre der Versuch für nachfolgende Studierende sehr viel sicherer und so.
+Ein Versuch, den \Pie\ einem Update zu unterziehen, ist fehlgeschlagen. Somit ist eine unmittelbare Synchronisation der Nachrichten-Typen aufwändig.
 
 

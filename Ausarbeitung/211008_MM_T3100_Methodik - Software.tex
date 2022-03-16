@@ -1,31 +1,31 @@
 \newSec[SW]{Eingesetzte Software}{2}
 
+In diesem Kapitel sollen die für diese \Arbeit\ eingesetzten Softwares genannt, um eine Reproduktion der Ergebnisse gewährleisten zu können.
 
+
+\note{Die Ausführungen der eingesetzten Software beziehen sich auf den Umgang mit der Drohne \textit{ArDrone 2.0}. Für die Interaktion mit der Drohne \textit{Clover 4.20}, weche zum Projektbeginn eingesetzt wurde, wurde aktuellere Software eingesetzt.}
 
 
 \newSec{ROS}{3}
 Das \textit{Robot Operating System} (\ROS) ist eine \textit{Open Source} Bibliothek, welche dem Nutzer eine modulare Architektur ermögicht.
 Hierbei kommunizieren \textit{Nodes} mittels \textit{Messages} miteinander.\vgl{ros1}
 
-Die \ROS\ Versionen werden jeweils mit Namen versehen, wobei die Anfangsbuchstaben der Versionen der alphabetischen Nummerierung entsprechen. In diesem Projekt wurde die aktuellste \ROS-Version \textit{noetic} eingesetzt.
+Die \ROS\ Versionen werden jeweils mit Namen versehen, wobei die Anfangsbuchstaben der Versionen der alphabetischen Nummerierung entsprechen. In diesem Projekt wurde die \ROS-Version \textit{Indigo} eingesetzt.
+Diese Version wird auf Grund der Anforderungen des \textit{Driver}-Package \textit{ardrone\_autonomy} eingesetzt. Der Einsatz der aktuellsten \ROS-Version \textit{noetic} in Zusammenspiel mit \textit{Ubuntu 20.04} konnte das gewünschte Ergebnis nicht erzielen.
 
 Die \ROS\textit{-Nodes} wurden mittels \textit{catkin} compiliert.
-
-
-
-
+Für eine korrekte Kompilierung müssen \textit{CMakeList.txt}-Dateien den Befehl \texttt{add\_compile\_options(-std=c++11)} beinhalten.
 
 
 \newSec{Ubuntu - Betriebssystem}{3}
+Als Betiebtssystem wird das \textit{UNIX}-basierte Betriebssystem \textit{Ubuntu} auf einer \VM\ in der Version 14.04 eingesetzt.
+Die Auswahl dieser Version gründet auf den Anforderungen der \ROS \textit{Indigo}-Version.\comp{rosVersion}
 
-
-
-
-
+Die \VM\ wird durch die Software \textit{VMWare Workstation 15 Pro} visualisiert.
 
 
 \newSec{Visual Studio - IDE}{3}
-
+\missing\
 
 
 
