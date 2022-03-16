@@ -37,6 +37,9 @@ public:
 
 	bool updatePose(IMUState State) override;
 
+	void reset() override { this->reset(Vector3D(this->getPosition().getUnit()), Vector3D(this->getOrientation().getUnit())); };
+	void reset(Vector3D Position, Vector3D Orientation);
+
 private:
 	Timestamp Time_;
 	

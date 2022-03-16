@@ -7,18 +7,22 @@
 
 #include <ros/ros.h>
 
-#include "mavros_msgs/ManualControl.h"
-
 #include "Abstraction/Vector3D.h"
+#include "DroneController/Timeable.h"
+#include "DroneController/PoseControlable.h"
 
-#include "parrot/parrotTransmitter.h"
+#include "parrot/parrotStatus.h"
+#include "parrot/parrotBattery.h"
 #include "parrot/parrotIMU.h"
+#include "parrot/parrotTransmitter.h"
 
 
-class parrotControl : public DroneControlable
+class parrotControl : public DroneControlable, public Timeable
 {
 public:
-	
+	parrotControl(PoseControlable* Controller);
+
+
 	/*
 	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
 	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
@@ -34,8 +38,6 @@ public:
 	double getGroundClearance_deangled() { return this->Orientation_->getGroundClearance_deangled(); };
 	
 	mavros_msgs::ManualControl getRC_normalized();
-	
-	double getTime() { return 0;};			// TODO!!
 	*/
 
 private:
@@ -44,6 +46,10 @@ private:
 	//void landing();
 	
 private:
+	parrotStatus Status_;
+	parrotBattery Battery_;
+	parrotIMU IMU_;
+	parrotTransmitter Transmitter_;
 };
 
 #endif // PARROTCONTROL_H

@@ -28,13 +28,17 @@ include_directories(
 
 ## Declare a C++ library
 add_library(Abstraction_lib
-	include/Abstraction/Header.h
+	./include/Abstraction/Header.h
 	src/SafetyProvider.cpp
 	src/TimedValue.cpp
 	src/Value.cpp
 	src/Vector3D.cpp
 )
 
+## Add cmake target dependencies of the executable
+add_dependencies(Abstraction_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+## Specify libraries to link a library or executable target against
 target_link_libraries(Abstraction_lib ${catkin_LIBRARIES})
 
 #############

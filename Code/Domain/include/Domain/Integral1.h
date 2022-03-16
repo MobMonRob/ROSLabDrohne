@@ -1,6 +1,7 @@
 #ifndef INTEGARL1_H
 #define INTEGARL1_H
 
+#include "Abstraction/FixedPoint.h"
 #include "Abstraction/Unit.h"
 #include "Abstraction/TimedValue.h"
 
@@ -18,6 +19,9 @@ public:
 
 	TimedValue getOutput() { return this->Integral_.getOutput(); };
 	Unit getOutputUnit() { return this->Integral_.getOutputUnit(); };
+
+	void reset() { this->reset(Value(this->Input_.getOutputUnit(), 0.0)); };
+	void reset(Value Output);
 
 private:
 	Controller_Input Input_;

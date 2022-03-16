@@ -17,7 +17,15 @@ IMUState StateBuilder::createState(Timestamp Time,
 
 IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity, Value GroundClearance)
 {
-	return IMUState(LinearAcceleration, RotationalVelocity, GroundClearance, Time) - this->NullPoint_;
+	this->StateHandler_.addEntry(IMUState(LinearAcceleration, RotationalVelocity, GroundClearance, Time) - this->NullPoint_);
+
+	return this->getState();
+}
+
+void StateBuilder::reset()
+{
+	this->clearStateHandler();
+	this->NullPoint_ = IMUState();
 }
 
 

@@ -166,12 +166,6 @@
     <ClInclude Include="include\DroneController\Transmitable.h" />
     <ClInclude Include="include\DroneController\VoltageOK.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="package.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

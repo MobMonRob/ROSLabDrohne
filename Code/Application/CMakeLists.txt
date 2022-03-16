@@ -4,10 +4,10 @@ project(Application)
 add_compile_options(-std=c++11)
 
 find_package(
-	catkin REQUIRED COMPONENTS
+	catkin REQUIRED 
+	COMPONENTS
 		roscpp
 		rospy
-		std_msgs
 		
 		Abstraction
 		Domain
@@ -19,7 +19,7 @@ find_package(
 ###################################
 catkin_package(
 	LIBRARIES Application_lib
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
@@ -35,12 +35,12 @@ include_directories(
 
 ## Declare a C++ library
 add_library(Application_lib
-	include/Application/Header.h
+	./include/Application/Header.h
 	src/PoseController.cpp
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(Application_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib Abstraction_lib)
+add_dependencies(Application_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} DroneController_lib Domain_lib Abstraction_lib)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(Application_lib ${catkin_LIBRARIES} DroneController_lib Domain_lib Abstraction_lib)

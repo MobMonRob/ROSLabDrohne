@@ -7,7 +7,6 @@ find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
 		rospy
-		std_msgs
 		
 		Abstraction
 )
@@ -17,7 +16,7 @@ find_package(
 ###################################
 catkin_package(
 	LIBRARIES Domain_lib
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
@@ -31,7 +30,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(Domain_lib
-	include/Domain/Header.h
+	./include/Domain/Header.h	
 	src/Controllable.cpp
 	src/Controller_Basic.cpp
 	src/Controller_D.cpp

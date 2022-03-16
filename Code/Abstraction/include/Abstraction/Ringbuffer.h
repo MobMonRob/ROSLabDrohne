@@ -1,6 +1,7 @@
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
+#include <cstdlib>
 #include <vector>
 
 #include "Abstraction/Optional.h"
@@ -10,23 +11,23 @@ template <typename DataType>
 class Ringbuffer
 {
 public:
-	Ringbuffer(size_t MaxElements = 1);
+	Ringbuffer(std::size_t MaxElements = 1);
 
 	void addItem(DataType Item);
 
 	Optional<DataType> getData(int Index = 0);
-	size_t getSize() { return this->Buffer_.size(); };
+	std::size_t getSize() { return this->Buffer_.size(); };
 
 	void clear() { this->Buffer_.clear(); };
 
 private:
 	std::vector<DataType> Buffer_;
-	size_t MaxSize_;
+	std::size_t MaxSize_;
 };
 
 
 template<typename DataType>
-inline Ringbuffer<DataType>::Ringbuffer(size_t MaxElements)
+inline Ringbuffer<DataType>::Ringbuffer(std::size_t MaxElements)
 {
 	this->MaxSize_ = MaxElements;
 }

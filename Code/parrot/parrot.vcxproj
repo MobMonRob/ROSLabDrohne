@@ -89,12 +89,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Abstraction/include;../Domain/include;../DroneController/include;../ROS_Mock</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Abstraction/include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseBuilder.obj;PoseControlable.obj;PoseController.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseBuilder.obj;PoseControlable.obj;PoseController.obj;StateBuilder.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -11,6 +11,7 @@ find_package(
 		
 		Abstraction
 		Domain
+		DroneController
 		Application
 )
 
@@ -29,22 +30,24 @@ include_directories(
 	include
 	../Abstraction/include
 	../Domain/include
+	../DroneController/include
 	../Application/include
 	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 add_library(Adapter_lib
-	include/Adapter/Header.h
-	src/ActionAdapter.cpp
-	src/ActionAdapter_Mock.cpp
+	./include/Adapter/Header.h
+	src/StateBuilder.cpp
+	src/StateHandler.cpp
+	src/PoseBuilder.cpp
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Application_lib Domain_lib Abstraction_lib)
+add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Application_lib DroneController_lib Domain_lib Abstraction_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Application_lib Domain_lib Abstraction_lib)
+target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Application_lib DroneController_lib Domain_lib Abstraction_lib)
 
 #############
 ## Install ##

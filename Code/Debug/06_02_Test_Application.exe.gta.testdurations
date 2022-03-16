@@ -8,6 +8,6 @@
     <TestDuration Test="Class_StateHandler.Init" Duration="1" />
     <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="92" />
     <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="94" />
-    <TestDuration Test="Class_PoseController.callTransmitter" Duration="3" />
+    <TestDuration Test="Class_PoseController.callTransmitter" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

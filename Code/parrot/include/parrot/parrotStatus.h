@@ -1,16 +1,13 @@
 #ifndef PARROTSTATUS_H
 #define PARROTSTATUS_H
 
-#include "DroneController/Statusable.h"
-
-#include <ros/ros.h>
-
 #include <string>
 #include <map>
 
-#include <mavros_msgs/State.h>
-#include <mavros_msgs/SetMode.h>
-#include "ardrone_autonomy/Navdata.h"
+#include "DroneController/Statusable.h"
+
+#include <ros/ros.h>
+#include <ardrone_autonomy/Navdata.h>
 
 #include "parrot/parrotBattery.h"
 

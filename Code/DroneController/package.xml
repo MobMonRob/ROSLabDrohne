@@ -53,7 +53,7 @@
 	<depend>roscpp</depend>
 	<depend>rospy</depend>
 	
-	<depend>Abstraction_lib</depend>
+	<depend>Abstraction</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

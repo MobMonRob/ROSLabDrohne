@@ -20,6 +20,12 @@ public:
 	TimedValue getOutput() { return this->Integral2_.getOutput(); };
 	Unit getOutputUnit() { return this->Integral2_.getOutputUnit(); };
 
+	void reset() {this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
+		Value(this->Integral2_.getOutputUnit(), 0.0)); };
+	void reset(Value Output) { this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
+		Output); };
+	void reset(Value Output, Value HiddenOutput);
+
 private:
 	Controller_Input Input_;
 	Controller_I Integral1_;

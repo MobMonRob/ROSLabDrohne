@@ -50,20 +50,19 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   
-	<depend>geometry_msgs</depend>
-	<depend>mavros_msgs</depend>
 	<depend>roscpp</depend>
 	<depend>rospy</depend>
 	<depend>std_msgs</depend>
-	<depend>message_generation</depend>
 	<depend>sensor_msgs</depend>
-	
-	<depend>threading</depend>
-	<depend>calling</depend>
+	<depend>geometry_msgs</depend>
   
-
+  <depend>ardrone_autonomy</depend>
   
-
+  <depend>Abstraction</depend>
+  <depend>Domain</depend>
+  <depend>DroneController</depend>
+  <depend>Application</depend>
+  <depend>Adapter</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

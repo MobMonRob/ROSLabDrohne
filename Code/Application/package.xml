@@ -17,11 +17,9 @@
   
 	<depend>roscpp</depend>
 	<depend>rospy</depend>
-	<depend>std_msgs</depend>
 	
-	<depend>Abstraction</depend>
 	<depend>Domain</depend>
-
+	<depend>DroneController</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

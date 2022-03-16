@@ -8,39 +8,16 @@ IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 }
 
 
-
-void IMUable::updateState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity)
-{
-	this->StateMutex_.lock();
-
-	this->State_ = IMUState(LinearAcceleration,
-		RotationalVelocity,
-		this->getGroundClearance(),
-		Time);
-
-	this->StateMutex_.unlock();
-}
-
-void IMUable::updateState(Timestamp Time, Value GroundClearance)
-{
-	this->StateMutex_.lock();
-
-	this->State_ = IMUState(this->getLinearAcceleration(),
-		this->getRotationalVelocity(),
-		GroundClearance,
-		Time);
-
-	this->StateMutex_.unlock();
-}
-
-bool IMUable::calcPose()
+bool IMUable::calcPose(IMUState S)
 {
 	bool ReturnBool = false;
 
 
 	if (this->PoseBuilder_ != nullptr)
 	{
-		ReturnBool = this->PoseBuilder_->updatePose(this->getState());
+		this->setTime(S.getTimestamp());
+
+		ReturnBool = this->PoseBuilder_->updatePose(S);
 	}
 
 	return ReturnBool;
@@ -58,4 +35,12 @@ bool IMUable::triggerController()
 
 	return ReturnBool;
 }
+
+void IMUable::reset()
+{
+	this->PoseBuilder_->reset();
+	this->PoseController_->reset();
+}
+
+
 

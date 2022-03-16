@@ -22,3 +22,10 @@ bool Integral1::setInput(TimedValue V, bool AutoCalculation)
 	return ReturnBool;
 }
 
+void Integral1::reset(Value Output)
+{
+	this->Integral_.setOutput(Output);
+}
+
+
+

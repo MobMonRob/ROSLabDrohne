@@ -21,6 +21,8 @@ public:
 	virtual Vector3D getOrientationUncertainty() const = 0;
 
 	virtual bool updatePose(IMUState State) = 0;
+
+	virtual void reset() = 0;
 };
 
 #endif // POSEBUILDABLE_H

@@ -1,19 +1,17 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(DroneController)
 
-add_compile_options(-std=c++11)
-
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 find_package(
-  catkin REQUIRED
-  COMPONENTS
-    roscpp
-    rospy
-	
-    Abstraction
+	catkin REQUIRED
+	COMPONENTS
+		roscpp
+		rospy
+
+		Abstraction
 )
 
 
@@ -22,8 +20,8 @@ find_package(
 ###################################
 catkin_package(
 #  INCLUDE_DIRS include
-	LIBRARIES DroneController
-	CATKIN_DEPENDS roscpp rospy Abstraction_lib
+	LIBRARIES DroneController_lib
+	CATKIN_DEPENDS roscpp rospy
 #  DEPENDS system_lib
 )
 
@@ -40,8 +38,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(DroneController_lib
-	../Abstraction/include/Abstraction/Header.h
-	include/DroneController/Header.h
+	./include/DroneController/Header.h
 	src/Batteryable.cpp
 	src/IMUable.cpp
 	src/IMUState.cpp

@@ -96,7 +96,7 @@ bool PoseBuilder::updatePose(IMUState State)
 		}
 
 
-		// Calc Error.
+		// Calc Error / Drift
 
 		ReturnBool = true;
 	}
@@ -107,4 +107,12 @@ bool PoseBuilder::updatePose(IMUState State)
 }
 
 
-
+void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
+{
+	this->PositionX_.reset(Value(Position.getUnit(), Position.getX()));
+	this->PositionX_.reset(Value(Position.getUnit(), Position.getY()));
+	this->PositionX_.reset(Value(Position.getUnit(), Position.getZ()));
+	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getX()));
+	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getY()));
+	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getZ()));
+}
