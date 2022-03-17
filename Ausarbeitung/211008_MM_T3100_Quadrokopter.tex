@@ -4,13 +4,32 @@
 
 
 
+\newSec{Orientierungsmerkmale}{2}
+
+
+
+
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=12cm]{Pictures/Orientations.png}}
+\caption{Orientierungsmerkmale eines Flugobjekts \cite{parotSDK}}
+\label{fig:Orient}
+\end{center}
+
+\vspace{0.25cm}
+\refImgShort{fig:Orient} zeigt die Orientierung eines beliebigen Flugobjektes am beispiel eines Flugzeugs. Die Bezeichner beziehen sich auf ein kartesisches Korrdinatensystem und beschrieben jeweils die Rotation um eine Raumachse.
+\end{figure}
+
+
+
+
 
 
 \newSec{Geometrien}{2}
-Die Rotoren von Drohnen können in zwei verschiedenen Anordnungen angebracht werden. in diesem Kapitel sollen diese Anordnung näher beschrieben werden.
+Bei \Quad[n] handelt es sich im allgemeinen um Fluggeräte mit vier Rotoren, welche horizontal angebracht sind. Der Auftrieb wird somit unmittelbar durch die Rotoren induziert.
 
-
-
+Die Rotoren von \Quad[n] können in zwei verschiedenen Anordnungen angebracht werden. in diesem Kapitel sollen diese Anordnung näher beschrieben werden.
 
 
 \newSec[Plus]{\textbf{+}-Anordnung}{3}
@@ -19,12 +38,16 @@ Die Rotoren von Drohnen können in zwei verschiedenen Anordnungen angebracht wer
 
 
 \missing[für roll und pitch wird die Drehzahl die Rotoren auf der jeweiligen Achse entgegengesetzt manipuliert.]
-\missing[für eine Drehung um die z-Achse werden die Rotoren der x- und y-Achse entgegengesetzt manipuliert.]
+\missing[für eine Drehung um die z-Achse (yarn) werden die Rotoren der x- und y-Achse entgegengesetzt manipuliert.]
 
 
 
 \newSec[X]{\textbf{x}-Anordnung}{3}
 \missing\
+
+
+
+
 
 
 
@@ -37,6 +60,82 @@ Die Rotoren von Drohnen können in zwei verschiedenen Anordnungen angebracht wer
 6 Freiheitsgrade, tatsächlich 4 individuell regelbar.
 
 \missing[Bild der Kräfte an der Drohne, wenn diese aus der horizontalen Ebene geneigt ist.]
+
+
+
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=12cm]{Pictures/Forces.png}}
+\caption{wirkende Kräfte am \Quad\ in \textbf{x}-Anordnung \comp{Paper2}}
+\label{fig:Forces}
+\end{center}
+
+\vspace{0.25cm}
+\refImgShort{fig:Forces} zeigt die wirkenden Kräfte an einem \Quad\ in \textbf{x}-Anordnung. Die Achsen das Koordinatensystems sind in \textcolor{red}{rot} markiert. Alle mit \textit{F} markeirten Pfeile deuten Kräfte an. Die mit \missing[Omega] markierten gebogenen Pfeile zeigen die Rotationsgeschwindigkeit der einzelnen Rotoren.
+
+
+
+ Orientierung eines beliebigen Flugobjektes am beispiel eines Flugzeugs. Die Bezeichner beziehen sich auf ein karthesisches Korrdinatensystem und beschrieben jeweils die Rotation um eine Raumachse.
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=12cm]{Pictures/Forces_Rolled.png}}
+\caption{wirkende Kräfte für gerollten \Quad\ \comp{Paper2}}
+\label{fig:ForcesRolled}
+\end{center}
+
+\vspace{0.25cm}
+\refImgShort{fig:ForcesRolled} zeigt die auf einen \Quad\ wirkenden Kräfte, wenn sich dieser in einer gerollten Orientierung befindet. Hier entspricht der Betrag der Kraft entlang der z-Achse der Gewichtskraft.
+
+
+\end{figure}
+
+
+Die Kraft $F_{res}$ wird mit der Gewichtskraft $F_g$ überlagert. Die hieraus resultierende Kraft kann in zwei Kräfte aufgeteilt werden, welche parallel zu den kartesischen Achsen angeordnet sind. Hieraus kann berechnet sich die Beschleunigung, welche auf den \Quad\ wirkt.
+
+\missing[muss hier eine Quelle angegeben werden? Wenn ja, evtl. Vorlesung tech Mech aus MB13VT.]
+
+
+
+
+Hieraus ergibt ich, dass eine Neigung zur horizontalen Ebene ine Beschleunigung in der horizontalen Ebene induziert wird. Somit ist jede Position auf der horizontalen Ebene von der Neigung zu dieser Ebene abhängig. Daraus folgt die Reduktion der Freiheitsgrde von sechs auf vier.
+
+\missing[hier vielleicht noch ne Quelle...]
+
+
+
+
+
+
+
+
+
+\newSec{Pose}{2}
+
+
+
+
+\newSec{lokale Pose}{3}
+
+
+
+
+\newSec{globale Pose}{3}
+
+
+
+
+
+
 
 
 

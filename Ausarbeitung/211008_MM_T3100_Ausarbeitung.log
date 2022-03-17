@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.8.31)  18 FEB 2022 11:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.8.31)  17 MAR 2022 10:27
 entering extended mode
 **C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung/211008_MM_T3100_A
 usarbeitung.tex
@@ -1960,42 +1960,170 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 ]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Me
-thodik.tex)
+thodik.tex
+LaTeX Font Info:    Font shape `T1/ua1/b/n' will be
+(Font)              scaled to size 13.67995pt on input line 17.
+
+Overfull \hbox (6.74695pt too wide) in paragraph at lines 18--19
+\T1/lmr/m/n/12 In die-sem Ka-pi-tel sol-len Be-griff-lich-kei-ten de-fi-niert w
+er-den, wel-che im all-ge-mei-nen Sprach-
+ []
+
+)
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_M
 ethodik - Software.tex"
-LaTeX Font Info:    Font shape `T1/ua1/b/n' will be
-(Font)              scaled to size 13.67995pt on input line 1.
 
+LaTeX Warning: Citation `ros1' on page 3 undefined on input line 11.
 
-LaTeX Warning: Citation `ros1' on page 3 undefined on input line 8.
-
-) [3
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+7.
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+[3
 
 
 ]
+
+LaTeX Warning: Citation `rosVersion' on page 4 undefined on input line 22.
+
+) [4]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Qu
 adrokopter.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\Quad' on input line 1.
 
-) [4
+<Pictures/Orientations.png, id=86, 269.20575pt x 245.718pt>
+File: Pictures/Orientations.png Graphic file (type png)
+<use Pictures/Orientations.png>
+Package pdftex.def Info: Pictures/Orientations.png  used on input line 15.
+(pdftex.def)             Requested size: 341.43306pt x 311.66095pt.
 
-]
+LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
+(Font)              using `T1/lmr/bx/n' instead on input line 16.
+
+
+LaTeX Warning: Citation `parotSDK' on page 5 undefined on input line 16.
+
+
+LaTeX Warning: Citation `parotSDK' on page 5 undefined on input line 16.
+
+
+LaTeX Warning: Reference `fig:Orient' on page 5 undefined on input line 21.
+
+[5
+
+ <C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung/Pictures/Orientat
+ions.png>]
+<Pictures/Forces.png, id=98, 364.9635pt x 232.4685pt>
+File: Pictures/Forces.png Graphic file (type png)
+<use Pictures/Forces.png>
+Package pdftex.def Info: Pictures/Forces.png  used on input line 69.
+(pdftex.def)             Requested size: 341.43306pt x 217.49527pt.
+
+
+LaTeX Warning: Citation `Paper2' on page 6 undefined on input line 70.
+
+
+LaTeX Warning: Citation `Paper2' on page 6 undefined on input line 70.
+
+
+LaTeX Warning: Reference `fig:Orient' on page 6 undefined on input line 75.
+
+! Bad character code (10146).
+<to be read again> 
+                   \relax 
+l.75 ... deuten KrÃ¤fte an. Die mit \symbol{"27A2}
+                                                   markierten gebogenen Pfei...
+
+? 
+) [6 <C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung/Pictures/Forc
+es.png>]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Ha
 rdware.tex)
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Geometry.tex")
-("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Sensoric.tex")
-("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Controls.tex")
-("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Funk.tex") [5
+ardware - COEX.tex" [7
 
 ]
+
+LaTeX Warning: Citation `coexExample' on page 8 undefined on input line 82.
+
+[8]
+Overfull \hbox (72.34846pt too wide) in paragraph at lines 131--132
+[]\T1/lmr/m/n/12 https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET
+_LOCAL_NED 
+ []
+
+
+Overfull \hbox (6.6083pt too wide) in paragraph at lines 142--143
+[]\T1/lmr/m/n/12 BESCHREIBUNG! \T1/lmr/m/it/10 Ach-tung: der Reg-ler VRA muss s
+o ein-ge-stellt sein, dass "ma-nu-al Flight"verfügbar
+ []
+
+
+Overfull \hbox (40.93059pt too wide) in paragraph at lines 170--172
+\T1/lmr/m/n/12 sich ein []\T1/lmtt/m/n/12 ros::Subscriber[] \T1/lmr/m/n/12 oder
+ ein []\T1/lmtt/m/n/12 ros::Publisher[] \T1/lmr/m/n/12 auf das \T1/lmr/m/it/12 
+ROS-Topic []\T1/lmtt/m/n/12 /mavros/rc/override[]
+ []
+
+
+Overfull \hbox (39.51537pt too wide) in paragraph at lines 170--172
+\T1/lmr/m/n/12 to ha-ve da-ta-ty-pe/md5sum [ma-vros_msgs/OverrideRCIn/73b27a463
+a40a3eda1f9fbb1fc86d6f3],
+ []
+
+[9]
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
+ty"
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
+ty"
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 178.
+
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 178.
+
+
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
+ty"
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
+ty"
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.st
+y"
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+)
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 197.
+
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 197.
+
+
+Overfull \hbox (2.29245pt too wide) in paragraph at lines 199--201
+[]\T1/lmr/m/n/12 von dem []\T1/lmr/m/it/12 Raspber-ry Pie 4[] \T1/lmr/m/n/12 ko
+-pie-ren und in der De-fi-ni-ti-on des lo-ka-len \T1/lmr/m/it/12 ROS []\T1/lmr/
+m/n/12 -
+ []
+
+)
+("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
+ardware - Parrot.tex" [10]) [11]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Re
-gelsystem.tex) [6
+gelsystem.tex) [12
 
 ]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Po
@@ -2011,17 +2139,11 @@ ositionsregelung Accel.tex"
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\Quad' on input line 1.
 
-) [7
-
-]
-("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Aufbau.tex")
-("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_H
-ardware - Aufbau - Troubleshooting.tex") [8
+) [13
 
 ]
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_R
-OS - Topic - Analyse.tex" [9
+OS - Topic - Analyse.tex" [14
 
 ]
 
@@ -2038,19 +2160,15 @@ LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 162.
 LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 162.
 
 
-[10])
+)
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_R
-OS - Topic - Troubleshooting.tex"
+OS - Topic - Troubleshooting.tex" [15]
 Overfull \hbox (6.6083pt too wide) in paragraph at lines 6--7
 [][]\T1/lmr/m/n/12 BESCHREIBUNG! \T1/lmr/m/it/10 Ach-tung: der Reg-ler VRA muss
  so ein-ge-stellt sein, dass "ma-nu-al Flight"verfügbar
  []
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-8.
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
+
 ("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
 ty"
 File: lstlang1.sty 2019/09/10 1.8c listings language file
@@ -2060,10 +2178,6 @@ y"
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 )
 
-LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 44.
-
-
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 44.
 
@@ -2071,11 +2185,11 @@ LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 44.
 
-[11]
-Overfull \hbox (38.31952pt too wide) in paragraph at lines 48--50
+
+Overfull \hbox (40.93059pt too wide) in paragraph at lines 48--50
 \T1/lmr/m/n/12 sich ein []\T1/lmtt/m/n/12 ros::Subscriber[] \T1/lmr/m/n/12 oder
  ein []\T1/lmtt/m/n/12 ros::Publisher[] \T1/lmr/m/n/12 auf das \T1/lmr/m/it/12 
-ROS-Topic[]\T1/lmtt/m/n/12 /mavros/rc/override[]
+ROS-Topic []\T1/lmtt/m/n/12 /mavros/rc/override[]
  []
 
 
@@ -2084,15 +2198,7 @@ Overfull \hbox (39.51537pt too wide) in paragraph at lines 48--50
 a40a3eda1f9fbb1fc86d6f3],
  []
 
-
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
-ty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
-ty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
+[16]
 
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 56.
@@ -2101,19 +2207,6 @@ LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 56.
 
-
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
-ty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
-ty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-("C:\Users\maag\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.st
-y"
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-)
 
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 75.
@@ -2129,10 +2222,10 @@ Overfull \hbox (2.29245pt too wide) in paragraph at lines 77--78
 m/n/12 -
  []
 
-) [12]
+) [17]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Ar
 chitektur.tex
-<Pictures/Clean Architecture.png, id=214, 1190.4475pt x 2262.4525pt>
+<Pictures/Clean Architecture.png, id=257, 1190.4475pt x 2262.4525pt>
 File: Pictures/Clean Architecture.png Graphic file (type png)
 <use Pictures/Clean Architecture.png>
 Package pdftex.def Info: Pictures/Clean Architecture.png  used on input line 9.
@@ -2140,18 +2233,18 @@ Package pdftex.def Info: Pictures/Clean Architecture.png  used on input line 9.
 (pdftex.def)             Requested size: 299.40945pt x 569.05511pt.
 
 
-LaTeX Warning: Reference `fig:CArch' on page 13 undefined on input line 15.
+LaTeX Warning: Reference `fig:CArch' on page 18 undefined on input line 15.
 
 )
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
-rchitektur - Abstraction.tex" [13
+rchitektur - Abstraction.tex" [18
 
  <C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung/Pictures/Clean Ar
-chitecture.png (PNG copy)>] [14])
+chitecture.png (PNG copy)>] [19])
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
 rchitektur - Domain.tex")
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
-rchitektur - Application.tex" [15])
+rchitektur - Application.tex" [20])
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
 rchitektur - Adapter.tex")
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
@@ -2168,221 +2261,60 @@ Overfull \hbox (26.85pt too wide) in paragraph at lines 7--8
 g, in-dem die Klas-se []\T1/lmtt/m/n/12 std::thread[]
  []
 
-[16])
+[21])
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_A
-rchitektur - Plugin coex.tex") [17]
+rchitektur - Plugin coex.tex") [22]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Im
-plementierung.tex) [18
+plementierung.tex) [23
 
 ]
 ("C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_R
-OS - Topic - Nutzung.tex") [19
+OS - Topic - Nutzung.tex") [24
 
 ]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Fa
-zit.tex) [20
+zit.tex) [25
 
 ]
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\211008_MM_T3100_Li
 teraturverzeichnis.tex
 \c@IndexLiteratur=\count326
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--82
+Underfull \hbox (badness 10000) in paragraph at lines 91--95
+\T1/lmr/m/n/12 Ka-pi-tel \T1/lmr/m/it/12 AR.Drone 2.0 Over-view\T1/lmr/m/n/12 ,
+ Sei-te 5 ff. on-li-ne, htt-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--117
 \T1/lmr/m/n/12 on-li-ne, https://stackoverflow.com/questions/18312658/how-do-st
 rings-allocate-
  []
 
+[26
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--90
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 122--125
 \T1/lmr/m/n/12 on-li-ne, https://www.oreilly.com/library/view/c-primer-
  []
 
-[21
-
-
-] [22])
+[27])
 (C:/Users/maag/Git-Repos/DHBW_SARB/ROSLabDrohne/Ausarbeitung\DefaultContent/210
-105_Default_Anhang.tex [23
+105_Default_Anhang.tex [28
 
 
 
 ])
 
-Package caption Warning: Unused \captionsetup[figure] on input line 139.
+Package caption Warning: Unused \captionsetup[figure] on input line 134.
 See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 151.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 151.
-(211008_MM_T3100_Ausarbeitung.aux
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.195 ...al}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-? ?
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
-? S
-OK, entering \scrollmode...
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.195 ...al}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.195 ...al}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.196 ...se}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.196 ...se}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.196 ...se}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.197 ...dy}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.197 ...dy}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.197 ...dy}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.198 ...ol}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.198 ...ol}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.198 ...ol}{{9.3.1}{10}{}{subsubsection.9.3.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.201 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.201 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.201 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.202 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.202 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.202 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.203 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.203 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Extra \endcsname.
-\@testdef ...r \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.203 ....3.2}{10}{unklar}{subsubsection.9.3.2}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 151.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 151.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 146.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 146.
+(211008_MM_T3100_Ausarbeitung.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 146.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 146.
 
 
 Package rerunfilecheck Warning: File `211008_MM_T3100_Ausarbeitung.out' has cha
@@ -2402,28 +2334,21 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Overfull \hbox (136.15527pt too wide) in paragraph at lines 195--151
-\T1/lmr/m/n/12 tion/lo-cal _po-si-tion/ho-me _po-si-tion/o-dom                 
-                                                                               
-                                         
- []
-
  ) 
 Here is how much of TeX's memory you used:
- 28036 strings out of 481556
- 526080 string characters out of 2914337
- 1046375 words of memory out of 3000000
- 42365 multiletter control sequences out of 15000+200000
+ 28088 strings out of 481556
+ 525754 string characters out of 2914337
+ 1044562 words of memory out of 3000000
+ 42398 multiletter control sequences out of 15000+200000
  647219 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,12n,83p,10837b,1254s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 67i,12n,83p,10837b,1255s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc
 }{C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{
-C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{
 C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.en
 c}{C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit
 .enc}{C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.
+enc}{C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.
 enc}<C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx
 10.pfb><C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/l
 mbx12.pfb><C:/Users/maag/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/l
@@ -2445,9 +2370,9 @@ grams/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/maag/AppData/Local/
 Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/Users/maag/AppData/Lo
 cal/Programs/MiKTeX 2.9/fonts/type1/urw/arial/ua1b8a.pfb><C:/Users/maag/AppData
 /Local/Programs/MiKTeX 2.9/fonts/type1/urw/arial/ua1bi8a.pfb>
-Output written on 211008_MM_T3100_Ausarbeitung.pdf (30 pages, 738457 bytes).
+Output written on 211008_MM_T3100_Ausarbeitung.pdf (35 pages, 866492 bytes).
 PDF statistics:
- 597 PDF objects out of 1000 (max. 8388607)
- 163 named destinations out of 1000 (max. 500000)
- 559 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 652 PDF objects out of 1000 (max. 8388607)
+ 192 named destinations out of 1000 (max. 500000)
+ 577 words of extra memory for PDF output out of 10000 (max. 10000000)
 
