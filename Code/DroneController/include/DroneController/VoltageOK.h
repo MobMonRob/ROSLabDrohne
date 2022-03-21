@@ -1,7 +1,7 @@
 #ifndef VOLTAGEOK_H
 #define VOLTAGEOK_H
 
-#include "Abstraction/SafetyRequirement.h"
+#include "Domain/SafetyRequirement.h"
 
 #include "DroneController/Batteryable.h"
 

@@ -1,7 +1,7 @@
 #ifndef TIMEABLE_H
 #define TIMEABLE_H
 
-#include "Abstraction/Timestamp.h"
+#include "Domain/Timestamp.h"
 
 
 class Timeable

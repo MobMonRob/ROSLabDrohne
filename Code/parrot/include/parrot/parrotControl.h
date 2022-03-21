@@ -1,14 +1,13 @@
 #ifndef PARROTCONTROL_H
 #define PARROTCONTROL_H
 
-#define DEBUG
-
 #include "DroneController/DroneControlable.h"
 
 #include <ros/ros.h>
 
-#include "Abstraction/Vector3D.h"
+#include "Domain/Vector3D.h"
 #include "DroneController/Timeable.h"
+#include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
 
 #include "parrot/parrotStatus.h"
@@ -20,20 +19,11 @@
 class parrotControl : public DroneControlable, public Timeable
 {
 public:
-	parrotControl(PoseControlable* Controller);
+	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, parrotTransmitter* Transmitter);
 
 
 	/*
-	bool setMode(std::string Mode) { return this->State_->setMode(Mode); };
-	bool setArmState(bool arming) { return this->State_->setArmState(arming); };
-	
-	bool getConnected() { return this->State_->getConnected(); };
-	bool getArmed() { return this->State_->getArmState(); };
-	
-	double getBatteryPercentage() { return this->Battery_->getPercentage(); };
-	
-	Vector3D getPosLinear() { return this->Orientation_->getPosLinear(); };
-	Vector3D getPosAngular() { return this->Orientation_->getPosAngular(); };
+
 	double getGroundClearance() { return this->Orientation_->getGroundClearance(); };
 	double getGroundClearance_deangled() { return this->Orientation_->getGroundClearance_deangled(); };
 	
@@ -49,7 +39,6 @@ private:
 	parrotStatus Status_;
 	parrotBattery Battery_;
 	parrotIMU IMU_;
-	parrotTransmitter Transmitter_;
 };
 
 #endif // PARROTCONTROL_H

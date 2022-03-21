@@ -2,8 +2,8 @@
 #define POSE_H
 
 
-#include "Abstraction/Vector3D.h"
-#include "Abstraction/Timestamp.h"
+#include "Domain/Vector3D.h"
+#include "Domain/Timestamp.h"
 
 class Pose
 {

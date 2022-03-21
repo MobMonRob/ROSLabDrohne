@@ -1,8 +1,8 @@
 #ifndef TRANSMITABLE_H
 #define TRANSMITABLE_H
 
-#include "Abstraction/FixedPoint.h"
-#include "Abstraction/Value.h"
+#include "Domain/FixedPoint.h"
+#include "Domain/Value.h"
 
 class Transmitable
 {

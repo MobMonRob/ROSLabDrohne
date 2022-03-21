@@ -16,6 +16,9 @@ class IMUable : public Timeable
 public:
 	IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 
+	Vector3D getPosition() { return this->PoseBuilder_->getPosition(); };
+	Vector3D getOrientation() { return this->PoseBuilder_->getOrientation(); };
+
 protected:
 	bool calcPose(IMUState S);
 	bool triggerController();

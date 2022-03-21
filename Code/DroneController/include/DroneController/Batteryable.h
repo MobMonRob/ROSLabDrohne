@@ -1,7 +1,7 @@
 #ifndef BATTERYABLE_H
 #define BATTERYABLE_H
 
-#include "Abstraction/SafetyProvider.h"
+#include "Domain/SafetyProvider.h"
 #include "DroneController/Timeable.h"
 
 

@@ -18,9 +18,6 @@
     <ClCompile Include="Adapter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\PoseBuilder.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\StateBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Adapter\Header.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Adapter\PoseBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\Adapter\StateBuilder.h">

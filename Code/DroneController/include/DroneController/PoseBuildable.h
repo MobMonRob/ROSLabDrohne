@@ -1,7 +1,7 @@
 #ifndef POSEBUILDABLE_H
 #define POSEBUILDABLE_H
 
-#include "Abstraction/FixedPoint.h"
+#include "Domain/FixedPoint.h"
 
 #include "DroneController/IMUState.h"
 #include "DroneController/Pose.h"

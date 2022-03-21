@@ -2,21 +2,21 @@
 #define PARROTIMU_H
 
 #include "DroneController/IMUable.h"
-#include "Abstraction/SafetyProvider.h"
+#include "Domain/SafetyProvider.h"
 
 #include <ros/ros.h>
 #include <ardrone_autonomy/Navdata.h>
 #include <sensor_msgs/Imu.h>
 
+#include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
 #include "Adapter/StateBuilder.h"
-#include "Adapter/PoseBuilder.h"
 
 
 class parrotIMU : public IMUable, protected SafetyProvider
 {
 public:
-	parrotIMU(PoseControlable* PoseController);
+	parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 	~parrotIMU();
 	
 	void takeoff() { this->StateBuilder_.setNullPoint(); };
@@ -32,7 +32,6 @@ private:
 	ros::Subscriber SubNav_;
 
 	StateBuilder StateBuilder_;
-	PoseBuilder PoseBuilder_;
 };
 
 #endif // PARROTIMU_H

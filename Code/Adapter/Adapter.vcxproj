@@ -89,13 +89,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Abstraction/include;../Domain/include;../DroneController/include;../Application/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../DroneController/Debug;../Application/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;IMUable.obj;PoseControlable.obj;IMUState.obj;Pose.obj;PoseController.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;IMUable.obj;PoseControlable.obj;IMUState.obj;Pose.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,7 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Adapter.cpp" />
-    <ClCompile Include="src\PoseBuilder.cpp" />
     <ClCompile Include="src\StateBuilder.cpp" />
     <ClCompile Include="src\StateHandler.cpp" />
   </ItemGroup>
@@ -161,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Adapter\Header.h" />
-    <ClInclude Include="include\Adapter\PoseBuilder.h" />
     <ClInclude Include="include\Adapter\StateBuilder.h" />
     <ClInclude Include="include\Adapter\StateHandler.h" />
   </ItemGroup>

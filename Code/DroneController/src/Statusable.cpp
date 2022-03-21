@@ -1,6 +1,6 @@
 #include "DroneController/Statusable.h"
 
-#include "Abstraction/SafetyTranslative.h"
+#include "Domain/SafetyTranslative.h"
 
 
 Statusable::Statusable(Batteryable* Batteryable)

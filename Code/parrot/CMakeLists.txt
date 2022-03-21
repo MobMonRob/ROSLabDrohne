@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(coex)
+project(parrot)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -16,10 +16,8 @@ find_package(
 
 	ardrone_autonomy
     
-	Abstraction
 	Domain
 	DroneController
-	Application
     Adapter
 
 )
@@ -55,12 +53,8 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(
 	include
-	../calling/include
-	../threading/include
-	../Abstraction/include
 	../Domain/include
 	../DroneController/include
-	../Application/include
 	../Adapter/include
 	${catkin_INCLUDE_DIRS}
 )
@@ -76,10 +70,10 @@ add_library(parrotController
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(parrotController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Adapter_lib DroneController_lib)
+add_dependencies(parrotController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib Adapter_lib DroneController_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(parrotController ${catkin_LIBRARIES} Adapter_lib DroneController_lib)
+target_link_libraries(parrotController ${catkin_LIBRARIES} Domain_lib Adapter_lib DroneController_lib)
 
 
 #############

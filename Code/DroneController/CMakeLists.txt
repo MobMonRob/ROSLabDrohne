@@ -11,7 +11,7 @@ find_package(
 		roscpp
 		rospy
 
-		Abstraction
+		Domain
 )
 
 
@@ -32,7 +32,7 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(
 	include
-	../Abstraction/include
+	../Domain/include
 	${catkin_INCLUDE_DIRS}
 )
 
@@ -48,10 +48,10 @@ add_library(DroneController_lib
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(DroneController_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Abstraction_lib)
+add_dependencies(DroneController_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(DroneController_lib ${catkin_LIBRARIES} Abstraction_lib)
+target_link_libraries(DroneController_lib ${catkin_LIBRARIES} Domain_lib)
 
 
 #############

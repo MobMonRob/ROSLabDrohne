@@ -7,12 +7,9 @@ find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
 		rospy
-		std_msgs
 		
-		Abstraction
 		Domain
 		DroneController
-		Application
 )
 
 ###################################
@@ -20,7 +17,7 @@ find_package(
 ###################################
 catkin_package(
 	LIBRARIES Adapter_lib
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
@@ -28,10 +25,8 @@ catkin_package(
 ###########
 include_directories(
 	include
-	../Abstraction/include
 	../Domain/include
 	../DroneController/include
-	../Application/include
 	${catkin_INCLUDE_DIRS}
 )
 
@@ -44,10 +39,10 @@ add_library(Adapter_lib
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Application_lib DroneController_lib Domain_lib Abstraction_lib)
+add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Abstraction_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Application_lib DroneController_lib Domain_lib Abstraction_lib)
+target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Domain_lib DroneController_lib Abstraction_lib)
 
 #############
 ## Install ##

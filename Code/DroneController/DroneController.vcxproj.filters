@@ -36,6 +36,9 @@
     <ClCompile Include="src\Batteryable.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\DroneControlable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DroneController\Batteryable.h">
@@ -77,5 +80,15 @@
     <ClInclude Include="include\DroneController\Timeable.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt">
+      <Filter>Ressourcendateien</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="package.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

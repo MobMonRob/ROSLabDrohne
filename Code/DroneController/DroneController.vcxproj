@@ -24,7 +24,7 @@
     <ProjectGuid>{65c48f3b-7a6d-4d8c-8c6e-0f8ca175441f}</ProjectGuid>
     <RootNamespace>DroneController</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>01_01_DroneController</ProjectName>
+    <ProjectName>02_DroneController</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,13 +89,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Abstraction/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../Domain/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="DroneController.cpp" />
     <ClCompile Include="src\Batteryable.cpp" />
+    <ClCompile Include="src\DroneControlable.cpp" />
     <ClCompile Include="src\IMUable.cpp" />
     <ClCompile Include="src\PoseControlable.cpp" />
     <ClCompile Include="src\IMUState.cpp" />
@@ -165,6 +166,12 @@
     <ClInclude Include="include\DroneController\Timeable.h" />
     <ClInclude Include="include\DroneController\Transmitable.h" />
     <ClInclude Include="include\DroneController\VoltageOK.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="package.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

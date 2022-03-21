@@ -4,10 +4,10 @@
 #include <map>
 #include <string>
 
-#include "Abstraction/SafetyProvider.h"
+#include "Domain/SafetyProvider.h"
 #include "DroneController/Timeable.h"
 
-#include "Abstraction/Timestamp.h"
+#include "Domain/Timestamp.h"
 #include "DroneController/Batteryable.h"
 
 

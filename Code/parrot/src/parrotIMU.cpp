@@ -1,11 +1,10 @@
 #include "parrot/parrotIMU.h"
 
-#include "Abstraction/Vector3D.h"
+#include "Domain/Vector3D.h"
 
 
-parrotIMU::parrotIMU(PoseControlable* PoseController)
-	: IMUable(&this->PoseBuilder_, PoseController),
-	nh_(),
+parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
+	: IMUable(PoseBuilder, PoseController),
 	SubIMU_(nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
 	SubNav_(nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
 {

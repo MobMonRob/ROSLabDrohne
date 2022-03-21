@@ -7,9 +7,9 @@
 #include <sensor_msgs/Range.h>
 #include <mavros_msgs/ManualControl.h>
 
-#include "Abstraction/Vector3D.h"
-#include "Domain/Integral1.h"
-#include "Domain/Integral2.h"
+#include "Domain/Vector3D.h"
+#include "Controller/Integral1.h"
+#include "Controller/Integral2.h"
 //#include "Application/Wrapper3D.h"
 
 #include "calling/Caller.h"

@@ -1,43 +1,25 @@
 #include <PosControl/PosBridge.h>
 
+#include <iostream>
+
 #include "std_msgs/Char.h"
 #include "sensor_msgs/BatteryState.h"
 
 
-/* 
- * 
- */
-PosBridge *PosBridge_ = nullptr;
-
-
-
-
-
-void callbackKeys(const std_msgs::Char::ConstPtr& msg)
-{
-	if (PosBridge_ != nullptr)
-	{
-		PosBridge_->receiveKey(msg->data);
-	}
-}
-
-
-
 
 PosBridge::PosBridge()
-	: coexController_(true, 4)
+	//: coexController_(true, 4)
+	: Sub_(nh_.subscribe("KeyReader", 1, &PosBridge::callbackKeys, this)),
+	PoseController_(&this->Transmitter_),
+	Controller_(&this->PoseBuilder_, &this->PoseController_, &this->Transmitter_)
 {
 	ROS_INFO("Starting PosBridge...");
 	
-	PosBridge_ = this;
-	
-	std::cout << "new ActionAdapter" << std::endl;
+	//std::cout << "new ActionAdapter" << std::endl;
 	//this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
-	std::cout << "new StateBuilder" << std::endl;
+	//std::cout << "new StateBuilder" << std::endl;
 	//this->StateBuilder_ = new StateBuilder(&this->coexController_, this->ActionAdapter_);
 	//this->coexController_.addCallable(this->StateBuilder_);
-	
-	this->SubKeys_ = this->nh_.subscribe("KeyReader", 50, callbackKeys);
 
 	ROS_INFO("Started PosBridge");
 }
@@ -55,8 +37,13 @@ PosBridge::~PosBridge()
 }
 
 
-void PosBridge::receiveKey(char Key)
+
+void PosBridge::callbackKeys(const std_msgs::Char::ConstPtr& msg)
 {
+	char Key = msg->data;
+
+
+
 	/* Key Controls (compare ActionTransmitter::transmitAction()-Methode):
 	 * W/S	forward/backward
 	 * A/D	left/right
@@ -99,21 +86,21 @@ void PosBridge::receiveKey(char Key)
 		break;
 		
 	case 'o':	// Mode Change to "OFFBOARD" (Arm Vehicle)
-		this->coexController_.setMode("OFFBOARD");
+		//this->coexController_.setMode("OFFBOARD");
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
-		this->coexController_.setArmState(true);
+		//this->coexController_.setArmState(true);
 		break;
 
 	case 'g':	// Ground (Disrm Vehicle)
-		this->coexController_.setMode("MANUAL");
-		this->coexController_.setArmState(false);
+		//this->coexController_.setMode("MANUAL");
+		//this->coexController_.setArmState(false);
 		break;
 		
 	case 'p':	// Info
-		ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString().c_str());
-		ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString().c_str());
+		//ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString().c_str());
+		//ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString().c_str());
 		break;
 
 	case 'q':	// Destructor
