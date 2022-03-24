@@ -18,6 +18,7 @@ public:
 	bool operator<=(const Timestamp& T) { return this->getTime() <= T.Time_; };
 	bool operator>(const Timestamp& T) { return this->getTime() > T.Time_; };
 	bool operator>=(const Timestamp& T) { return this->getTime() >= T.Time_; };
+	Timestamp operator-(const Timestamp& T) { return Timestamp(this->getTime() >= T.Time_); };
 
 	FixedPoint<Accuracy_Time> getTime() { return this->Time_; };
 

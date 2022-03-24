@@ -8,8 +8,10 @@
 class StateBuilder
 {
 public:
-	void setNullPoint() { this->setNullPoint(this->StateHandler_.getAvgState()); };
-	void setNullPoint(IMUState S) { this->NullPoint_ = S; };
+	StateBuilder(int SmoothingEntries = 3, int OffsetingEntries = 10);
+	
+	void setOffsetPoint(IMUState S);
+	void setOffsetting(bool Offsetting) { this->Offsetting_ = Offsetting; };
 
 	IMUState createState(Timestamp Time,
 		FixedPoint<Accuracy_Value> LinAccelX, FixedPoint<Accuracy_Value> LinAccelY, FixedPoint<Accuracy_Value> LinAccelZ,
@@ -18,13 +20,16 @@ public:
 	IMUState createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity, Value GroundClearance);
 	
 	IMUState getState() { return this->StateHandler_.getAvgState(); };
+	IMUState getOffsetPoint() { return this->OffsetHandler_.getAvgState(); };
 
 	void clearStateHandler() { this->StateHandler_.clear(); };
 	void reset();
 
 private:
 	StateHandler StateHandler_;
-	IMUState NullPoint_;
+	StateHandler OffsetHandler_;
+	Timestamp OffsetTime_;
+	bool Offsetting_;
 };
 
 #endif // STATEBUILDER_H

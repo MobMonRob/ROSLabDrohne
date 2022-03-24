@@ -1,6 +1,7 @@
 #ifndef POSE_H
 #define POSE_H
 
+#include <string>
 
 #include "Domain/Vector3D.h"
 #include "Domain/Timestamp.h"
@@ -17,6 +18,7 @@ public:
 	Vector3D getPositionUncertainty() const { return this->PositionUncertainty_; };
 	Vector3D getOrientation() const { return this->Orientation_; };
 	Vector3D getOrientationUncertainty() const { return this->OrientationUncertainty_; };
+	std::string getString();
 
 private:
 	Timestamp Time_;

@@ -35,14 +35,13 @@ add_library(Adapter_lib
 	./include/Adapter/Header.h
 	src/StateBuilder.cpp
 	src/StateHandler.cpp
-	src/PoseBuilder.cpp
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Abstraction_lib)
+add_dependencies(Adapter_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Domain_lib DroneController_lib Abstraction_lib)
+target_link_libraries(Adapter_lib ${catkin_LIBRARIES} Domain_lib DroneController_lib)
 
 #############
 ## Install ##

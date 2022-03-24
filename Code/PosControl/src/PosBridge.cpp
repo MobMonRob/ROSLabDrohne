@@ -2,13 +2,11 @@
 
 #include <iostream>
 
-#include "std_msgs/Char.h"
 #include "sensor_msgs/BatteryState.h"
 
 
 
 PosBridge::PosBridge()
-	//: coexController_(true, 4)
 	: Sub_(nh_.subscribe("KeyReader", 1, &PosBridge::callbackKeys, this)),
 	PoseController_(&this->Transmitter_),
 	Controller_(&this->PoseBuilder_, &this->PoseController_, &this->Transmitter_)
@@ -35,6 +33,21 @@ PosBridge::~PosBridge()
 
 	ROS_INFO("Terminated PosBridge");
 }
+
+
+
+
+
+void PosBridge::printPose()
+{
+	ROS_INFO(this->PoseBuilder_.getPose().getString().c_str());
+}
+
+
+
+
+
+
 
 
 

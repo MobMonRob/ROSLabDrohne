@@ -43,8 +43,6 @@ add_library(Controller_lib
 	src/Controller_PT.cpp
 	src/ControllerSystem.cpp
 	src/Input.cpp
-	src/Integral1.cpp
-	src/Integral2.cpp
 	src/PoseController.cpp
 	src/TimedDifference.cpp
 )

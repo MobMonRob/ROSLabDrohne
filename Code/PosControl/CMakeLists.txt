@@ -15,9 +15,10 @@ find_package(
     rospy
     std_msgs
     geometry_msgs
-    mavros_msgs
     sensor_msgs
-    
+
+	ardrone_autonomy
+
     Domain
 	DroneController
     Adapter
@@ -33,7 +34,7 @@ catkin_package(
 	INCLUDE_DIRS
 		include
 #  LIBRARIES ${PROJECT_NAME}
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs sensor_msgs ardrone_autonomy
 #  DEPENDS
 )
 
@@ -64,9 +65,9 @@ add_executable(BridgeNode
 
 
 ## Add cmake target dependencies of the executable
-add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} parrotController Controller_lib Adapter_lib DroneController_lib Domain_lib)
+add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(BridgeNode ${catkin_LIBRARIES} parrotController Controller_lib Adapter_lib DroneController_lib Domain_lib)
+target_link_libraries(BridgeNode ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 

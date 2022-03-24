@@ -76,3 +76,10 @@ IMUState IMUState::operator-(const IMUState& S)
 }
 
 
+IMUState IMUState::operator-(const Timestamp& T)
+{
+	return IMUState(this->getVector_Linear(),
+		this->getVector_Angular(),
+		this->getGroundClearance(),
+		this->getTimestamp() - T);
+}

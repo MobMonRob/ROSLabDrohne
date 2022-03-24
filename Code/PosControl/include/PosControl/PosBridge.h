@@ -3,15 +3,13 @@
 
 #include <ros/ros.h>
 
+#include <std_msgs/Char.h>
+
 #include "parrot/parrotControl.h"
 #include "parrot/parrotTransmitter.h"
-#include "PosControl/PoseBuilder.h"
 #include "Controller/PoseController.h"
 
-//#include "Adapter/ActionAdapter_Mock.h"
-//#include "Adapter/ActionAdapter.h"
-//#include "Application/StateBuilder.h"
-
+#include "PosControl/PoseBuilder.h"
 
 class PosBridge
 {
@@ -19,6 +17,10 @@ public:
 	PosBridge();
 	~PosBridge();
 	
+
+	void printPose();
+
+
 
 
 private:

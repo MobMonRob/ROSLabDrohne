@@ -74,12 +74,9 @@ std::string Vector3D::getString()
 
 
 	ReturnString.append(this->getUnit().getUnit());
-	ReturnString.append("], x=");
-	ReturnString.append(std::to_string(this->getX().getValue()));
-	ReturnString.append("], y=");
-	ReturnString.append(std::to_string(this->getY().getValue()));
-	ReturnString.append("], z=");
-	ReturnString.append(std::to_string(this->getZ().getValue()));
+	ReturnString.append("], x=").append(std::to_string(this->getX().getValue()));
+	ReturnString.append(", y=").append(std::to_string(this->getY().getValue()));
+	ReturnString.append(", z=").append(std::to_string(this->getZ().getValue()));
 
 	return ReturnString;
 }

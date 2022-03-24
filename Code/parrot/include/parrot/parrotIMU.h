@@ -19,8 +19,8 @@ public:
 	parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 	~parrotIMU();
 	
-	void takeoff() { this->StateBuilder_.setNullPoint(); };
-	void touchdown() { this->reset(); };
+	void takeoff() { this->StateBuilder_.setOffsetting(false); };
+	void touchdown() { this->StateBuilder_.setOffsetting(true); };
 
 private:
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);

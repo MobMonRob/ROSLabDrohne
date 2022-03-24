@@ -22,6 +22,7 @@ public:
 	bool operator==(const IMUState& S) const;
 	void operator+=(const IMUState& S);
 	IMUState operator-(const IMUState& S);
+	IMUState operator-(const Timestamp& T);
 
 	Vector3D getVector_Linear() { return this->Accelerations_; };
 	Vector3D getVector_Angular() { return this->Angles_; };

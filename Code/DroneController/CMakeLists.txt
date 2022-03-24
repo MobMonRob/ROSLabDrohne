@@ -40,6 +40,7 @@ include_directories(
 add_library(DroneController_lib
 	./include/DroneController/Header.h
 	src/Batteryable.cpp
+	src/DroneControlable.cpp
 	src/IMUable.cpp
 	src/IMUState.cpp
 	src/Pose.cpp

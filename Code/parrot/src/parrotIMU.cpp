@@ -33,6 +33,8 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	// maybe trigger new Thread??
 	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration, RotationalVelocity, GroundClearance);
 
+	ROS_INFO("NavData LinAccel: %s", LinearAcceleration.getString().c_str());
+	
 	this->calcPose(State);
 	this->triggerController();
 }

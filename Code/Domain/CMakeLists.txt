@@ -38,7 +38,7 @@ add_library(Domain_lib
 add_dependencies(Domain_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Abstraction_lib ${catkin_LIBRARIES})
+target_link_libraries(Domain_lib ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -48,7 +48,7 @@ install(TARGETS Domain_lib
 	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 
-install(DIRECTORY include/Abstraction/
+install(DIRECTORY include/Domain/
 	DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
 
