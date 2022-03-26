@@ -30,8 +30,9 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	Vector3D LinearAcceleration(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
 	Vector3D RotationalVelocity(Unit_AngleDeg, navdataPtr->rotX, navdataPtr->rotY, navdataPtr->rotZ);
 	Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
+	
 	// maybe trigger new Thread??
-	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration, RotationalVelocity, GroundClearance);
+	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * GravitationConstant, RotationalVelocity, GroundClearance);
 
 	ROS_INFO("NavData LinAccel: %s", LinearAcceleration.getString().c_str());
 	

@@ -6,7 +6,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="MockTransmitable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

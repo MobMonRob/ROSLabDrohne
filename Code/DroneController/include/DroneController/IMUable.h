@@ -10,6 +10,8 @@
 #include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
 
+const FixedPoint<Accuracy_Value> GravitationConstant(9.816);
+
 
 class IMUable : public Timeable
 {

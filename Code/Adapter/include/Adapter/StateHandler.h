@@ -16,7 +16,10 @@ public:
 	void addEntry(IMUState State) { this->addItem(State); };
 
 	int getSize() { return Ringbuffer::getSize(); };
+	Timestamp getTime();
 	IMUState getAvgState();
+	IMUState getMedianState();
+	
 
 	void clear() { Ringbuffer<IMUState>::clear(); };
 

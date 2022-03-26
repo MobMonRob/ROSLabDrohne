@@ -15,6 +15,7 @@ public:
 	Value operator+ (const Value& V);
 	Value operator- (const Value& V);
 	Value operator/ (double Divisor);
+	Value operator/ (FixedPoint<Accuracy_Value> Divisor) { return Value(this->getUnit(), this->getValue() / Divisor); };
 	void operator+= (const Value& V);
 
 	FixedPoint<Accuracy_Value> getValue() { return this->Value_; };

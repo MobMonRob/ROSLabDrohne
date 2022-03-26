@@ -23,6 +23,7 @@ public:
 	bool operator!= (const Vector3D& V) const { return !(*this == V); };
 	Vector3D operator+ (const Vector3D& V);
 	Vector3D operator- (const Vector3D& V);
+	Vector3D operator* (FixedPoint<Accuracy_Vector> Multiplier);
 	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Accuracy_Vector>(Divisor); };
 	Vector3D operator/ (FixedPoint<Accuracy_Vector> Divisor);
 	void operator+= (const Vector3D& V);

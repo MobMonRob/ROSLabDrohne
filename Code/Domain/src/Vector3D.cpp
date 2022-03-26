@@ -48,10 +48,13 @@ Vector3D Vector3D::operator-(const Vector3D& V)
 	}
 }
 
+Vector3D Vector3D::operator*(FixedPoint<Accuracy_Vector> Multiplier)
+{
+	return Vector3D(this->Unit_, this->X_ * Multiplier, this->Y_ * Multiplier, this->Z_ * Multiplier);
+}
+
 Vector3D Vector3D::operator/(FixedPoint<Accuracy_Vector> Divisor)
 {
-
-
 	return Vector3D(this->Unit_, this->X_/ Divisor, this->Y_/ Divisor, this->Z_ / Divisor);
 }
 
