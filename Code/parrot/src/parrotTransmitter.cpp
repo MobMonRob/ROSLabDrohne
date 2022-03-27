@@ -6,7 +6,7 @@
 parrotTransmitter::parrotTransmitter()
 	: Transmitable(),
 	nh_(),
-	Pub_(this->nh_.advertise< geometry_msgs::Twist >("droneApp/cmd_vel", 1))
+	Pub_(this->nh_.advertise<geometry_msgs::Twist>("droneApp/cmd_vel", 1))
 {
 	ROS_INFO("Started parrotTransmitter");
 }
