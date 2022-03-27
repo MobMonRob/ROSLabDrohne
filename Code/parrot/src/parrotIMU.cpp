@@ -1,106 +1,51 @@
-#include "coex/coexOrientation.h"
+#include "parrot/parrotIMU.h"
+
+#include "Domain/Vector3D.h"
 
 
-coexOrientation *coex_Orientation = nullptr;
-
-
-
-void callbackIMU(const sensor_msgs::Imu::ConstPtr& msg)
+parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
+	: IMUable(PoseBuilder, PoseController),
+	SubIMU_(nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
+	SubNav_(nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
 {
-	if (coex_Orientation != nullptr)
-	{
-		coex_Orientation->cbIMU(msg);
-	}
-}
-
-void callbackGround(const sensor_msgs::Range::ConstPtr& msg)
-{
-	if (coex_Orientation != nullptr)
-	{
-		coex_Orientation->cbGroundClearance(msg);
-	}
-}
-
-
-
-coexOrientation::coexOrientation(coexState* State, double Threshold_AccelZ)
-	: Pos_(Unit_Acceleration, Unit_Length),
-	Ang_(Unit_AngleVelDeg, Unit_AngleDeg),
-	State_(State),
-	Threshold_AccelZ_(Threshold_AccelZ)
-{
-	ROS_INFO("Starting coexOrientation...");
+	ROS_INFO("Starting parrotIMU...");
 	ros::spinOnce();
-	
-	coex_Orientation = this;
-	
-	this->SubIMU_ = this->nh_.subscribe("mavros/imu/data", 1, callbackIMU);
-	this->SubGroundClearance_ = this->nh_.subscribe("rangefinder/range", 1, callbackGround);
 
-
-	if (coex_Orientation != this)
-	{
-		ROS_WARN("Instance of coexOrientation is not set as global Instance!");
-	}
-
-	ROS_INFO("Started coexOrientation");
+	ROS_INFO("Started parrotIMU");
 }
 
-coexOrientation::~coexOrientation()
+parrotIMU::~parrotIMU()
 {
-	ROS_INFO("Termintated coexOrientation");
+	ROS_INFO("Termintated parrotIMU");
+	ros::spinOnce();
 }
 
 
-double coexOrientation::getGroundClearance()
+
+
+
+void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
-	double ReturnValue = this->GroundClearance_.range;
+	Timestamp Time(navdataPtr->header.stamp.toSec());
+	Vector3D LinearAcceleration(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
+	Vector3D RotationalVelocity(Unit_AngleDeg, navdataPtr->rotX, navdataPtr->rotY, navdataPtr->rotZ);
+	Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 	
+	// maybe trigger new Thread??
+	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * GravitationConstant, RotationalVelocity, GroundClearance);
+
+	ROS_INFO("NavData LinAccel: %s", LinearAcceleration.getString().c_str());
 	
-	if (ReturnValue < this->GroundClearance_.min_range)
-	{
-		ReturnValue = this->GroundClearance_.min_range;
-	}
-	
-	if (ReturnValue > this->GroundClearance_.max_range)
-	{
-		ReturnValue = this->GroundClearance_.max_range;
-	}
-	
-	return ReturnValue;
+	this->calcPose(State);
+	this->triggerController();
 }
 
-/* Calculates Ground Clearance according to the Angle of the Vehicle.
- * ATTENTION: There might be a Missassumption due to Dips.
- */
-double coexOrientation::getGroundClearance_deangled()
+void parrotIMU::callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr)
 {
-	
-	
-	// TODO
-	
-	
-	
-	return this->getGroundClearance();
+
+
+
 }
 
-
-void coexOrientation::cbIMU(const sensor_msgs::Imu::ConstPtr& IMU)
-{
-	this->Pos_.setLock(!this->State_->getArmState());
-	this->Ang_.setLock(!this->State_->getArmState());
-
-	this->Pos_.setInput(this->translate(IMU->linear_acceleration, Unit_Acceleration), Timestamp(IMU->header.stamp.toSec()));
-	this->Ang_.setInput(this->translate(IMU->angular_velocity, Unit_AngleVelDeg), Timestamp(IMU->header.stamp.toSec()));
-
-	this->call();
-}
-
-void coexOrientation::cbGroundClearance(const sensor_msgs::Range::ConstPtr& GroundClearance)
-{
-	this->GroundClearance_ = *GroundClearance;
-	
-	this->call();
-}
 
 

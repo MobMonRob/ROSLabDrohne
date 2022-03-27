@@ -2,8 +2,8 @@
 #define STATEHANDLER_H
 
 
-#include "Abstraction/Optional.h"
-#include "Abstraction/Ringbuffer.h"
+#include "Domain/Optional.h"
+#include "Domain/Ringbuffer.h"
 #include "DroneController/IMUState.h"
 
 
@@ -16,7 +16,10 @@ public:
 	void addEntry(IMUState State) { this->addItem(State); };
 
 	int getSize() { return Ringbuffer::getSize(); };
+	Timestamp getTime();
 	IMUState getAvgState();
+	IMUState getMedianState();
+	
 
 	void clear() { Ringbuffer<IMUState>::clear(); };
 

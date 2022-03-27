@@ -3,5 +3,6 @@
   <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_01_Test_Domain.exe</Executable>
   <TestDurations>
     <TestDuration Test="Class_Integral1.AutoCalculation" Duration="1" />
+    <TestDuration Test="Class_State.Substract" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

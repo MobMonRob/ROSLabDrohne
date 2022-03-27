@@ -21,7 +21,9 @@ namespace ros
 		bool operator==(const Duration& T) { return false; };
 		bool operator<=(const Duration& T) { return false; };
 		bool operator>=(const Duration& T) { return false; };
-		
+		bool operator==(const Time& T) { return false; };
+		bool operator==(Time& T) { return false; };
+
 		double toSec() { return 0; };
 
 

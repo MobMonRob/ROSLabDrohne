@@ -5,9 +5,6 @@
 
 #include <ros/ros.h>
 
-#include <mavros_msgs/ManualControl.h>
-#include <mavros_msgs/OverrideRCIn.h>
-
 #include "parrot/parrotStatus.h"
 #include "parrot/parrotBattery.h"
 
@@ -23,6 +20,8 @@ private:
 	bool transmitAction(double pitch, double roll, double thrust, double yarn) override;			// from Transmitable
 	
 private:
+	ros::NodeHandle nh_;
+	ros::Publisher Pub_;
 };
 
 #endif // PARROT_TRANSMITTER_H

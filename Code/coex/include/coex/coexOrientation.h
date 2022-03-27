@@ -7,9 +7,9 @@
 #include <sensor_msgs/Range.h>
 #include <mavros_msgs/ManualControl.h>
 
-#include "Abstraction/Vector3D.h"
-#include "Domain/Integral1.h"
-#include "Domain/Integral2.h"
+#include "Domain/Vector3D.h"
+#include "Controller/Integral1.h"
+#include "Controller/Integral2.h"
 //#include "Application/Wrapper3D.h"
 
 #include "calling/Caller.h"
@@ -24,10 +24,10 @@ public:
 	
 	double getGroundClearance();
 	double getGroundClearance_deangled();
-	//Vector3D getPosLinear() { return this->Pos_.getVector(); };
-	//Vector3D getPosAngular() { return this->Ang_.getVector(); };
-	//Vector3D getSuspentionLinear() { return this->Pos_.getVectorSuspention(); };
-	//Vector3D getSuspentionAngular() { return this->Ang_.getVectorSuspention(); };
+	Vector3D getPosLinear() { return Vector3D(Unit_Length); };
+	Vector3D getPosAngular() { return Vector3D(Unit_AngleDeg); };
+	Vector3D getSuspentionLinear() { return Vector3D(Unit_Length); };
+	Vector3D getSuspentionAngular() { return Vector3D(Unit_AngleDeg); };
 	ros::Time getTime_Imu() const { return this->IMU_.header.stamp;};
 	ros::Time getTime_Ground() const { return this->GroundClearance_.header.stamp;};
 	

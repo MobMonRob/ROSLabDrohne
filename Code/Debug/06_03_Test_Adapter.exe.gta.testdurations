@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_03_Test_Adapter.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="Class_StateHandler.MaxEntries10" Duration="3" />
+    <TestDuration Test="Class_StateHandler.Average_Single" Duration="1" />
+    <TestDuration Test="Class_StateHandler.Init" Duration="1" />
+    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="109" />
+    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="125" />
+  </TestDurations>
+</GtaTestDurations>

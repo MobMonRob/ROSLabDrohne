@@ -1,18 +1,17 @@
 #ifndef BATTERYABLE_H
 #define BATTERYABLE_H
 
+#include "Domain/SafetyProvider.h"
+#include "DroneController/Timeable.h"
 
-class Batteryable
+
+class Batteryable : public SafetyProvider, public Timeable
 {
 public:
-	Batteryable(double VoltageThreshold = 42.0) : VoltageThreshold_(VoltageThreshold) {};
+	Batteryable(double PercentageThreshold);
 	
 	virtual double getVoltage() { return 0.0; };
 	virtual double getPercentage() { return 0.0; };
-	bool isSafe() { return this->getVoltage() > this->VoltageThreshold_; };
-
-private:
-	double VoltageThreshold_;
 };
 
 #endif // BATTERYABLE_H

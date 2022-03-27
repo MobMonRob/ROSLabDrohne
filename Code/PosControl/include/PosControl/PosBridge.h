@@ -3,12 +3,13 @@
 
 #include <ros/ros.h>
 
-#include "coex/coexControl.h"
+#include <std_msgs/Char.h>
 
-#include "Adapter/ActionAdapter_Mock.h"
-#include "Adapter/ActionAdapter.h"
-#include "Application/StateBuilder.h"
+#include "parrot/parrotControl.h"
+#include "parrot/parrotTransmitter.h"
+#include "Controller/PoseController.h"
 
+#include "PosControl/PoseBuilder.h"
 
 class PosBridge
 {
@@ -16,15 +17,23 @@ public:
 	PosBridge();
 	~PosBridge();
 	
-	void receiveKey(char Key);
-	
+
+	void printPose();
+
+
+
+
+private:
+	void callbackKeys(const std_msgs::Char::ConstPtr& msg);
+
 private:
 	ros::NodeHandle nh_;
-	ros::Subscriber SubKeys_;
+	ros::Subscriber Sub_;
 	
-	coexControl coexController_;
-	ActionAdapter *ActionAdapter_;
-	StateBuilder *StateBuilder_;
+	PoseBuilder PoseBuilder_;
+	PoseController PoseController_;
+	parrotTransmitter Transmitter_;
+	parrotControl Controller_;
 };
 
 #endif // POSBRIDGE_H

@@ -1,80 +1,30 @@
-#include "coex/coexMC.h"
+#include "parrot/parrotTransmitter.h"
 
-#include "mavros_msgs/State.h"
-#include "mavros_msgs/ManualControl.h"
-#include "mavros_msgs/CommandBool.h"
-#include "mavros_msgs/SetMode.h"
-#include "mavros/px4_custom_mode.h"
+#include "geometry_msgs/Twist.h"
 
 
-coexMC::coexMC(coexState *State, int Frequency)
-	: coexTransmitable(State),
-	AutoPublisher<mavros_msgs::ManualControl>("mavros/manual_control/send", Frequency, 10, true)
+parrotTransmitter::parrotTransmitter()
+	: Transmitable(),
+	nh_(),
+	Pub_(this->nh_.advertise<geometry_msgs::Twist>("droneApp/cmd_vel", 1))
 {
-	ROS_INFO("Started coexMC");
+	ROS_INFO("Started parrotTransmitter");
 }
 
-coexMC::~coexMC()
+parrotTransmitter::~parrotTransmitter()
 {
-	ROS_INFO("Termintating coexMC...");
+	ROS_INFO("Termintating parrotTransmitter...");
 	ros::spinOnce();
 
-	this->stop();
-
-	ROS_INFO("Terminated coexMC");
+	ROS_INFO("Terminated parrotTransmitter");
 }
 
 
-void coexMC::transmit(mavros_msgs::ManualControl Msg)
+
+bool parrotTransmitter::transmitAction(double pitch, double roll, double thrust, double yarn)
 {
-	bool Valid = true;
-	
-	
-	// For Intervalls see Header File!
-	if (Msg.x >= -1 && Msg.x <= 1)
-	{
-		Msg.x *= 1000;
-	}
-	else
-	{
-		Valid = false;
-	}
-	
-	if (Msg.y >= -1 && Msg.y <= 1)
-	{
-		Msg.y *= 1000;
-	}
-	else
-	{
-		Valid = false;
-	}
-	
-	if (Msg.z >= 0 && Msg.z <= 1)
-	{
-		Msg.z *= 2;
-		Msg.z -= 1;
-		Msg.z *= 1000;
-	}
-	else
-	{
-		Valid = false;
-	}
-	
-	if (Msg.r >= -1 && Msg.r <= 1)
-	{
-		Msg.r *= 1000;
-	}
-	else
-	{
-		Valid = false;
-	}
-	
-	if (Valid)
-	{
-		ROS_INFO("Transmit: x=%f, y=%f, z=%f, r=%f", Msg.x, Msg.y, Msg.z, Msg.r);
 
-		this->setPayload(Msg);
-	}
+
+	return false;
 }
-
 

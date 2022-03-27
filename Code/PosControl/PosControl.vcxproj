@@ -24,7 +24,7 @@
     <ProjectGuid>{720be124-3015-46ca-a6e8-37e4e44795ad}</ProjectGuid>
     <RootNamespace>Domain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>05_Main</ProjectName>
+    <ProjectName>05_PlugIn</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -90,13 +90,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Abstraction/include;../Domain/include;../Application/include;../Adapter/include;../ROS_Mock;../threading/include;../calling/include;../coex/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock;../Controller/include;../parrot/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../threading/Debug;../calling/Debug;../coex/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;Integral1.obj;Integral2.obj;TimedDifference.obj;State.obj;StateHandler.obj;ActionAdapter.obj;termios.obj;ros_Talker.obj;ros.obj;Caller.obj;coexBattery.obj;coexState.obj;coexTransmitable.obj;JoystickAxis.obj;Joystick.obj;coexMC.obj;coexRC_Receiver.obj;coexRC_Transmitter.obj;coexOrientation.obj;coexControl.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../parrot/Debug;../Controller/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;TimedDifference.obj;IMUState.obj;StateHandler.obj;termios.obj;ros_Talker.obj;ros.obj;Batteryable.obj;Statusable.obj;IMUable.obj;Pose.obj;PoseControlable.obj;PoseController.obj;parrotBattery.obj;DroneControlable.obj;parrotControl.obj;parrotTransmitter.obj;parrotIMU.obj;parrotStatus.obj;SafetyProvider.obj;StateBuilder.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,8 +144,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PosControl.cpp" />
+    <ClCompile Include="src\Integral1.cpp" />
+    <ClCompile Include="src\Integral2.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
+    <ClCompile Include="src\PoseBuilder.cpp" />
+    <ClCompile Include="src\RosBridge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstraction\Abstraction.vcxproj">
@@ -153,15 +156,6 @@
     </ProjectReference>
     <ProjectReference Include="..\Adapter\Adapter.vcxproj">
       <Project>{26151999-d81f-45d6-ac46-1396bfa3f27e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Application\Application.vcxproj">
-      <Project>{bef7abd1-d697-40b7-acb1-a65a64664993}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\calling\calling.vcxproj">
-      <Project>{df732d96-40fc-4c7a-9f9b-2455f00c25cf}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\coex\coex.vcxproj">
-      <Project>{4eee7732-831f-4f24-9ddb-a46a3b235b67}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.vcxproj">
       <Project>{8651ab26-1a03-46c4-9a72-8a3dafa3b7a6}</Project>
@@ -172,15 +166,22 @@
     <ProjectReference Include="..\ROS_Mock\ROS_Mock.vcxproj">
       <Project>{da0344de-905a-4ae4-9254-1fe25dcbc9ec}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\threading\threading.vcxproj">
-      <Project>{1b5aa0cb-1da9-42b8-a02f-d79572132752}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\PosControl\Header.h" />
+    <ClInclude Include="include\PosControl\Integral1.h" />
+    <ClInclude Include="include\PosControl\Integral2.h" />
     <ClInclude Include="include\PosControl\PosBridge.h" />
+    <ClInclude Include="include\PosControl\PoseBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="package.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

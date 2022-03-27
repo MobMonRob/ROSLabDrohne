@@ -1,7 +1,7 @@
 #ifndef POSEBUILDABLE_H
 #define POSEBUILDABLE_H
 
-#include "Abstraction/FixedPoint.h"
+#include "Domain/FixedPoint.h"
 
 #include "DroneController/IMUState.h"
 #include "DroneController/Pose.h"
@@ -21,6 +21,8 @@ public:
 	virtual Vector3D getOrientationUncertainty() const = 0;
 
 	virtual bool updatePose(IMUState State) = 0;
+
+	virtual void reset() = 0;
 };
 
 #endif // POSEBUILDABLE_H

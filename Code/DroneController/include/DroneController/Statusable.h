@@ -1,34 +1,40 @@
 #ifndef STATUSABLE_H
 #define STATUSABLE_H
 
-#include "Abstraction/Timestamp.h"
+#include <map>
+#include <string>
+
+#include "Domain/SafetyProvider.h"
+#include "DroneController/Timeable.h"
+
+#include "Domain/Timestamp.h"
 #include "DroneController/Batteryable.h"
 
 
-class Statusable
+class Statusable : public SafetyProvider, public Timeable
 {
 public:
-	Statusable(Batteryable* Batteryable) : Batteryable_(Batteryable) {};
+	Statusable(Batteryable* Batteryable);
 
 	virtual bool setArmState(bool ArmState) { return false; };
 
 
-	virtual Timestamp getTime() = 0;
 	virtual bool getArmState() { return false; };
+	int getStatusID() const { return this->StatusID_; };
+	std::string getStatusTranslation() { return this->getStatusTranslation(this->getStatusID()); };
+	std::string getStatusTranslation(int StatusID);
 
-	bool isSafe();
+	virtual bool isGrounded() = 0;
+	virtual bool isFlying() = 0;
 
 protected:
-	callbackStatus;
-
-
-
-
-
-
+	void setStatusID(int ID) { this->StatusID_ = ID; };
+	void addSystemStatus(int ID, std::string Description) { this->StatusTranslation_.insert(std::pair<int, std::string>(ID, Description)); };
+	virtual void initSystemStatus() = 0;
 
 private:
-	Batteryable* Batteryable_;
+	int StatusID_;
+	std::map<int, std::string> StatusTranslation_;
 };
 
 #endif // STATUSABLE_H

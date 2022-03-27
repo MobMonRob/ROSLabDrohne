@@ -2,12 +2,16 @@
 #define STATEBUILDER_H
 
 #include "DroneController/IMUState.h"
+#include "Adapter/StateHandler.h"
 
 
 class StateBuilder
 {
 public:
-	void setNullPoint(IMUState S) { this->NullPoint_ = S; };
+	StateBuilder(int SmoothingEntries = 3, int OffsetingEntries = 10);
+	
+	void setOffsetPoint(IMUState S);
+	void setOffsetting(bool Offsetting) { this->Offsetting_ = Offsetting; };
 
 	IMUState createState(Timestamp Time,
 		FixedPoint<Accuracy_Value> LinAccelX, FixedPoint<Accuracy_Value> LinAccelY, FixedPoint<Accuracy_Value> LinAccelZ,
@@ -15,8 +19,17 @@ public:
 		Value GroundClearance);
 	IMUState createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity, Value GroundClearance);
 	
+	IMUState getState() { return this->StateHandler_.getAvgState(); };
+	IMUState getOffsetPoint() { return this->OffsetHandler_.getAvgState(); };
+
+	void clearStateHandler() { this->StateHandler_.clear(); };
+	void reset();
+
 private:
-	IMUState NullPoint_;
+	StateHandler StateHandler_;
+	StateHandler OffsetHandler_;
+	Timestamp OffsetTime_;
+	bool Offsetting_;
 };
 
 #endif // STATEBUILDER_H

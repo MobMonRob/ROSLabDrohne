@@ -1,10 +1,9 @@
 #ifndef IMUSTATE_H
 #define IMUSTATE_H
 
-
-#include "Abstraction/Value.h"
-#include "Abstraction/Vector3D.h"
-#include "Abstraction/Timestamp.h"
+#include "Domain/Value.h"
+#include "Domain/Vector3D.h"
+#include "Domain/Timestamp.h"
 
 
 /* Expects following Units:
@@ -23,6 +22,7 @@ public:
 	bool operator==(const IMUState& S) const;
 	void operator+=(const IMUState& S);
 	IMUState operator-(const IMUState& S);
+	IMUState operator-(const Timestamp& T);
 
 	Vector3D getVector_Linear() { return this->Accelerations_; };
 	Vector3D getVector_Angular() { return this->Angles_; };

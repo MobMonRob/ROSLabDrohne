@@ -10,6 +10,8 @@
 #include "../std_msgs/Msg.h"
 #include "ros_Talker.h"
 
+#include "../ardrone_autonomy/Navdata.h"
+
 #include "../mavros_msgs/PositionTarget.h"
 #include "../mavros_msgs/RCIn.h"
 #include "../mavros_msgs/State.h"
@@ -20,6 +22,11 @@
 #include "../sensor_msgs/Range.h"
 
 #include "../std_msgs/Char.h"
+#include "../std_msgs/Empty.h"
+
+#include "../../DroneController/include/DroneController/Batteryable.h"
+#include "../../DroneController/include/DroneController/Statusable.h"
+#include "../../DroneController/include/DroneController/IMUable.h"
 
 
 namespace ros
@@ -36,6 +43,7 @@ namespace ros
 	{
 	public:
 		void publish(Msg Message) {};
+		void publish(std_msgs::Empty Message) {};
 
 	};
 
@@ -74,7 +82,9 @@ namespace ros
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Char::ConstPtr&)) { return Subscriber(); };
 		
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&)) { return Subscriber(); };
-
+		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Batteryable* Item) { return Subscriber(); };
+		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Statusable* Item) { return Subscriber(); };
+		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), IMUable* Item) { return Subscriber(); };
 
 
 		template <class M>
@@ -82,7 +92,12 @@ namespace ros
 		{
 			return Subscriber();
 		}
-		
+
+		template<class M, class T>
+		Subscriber subscribe(const std::string& topic, uint32_t queue_size, void(T::* fp)(M), T* obj)
+		{
+			return Subscriber();
+		}
 
 
 		template <class M>
