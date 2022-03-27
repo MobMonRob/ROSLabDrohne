@@ -91,7 +91,6 @@ IMUState StateHandler::getMedianState()
 		}
 
 		{	// sort
-			/*
 			std::sort(VectorAx.begin(), VectorAx.end());
 			std::sort(VectorAy.begin(), VectorAy.end());
 			std::sort(VectorAz.begin(), VectorAz.end());
@@ -99,9 +98,8 @@ IMUState StateHandler::getMedianState()
 			std::sort(VectorRx.begin(), VectorRx.end());
 			std::sort(VectorRy.begin(), VectorRy.end());
 			std::sort(VectorRz.begin(), VectorRz.end());
-
+			
 			std::sort(VectorGC.begin(), VectorGC.end());
-			*/
 		}
 
 		if (BufferSize % 2 == 0)

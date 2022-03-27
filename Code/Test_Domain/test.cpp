@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include <gtest/gtest.h>
-#include "../Abstraction/include/Abstraction/Header.h"
+#include "Domain/Header.h"
 
 
 TEST(Class_FixedPoint, InitInt10_raw0)

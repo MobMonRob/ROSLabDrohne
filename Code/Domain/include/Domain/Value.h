@@ -12,6 +12,8 @@ public:
 
 	bool operator== (const Value& V);
 	bool operator== (const Value& V) const;
+	bool operator<(const Value& V) const { return this->Value_ < V.Value_; };
+
 	Value operator+ (const Value& V);
 	Value operator- (const Value& V);
 	Value operator/ (double Divisor);
