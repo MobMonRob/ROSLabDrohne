@@ -34,8 +34,8 @@ bool IMUState::operator==(const IMUState& S)
 	bool ReturnBool = true;
 
 
-	ReturnBool &= (this->getVector_Linear() == S.Accelerations_);
-	ReturnBool &= (this->getVector_Angular() == S.Angles_);
+	ReturnBool &= (this->getLinearAcceleration() == S.Accelerations_);
+	ReturnBool &= (this->getRotationalVelocity() == S.Angles_);
 	ReturnBool &= (this->getGroundClearance() == S.GroundClearance_);
 	ReturnBool &= (this->getTimestamp() == S.Time_);
 
@@ -69,8 +69,8 @@ void IMUState::operator+=(const IMUState& S)
 
 IMUState IMUState::operator-(const IMUState& S)
 {
-	return IMUState(this->getVector_Linear() - S.Accelerations_,
-		this->getVector_Angular() - S.Angles_,
+	return IMUState(this->getLinearAcceleration() - S.Accelerations_,
+		this->getRotationalVelocity() - S.Angles_,
 		this->getGroundClearance() - S.GroundClearance_,
 		(this->getTimestamp() > S.Time_ ? this->getTimestamp() : S.Time_));
 }
@@ -78,8 +78,23 @@ IMUState IMUState::operator-(const IMUState& S)
 
 IMUState IMUState::operator-(const Timestamp& T)
 {
-	return IMUState(this->getVector_Linear(),
-		this->getVector_Angular(),
+	return IMUState(this->getLinearAcceleration(),
+		this->getRotationalVelocity(),
 		this->getGroundClearance(),
 		this->getTimestamp() - T);
+}
+
+
+
+std::string IMUState::getString()
+{
+	std::string ReturnString = "IMUState:\n";
+
+
+	ReturnString.append("\tLinAccel: ").append(this->getLinearAcceleration().getString()).append("\n");
+	ReturnString.append("\tRotVel:   ").append(this->getRotationalVelocity().getString()).append("\n");
+	ReturnString.append("\tGround:   ").append(this->getGroundClearance().getString()).append("\n");
+	ReturnString.append("\tTime:     ").append(std::to_string(this->getTimestamp().getTime().getValue()));
+
+	return ReturnString;
 }

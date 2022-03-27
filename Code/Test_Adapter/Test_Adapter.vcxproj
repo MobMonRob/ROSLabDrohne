@@ -67,7 +67,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>../Abstraction/Debug;../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../gmock/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../gmock/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;IMUState.obj;StateBuilder.obj;StateHandler.obj;Pose.obj;PoseControlable.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

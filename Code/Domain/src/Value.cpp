@@ -58,3 +58,10 @@ void Value::operator+=(const Value& V)
 		this->Value_ += V.Value_;
 	}
 }
+
+
+std::string Value::getString()
+{
+	return std::string("Value [").append(this->getUnit().getUnit()).append("] = ").append(std::to_string(this->getValue().getValue()));
+}
+

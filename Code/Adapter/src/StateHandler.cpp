@@ -41,8 +41,8 @@ IMUState StateHandler::getAvgState()
 		}
 	}
 
-	return IMUState(Sum.getVector_Linear() / BufferSize,
-		Sum.getVector_Angular() / BufferSize, 
+	return IMUState(Sum.getLinearAcceleration() / BufferSize,
+		Sum.getRotationalVelocity() / BufferSize, 
 		Sum.getGroundClearance() / BufferSize, 
 		Sum.getTimestamp());
 }
@@ -76,15 +76,16 @@ IMUState StateHandler::getMedianState()
 			if (DataWrapper.getValid())
 			{
 				IMUState State = DataWrapper.getData();
+				Vector3D LinearAcceleration = State.getLinearAcceleration();
+				Vector3D RotationalVelocity = State.getRotationalVelocity();
 
+				VectorAx.push_back(LinearAcceleration.getX());
+				VectorAy.push_back(LinearAcceleration.getY());
+				VectorAz.push_back(LinearAcceleration.getZ());
 
-				VectorAx.push_back(State.getVector_Linear().getX());
-				VectorAy.push_back(State.getVector_Linear().getY());
-				VectorAz.push_back(State.getVector_Linear().getZ());
-
-				VectorRx.push_back(State.getVector_Angular().getX());
-				VectorRy.push_back(State.getVector_Angular().getY());
-				VectorRz.push_back(State.getVector_Angular().getZ());
+				VectorRx.push_back(RotationalVelocity.getX());
+				VectorRy.push_back(RotationalVelocity.getY());
+				VectorRz.push_back(RotationalVelocity.getZ());
 
 				VectorGC.push_back(State.getGroundClearance());
 			}
@@ -109,18 +110,18 @@ IMUState StateHandler::getMedianState()
 
 
 			A = Vector3D(Unit_Acceleration,
-				(VectorAx.at(Index) + VectorAx.at(Index + 1)) / Devider,
-				(VectorAy.at(Index) + VectorAy.at(Index + 1)) / Devider,
-				(VectorAz.at(Index) + VectorAz.at(Index + 1)) / Devider);
+				(VectorAx.at(Index - 1) + VectorAx.at(Index)) / Devider,
+				(VectorAy.at(Index - 1) + VectorAy.at(Index)) / Devider,
+				(VectorAz.at(Index - 1) + VectorAz.at(Index)) / Devider);
 			R = Vector3D(Unit_AngleVelDeg,
-				(VectorRx.at(Index) + VectorRx.at(Index + 1)) / Devider,
-				(VectorRy.at(Index) + VectorRy.at(Index + 1)) / Devider,
-				(VectorRz.at(Index) + VectorRz.at(Index + 1)) / Devider);
-			GC = (VectorGC.at(Index) + VectorGC.at(Index + 1)) / Devider;
+				(VectorRx.at(Index - 1) + VectorRx.at(Index)) / Devider,
+				(VectorRy.at(Index - 1) + VectorRy.at(Index)) / Devider,
+				(VectorRz.at(Index - 1) + VectorRz.at(Index)) / Devider);
+			GC = (VectorGC.at(Index - 1) + VectorGC.at(Index)) / Devider;
 		}
 		else
 		{
-			int Index = BufferSize / 2 + 1;
+			int Index = BufferSize / 2;
 
 
 			A = Vector3D(Unit_Acceleration, VectorAx.at(Index), VectorAy.at(Index), VectorAz.at(Index));
