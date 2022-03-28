@@ -8,15 +8,13 @@
 #include "ardrone_autonomy/Navdata.h"
 
 
-
 class parrotBattery : public Batteryable
 {
 public:
-	parrotBattery(double PercentageThershold, double Intervall_Info = 60.0);
+	parrotBattery(double PercentageThershold, double InfoIntervall = 60.0);
 	~parrotBattery();
 
 	double getPercentage() override { return this->Percentage_; };
-	Timestamp getTime() { return this->Time_;};
 	
 private:
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
@@ -25,7 +23,8 @@ private:
 	ros::NodeHandle nh_;
 	ros::Subscriber Sub_;
 	
-	Timestamp Time_;
+	ros::Time InfoTime_;
+	ros::Duration InfoDuration_;
 	double Percentage_;
 };
 

@@ -103,17 +103,26 @@ void PosBridge::callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
-		//this->coexController_.setArmState(true);
+		this->Controller_.setArmState(true);
 		break;
 
 	case 'g':	// Ground (Disrm Vehicle)
-		//this->coexController_.setMode("MANUAL");
-		//this->coexController_.setArmState(false);
+		this->Controller_.setArmState(false);
 		break;
 		
 	case 'p':	// Info
 		//ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString().c_str());
 		//ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString().c_str());
+		break;
+
+	case 'c':
+		ROS_INFO("Calibrate IMU");
+		this->Controller_.calibrate();
+		break;
+
+	case 'r':
+		ROS_INFO("Reset Controller");
+		this->Controller_.reset();
 		break;
 
 	case 'q':	// Destructor

@@ -22,6 +22,11 @@ public:
 	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, parrotTransmitter* Transmitter);
 
 
+
+
+	bool calibrate() { return this->IMU_.calibrate(); };
+
+	bool reset() { return this->Status_.resetStatus(); };
 	/*
 
 	double getGroundClearance() { return this->Orientation_->getGroundClearance(); };

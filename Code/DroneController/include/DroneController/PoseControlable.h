@@ -16,7 +16,7 @@ public:
 	virtual void reset() = 0;
 
 private:
-	bool transmitAction(double pitch, double roll, double thrust, double yarn) override;
+	bool transmitAction(double roll, double pitch, double yarn, double thrust) override;
 
 protected:
 	Transmitable* Transmitter_;

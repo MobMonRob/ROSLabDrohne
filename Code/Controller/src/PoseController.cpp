@@ -51,9 +51,9 @@ bool PoseController::feedbackPose(Pose P)
 	this->ControlR_.setFeedback(TimedValue(Orientation.getUnit(), Orientation.getZ(), Time));
 
 	return this->Transmitter_->transmitAction(
-		this->ControlX_.getOutput().getValue().getValue(),
 		this->ControlY_.getOutput().getValue().getValue(),
-		this->ControlZ_.getOutput().getValue().getValue(),
-		this->ControlR_.getOutput().getValue().getValue());
+		this->ControlX_.getOutput().getValue().getValue(),
+		this->ControlR_.getOutput().getValue().getValue(),
+		this->ControlZ_.getOutput().getValue().getValue());
 }
 

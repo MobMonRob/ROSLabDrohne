@@ -11,7 +11,7 @@ class VoltageOK : public SafetyRequirement
 public:
 	VoltageOK(Batteryable* Battery, double Threshold) : Battery_(Battery), Threshold_(Threshold) {};
 	
-	bool meets() override { return (this->Battery_->getVoltage() >= this->Threshold_); };
+	bool meets() override;
 
 private:
 	Batteryable* Battery_;

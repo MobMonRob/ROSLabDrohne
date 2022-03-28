@@ -12,6 +12,8 @@
 
 #include "../ardrone_autonomy/Navdata.h"
 
+#include "../geometry_msgs/Twist.h"
+
 #include "../mavros_msgs/PositionTarget.h"
 #include "../mavros_msgs/RCIn.h"
 #include "../mavros_msgs/State.h"
@@ -23,6 +25,8 @@
 
 #include "../std_msgs/Char.h"
 #include "../std_msgs/Empty.h"
+
+#include "../std_srvs/Empty.h"
 
 #include "../../DroneController/include/DroneController/Batteryable.h"
 #include "../../DroneController/include/DroneController/Statusable.h"
@@ -43,6 +47,7 @@ namespace ros
 	{
 	public:
 		void publish(Msg Message) {};
+		void publish(geometry_msgs::Twist Message) {};
 		void publish(std_msgs::Empty Message) {};
 
 	};
@@ -58,6 +63,7 @@ namespace ros
 	{
 	public:
 		bool call(Msg) { return false; };
+		bool call(std_srvs::Empty) { return false; };
 		std::string getService() { return std::string(); };
 	};
 

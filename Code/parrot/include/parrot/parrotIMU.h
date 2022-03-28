@@ -22,6 +22,8 @@ public:
 	void takeoff() { this->StateBuilder_.setOffsetting(false); };
 	void touchdown() { this->StateBuilder_.setOffsetting(true); };
 
+	bool calibrate();
+
 private:
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
 	void callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr);
