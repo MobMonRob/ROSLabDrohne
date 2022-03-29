@@ -33,6 +33,9 @@
     <ClCompile Include="src\parrotTransmitter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\MessageTracker.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\parrot\Header.h">

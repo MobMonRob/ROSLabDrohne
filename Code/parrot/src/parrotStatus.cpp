@@ -53,7 +53,7 @@ bool parrotStatus::setArmState(bool ArmState)
 					int TryCount = 0;
 					const int TryMax = 10;
 
-					while (TryCount++ < TryMax && this->getStatusID() == 0)
+					while (TryCount++ < TryMax && !this->isFlying())
 					{
 						ros::Time WaitTime = ros::Time::now();
 						ros::Duration WaitDuration(1.0);

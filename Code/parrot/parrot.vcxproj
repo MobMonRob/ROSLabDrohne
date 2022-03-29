@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="parrot.cpp" />
+    <ClCompile Include="src\MessageTracker.cpp" />
     <ClCompile Include="src\parrotBattery.cpp" />
     <ClCompile Include="src\parrotControl.cpp" />
     <ClCompile Include="src\parrotIMU.cpp" />

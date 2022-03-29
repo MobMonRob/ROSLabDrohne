@@ -6,6 +6,7 @@
 void ROS_INFO(std::string Msg);
 void ROS_INFO(std::string Msg, double Value1);
 void ROS_INFO(std::string Msg, int Value1, double Value2);
+void ROS_INFO(std::string Msg, int Value1, std::string Value2);
 void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3);
 void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3, double Value4);
 void ROS_INFO(std::string Msg, std::string Str1);

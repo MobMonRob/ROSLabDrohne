@@ -13,6 +13,8 @@
 
 
 
+
+
 parrotTransmitter* Transmitter_;
 parrotStatus* StateController_;
 double Roll = 0.0;
@@ -33,37 +35,37 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 	 * I/K	Up/Down
 	 * J/L	Yard left/right
 	 */
-	
+
 	switch (Key)
 	{
 	case 'w':
 		Pitch += 0.01;
 		break;
-	
+
 	case 's':
 		Pitch -= 0.01;
 		break;
-		
+
 	case 'a':
 		Roll += 0.01;
 		break;
-		
+
 	case 'd':
 		Roll -= 0.01;
 		break;
-		
+
 	case 'i':
 		Thrust += 0.01;
 		break;
-		
+
 	case 'k':
 		Thrust -= 0.01;
 		break;
-		
+
 	case 'j':
 		Yarn += 0.01;
 		break;
-		
+
 	case 'l':
 		Yarn -= 0.01;
 		break;
@@ -75,7 +77,7 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 	case 'g':	// Ground (Disrm Vehicle)
 		StateController_->setArmState(false);
 		break;
-		
+
 	case 'p':	// Info
 		//ROS_INFO("LinPos = %s", this->coexController_.getPosLinear().getString().c_str());
 		//ROS_INFO("AngPos = %s", this->coexController_.getPosAngular().getString().c_str());
@@ -130,5 +132,6 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
 
 

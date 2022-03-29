@@ -86,7 +86,8 @@ namespace ros
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Joy::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Range::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Char::ConstPtr&)) { return Subscriber(); };
-		
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Empty::ConstPtr&)) { return Subscriber(); };
+
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&)) { return Subscriber(); };
 		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Batteryable* Item) { return Subscriber(); };
 		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Statusable* Item) { return Subscriber(); };

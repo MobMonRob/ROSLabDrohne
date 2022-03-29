@@ -56,12 +56,18 @@ add_library(parrotController
   	src/parrotTransmitter.cpp
 )
 
+## Declare a C++ executable
+add_executable(MessageTracker 
+	src/MessageTracker.cpp
+)
+
 ## Add cmake target dependencies of the executable
 add_dependencies(parrotController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib)
+add_dependencies(MessageTracker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(parrotController ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib)
-
+target_link_libraries(MessageTracker ${catkin_LIBRARIES})
 
 #############
 ## Install ##

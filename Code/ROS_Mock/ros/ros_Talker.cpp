@@ -12,7 +12,11 @@ void ROS_INFO(std::string Msg, double Value1)
 }
 void ROS_INFO(std::string Msg, int Value1, double Value2)
 {
-	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value1 << std::endl;
+	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value2 << std::endl;
+}
+void ROS_INFO(std::string Msg, int Value1, std::string Value2)
+{
+	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value2 << std::endl;
 }
 void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3)
 {
