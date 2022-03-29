@@ -110,7 +110,7 @@ int main(int argc, char** argv)
 {
 	ROS_INFO("Started New Node: ManualController");
 
-	ros::init(argc, argv, "Bridge");
+	ros::init(argc, argv, "ManualController");
 	ros::NodeHandle nh_;
 	ros::Subscriber Sub_(nh_.subscribe("KeyReader", 1, callbackKeys));
 
