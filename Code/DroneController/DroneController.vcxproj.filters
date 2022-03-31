@@ -45,6 +45,12 @@
     <ClCompile Include="src\PercentageOK.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thrustable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rotor.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DroneController\Batteryable.h">
@@ -84,6 +90,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\DroneController\Timeable.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DroneController\Thrustable.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DroneController\Rotor.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -34,4 +34,14 @@ const Unit Unit_AngleVelRad("rad/s");
 
 const Unit Unit_Percent("%");
 
+const Unit Unit_Force("N");
+const Unit Unit_Force_Moment("Nm");
+
+const Unit Unit_Pressure("N/mm²");
+const Unit Unit_Pressure_mPa("mPa");
+
+const Unit Unit_Frequence("1/s");
+const Unit Unit_Frequence_RPM("1/min");
+
+
 #endif // UNIT_H

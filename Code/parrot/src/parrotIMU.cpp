@@ -47,8 +47,8 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 	
 	// maybe trigger new Thread??
-	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * GravitationConstant, RotationalVelocity, GroundClearance);
-	
+	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * Value_GravitationConstant.getValue(), RotationalVelocity, GroundClearance);
+
 	this->calcPose(State);
 	this->triggerController();
 }
