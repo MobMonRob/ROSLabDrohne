@@ -1,7 +1,7 @@
 #include "parrot/parrotStatus.h"
 
 #include <std_msgs/Empty.h>
-
+#include <std_srvs/Empty.h>
 
 
 
@@ -38,24 +38,56 @@ bool parrotStatus::setArmState(bool ArmState)
 
 	if (ArmState)
 	{
-		if (this->meetsRequirements() && !this->isGrounded())
+		if (this->meetsRequirements())
 		{
-			this->reset();
+			if (this->isGrounded() || this->getStatusID() == 0)
+			{
+				if (this->getStatusID() == 0)
+				{
+					this->resetStatus();
+				}
 
-			PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/takeoff", 1);
+				ROS_INFO("Takeoff...");
 
-			PubCmd.publish(std_msgs::Empty());
+				{
+					int TryCount = 0;
+					const int TryMax = 10;
+
+					while (TryCount++ < TryMax && !this->isFlying())
+					{
+						ros::Time WaitTime = ros::Time::now();
+						ros::Duration WaitDuration(1.0);
+
+
+						PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/takeoff", 1);
+
+						PubCmd.publish(std_msgs::Empty());
+						ros::spinOnce();
+
+						while (ros::Time::now() - WaitTime < WaitDuration)
+						{
+						}
+					}
+				}
+			}
+			else
+			{
+				ROS_INFO("Drone allready flying, no additional Takeoff needed.");
+			}
 		}
 		else
 		{
-			ROS_ERROR("Takeoff not possible, Requirements not met.");
+			ROS_WARN("Takeoff not possible, Requirements not met.");
 		}
 	}
 	else
 	{
+		ROS_INFO("Landing...");
+
 		PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/land", 1);
 
 		PubCmd.publish(std_msgs::Empty());
+		ros::spinOnce();
 	}
 
 	return ReturnBool;
@@ -79,17 +111,56 @@ bool parrotStatus::setArmState(bool ArmState)
 
 
 
-bool parrotStatus::reset()
+bool parrotStatus::resetStatus()
 {
-	ros::Publisher PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/reset", 1);
-	ros::ServiceClient clientDroneFlatTrim;
-	ros::ServiceClient clientDroneIMURecalib;
+	ROS_INFO("Reset Drone before Takeoff...");
 
 
 
+	{
+		ros::Publisher ResetCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/reset", 1);
+
+		int TryCount = 0;
+		const int TryMax = 10;
+
+		while (TryCount++ < TryMax && this->getStatusID() == 0)
+		{
+			ros::Time WaitTime = ros::Time::now();
+			ros::Duration WaitDuration(1.0);
+
+			ResetCmd.publish(std_msgs::Empty());
+			ros::spinOnce();
+
+			while (ros::Time::now() - WaitTime < WaitDuration)
+			{
+			}
+		}
 
 
+		/* no need for an explicit shutdown of PubCmd
+		 * https://docs.ros.org/en/jade/api/roscpp/html/classros_1_1Publisher.html#a5ba460ae4cbf805d35055d054ad034c2
+		 */
+	}
 
+	{
+		ros::ServiceClient ClienCalibrate = this->nh_.serviceClient<std_srvs::Empty>("ardrone/imu_recalib");
+
+		std_srvs::Empty srvEmpty;
+
+
+		ClienCalibrate.call(srvEmpty);
+	}
+
+	{
+		ros::ServiceClient ClienTrim = this->nh_.serviceClient<std_srvs::Empty>("ardrone/flattrim");
+
+		std_srvs::Empty srvEmpty;
+
+
+		ClienTrim.call(srvEmpty);
+	}
+
+	
 	return false;
 }
 
@@ -118,7 +189,7 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 {
 	if (this->getStatusID() != navdataPtr->state)
 	{
-		ROS_INFO("Status changed to %s.", this->getStatusTranslation().c_str());
+		ROS_INFO("Status changed to %s.", this->getStatusTranslation(navdataPtr->state).c_str());
 	}
 
 	this->setStatusID(navdataPtr->state);

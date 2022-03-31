@@ -8,20 +8,27 @@
 #include "parrot/parrotStatus.h"
 #include "parrot/parrotBattery.h"
 
+#define TRANSMIT_ROLL	1
+#define TRANSMIT_PITCH	1
+#define TRANSMIT_YARN	1
+#define TRANSMIT_THRUST	1
+
+
+
+
 
 class parrotTransmitter : public Transmitable
 {
 public:
-	parrotTransmitter();
+	parrotTransmitter(int Mask = TRANSMIT_ROLL | TRANSMIT_PITCH | TRANSMIT_YARN | TRANSMIT_THRUST);
 	~parrotTransmitter();
 
-
-private:
-	bool transmitAction(double pitch, double roll, double thrust, double yarn) override;			// from Transmitable
+	bool transmitAction(double roll, double pitch, double yarn, double thrust) override;			// from Transmitable
 	
 private:
 	ros::NodeHandle nh_;
 	ros::Publisher Pub_;
+	int SendMask_;
 };
 
 #endif // PARROT_TRANSMITTER_H

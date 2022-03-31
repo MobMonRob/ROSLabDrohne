@@ -75,24 +75,24 @@ bool PoseBuilder::updatePose(IMUState State)
 	{
 		{
 			Vector3D Orientation = this->getOrientation();
-			Vector3D Acceleration = State.getVector_Linear().rotate(
+			Vector3D LinearAcceleration = State.getLinearAcceleration().rotate(
 				Orientation.getX().getValue(),
 				Orientation.getY().getValue(), 
 				Orientation.getZ().getValue());
 			
 
-			this->PositionX_.setInput(TimedValue(Acceleration.getUnit(), Acceleration.getX(), State.getTimestamp()), true);
-			this->PositionY_.setInput(TimedValue(Acceleration.getUnit(), Acceleration.getY(), State.getTimestamp()), true);
-			this->PositionZ_.setInput(TimedValue(Acceleration.getUnit(), Acceleration.getZ(), State.getTimestamp()), true);
+			this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getX(), State.getTimestamp()), true);
+			this->PositionY_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getY(), State.getTimestamp()), true);
+			this->PositionZ_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getZ(), State.getTimestamp()), true);
 		}
 
 		{
-			Vector3D AccelRotation = State.getVector_Angular();
+			Vector3D RotationalVelocity = State.getRotationalVelocity();
 
 
-			this->OrientationX_.setInput(TimedValue(AccelRotation.getUnit(), AccelRotation.getX(), State.getTimestamp()), true);
-			this->OrientationY_.setInput(TimedValue(AccelRotation.getUnit(), AccelRotation.getY(), State.getTimestamp()), true);
-			this->OrientationZ_.setInput(TimedValue(AccelRotation.getUnit(), AccelRotation.getZ(), State.getTimestamp()), true);
+			this->OrientationX_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getX(), State.getTimestamp()), true);
+			this->OrientationY_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getY(), State.getTimestamp()), true);
+			this->OrientationZ_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getZ(), State.getTimestamp()), true);
 		}
 
 

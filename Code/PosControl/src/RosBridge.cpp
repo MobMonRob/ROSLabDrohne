@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 	
 	PosBridge Bridge;
 	ros::Time UpdatePose = ros::Time::now();
-	ros::Duration DurationPose(0.5);
+	ros::Duration DurationPose(1);
 
 	while(ros::ok())
 	{

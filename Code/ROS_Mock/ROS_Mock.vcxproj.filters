@@ -119,5 +119,14 @@
     <ClInclude Include="std_msgs\Empty.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="std_srvs\Empty.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_srvs\EmptyRequest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_srvs\EmptyResponse.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

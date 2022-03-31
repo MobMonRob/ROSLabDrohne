@@ -43,9 +43,11 @@ add_library(DroneController_lib
 	src/DroneControlable.cpp
 	src/IMUable.cpp
 	src/IMUState.cpp
+	src/PercentageOK.cpp
 	src/Pose.cpp
 	src/PoseControlable.cpp
 	src/Statusable.cpp
+	src/VoltageOK.cpp
 )
 
 ## Add cmake target dependencies of the executable

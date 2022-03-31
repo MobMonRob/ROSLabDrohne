@@ -1,1 +1,0 @@
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Test_Abstraction\Debug\Test_Abstraction.vcxproj.CopyComplete

@@ -176,6 +176,9 @@
     <ClInclude Include="std_msgs\Msg.h" />
     <ClInclude Include="std_msgs\Char.h" />
     <ClInclude Include="std_msgs\String.h" />
+    <ClInclude Include="std_srvs\Empty.h" />
+    <ClInclude Include="std_srvs\EmptyRequest.h" />
+    <ClInclude Include="std_srvs\EmptyResponse.h" />
     <ClInclude Include="termios.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

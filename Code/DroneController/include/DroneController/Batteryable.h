@@ -12,6 +12,9 @@ public:
 	
 	virtual double getVoltage() { return 0.0; };
 	virtual double getPercentage() { return 0.0; };
+
+protected:
+	void setTime(Timestamp Time) { Timeable::setTime(Time); };
 };
 
 #endif // BATTERYABLE_H

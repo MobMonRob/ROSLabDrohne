@@ -12,6 +12,8 @@
 
 #include "../ardrone_autonomy/Navdata.h"
 
+#include "../geometry_msgs/Twist.h"
+
 #include "../mavros_msgs/PositionTarget.h"
 #include "../mavros_msgs/RCIn.h"
 #include "../mavros_msgs/State.h"
@@ -23,6 +25,8 @@
 
 #include "../std_msgs/Char.h"
 #include "../std_msgs/Empty.h"
+
+#include "../std_srvs/Empty.h"
 
 #include "../../DroneController/include/DroneController/Batteryable.h"
 #include "../../DroneController/include/DroneController/Statusable.h"
@@ -43,6 +47,7 @@ namespace ros
 	{
 	public:
 		void publish(Msg Message) {};
+		void publish(geometry_msgs::Twist Message) {};
 		void publish(std_msgs::Empty Message) {};
 
 	};
@@ -58,6 +63,7 @@ namespace ros
 	{
 	public:
 		bool call(Msg) { return false; };
+		bool call(std_srvs::Empty) { return false; };
 		std::string getService() { return std::string(); };
 	};
 
@@ -71,7 +77,7 @@ namespace ros
 		}
 
 		
-
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const geometry_msgs::Twist::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::PositionTarget::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::RCIn::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const mavros_msgs::State::ConstPtr&)) { return Subscriber(); };
@@ -80,7 +86,8 @@ namespace ros
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Joy::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const sensor_msgs::Range::ConstPtr&)) { return Subscriber(); };
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Char::ConstPtr&)) { return Subscriber(); };
-		
+		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const std_msgs::Empty::ConstPtr&)) { return Subscriber(); };
+
 		Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&)) { return Subscriber(); };
 		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Batteryable* Item) { return Subscriber(); };
 		//Subscriber subscribe(std::string Str, int Int, void(*Callback)(const ardrone_autonomy::Navdata::ConstPtr&), Statusable* Item) { return Subscriber(); };

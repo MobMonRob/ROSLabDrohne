@@ -9,7 +9,7 @@ class Transmitable
 public:
 	Transmitable() {};
 
-	virtual bool transmitAction(double pitch, double roll, double thrust, double yarn) = 0;
+	virtual bool transmitAction(double roll, double pitch, double yarn, double thrust) = 0;
 };
 
 #endif // TRANSMITABLE_H

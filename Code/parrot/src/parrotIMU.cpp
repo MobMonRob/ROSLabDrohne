@@ -1,6 +1,7 @@
 #include "parrot/parrotIMU.h"
 
 #include "Domain/Vector3D.h"
+#include "std_srvs/Empty.h"
 
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
@@ -24,6 +25,20 @@ parrotIMU::~parrotIMU()
 
 
 
+bool parrotIMU::calibrate()
+{
+	bool ReturnBool = false;
+	ros::ServiceClient ClientIMUCalib = this->nh_.serviceClient<std_srvs::Empty>("ardrone/imu_recalib");
+	std_srvs::Empty Cmd;
+
+
+	ReturnBool = ClientIMUCalib.call(Cmd);
+
+	return ReturnBool;
+}
+
+
+
 void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
 	Timestamp Time(navdataPtr->header.stamp.toSec());
@@ -33,8 +48,6 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	
 	// maybe trigger new Thread??
 	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * GravitationConstant, RotationalVelocity, GroundClearance);
-
-	ROS_INFO("NavData LinAccel: %s", LinearAcceleration.getString().c_str());
 	
 	this->calcPose(State);
 	this->triggerController();

@@ -24,7 +24,7 @@ public:
 	bool isFlying() override { return (this->getStatusID() == 3 || this->getStatusID() == 7); };
 
 
-	bool reset();
+	bool resetStatus();
 	
 private:
 	void initSystemStatus() override;

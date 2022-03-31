@@ -2,14 +2,14 @@
 
 
 
-bool PoseControlable::transmitAction(double pitch, double roll, double thrust, double yarn)
+bool PoseControlable::transmitAction(double roll, double pitch, double yarn, double thrust)
 {
 	bool ReturnBool = false;
 
 
 	if (this->Transmitter_ != nullptr)
 	{
-		ReturnBool = this->Transmitter_->transmitAction(pitch, roll, thrust, yarn);
+		ReturnBool = this->Transmitter_->transmitAction(roll, pitch, yarn, thrust);
 	}
 
 	return ReturnBool;

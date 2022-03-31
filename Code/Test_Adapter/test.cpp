@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include <string>
+
 #include "DroneController/IMUState.h"
 #include "Adapter/Header.h"
 
@@ -52,7 +54,7 @@ TEST(Class_StateHandler, Average_Single)
 	EXPECT_EQ(Result, State1);
 }
 
-TEST(Class_StateHandler, Init)
+TEST(Class_StateHandler, Average_Double)
 {
 	const int MaxEntries = 10;
 	StateHandler SH(MaxEntries);
@@ -80,123 +82,119 @@ TEST(Class_StateHandler, Init)
 		{
 			SH.addEntry(State2);
 		}
-
-
 	}
 
 	const IMUState Result = SH.getAvgState();
 
-	IMUState Expectation(
+	const IMUState Expectation(
 		Vector3D(Unit_Acceleration, 3, 4, 5),
 		Vector3D(Unit_AngleVelRad, 0.3, 0.4, 0.5),
 		Value(Unit_Length, 10),
-		Timestamp(FixedPoint<Accuracy_Time>(10))
-	);
+		Timestamp(FixedPoint<Accuracy_Time>(10)));
 
 	EXPECT_EQ(Result, Expectation);
 }
 
 
-TEST(Class_PoseBuilder, AccelPos_X_10s)
+TEST(Class_StateHandler, Median_Single)
 {
-	const int t_max = 10;
-	const int StepFactor = 50;
-	double ErrorMax = 0.1;		// [%]
-	PoseBuilder PB;
-	std::vector<Vector3D> Results;
-	std::vector<Vector3D> Expectations;
+	const int MaxEntries = 10;
+	StateHandler SH(MaxEntries);
+	IMUState State1(
+		Vector3D(Unit_Acceleration, 1, 2, 3),
+		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Value(Unit_Length, 5),
+		Timestamp(FixedPoint<Accuracy_Time>(1))
+	);
 
 
-	for (int t = 0; t <= t_max * StepFactor; t++)
+	for (int i = 0; i < MaxEntries; i++)
 	{
-		double Time = static_cast<double>(t) / StepFactor;
-		IMUState S(
-			Vector3D(Unit_Acceleration, 1, 0, 0),
-			Vector3D(Unit_AngleVelRad, 0, 0, 0),
-			Value(Unit_Length, 0),
-			Timestamp(FixedPoint<Accuracy_Time>(Time))
-		);
-
-		PB.updatePose(S);
-
-		if (t % StepFactor == 0)
-		{
-			Results.push_back(PB.getPosition());
-		}
+		SH.addEntry(State1);
 	}
 
-	for (int i = 0; i <= t_max; i++)
+	IMUState Result = SH.getMedianState();
+
+	const IMUState Expectation = State1;
+
+	if (!(Result == Expectation))
 	{
-		Expectations.push_back(Vector3D(Unit_Length, 0.5 * i * i, 0, 0));
+		std::cout << Result.getString() << std::endl;
 	}
 
-	for (int i = 1; i <= t_max; i++)
-	{
-		const FixedPoint<Accuracy_Value> Result = Results.at(i).getX();
-		const FixedPoint<Accuracy_Value> ExpectatedValue = Expectations.at(i).getX();
-		double Error = 100 * std::abs(Result.getValue() / ExpectatedValue.getValue() - 1);
-		bool Expectation = Error <= ErrorMax;
-
-
-		if (!Expectation)
-		{
-			std::cout << "Position Error " << i << ": " << Error << "%." << std::endl;
-		}
-
-		EXPECT_TRUE(Expectation);
-	}
+	EXPECT_EQ(Result, Expectation);
 }
 
-
-TEST(Class_PoseBuilder, AccelRot_X_10s)
+TEST(Class_StateHandler, Median_Double)
 {
-	const int t_max = 10;
-	const int StepFactor = 50;
-	double ErrorMax = 0.01;		// [%]
-	PoseBuilder PB;
-	std::vector<Vector3D> Results;
-	std::vector<Vector3D> Expectations;
+	const int MaxEntries = 10;
+	StateHandler SH(MaxEntries);
+	IMUState State1(
+		Vector3D(Unit_Acceleration, 1, 2, 3),
+		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Value(Unit_Length, 5),
+		Timestamp(FixedPoint<Accuracy_Time>(1))
+	);
+	IMUState State2(
+		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(3),
+		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(3),
+		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(3),
+		State1.getTimestamp());
 
 
-	for (int t = 0; t <= t_max * StepFactor; t++)
+	SH.addEntry(State1);
+	SH.addEntry(State2);
+
+	IMUState Result = SH.getMedianState();
+
+	const IMUState Expectation(
+		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(2),
+		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(2),
+		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(2),
+		State1.getTimestamp());
+
+	if (!(Result == Expectation))
 	{
-		double Time = static_cast<double>(t) / StepFactor;
-		IMUState S(
-			Vector3D(Unit_Acceleration, 0, 0, 0),
-			Vector3D(Unit_AngleVelRad, 1, 0, 0),
-			Value(Unit_Length, 0),
-			Timestamp(FixedPoint<Accuracy_Time>(Time))
-		);
-
-		PB.updatePose(S);
-
-		if (t % StepFactor == 0)
-		{
-			Results.push_back(PB.getOrientation());
-		}
+		std::cout << Result.getString() << std::endl;
 	}
 
-	for (int i = 0; i <= t_max; i++)
-	{
-		Expectations.push_back(Vector3D(Unit_AngleRad, i, 0, 0));
-	}
-
-	for (int i = 1; i <= t_max; i++)
-	{
-		const FixedPoint<Accuracy_Value> Result = Results.at(i).getX();
-		const FixedPoint<Accuracy_Value> ExpectatedValue = Expectations.at(i).getX();
-		double Error = 100 * std::abs(Result.getValue() / ExpectatedValue.getValue() - 1);
-		bool Expectation = Error <= ErrorMax;
-
-
-		if (!Expectation)
-		{
-			std::cout << "Position Error " << i << ": " << Error << std::endl;
-		}
-
-		EXPECT_TRUE(Expectation);
-	}
+	EXPECT_EQ(Result, Expectation);
 }
 
+TEST(Class_StateHandler, Median_Tripple)
+{
+	const int MaxEntries = 10;
+	StateHandler SH(MaxEntries);
+	IMUState State1(
+		Vector3D(Unit_Acceleration, 1, 2, 3),
+		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Value(Unit_Length, 5),
+		Timestamp(FixedPoint<Accuracy_Time>(1))
+	);
+	IMUState State2(
+		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(2),
+		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(2),
+		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(2),
+		State1.getTimestamp());
+	IMUState State3(
+		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(8),
+		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(8),
+		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(8),
+		State1.getTimestamp());
 
 
+	SH.addEntry(State1);
+	SH.addEntry(State2);
+	SH.addEntry(State3);
+
+	IMUState Result = SH.getMedianState();
+
+	const IMUState Expectation = State2;
+
+	if (!(Result == Expectation))
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
+}
