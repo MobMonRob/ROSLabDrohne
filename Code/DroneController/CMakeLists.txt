@@ -46,7 +46,9 @@ add_library(DroneController_lib
 	src/PercentageOK.cpp
 	src/Pose.cpp
 	src/PoseControlable.cpp
+	src/Rotor.cpp
 	src/Statusable.cpp
+	src/Thrustable.cpp
 	src/VoltageOK.cpp
 )
 

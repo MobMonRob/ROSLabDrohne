@@ -56,12 +56,11 @@ bool parrotTransmitter::transmitAction(double roll, double pitch, double yarn, d
 
 	if (Msg.angular.x == 0.0 && Msg.angular.y == 0.0 && Msg.angular.z == 0.0 && Msg.linear.z == 0.0)
 	{	// AntiHover
-		Msg.linear.z = 0.00000000001;
+		Msg.angular.x = 0.00000000001;
+		Msg.angular.y = 0.00000000001;
 	}
 
 	{	// send
-		ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Msg.linear.x, Msg.linear.y, Msg.angular.z, Msg.linear.z);
-
 		this->Pub_.publish(Msg);
 		ros::spinOnce();
 	}

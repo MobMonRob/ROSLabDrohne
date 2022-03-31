@@ -151,6 +151,8 @@
     <ClCompile Include="src\PoseControlable.cpp" />
     <ClCompile Include="src\IMUState.cpp" />
     <ClCompile Include="src\Pose.cpp" />
+    <ClCompile Include="src\Rotor.cpp" />
+    <ClCompile Include="src\Thrustable.cpp" />
     <ClCompile Include="src\Statusable.cpp" />
     <ClCompile Include="src\VoltageOK.cpp" />
   </ItemGroup>
@@ -164,6 +166,8 @@
     <ClInclude Include="include\DroneController\IMUState.h" />
     <ClInclude Include="include\DroneController\Pose.h" />
     <ClInclude Include="include\DroneController\PoseBuildable.h" />
+    <ClInclude Include="include\DroneController\Rotor.h" />
+    <ClInclude Include="include\DroneController\Thrustable.h" />
     <ClInclude Include="include\DroneController\Statusable.h" />
     <ClInclude Include="include\DroneController\Timeable.h" />
     <ClInclude Include="include\DroneController\Transmitable.h" />
