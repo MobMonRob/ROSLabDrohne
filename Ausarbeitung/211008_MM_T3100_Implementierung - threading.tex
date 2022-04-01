@@ -1,0 +1,22 @@
+\newSec[ArchPlugThread]{\textit{threading} Package}{3}
+
+Das Paket \CodePkg{threading} bietet die Möglichkeit wiederkehrende Aufgaben, abseits von separaten \Node[s], beabeiten zu können. Dieser Zusatz erlaubt ein monolithisches Programm zu entwerfen.
+
+
+\newSec{Thread}{4}
+Diese Klasse bietet die Basis für die Thread-Implementierung, indem die Klasse \CodeClass{std::thread} gekapselt wird. Hier wird mit Aufruf der \CodeMeth{start()}-Methode eine neue Instanz auf den zugehörigen \textit{Pointer} initialisiert. Zusätzlich implementiert die Klasse \CodeClass{Thread} einen Sperr-Mechanismus, um synchrones Schreiben zu vermeiden. \missing[dirty read und so beschreiben?]
+
+
+\newSec{rosThread}{4}
+Die Klasse \CodeClass{rosThread} erweitert die Klasse \CodeClass{Thread} um eine generische Variable \CodeVar{T Payload}, welcher von den erbenden Klassen zum Versand genutzt werden kann. Die Methode \CodeMeth{T runOnce(T Payload)} ist als \textit{full virtual} implementiert, somit wird ein Überschreiben durch erbende Klassen erzwungen. Die Klasse \CodeClass{ros::Rate} ermöglicht eine frequentiell pausierte Abarbeitung des der auszuführenden Methode \CodeMeth{T runOnce()}.
+
+\note{Idealerweise sollte eine Instanz der Klasse \CodeClass{ROS::NodeHandler} ebenfalls in dieser Klasse integriert sein. Tests während der Entwicklung zeigten, dass dies nicht umsetzbar ist. Eine Begründung hierfür konnte nicht gefunden werden.}
+
+
+\newSec{AutoPublisher}{4}
+Wie der Name der Klasse \CodeClass{AutoPublisher} erahnen lässt, wird hier ein \CodeClass{ros::Publisher} implementiert. Mit dem Aufruf der \CodeMeth{runOnce()}-Methode wird wird der in Basisklasse \CodeClass{rosThread} gespeicherte \CodeVar{T Payload} mit der Instanz des \CodeClass{ros::Publisher} versandt.
+
+
+\newSec{AutoClient}{4}
+Die Klasse \CodeClass{AutoClient} kapselt eine Instanz der Klasse \CodeClass{ros::ServiceClient} und bietet somit die Option, Service-Anfragen regelmäßig senden zu können.
+Für dieses Projekt ist dies notwendig, da die Anfrage für den \textit{FlightMode} \glqq\texttt{OFFBOARD}\grqq mit einer Frequenz von mindestend $2 Hz$ als \textit{Alive}-Nachricht genutzt wird. Wird die Zeit von $500 ms$ ohne Anfrage überschritten, fällt der \textit{Flight Controller} auf den zuvor verwendeten \textit{FlightMode} zurück.

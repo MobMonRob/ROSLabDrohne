@@ -5,45 +5,20 @@ Hierbei handelt es sich um die Drohne \Ar. Nachfolgend soll die Drohne und die e
 
 
 
-
-
-
-Parrot AR.Drohne 2.0
-
-Laut hersteller folgende Sensorik:
-
-Ultraschall-Sensoren für Bodenabstand
-
-Kamera unten
-
-Kamera vorn
-
-
-Magnetometer
-
-Beschleunigungssensoren
-
-
-
-
-
-
-
-Sobald IB mit dieser Drohne möglich, wird hier mehr beschrieben.
-
-Falls auch das nicht geht, dann halt Gezabo :D
-
-
-
-
-
 \newSec{Geometrie}{3}
 
 
-\newSec[Geom-Rot]{Anordnung der Rotoren}{4}
+\newSec[parrotGeom]{Anordnung der Rotoren}{4}
 
 
 X
+
+
+\newSec[parrotSize]{Abmessungen}{4}
+
+
+
+
 
 
 
@@ -56,7 +31,7 @@ X
 
 \missing[Drohne ist nur Client]
 
-\missing[Nutzung von ardrone\_autonomy-Package]
+\missing[Nutzung von ardrone\_autonomy-\Pack]
 
 
 
@@ -64,24 +39,48 @@ X
 \newSec{Sensorik}{3}
 
 
-
-\newSec{Gyroskop}{4}
-
-
-
-\newSec{Magnetometer}{4}
-
-
-
-\newSec[Ultraschall]{Ultraschall-Abstandsmessung}{4}
+\begin{itemize}
+\item Beschleunigungssensorik
+\item Magnetometer
+\item Ultraschall-Abstandsmessung zum Boden
+\item Frontkamera
+\item Bodenkamera
+\end{itemize}
 
 
 
-\newSec{Bodenkamera}{4}
 
 
 
-\newSec{Frontkamera}{4}
+
+\newSec[parrotROS]{Interaktion mittels \ROS}{3}
+
+
+
+\newSec[parrotAutonomy]{Treiber \pAuto}{4}
+Für die Ansteuerung der Drohne \Ar\ existiert eine Treiber, welche die initialisierung und die Kommunukation mit der Drohne anbietet. Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] angeboten, welche nachfolgend näher beschrieben werden sollen.
+
+
+\newSec[parrotTopics]{Topics}{4}
+
+
+
+
+
+\missing[Bild von rqt-graph]
+
+
+
+
+
+
+
+\newSec[parrotService]{Services}{4}
+
+
+
+
+
 
 
 
