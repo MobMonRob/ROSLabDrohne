@@ -10,6 +10,7 @@
 #include "Controller/PoseController.h"
 
 #include "PosControl/PoseBuilder.h"
+#include "PosControl/Transmitter_Mock.h"
 
 class PosBridge
 {
@@ -32,7 +33,7 @@ private:
 	
 	PoseBuilder PoseBuilder_;
 	PoseController PoseController_;
-	parrotTransmitter Transmitter_;
+	Transmitter_Mock Transmitter_;
 	parrotControl Controller_;
 };
 

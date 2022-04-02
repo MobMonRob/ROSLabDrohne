@@ -19,7 +19,7 @@
 class parrotControl : public DroneControlable, public Timeable
 {
 public:
-	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, parrotTransmitter* Transmitter);
+	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, Transmitable* Transmitter);
 
 
 

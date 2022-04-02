@@ -8,13 +8,11 @@
 #include "parrot/parrotStatus.h"
 #include "parrot/parrotBattery.h"
 
+
 #define TRANSMIT_ROLL	1
 #define TRANSMIT_PITCH	1
 #define TRANSMIT_YARN	1
 #define TRANSMIT_THRUST	1
-
-
-
 
 
 class parrotTransmitter : public Transmitable

@@ -20,6 +20,7 @@ public:
 
 	Vector3D getPosition() { return this->PoseBuilder_->getPosition(); };
 	Vector3D getOrientation() { return this->PoseBuilder_->getOrientation(); };
+	Pose getPose() { return this->PoseBuilder_->getPose(); };
 
 protected:
 	bool calcPose(IMUState S);
