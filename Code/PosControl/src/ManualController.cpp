@@ -14,7 +14,6 @@
 
 
 
-
 parrotStatus* StateController_;
 ros::Time SmoothTime;
 double Roll = 0.0;
@@ -30,45 +29,50 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 
 
-	/* Key Controls (compare ActionTransmitter::transmitAction()-Methode):
-	 * W/S	forward/backward
-	 * A/D	left/right
-	 * I/K	Up/Down
-	 * J/L	Yard left/right
+	/* 
+	 * https://ardrone-autonomy.readthedocs.io/en/latest/commands.html
 	 */
 
 	switch (Key)
 	{
 	case 'w':
-		Pitch += 0.01;
+		Pitch += 0.005;
+		dirty = true;
 		break;
 
 	case 's':
-		Pitch -= 0.01;
+		Pitch -= 0.005;
+		dirty = true;
 		break;
 
 	case 'a':
-		Roll += 0.01;
+		Roll += 0.005;
+		dirty = true;
 		break;
 
 	case 'd':
-		Roll -= 0.01;
+		Roll -= 0.005;
+		dirty = true;
 		break;
 
 	case 'i':
-		Thrust += 0.01;
+		Thrust += 0.001;
+		dirty = true;
 		break;
 
 	case 'k':
-		Thrust -= 0.01;
+		Thrust -= 0.005;
+		dirty = true;
 		break;
 
 	case 'j':
-		Yarn += 0.01;
+		Yarn += 0.005;
+		dirty = true;
 		break;
 
 	case 'l':
-		Yarn -= 0.01;
+		Yarn -= 0.005;
+		dirty = true;
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
@@ -97,6 +101,8 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		ROS_INFO("unprocessable Key: %c", Key);
 		break;
 	}
+
+	SmoothTime = ros::Time::now();
 }
 
 
@@ -120,6 +126,10 @@ int main(int argc, char** argv)
 	const double SmoothFactor = 0.85;
 	ros::Duration SmoothDuration(0.1);
 	ros::Rate SpinRate(75);
+
+	const double SmoothFactor = 0.5;
+	ros::Duration SmoothDuration(0.5);
+	ros::Rate SpinRate(100);
 
 
 	while (ros::ok())
@@ -147,6 +157,9 @@ int main(int argc, char** argv)
 		SpinRate.sleep();
 	}
 
+
+
+	StateController_->setArmState(false);
 
 	delete StateController_;
 

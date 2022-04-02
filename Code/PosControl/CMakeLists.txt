@@ -54,7 +54,7 @@ include_directories(
 )
 
 ## Declare a C++ executable
-add_executable(BridgeNode 
+add_executable(AutoController 
 	include/PosControl/Header.h
 	src/Integral1.cpp
 	src/Integral2.cpp
@@ -68,16 +68,16 @@ add_executable(BagPlotter_ND_AV
 	src/BagPlotter_NavData_AccelVel.cpp
 )
 
-add_executable(Manual 
+add_executable(ManualController 
 	src/ManualController.cpp
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
+add_dependencies(AutoController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 add_dependencies(BagPlotter_ND_AV ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(Manual ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} parrotController)
+add_dependencies(ManualController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} parrotController)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(BridgeNode ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
+target_link_libraries(AutoController ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 target_link_libraries(BagPlotter_ND_AV ${catkin_LIBRARIES})
-target_link_libraries(Manual ${catkin_LIBRARIES} parrotController)
+target_link_libraries(ManualController ${catkin_LIBRARIES} parrotController)
