@@ -42,6 +42,11 @@ void parrotBattery::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& n
 
 		this->InfoTime_ = ros::Time::now();
 	}
+
+	if (!this->meetsRequirements())
+	{
+		ROS_WARN("Battery doesn't meet Requirements anymore!");
+	}
 }
 
 

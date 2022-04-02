@@ -61,6 +61,7 @@ add_executable(BridgeNode
 	src/PosBridge.cpp
 	src/PoseBuilder.cpp
 	src/RosBridge.cpp
+	src/Transmitter_Mock.cpp
 )
 
 add_executable(BagPlotter_ND_AV 

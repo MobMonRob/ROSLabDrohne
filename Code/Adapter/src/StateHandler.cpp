@@ -41,8 +41,8 @@ IMUState StateHandler::getAvgState()
 		}
 	}
 
-	return IMUState(Sum.getLinearAcceleration() / BufferSize,
-		Sum.getRotationalVelocity() / BufferSize, 
+	return IMUState(Sum.getLinear() / BufferSize,
+		Sum.getRotational() / BufferSize, 
 		Sum.getGroundClearance() / BufferSize, 
 		Sum.getTimestamp());
 }
@@ -76,8 +76,8 @@ IMUState StateHandler::getMedianState()
 			if (DataWrapper.getValid())
 			{
 				IMUState State = DataWrapper.getData();
-				Vector3D LinearAcceleration = State.getLinearAcceleration();
-				Vector3D RotationalVelocity = State.getRotationalVelocity();
+				Vector3D LinearAcceleration = State.getLinear();
+				Vector3D RotationalVelocity = State.getRotational();
 
 				VectorAx.push_back(LinearAcceleration.getX());
 				VectorAy.push_back(LinearAcceleration.getY());

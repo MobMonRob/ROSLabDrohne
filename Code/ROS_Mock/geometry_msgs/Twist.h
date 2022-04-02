@@ -10,7 +10,7 @@
 #include <vector>
 #include <map>
 
-#include <geometry_msgs/Vector3.h>
+#include "Vector3.h"
 
 namespace geometry_msgs
 {

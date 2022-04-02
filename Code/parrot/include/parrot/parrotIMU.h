@@ -27,9 +27,11 @@ public:
 private:
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
 	void callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr);
+	void publishPose();
 
 private:
 	ros::NodeHandle nh_;
+	ros::Publisher PubPose_;
 	ros::Subscriber SubIMU_;
 	ros::Subscriber SubNav_;
 

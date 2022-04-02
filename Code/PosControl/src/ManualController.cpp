@@ -15,12 +15,13 @@
 
 
 
-parrotTransmitter* Transmitter_;
 parrotStatus* StateController_;
+ros::Time SmoothTime;
 double Roll = 0.0;
 double Pitch = 0.0;
 double Yarn = 0.0;
 double Thrust = 0.0;
+bool dirty = false;
 
 
 void callbackKeys(const std_msgs::Char::ConstPtr& msg)
@@ -96,8 +97,6 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		ROS_INFO("unprocessable Key: %c", Key);
 		break;
 	}
-
-	Transmitter_->transmitAction(Roll, Pitch, Yarn, Thrust);
 }
 
 
@@ -115,17 +114,40 @@ int main(int argc, char** argv)
 	ros::Subscriber Sub_(nh_.subscribe("KeyReader", 1, callbackKeys));
 
 	parrotBattery Battery(20.0);
-	Transmitter_ = new parrotTransmitter();
+	parrotTransmitter Transmitter_;
 	StateController_ = new parrotStatus(&Battery);
+
+	const double SmoothFactor = 0.85;
+	ros::Duration SmoothDuration(0.1);
+	ros::Rate SpinRate(75);
 
 
 	while (ros::ok())
 	{
+		if (ros::Time::now() - SmoothTime > SmoothDuration)
+		{
+			Roll *= SmoothFactor;
+			Pitch *= SmoothFactor;
+			Yarn *= SmoothFactor;
+			Thrust *= SmoothFactor;
+
+			SmoothTime = ros::Time::now();
+			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+		}
+
+		if (dirty)
+		{
+			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+
+			dirty = false;
+		}
+
+		Transmitter_.transmitAction(Roll, Pitch, Yarn, Thrust);
 		ros::spinOnce();
+		SpinRate.sleep();
 	}
 
 
-	delete Transmitter_;
 	delete StateController_;
 
 	ROS_INFO("Terminated Node: ManualController");

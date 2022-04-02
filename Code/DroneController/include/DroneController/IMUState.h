@@ -26,8 +26,8 @@ public:
 	IMUState operator-(const IMUState& S);
 	IMUState operator-(const Timestamp& T);
 
-	Vector3D getLinearAcceleration() { return this->Accelerations_; };
-	Vector3D getRotationalVelocity() { return this->Angles_; };
+	Vector3D getLinear() { return this->Accelerations_; };
+	Vector3D getRotational() { return this->Angles_; };
 	Value getGroundClearance() { return this->GroundClearance_; };
 	Timestamp getTimestamp() { return this->Time_; };
 	std::string getString();
