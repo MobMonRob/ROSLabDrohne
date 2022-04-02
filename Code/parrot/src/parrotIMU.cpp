@@ -45,12 +45,15 @@ bool parrotIMU::calibrate()
 void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
 	Timestamp Time(navdataPtr->header.stamp.toSec());
-	Vector3D LinearAcceleration(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
-	Vector3D RotationalVelocity(Unit_AngleDeg, navdataPtr->rotX, navdataPtr->rotY, navdataPtr->rotZ);
+	Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
+	Vector3D RotationalRad(Unit_AngleRad, 
+		FixedPoint<Accuracy_Value>(navdataPtr->rotX) * Value_DEGToRAD.getValue(),
+		FixedPoint<Accuracy_Value>(navdataPtr->rotY) * Value_DEGToRAD.getValue(),
+		FixedPoint<Accuracy_Value>(navdataPtr->rotZ) * Value_DEGToRAD.getValue());
 	Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 	
 	// maybe trigger new Thread??
-	IMUState State = this->StateBuilder_.createState(Time, LinearAcceleration * Value_GravitationConstant.getValue(), RotationalVelocity, GroundClearance);
+	IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalRad, GroundClearance);
 
 	this->calcPose(State);
 	this->triggerController();

@@ -357,5 +357,10 @@ inline long long FixedPoint<T>::powl10(int Power)
 }
 
 
+
+FixedPoint<Accuracy_Value> PI(3.1415926535897932);
+
+
+
 #endif // FIXEDPOINT_H
 

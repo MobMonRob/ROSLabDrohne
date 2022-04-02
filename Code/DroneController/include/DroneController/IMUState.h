@@ -17,7 +17,7 @@
 class IMUState
 {
 public:
-	IMUState() : IMUState(Vector3D(Unit_Acceleration), Vector3D(Unit_AngleVelDeg), Value(Unit_Length), Timestamp()) {};
+	IMUState() : IMUState(Vector3D(Unit_Acceleration), Vector3D(Unit_AngleRad), Value(Unit_Length), Timestamp()) {};
 	IMUState(Vector3D Translative, Vector3D Angular, Value GroundClearance, Timestamp Time);
 
 	bool operator==(const IMUState& S);

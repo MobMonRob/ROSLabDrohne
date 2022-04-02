@@ -13,7 +13,7 @@ PoseBuilder::PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_V
 	/*OrientationX_(Unit_AngleVelRad, Unit_AngleRad),
 	OrientationY_(Unit_AngleVelRad, Unit_AngleRad),
 	OrientationZ_(Unit_AngleVelRad, Unit_AngleRad),*/
-	Orientation_(Unit_AngleDeg),
+	Orientation_(Unit_AngleRad),
 	OrientationUncertainty_(Unit_None)
 {
 }
