@@ -38,7 +38,8 @@ protected:
 
 
 const Value Value_GravitationConstant(Unit_Acceleration, 9.816);
-
+const Value Value_RADToDEG(Unit("°/rad"), FixedPoint<Accuracy_Value>(180)/PI);
+const Value Value_DEGToRAD(Unit("°/rad"), PI/FixedPoint<Accuracy_Value>(180));
 
 #endif // VALUE_H
 
