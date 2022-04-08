@@ -356,5 +356,8 @@ inline long long FixedPoint<T>::powl10(int Power)
 	return ReturnValue;
 }
 
+
+const FixedPoint<Accuracy_Value> Fixed_PI(3.141592);
+
 #endif // FIXEDPOINT_H
 
