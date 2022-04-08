@@ -8,9 +8,9 @@
 class StateBuilder
 {
 public:
-	StateBuilder(int SmoothingEntries = 3, int OffsetingEntries = 10);
+	StateBuilder(int MedianingEntries = 3, int AveragingEntries = 3, int OffsetingEntries = 10);
 	
-	void setOffsetPoint(IMUState S);
+	void setOffsetState(IMUState S);
 	void setOffsetting(bool Offsetting) { this->Offsetting_ = Offsetting; };
 
 	IMUState createState(Timestamp Time,
@@ -19,14 +19,18 @@ public:
 		Value GroundClearance);
 	IMUState createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity, Value GroundClearance);
 	
-	IMUState getState() { return this->StateHandler_.getAvgState(); };
-	IMUState getOffsetPoint() { return this->OffsetHandler_.getAvgState(); };
+	IMUState getState() { return this->getStateAvgRaw() - this->getOffsetState(); };
+	IMUState getStateMedianRaw() { return this->MedianHandler_.getMedianState(); };
+	IMUState getStateAvgRaw() { return this->AvgHandler_.getAvgState(); };
+	IMUState getOffsetState() { return this->OffsetHandler_.getAvgState(); };
+	bool getOffsetting() const { return this->Offsetting_; };
 
-	void clearStateHandler() { this->StateHandler_.clear(); };
+	void clearStateHandler();
 	void reset();
 
 private:
-	StateHandler StateHandler_;
+	StateHandler MedianHandler_;
+	StateHandler AvgHandler_;
 	StateHandler OffsetHandler_;
 	Timestamp OffsetTime_;
 	bool Offsetting_;

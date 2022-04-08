@@ -18,6 +18,8 @@ class IMUable : public Timeable
 public:
 	IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 
+	virtual void setFlightState(bool FlightState) = 0;
+
 	Vector3D getPosition() { return this->PoseBuilder_->getPosition(); };
 	Vector3D getOrientation() { return this->PoseBuilder_->getOrientation(); };
 	Pose getPose() { return this->PoseBuilder_->getPose(); };

@@ -8,6 +8,8 @@
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 	: IMUable(PoseBuilder, PoseController),
+	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
+	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
 	SubIMU_(this->nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
 	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
@@ -68,6 +70,28 @@ void parrotIMU::callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr)
 
 }
 
+
+
+
+
+void parrotIMU::publishState()
+{
+	geometry_msgs::Twist Msg;
+	IMUState State = this->StateBuilder_.getState();
+
+
+
+
+	Msg.linear.x = State.getLinear().getX().getValue();
+	Msg.linear.y = State.getLinear().getY().getValue();
+	Msg.linear.z = State.getLinear().getZ().getValue();
+
+	Msg.angular.x = State.getRotational().getX().getValue();
+	Msg.angular.y = State.getRotational().getY().getValue();
+	Msg.angular.z = State.getRotational().getZ().getValue();
+
+	PubPose_.publish(Msg);
+}
 
 void parrotIMU::publishPose()
 {

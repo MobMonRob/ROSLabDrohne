@@ -5,8 +5,8 @@
 
 
 
-StateBuilder::StateBuilder(int SmoothingEntries, int OffsetingEntries)
-	: StateHandler_(SmoothingEntries),
+StateBuilder::StateBuilder(int MedianingEntries, int AveragingEntries, int OffsetingEntries)
+	: AvgHandler_(AveragingEntries),
 	OffsetHandler_(OffsetingEntries),
 	Offsetting_(false)
 {
@@ -15,7 +15,7 @@ StateBuilder::StateBuilder(int SmoothingEntries, int OffsetingEntries)
 
 
 
-void StateBuilder::setOffsetPoint(IMUState S)
+void StateBuilder::setOffsetState(IMUState S)
 {
 	this->OffsetHandler_.clear();
 	this->OffsetHandler_.addEntry(S);
@@ -47,15 +47,25 @@ IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, 
 		this->OffsetTime_ = Time;
 	}
 
-	if (this->Offsetting_ || this->OffsetHandler_.getSize() < 1)
+	if (this->getOffsetting() || this->OffsetHandler_.getSize() < 1)
 	{
 		this->OffsetHandler_.addEntry(Entry);
 	}
 
-	this->StateHandler_.addEntry((Entry - this->getOffsetPoint()) - this->OffsetTime_);
+	this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
+	this->AvgHandler_.addEntry(this->getStateMedianRaw());
 
 	return this->getState();
 }
+
+
+
+void StateBuilder::clearStateHandler()
+{
+	this->MedianHandler_.clear();
+	this->AvgHandler_.clear();
+}
+
 
 void StateBuilder::reset()
 {
