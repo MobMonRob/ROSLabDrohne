@@ -14,7 +14,7 @@
     <TestDuration Test="Class_Vector3D.Rotate_Y" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="2" />
     <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
@@ -65,5 +65,7 @@
     <TestDuration Test="Class_FixedPoint.OpGreater_EqualShift" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Smaller_EqualShift" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Equal_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAdd_ConstFP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstract_ConstFP" Duration="0" />
   </TestDurations>
 </GtaTestDurations>

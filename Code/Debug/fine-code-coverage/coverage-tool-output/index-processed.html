@@ -682,6 +682,14 @@ a.percentagebar { padding-left: 6px }
 
 					
 
+risk-hotspots > div > table > thead > tr > th:last-of-type > a:last-of-type {
+
+		display:none
+
+}
+
+
+
 					body { -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none }
 
 					table.overview th, table.overview td { white-space: nowrap; word-break: normal; padding-left:10px;padding-right:10px; }
@@ -1030,7 +1038,7 @@ a.percentagebar { padding-left: 6px }
 
 
 
-						var previousLogMessages = ['Starting coverage - full details in FCC Output Pane','File synchronization 40 items, duration : 00:00:00.0987024','Starting OpenCover coverage for 06_00_Test_Abstraction','Completed coverage for 06_00_Test_Abstraction : 00:00:03.3247949','Generating cobertura report','Cobertura report generation duration - 00:00:00.3709272','Generating html report','Html report generation duration - 00:00:00.9208004','Starting coverage - full details in FCC Output Pane','File synchronization 4 items, duration : 00:00:00.0193456','Starting OpenCover coverage for 06_00_Test_Abstraction','Completed coverage for 06_00_Test_Abstraction : 00:00:02.5782165','Generating cobertura report','Cobertura report generation duration - 00:00:00.3847441','Generating html report','Html report generation duration - 00:00:00.5295114','Starting coverage - full details in FCC Output Pane','File synchronization 4 items, duration : 00:00:00.0173591','Starting OpenCover coverage for 06_00_Test_Abstraction','Completed coverage for 06_00_Test_Abstraction : 00:00:02.6798848','Generating cobertura report','Cobertura report generation duration - 00:00:00.4148810','Generating html report','Html report generation duration - 00:00:00.4663249','Starting coverage - full details in FCC Output Pane','File synchronization 1 item, duration : 00:00:00.0059524','Starting OpenCover coverage for 06_00_Test_Abstraction','Completed coverage for 06_00_Test_Abstraction : 00:00:02.8563856','Generating cobertura report','Cobertura report generation duration - 00:00:00.5155754','Generating html report','Html report generation duration - 00:00:00.5318284']
+						var previousLogMessages = ['See option RunMsCodeCoverage for a better ( Beta ) experience. View readme.','Starting coverage - full details in FCC Output Pane','File synchronization 34 items, duration : 00:00:00.9885552','Run OpenCover (06_00_Test_Abstraction)','Completed coverage for (06_00_Test_Abstraction) : 00:00:03.7279984','Generating cobertura report','Cobertura report generation duration - 00:00:00.9439117','Generating html report','Html report generation duration - 00:00:00.4910531','See option RunMsCodeCoverage for a better ( Beta ) experience. View readme.','Starting coverage - full details in FCC Output Pane','File synchronization 32 items, duration : 00:00:00.3042342','Run OpenCover (06_00_Test_Abstraction)','Completed coverage for (06_00_Test_Abstraction) : 00:00:02.6768473','Generating cobertura report','Cobertura report generation duration - 00:00:00.2343760','Generating html report','Html report generation duration - 00:00:00.4358931','See option RunMsCodeCoverage for a better ( Beta ) experience. View readme.','Starting coverage - full details in FCC Output Pane','File synchronization 5 items, duration : 00:00:00.0149613','Run OpenCover (06_00_Test_Abstraction)','Completed coverage for (06_00_Test_Abstraction) : 00:00:02.7451700','Generating cobertura report','Cobertura report generation duration - 00:00:00.2373393','Generating html report','Html report generation duration - 00:00:00.4247939']
 
 						var coverageLogElement;
 
@@ -1080,19 +1088,19 @@ a.percentagebar { padding-left: 6px }
 
 						}
 
-						function addLogMessageElement(message){
+						function addExternalMessage(logElement,message,matchLinkPart, externalFn){
 
-							var logElement = document.createElement('div');
+							var matched = false;
 
-							var fccOutputPanePart = 'FCC Output Pane';
+							var startIndex = message.indexOf(matchLinkPart);
 
-							var fccOutputPaneStartIndex = message.indexOf(fccOutputPanePart);
+							if(startIndex != -1){
 
-							if(fccOutputPaneStartIndex != -1){
+								matched = true;
 
-								if(fccOutputPaneStartIndex != 0){
+								if(startIndex != 0){
 
-									var before = message.substring(0,fccOutputPaneStartIndex);
+									var before = message.substring(0,startIndex);
 
 									var beforeEl = document.createElement('span');
 
@@ -1102,23 +1110,23 @@ a.percentagebar { padding-left: 6px }
 
 								}
 
-								var openFccPanelLink = document.createElement('a');
+								var externalLink = document.createElement('a');
 
-								openFccPanelLink.innerText = fccOutputPanePart;
+								externalLink.innerText = matchLinkPart;
 
-								openFccPanelLink.href = '#';
+								externalLink.href = '#';
 
-								openFccPanelLink.onclick = function(){
+								externalLink.onclick = function(){
 
-									window.external.ShowFCCOutputPane();
+									window.external[externalFn]();
 
 									return false; 
 
 								}
 
-								logElement.appendChild(openFccPanelLink);
+								logElement.appendChild(externalLink);
 
-								var after = message.substring(fccOutputPaneStartIndex + fccOutputPanePart.length);
+								var after = message.substring(startIndex + matchLinkPart.length);
 
 								if(after != ''){
 
@@ -1130,7 +1138,25 @@ a.percentagebar { padding-left: 6px }
 
 								}
 
-							}else{
+							}
+
+							return matched;
+
+						}
+
+						function addLogMessageElement(message){
+
+							var logElement = document.createElement('div');
+
+							var matched = addExternalMessage(logElement,message,'FCC Output Pane','ShowFCCOutputPane');
+
+							if(!matched){
+
+								matched = addExternalMessage(logElement,message,'View readme','ReadReadMe');
+
+							}
+
+							if(!matched){
 
 								logElement.innerText = message;
 
@@ -1232,7 +1258,7 @@ a.percentagebar { padding-left: 6px }
 
 <tbody>
 
-<tr style="display:none"><th>Generated on:</th><td>28.02.2022 - 11:37:11</td></tr>
+<tr style="display:none"><th>Generated on:</th><td>08.04.2022 - 10:09:29</td></tr>
 
 <tr style="display:none"><th>Parser:</th><td>CoberturaParser</td></tr>
 
@@ -1272,7 +1298,7 @@ a.percentagebar { padding-left: 6px }
 
 <p style="display:none">No assemblies have been covered.</p>
 
-<div class="footer" style="display:none">Generated by: ReportGenerator 4.7.1.0<br>28.02.2022 - 11:37:11<br><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div></div>
+<div class="footer" style="display:none">Generated by: ReportGenerator 4.7.1.0<br>08.04.2022 - 10:09:29<br><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div></div>
 
 <script type="text/javascript">/* <![CDATA[ */ /* Chartist.js 0.11.0
 

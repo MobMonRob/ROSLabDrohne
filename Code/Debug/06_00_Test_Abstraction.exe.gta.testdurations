@@ -65,5 +65,9 @@
     <TestDuration Test="Class_FixedPoint.OpGreater_EqualShift" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Smaller_EqualShift" Duration="1" />
     <TestDuration Test="Class_FixedPoint.OpGreaterEquals_Equal_EqualShift" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpAdd_ConstFP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpSubstract_ConstFP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpMultiply_ConstFP" Duration="1" />
+    <TestDuration Test="Class_FixedPoint.OpDevide_ConstFP" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
