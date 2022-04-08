@@ -1,6 +1,11 @@
 #include "Domain/Value.h"
 
 
+
+
+
+
+
 bool Value::operator==(const Value& V)
 {
 	const Value Item = *this;
