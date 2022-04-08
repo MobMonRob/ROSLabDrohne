@@ -286,6 +286,17 @@ TEST(Class_FixedPoint, OpAdd_FP)
 	EXPECT_EQ(Result, 20);
 }
 
+TEST(Class_FixedPoint, OpAdd_ConstFP)
+{
+	int Value = 10;
+	const FixedPoint<-6> FP1(Value);
+	const FixedPoint<-6> FP2(Value);
+
+	FixedPoint<-6> Result = FP1 + FP2;
+
+	EXPECT_EQ(Result, FixedPoint<-6>(20));
+}
+
 TEST(Class_FixedPoint, OpAddReturn_FP)
 {
 	FixedPoint<-6> FP1(10);
@@ -344,6 +355,17 @@ TEST(Class_FixedPoint, OpSubstract_FP)
 
 
 	EXPECT_EQ(Result, 0);
+}
+
+TEST(Class_FixedPoint, OpSubstract_ConstFP)
+{
+	int Value = 10;
+	const FixedPoint<-6> FP1(Value);
+	const FixedPoint<-6> FP2(Value);
+
+	FixedPoint<-6> Result = FP1 - FP2;
+
+	EXPECT_EQ(Result, FixedPoint < -6>(0));
 }
 
 TEST(Class_FixedPoint, OpSubstractReturn_FP)
@@ -406,6 +428,17 @@ TEST(Class_FixedPoint, OpMultiply_FP)
 	EXPECT_EQ(Result, 100);
 }
 
+TEST(Class_FixedPoint, OpMultiply_ConstFP)
+{
+	int Value = 10;
+	const FixedPoint<-6> FP1(Value);
+	const FixedPoint<-6> FP2(Value);
+
+	FixedPoint<-6> Result = FP1 * FP2;
+
+	EXPECT_EQ(Result, FixedPoint < -6>(100));
+}
+
 TEST(Class_FixedPoint, OpMultiplyReturn_FP)
 {
 	FixedPoint<-6> FP1(10);
@@ -464,6 +497,17 @@ TEST(Class_FixedPoint, OpDevide_FP)
 
 
 	EXPECT_EQ(Result, 1);
+}
+
+TEST(Class_FixedPoint, OpDevide_ConstFP)
+{
+	int Value = 10;
+	const FixedPoint<-6> FP1(Value);
+	const FixedPoint<-6> FP2(Value);
+
+	FixedPoint<-6> Result = FP1 / FP2;
+
+	EXPECT_EQ(Result, FixedPoint<-6>(1));
 }
 
 TEST(Class_FixedPoint, OpDevideReturn_FP)
