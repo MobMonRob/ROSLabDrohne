@@ -127,11 +127,6 @@ int main(int argc, char** argv)
 	ros::Duration SmoothDuration(0.1);
 	ros::Rate SpinRate(75);
 
-	const double SmoothFactor = 0.5;
-	ros::Duration SmoothDuration(0.5);
-	ros::Rate SpinRate(100);
-
-
 	while (ros::ok())
 	{
 		if (ros::Time::now() - SmoothTime > SmoothDuration)

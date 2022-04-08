@@ -16,7 +16,7 @@
 class parrotStatus : public Statusable
 {
 public:
-	parrotStatus(parrotBattery* Battery, parrotIMU* IMU);
+	parrotStatus(parrotBattery* Battery, parrotIMU* IMU = nullptr);
 	~parrotStatus();
 	
 	bool setArmState(bool ArmState) override;

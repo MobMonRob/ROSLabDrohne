@@ -74,7 +74,7 @@ Vector3D Thrustable<RotorCount>::getThrust()
 
 	if (SumForce > Value(SumForce.getUnit()))
 	{
-		ReturnVector = Vector3D(ReturnVector.getUnit(), SumMomentX / SumForce, SumMomentY / SumForce, SumForce);
+		ReturnVector = Vector3D(ReturnVector.getUnit(), (SumMomentX / SumForce).getValue(), (SumMomentY / SumForce).getValue(), SumForce.getValue());
 	}
 
 	return ReturnVector;

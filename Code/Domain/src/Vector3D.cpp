@@ -3,6 +3,8 @@
 #include<math.h>
 
 
+
+
 bool Vector3D::operator==(const Vector3D& V)
 {
 	const Vector3D Item = *this;
