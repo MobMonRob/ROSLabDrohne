@@ -50,7 +50,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{a80faebe-6013-4403-a06c-b2a178b5cf4f}</ProjectGuid>
-    <RootNamespace>Abstraction</RootNamespace>
+    <RootNamespace>Domain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>01_Domain</ProjectName>
   </PropertyGroup>

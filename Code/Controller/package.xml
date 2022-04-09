@@ -20,5 +20,6 @@
 	<depend>std_msgs</depend>
 	
 	<depend>Domain</depend>
+  <depend>DroneController</depend>
 
 </package>

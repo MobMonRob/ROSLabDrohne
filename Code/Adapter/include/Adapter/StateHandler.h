@@ -20,9 +20,7 @@ public:
 	IMUState getAvgState();
 	IMUState getMedianState();
 	
-
 	void clear() { Ringbuffer<IMUState>::clear(); };
-
 };
 
 #endif // STATEHANDLER_H

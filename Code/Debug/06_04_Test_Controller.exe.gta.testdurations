@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_04_Test_Controller.exe</Executable>
-  <TestDurations>
-    <TestDuration Test="Class_PoseController.callTransmitter" Duration="3" />
-  </TestDurations>
-</GtaTestDurations>

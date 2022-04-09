@@ -36,7 +36,7 @@ ControllerSystem ControllerSystem::operator=(const ControllerSystem& CS)
 	ControllerSystem ReturnItem(this->getOutputUnit());
 
 
-	for (int i = 0; i < this->Knots_.size(); i++)
+	for (size_t i = 0; i < this->Knots_.size(); i++)
 	{
 		ControlledOutput* Knot = this->getKnot(i);
 		ControllerType Type = Knot->getType();
@@ -148,7 +148,7 @@ void ControllerSystem::addControllable(ControlledOutput* ControlAddr)
 	this->setOutputUnit(ControlAddr->getOutputUnit());
 }
 
-ControlledOutput* ControllerSystem::getKnot(int ID)
+ControlledOutput* ControllerSystem::getKnot(size_t ID)
 {
 	ControlledOutput* ReturnAddr = nullptr;
 

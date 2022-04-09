@@ -6,7 +6,7 @@ bool SafetyProvider::meetsRequirements()
 	bool ReturnBool = true;
 
 
-	for (int i = 0; i < this->Requirements_.size(); i++)
+	for (size_t i = 0; i < this->Requirements_.size(); i++)
 	{
 		ReturnBool &= this->Requirements_.at(i).meets();
 	}

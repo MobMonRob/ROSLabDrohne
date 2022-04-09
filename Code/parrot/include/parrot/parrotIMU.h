@@ -19,17 +19,21 @@ public:
 	parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 	~parrotIMU();
 	
-	void takeoff() { this->StateBuilder_.setOffsetting(false); };
-	void touchdown() { this->StateBuilder_.setOffsetting(true); };
+	void setFlightState(bool FlightState) override { this->StateBuilder_.setOffsetting(!FlightState); };
 
 	bool calibrate();
 
 private:
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
 	void callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr);
+	void publishState();
+	void publishPose();
 
 private:
 	ros::NodeHandle nh_;
+	ros::Publisher PubStateRaw_;
+	ros::Publisher PubState_;
+	ros::Publisher PubPose_;
 	ros::Subscriber SubIMU_;
 	ros::Subscriber SubNav_;
 

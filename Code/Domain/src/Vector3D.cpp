@@ -3,6 +3,8 @@
 #include<math.h>
 
 
+
+
 bool Vector3D::operator==(const Vector3D& V)
 {
 	const Vector3D Item = *this;
@@ -131,7 +133,7 @@ Vector3D Vector3D::rotateY(double Angle)
 	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
 	FixedPoint<Accuracy_Vector> COS(cos(Angle));
 
-	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
+
 	FixedPoint<Accuracy_Vector> X = this->getX() * COS
 		+ this->getZ() * SIN;
 	FixedPoint<Accuracy_Vector> Z = this->getZ() * COS

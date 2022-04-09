@@ -7,16 +7,13 @@
 #include "Domain/FixedPoint.h"
 
 
-const double PI = 3.1415926535897932;
-
-
 class Vector3D
 {
 public:
 	Vector3D(Unit Unit) : Vector3D(Unit, 0.0, 0.0, 0.0) {};
 	Vector3D(Unit Unit, double X, double Y, double Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
 	Vector3D(Unit Unit, FixedPoint<Accuracy_Vector> X, FixedPoint<Accuracy_Vector> Y, FixedPoint<Accuracy_Vector> Z) : Unit_(Unit.getUnit()), X_(X), Y_(Y), Z_(Z) {};
-	
+	Vector3D(const Vector3D& V) : Unit_(V.getUnit()), X_(V.getX()), Y_(V.getY()), Z_(V.getZ()) {};
 	
 	bool operator== (const Vector3D& V);
 	bool operator== (const Vector3D& V) const;

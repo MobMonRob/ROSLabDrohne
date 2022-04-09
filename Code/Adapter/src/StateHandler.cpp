@@ -25,8 +25,9 @@ Timestamp StateHandler::getTime()
 
 
 IMUState StateHandler::getAvgState()
-{
+{/*
 	int BufferSize = this->getSize();
+	FixedPoint<Accuracy_Vector> Devider(0);
 	IMUState Sum;
 
 
@@ -38,13 +39,15 @@ IMUState StateHandler::getAvgState()
 		if (Data.getValid())
 		{
 			Sum += Data.getData();
+			Devider += FixedPoint<Accuracy_Vector>(1);
 		}
 	}
-
-	return IMUState(Sum.getLinearAcceleration() / BufferSize,
-		Sum.getRotationalVelocity() / BufferSize, 
-		Sum.getGroundClearance() / BufferSize, 
-		Sum.getTimestamp());
+	*/
+	/*return IMUState(Sum.getLinear() / Devider,
+		Sum.getRotational() / Devider,
+		Sum.getGroundClearance() / Devider,
+		Sum.getTimestamp());*/
+	return IMUState();
 }
 
 IMUState StateHandler::getMedianState()
@@ -65,6 +68,7 @@ IMUState StateHandler::getMedianState()
 		std::vector<FixedPoint<Accuracy_Value>> VectorRy;
 		std::vector<FixedPoint<Accuracy_Value>> VectorRz;
 		std::vector<Value> VectorGC;
+		FixedPoint<Accuracy_Vector> Devider(0);
 
 
 
@@ -76,8 +80,8 @@ IMUState StateHandler::getMedianState()
 			if (DataWrapper.getValid())
 			{
 				IMUState State = DataWrapper.getData();
-				Vector3D LinearAcceleration = State.getLinearAcceleration();
-				Vector3D RotationalVelocity = State.getRotationalVelocity();
+				Vector3D LinearAcceleration = State.getLinear();
+				Vector3D RotationalVelocity = State.getRotational();
 
 				VectorAx.push_back(LinearAcceleration.getX());
 				VectorAy.push_back(LinearAcceleration.getY());
@@ -88,6 +92,8 @@ IMUState StateHandler::getMedianState()
 				VectorRz.push_back(RotationalVelocity.getZ());
 
 				VectorGC.push_back(State.getGroundClearance());
+
+				Devider += FixedPoint<Accuracy_Vector>(1);
 			}
 		}
 

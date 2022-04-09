@@ -4,9 +4,9 @@
 
 int main(int argc, char** argv)
 {
-	ROS_INFO("Started New Node: RosBridge");
+	ROS_INFO("Started New Node: AutoController");
 	
-	ros::init(argc, argv, "Bridge");
+	ros::init(argc, argv, "AutoController");
 	
 	PosBridge Bridge;
 	ros::Time UpdatePose = ros::Time::now();
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 		ros::spinOnce();
 	}
 	
-	ROS_INFO("Terminated Node: RosBridge");
+	ROS_INFO("Terminated Node: AutoController");
 	
 	return 0;
 }

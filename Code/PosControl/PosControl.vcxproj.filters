@@ -18,6 +18,9 @@
     <ClCompile Include="src\Integral2.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Transmitter_Mock.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="src\ManualController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -47,6 +50,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\PosControl\Integral2.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PosControl\Transmitter_Mock.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,10 +6,11 @@
 
 
 
-parrotStatus::parrotStatus(parrotBattery* Battery)
+parrotStatus::parrotStatus(parrotBattery* Battery, parrotIMU* IMU)
 	: Statusable(Battery),
 	nh_(),
-	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this))
+	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this)),
+	IMU_(IMU)
 {
 	ROS_INFO("Starting parrotStatus...");
 	ros::spinOnce();
@@ -56,7 +57,7 @@ bool parrotStatus::setArmState(bool ArmState)
 					while (TryCount++ < TryMax && !this->isFlying())
 					{
 						ros::Time WaitTime = ros::Time::now();
-						ros::Duration WaitDuration(1.0);
+						ros::Duration WaitDuration(0.25);
 
 
 						PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/takeoff", 1);
@@ -79,6 +80,8 @@ bool parrotStatus::setArmState(bool ArmState)
 		{
 			ROS_WARN("Takeoff not possible, Requirements not met.");
 		}
+
+		ReturnBool = this->isFlying();
 	}
 	else
 	{
@@ -88,6 +91,8 @@ bool parrotStatus::setArmState(bool ArmState)
 
 		PubCmd.publish(std_msgs::Empty());
 		ros::spinOnce();
+
+		ReturnBool = true;
 	}
 
 	return ReturnBool;
@@ -187,11 +192,19 @@ void parrotStatus::initSystemStatus()
 
 void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
-	if (this->getStatusID() != navdataPtr->state)
+	bool StatusChange = this->getStatusID() != navdataPtr->state;
+
+
+	if (StatusChange)
 	{
 		ROS_INFO("Status changed to %s.", this->getStatusTranslation(navdataPtr->state).c_str());
 	}
 
 	this->setStatusID(navdataPtr->state);
 	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
+
+	if (StatusChange && this->IMU_ != nullptr)
+	{
+		this->IMU_->setFlightState(this->isFlying());
+	}
 }

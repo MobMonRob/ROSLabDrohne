@@ -14,13 +14,13 @@
 
 
 
-
-parrotTransmitter* Transmitter_;
 parrotStatus* StateController_;
+ros::Time SmoothTime;
 double Roll = 0.0;
 double Pitch = 0.0;
 double Yarn = 0.0;
 double Thrust = 0.0;
+bool dirty = false;
 
 
 void callbackKeys(const std_msgs::Char::ConstPtr& msg)
@@ -29,45 +29,50 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 
 
-	/* Key Controls (compare ActionTransmitter::transmitAction()-Methode):
-	 * W/S	forward/backward
-	 * A/D	left/right
-	 * I/K	Up/Down
-	 * J/L	Yard left/right
+	/* 
+	 * https://ardrone-autonomy.readthedocs.io/en/latest/commands.html
 	 */
 
 	switch (Key)
 	{
 	case 'w':
-		Pitch += 0.01;
+		Pitch += 0.005;
+		dirty = true;
 		break;
 
 	case 's':
-		Pitch -= 0.01;
+		Pitch -= 0.005;
+		dirty = true;
 		break;
 
 	case 'a':
-		Roll += 0.01;
+		Roll += 0.005;
+		dirty = true;
 		break;
 
 	case 'd':
-		Roll -= 0.01;
+		Roll -= 0.005;
+		dirty = true;
 		break;
 
 	case 'i':
-		Thrust += 0.01;
+		Thrust += 0.001;
+		dirty = true;
 		break;
 
 	case 'k':
-		Thrust -= 0.01;
+		Thrust -= 0.005;
+		dirty = true;
 		break;
 
 	case 'j':
-		Yarn += 0.01;
+		Yarn += 0.005;
+		dirty = true;
 		break;
 
 	case 'l':
-		Yarn -= 0.01;
+		Yarn -= 0.005;
+		dirty = true;
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
@@ -97,7 +102,7 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 	}
 
-	Transmitter_->transmitAction(Roll, Pitch, Yarn, Thrust);
+	SmoothTime = ros::Time::now();
 }
 
 
@@ -115,17 +120,42 @@ int main(int argc, char** argv)
 	ros::Subscriber Sub_(nh_.subscribe("KeyReader", 1, callbackKeys));
 
 	parrotBattery Battery(20.0);
-	Transmitter_ = new parrotTransmitter();
+	parrotTransmitter Transmitter_;
 	StateController_ = new parrotStatus(&Battery);
 
+	const double SmoothFactor = 0.85;
+	ros::Duration SmoothDuration(0.1);
+	ros::Rate SpinRate(75);
 
 	while (ros::ok())
 	{
+		if (ros::Time::now() - SmoothTime > SmoothDuration)
+		{
+			Roll *= SmoothFactor;
+			Pitch *= SmoothFactor;
+			Yarn *= SmoothFactor;
+			Thrust *= SmoothFactor;
+
+			SmoothTime = ros::Time::now();
+			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+		}
+
+		if (dirty)
+		{
+			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+
+			dirty = false;
+		}
+
+		Transmitter_.transmitAction(Roll, Pitch, Yarn, Thrust);
 		ros::spinOnce();
+		SpinRate.sleep();
 	}
 
 
-	delete Transmitter_;
+
+	StateController_->setArmState(false);
+
 	delete StateController_;
 
 	ROS_INFO("Terminated Node: ManualController");

@@ -32,7 +32,8 @@ public:
 	Timestamp getTime() const override { return this->Time_; };
 	Vector3D getPosition() override;
 	Vector3D getPositionUncertainty() const override { return this->PositionUncertainty_; };
-	Vector3D getOrientation() override;
+	//Vector3D getOrientation() override;
+	Vector3D getOrientation() override { return this->Orientation_; };
 	Vector3D getOrientationUncertainty() const override { return this->OrientationUncertainty_; };
 
 	bool updatePose(IMUState State) override;
@@ -48,9 +49,10 @@ private:
 	Integral2 PositionZ_;
 	Vector3D PositionUncertainty_;
 
-	Integral1 OrientationX_;
+	/*Integral1 OrientationX_;
 	Integral1 OrientationY_;
-	Integral1 OrientationZ_;
+	Integral1 OrientationZ_;*/
+	Vector3D Orientation_;
 	Vector3D OrientationUncertainty_;
 };
 
