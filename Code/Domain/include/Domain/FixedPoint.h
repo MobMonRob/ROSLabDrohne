@@ -77,7 +77,7 @@ private:
 	static long long powl10(int Power);
 
 protected:
-	long long ValueRaw_;
+	long long ValueRaw_ = 0;
 };
 
 
@@ -101,11 +101,11 @@ inline FixedPoint<T>::FixedPoint(double Value)
 {
 	if (T < 0)
 	{
-		this->ValueRaw_ = Value * FixedPoint<T>::powl10(-T);
+		this->ValueRaw_ = static_cast<long long>(Value * FixedPoint<T>::powl10(-T));
 	}
 	if (T > 0)
 	{
-		this->ValueRaw_ = Value / FixedPoint<T>::powl10(T);
+		this->ValueRaw_ = static_cast<long long>(Value / FixedPoint<T>::powl10(T));
 	}
 }
 
@@ -295,7 +295,7 @@ inline void FixedPoint<T>::operator/=(int Value)
 template<int T>
 inline double FixedPoint<T>::getValue() const
 {
-	double ReturnValue = this->getValueRaw();
+	double ReturnValue = static_cast<double>(this->getValueRaw());
 
 
 	if (T < 0)

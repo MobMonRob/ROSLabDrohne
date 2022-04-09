@@ -38,7 +38,7 @@ void parrotBattery::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& n
 
 	if (ros::Time::now() - this->InfoTime_ >= this->InfoDuration_)
 	{
-		ROS_INFO("Battery at %f\%.", this->getPercentage());
+		ROS_INFO("Battery at %f [%]", this->getPercentage());
 
 		this->InfoTime_ = ros::Time::now();
 	}

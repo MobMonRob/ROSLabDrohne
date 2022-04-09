@@ -15,7 +15,7 @@ public:
 
 	void addItem(DataType Item);
 
-	Optional<DataType> getData(int Index = 0);
+	Optional<DataType> getData(size_t Index = 0);
 	std::size_t getSize() { return this->Buffer_.size(); };
 
 	void clear() { this->Buffer_.clear(); };
@@ -46,7 +46,7 @@ inline void Ringbuffer<DataType>::addItem(DataType Item)
 
 
 template<typename DataType>
-inline Optional<DataType> Ringbuffer<DataType>::getData(int Index)
+inline Optional<DataType> Ringbuffer<DataType>::getData(size_t Index)
 {
 	Optional<DataType> ReturnItem;
 

@@ -34,7 +34,7 @@ public:
 
 protected:
 	void addControllable(ControlledOutput* ControlAddr);
-	ControlledOutput* getKnot(int ID);
+	ControlledOutput* getKnot(size_t ID);
 	ControlledOutput* getKnotAddrLast();
 	Output* getOutputAddrLast();
 	

@@ -25,7 +25,7 @@ Timestamp StateHandler::getTime()
 
 
 IMUState StateHandler::getAvgState()
-{
+{/*
 	int BufferSize = this->getSize();
 	FixedPoint<Accuracy_Vector> Devider(0);
 	IMUState Sum;
@@ -42,11 +42,12 @@ IMUState StateHandler::getAvgState()
 			Devider += FixedPoint<Accuracy_Vector>(1);
 		}
 	}
-
-	return IMUState(Sum.getLinear() / Devider,
+	*/
+	/*return IMUState(Sum.getLinear() / Devider,
 		Sum.getRotational() / Devider,
 		Sum.getGroundClearance() / Devider,
-		Sum.getTimestamp());
+		Sum.getTimestamp());*/
+	return IMUState();
 }
 
 IMUState StateHandler::getMedianState()

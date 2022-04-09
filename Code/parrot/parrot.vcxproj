@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Abstraction/include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
