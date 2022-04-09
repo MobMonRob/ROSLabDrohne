@@ -57,6 +57,7 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	// maybe trigger new Thread??
 	IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalRad, GroundClearance);
 
+	// How to null a State when on the Ground? It that necessary?
 	this->calcPose(State);
 	this->triggerController();
 
