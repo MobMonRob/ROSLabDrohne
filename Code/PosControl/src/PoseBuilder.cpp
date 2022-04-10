@@ -72,32 +72,13 @@ bool PoseBuilder::updatePose(IMUState State)
 {
 	bool ReturnBool = false;
 
-
+	
 
 	if (this->getTime() > Timestamp())
 	{
-		{
-			Vector3D Orientation = this->getOrientation();
-			Vector3D LinearAcceleration = State.getLinear().rotate(
-				Orientation.getX().getValue(),
-				Orientation.getY().getValue(), 
-				Orientation.getZ().getValue());
-			
+		this->updatePosition(State.getLinear(), this->getOrientation(), State.getTimestamp());
+		this->updateOrientation(State.getRotational(), State.getTimestamp());
 
-			this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getX(), State.getTimestamp()), true);
-			this->PositionY_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getY(), State.getTimestamp()), true);
-			this->PositionZ_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getZ(), State.getTimestamp()), true);
-		}
-		
-		{
-			/*Vector3D RotationalVelocity = State.getRotational();
-
-
-			this->OrientationX_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getX(), State.getTimestamp()), true);
-			this->OrientationY_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getY(), State.getTimestamp()), true);
-			this->OrientationZ_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getZ(), State.getTimestamp()), true);*/
-			this->Orientation_ = State.getRotational();
-		}
 
 
 		// Calc Error / Drift
@@ -110,6 +91,34 @@ bool PoseBuilder::updatePose(IMUState State)
 	return ReturnBool;
 }
 
+bool PoseBuilder::updatePosition(Vector3D LinearAcceleration, Vector3D Orientation, Timestamp Time)
+{
+	LinearAcceleration = LinearAcceleration.rotate(
+		Orientation.getX().getValue(),
+		Orientation.getY().getValue(),
+		Orientation.getZ().getValue());
+
+	this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getX(), Time), true);
+	this->PositionY_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getY(), Time), true);
+	this->PositionZ_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getZ(), Time), true);
+
+	return true;
+}
+
+bool PoseBuilder::updateOrientation(Vector3D RotationalAngle, Timestamp Time)
+{
+	/*
+	this->OrientationX_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getX(), Time), true);
+	this->OrientationY_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getY(), Time), true);
+	this->OrientationZ_.setInput(TimedValue(RotationalVelocity.getUnit(), RotationalVelocity.getZ(), Time), true);
+	*/
+	this->Orientation_ = RotationalAngle;
+
+	return true;
+}
+
+
+
 
 void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
 {
@@ -121,3 +130,16 @@ void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
 	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getZ()));*/
 	this->Orientation_ = Orientation;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
