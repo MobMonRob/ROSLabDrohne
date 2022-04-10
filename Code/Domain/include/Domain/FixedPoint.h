@@ -9,6 +9,7 @@
 const int Accuracy_Value = -6;
 const int Accuracy_Time = -4;
 const int Accuracy_Vector = Accuracy_Value;
+const int Accuracy_Constant = -10;
 
 template<int T>
 class FixedPoint
@@ -357,7 +358,7 @@ inline long long FixedPoint<T>::powl10(int Power)
 }
 
 
-const FixedPoint<Accuracy_Value> Fixed_PI(3.141592);
+const FixedPoint<Accuracy_Constant> Fixed_PI(3.141592653589793238462643383279);
 
 #endif // FIXEDPOINT_H
 

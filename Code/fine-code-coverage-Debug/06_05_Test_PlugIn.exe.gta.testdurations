@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\06_05_Test_PlugIn.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="Class_Integral1.AutoCalculation" Duration="1" />
+    <TestDuration Test="Class_PoseBuilder.AccelPos_X_10s" Duration="71" />
+    <TestDuration Test="Class_PoseBuilder.AccelRot_X_10s" Duration="62" />
+  </TestDurations>
+</GtaTestDurations>

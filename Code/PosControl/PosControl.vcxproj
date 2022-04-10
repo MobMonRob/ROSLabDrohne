@@ -146,7 +146,6 @@
   <ItemGroup>
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
-    <ClCompile Include="src\ManualController.cpp" />
     <ClCompile Include="src\PosBridge.cpp" />
     <ClCompile Include="src\PoseBuilder.cpp" />
     <ClCompile Include="src\RosBridge.cpp" />
