@@ -31,3 +31,15 @@
 *.exe
 *.out
 *.app
+
+*.idb
+
+*.ilk
+
+*.pdb
+
+*.log
+
+*.tlog
+
+*.recipe
