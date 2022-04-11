@@ -81,6 +81,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_03_Test_Adapter", "Test_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_01_Test_Domain", "Test_Domain\Test_Doamin.vcxproj", "{40209A0A-F101-4CB9-B412-C02F956C23A4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ros_BagfileWriter", "Ros_BagfileWriter\Ros_BagfileWriter.vcxproj", "{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -193,6 +195,14 @@ Global
 		{40209A0A-F101-4CB9-B412-C02F956C23A4}.Release|x64.Build.0 = Release|x64
 		{40209A0A-F101-4CB9-B412-C02F956C23A4}.Release|x86.ActiveCfg = Release|Win32
 		{40209A0A-F101-4CB9-B412-C02F956C23A4}.Release|x86.Build.0 = Release|Win32
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Debug|x64.ActiveCfg = Debug|x64
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Debug|x64.Build.0 = Debug|x64
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Debug|x86.ActiveCfg = Debug|Win32
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Debug|x86.Build.0 = Debug|Win32
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x64.ActiveCfg = Release|x64
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x64.Build.0 = Release|x64
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x86.ActiveCfg = Release|Win32
+		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

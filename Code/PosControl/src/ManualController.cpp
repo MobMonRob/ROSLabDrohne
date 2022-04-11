@@ -125,6 +125,8 @@ int main(int argc, char** argv)
 
 	const double SmoothFactor = 0.85;
 	ros::Duration SmoothDuration(0.1);
+	ros::Time InfoTime = ros::Time::now();
+	ros::Duration InfoDuration(1);
 	ros::Rate SpinRate(75);
 
 	while (ros::ok())
@@ -137,7 +139,13 @@ int main(int argc, char** argv)
 			Thrust *= SmoothFactor;
 
 			SmoothTime = ros::Time::now();
+		}
+
+		if (ros::Time::now() - InfoTime > InfoDuration)
+		{
 			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+
+			InfoTime = ros::Time::now();
 		}
 
 		if (dirty)
@@ -145,6 +153,7 @@ int main(int argc, char** argv)
 			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
 
 			dirty = false;
+			InfoTime = ros::Time::now();
 		}
 
 		Transmitter_.transmitAction(Roll, Pitch, Yarn, Thrust);

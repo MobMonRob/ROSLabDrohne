@@ -203,6 +203,11 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 	this->setStatusID(navdataPtr->state);
 	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
 
+	if (!this->meetsRequirements())
+	{
+		this->setArmState(false);
+	}
+
 	if (StatusChange && this->IMU_ != nullptr)
 	{
 		this->IMU_->setFlightState(this->isFlying());

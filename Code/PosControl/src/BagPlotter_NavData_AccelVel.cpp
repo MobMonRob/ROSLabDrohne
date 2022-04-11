@@ -21,12 +21,12 @@ std::fstream OutputFile;
 
 void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
+	TimeMessage = navdataPtr->header.stamp;
+
 	if (TimeStamp == ros::Time())
 	{
-		TimeStamp = navdataPtr->header.stamp;
+		TimeStamp = TimeMessage;
 	}
-
-	TimeMessage = navdataPtr->header.stamp;
 
 	if (OutputFile.is_open())
 	{
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 {
 	ROS_INFO("Started New Node: Bagfile Plotter");
 	
-	std::string FilePath = "/home/Documents/BagOutput.txt";
+	std::string FilePath = "/home/Documents/BagOutput_NavData.txt";
 
 
 	OutputFile.open(FilePath.c_str(), std::fstream::out);
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 	{
 		OutputFile << "Time [s];State;ax [m/s²];ay [m/s²];az [m/s²];vx [m/s];vy [m/s];vz [m/s];h [m]\n";
 
-		ros::init(argc, argv, "BagPlotter");
+		ros::init(argc, argv, "BagPlotter_NavData");
 		ros::NodeHandle nh_;
 		ros::Subscriber SubIMU_;
 		ros::Subscriber SubNav_ = nh_.subscribe("ardrone/navdata", 1, callbackNavdata);

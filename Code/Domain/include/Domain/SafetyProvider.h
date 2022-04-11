@@ -2,6 +2,7 @@
 #define SAFETYPROVIDER_H
 
 #include <vector>
+#include <cstddef>
 
 #include "Domain/SafetyRequirement.h"
 
