@@ -81,7 +81,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_03_Test_Adapter", "Test_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_01_Test_Domain", "Test_Domain\Test_Doamin.vcxproj", "{40209A0A-F101-4CB9-B412-C02F956C23A4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ros_BagfileWriter", "Ros_BagfileWriter\Ros_BagfileWriter.vcxproj", "{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BagPlotter", "BagPlotter\BagPlotter.vcxproj", "{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
