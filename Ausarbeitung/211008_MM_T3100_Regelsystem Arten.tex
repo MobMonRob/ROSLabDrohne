@@ -1,11 +1,13 @@
-\newSec[Regelerarten]{Arten von Reglern}{2}
+\newSec[Regelerarten]{Arten von Reglergliedern}{2}
 
 In diesem Kapitel sollen grundlegende Bausteine der Regelungtechnik beschrieben werden. Diesbezüglich erhebt dieses Kapitel keinen Anspruch auf Vollständigkeit. Auf eine detallierte Beschreibung, welche \ua\ das Zeitverhalten betrachten, soll hier außen vor gelassen werden.
 Als weitere Einschränkung soll sich die Betrachtung der Bausteine ausschließlich auf zeitdiskrete Systeme (vgl. \refCap{zeitdiskrete Systeme}) beziehen.
 
 
-\newSec[ControlP]{P-Regler}{3}
-Die Abkürzung \texttt{P} in der Bezeichnung \textit{P-Glied} steht für \textit{proportional}. HIerbei wird eine die Eingangsgröße um einen Faktor $k_P$ verstärkt.
+\newSec[ControlP]{P-Glied}{3}
+Die Abkürzung \texttt{P} in der Bezeichnung \textit{P-Glied} steht für \textit{proportional}. Hierbei wird eine die Eingangsgröße um einen Faktor $k_P$ verstärkt.
+\missing[Elektrotechnik oder sehr einfacher Regler]
+\missing[dauerhafte Regelabweichung.]
 
 \begin{equ}[!ht]
 \begin{equation}
@@ -24,6 +26,7 @@ y_k = k_P * x_k
 \end{center}
 
 \vspace{0.25cm}
+\refImgShort{fig:StepPID} zeigt charakteristischen Sprungantwort des \textit{P-Glieds}. Hier wurde der Parameter $k_P$ mit dem Wert 0,6 gewählt, um die Sichtbarkeit in der Abbildung zu erhöhen.
 \end{figure}
 
 \missing[\cite{RT1} Seite 220]
@@ -31,7 +34,7 @@ y_k = k_P * x_k
 
 
 
-\newSec[ControlI]{I-Regler}{3}
+\newSec[ControlI]{I-Gield}{3}
 Wie sich aus dem Namen des \textit{Integral-Glieds} ableiten lässt, bildet dieser Baustein ein Integral über dem Eingangssignal.
 Hierdurch können physikalische Umrechnungen oder Prozesse abgebildet werden. Als Beispiele kann an dieser Stelle der Füllstand eines Tanks oder die Ermittlung einer Geschwindigkeit aus Beschleunigungsdaten genannt werden.
 
@@ -59,7 +62,7 @@ y_k = y_{k-1} + k_I * x_k*{\Delta t}
 
 
 
-\newSec[ControlD]{D-Regler}{3}
+\newSec[ControlD]{D-Gield}{3}
 In der betrachteten Literatur spielen D-Glieder keine signifikante Rolle. \compB{RT1}{SV1}
 Dennoch sollen sie hier als Grundlage für \textit{PID}-Glieder beschrieben werden.
 
@@ -79,7 +82,7 @@ y_k = k_D * \frac{x_k - x_{k-1}}{\Delta t}
 \vspace{0.25cm}
 \begin{center}
 \fbox{\includegraphics[width=8cm]{Pictures/StepD.png}}
-\caption{Sprungantwort eines PID-Glieds}
+\caption{Sprungantwort eines D-Glieds}
 \label{fig:StepD}
 \end{center}
 
@@ -120,7 +123,7 @@ y_k = y_{k(P)} + y_{k(I)} + y_{k(D)}
 
 
 
-\newSec[ControlPT]{PT-Regler}{3}
+\newSec[ControlPT]{PT-Glied}{3}
 
 \missing[Dient der Abbildung realer Systeme, welche sich an einen Zustand anpassen müssen. Drehzahlen, Temperaturen etc.]
 
@@ -158,7 +161,7 @@ y_k = k_D * \frac{x_k - x_{k-1}}{\Delta t}
 
 
 
-
+\newSec[ControlPT]{Tt-Glied}{3}
 
 
 
