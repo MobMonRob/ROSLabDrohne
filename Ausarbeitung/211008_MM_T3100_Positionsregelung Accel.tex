@@ -4,13 +4,10 @@
 
 
 \newSec[ControlPosAccelCalc]{Berechnung}{3}
+Für die nchfolgend beschriebene Berechnung der Position einer Pose wird angenommen, dass die Orientierung des \Quad[s] bekannt ist.
+Es ist zu berücksichtigen, dass die Beschleunigungssensorik fest im \Quad\ verbaut ist. Der resultierende Kraft-Vektor ist in ein Koordinatensystem zu transformieren, dessen xy-Ebene parallel zu der Start-Orientierung des \Quad[s] ausgerichtet ist. \missing[Quelle?]
 
-
-\missing[doppelt integieren]
-
-
-
-
+Anschließend kann der Kraft-Vektor entlang der Achsen des \Quad-Koordinatensystems aufgeteilt werden und die Beschleunigungen auf den \Quad\ zweifach integiert werden. Dieses Vorgehen gelingt lediglich bei idealen Daten. Da in Störungen auf das Signal wirken können, sind geeignete Methoden der Signalverarbeitung anzuwenden. \missing[Quelle?]
 
 
 \newSec[ControlPosAccelDisturb]{Signalaufarbeitung}{3}
@@ -65,7 +62,7 @@ Es ist darauf zu achten, dass Überläufe von digitalen Speichertypen vermieden 
 Um das aufgeprägte Rauschen zu erzeugen wurden Zufallszahlen im Bereich [-1, 1] erzeugt und diese mit dem Faktor einer angenommenen absoluten Genauigkeit (0.375\% für einen Wertebereich [-15 m/s², 15 m/s²]) und einer angenommenen relativen Genauigkeit (0.5\%) verrechnet.
 \end{figure}
 
-
+\missing[was dagegen tun? Eigentlich Mittelwert bilden. Aber Mittelwert glättet auch einzelne Werte. Also Höhere Abtastrate!]
 
 
 
