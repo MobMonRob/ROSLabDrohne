@@ -13,12 +13,10 @@
 
 
 
-\newSec[ControlPosAccelDisturb]{Störgrößen}{3}
-Nachfolgend soll auf Einflüsse der Messung auf die Qualität der ermittelten Pose eingegangen werden. Hierzu werden verschiedene Störgrößen am Beispiel eines Szenarios betrachtet und mögliche Gegenmaßnahmen gezeigt.
+\newSec[ControlPosAccelDisturb]{Signalaufarbeitung}{3}
+Nachfolgend soll auf die Einflüsse einer Messung eingegangen werden, welche sich die Qualität der ermittelten Pose auswirkten. Hierzu werden verschiedene Störgrößen am Beispiel eines Szenarios betrachtet und mögliche Gegenmaßnahmen gezeigt.
 
-
-\missing[Hier den Inhalt aus der Excel-Mappe Signalverarbeitung]
-
+An dieser Stelle sei angemerkt, dass bei dem Vorgehen der Ansatz für online-Datenverarbeitung genutzt wurde. Hierbei fließen ausschließlich Daten ein, welche maximal den aktuell betrachteten Zeitstempel aufweisen.
 
 
 \newSec[ControlPosAccelSzenario]{veranschaulichendes Szenario}{4}
@@ -43,26 +41,16 @@ Die Kurve setzt sich aus idealisierten Teilstücken zusammen (siehe \refImg{fig:
 \end{center}
 
 \vspace{0.25cm}
-In \refImgShort{fig:SzeneOrigin} sind der idealisiete Höhneverlauf (oben) und die daraus abgeleitete Beschleunigung (unten) aufgetragen.
+In \refImgShort{fig:SzeneOrigin} sind der idealisiete Höhneverlauf (oben) und die daraus abgeleitete Beschleunigung (unten) aufgetragen. Sofern nicht anderweitig beschrieben, wird im Folgenden eine Abtastrate von 20 Datenpunkten pro Sekunde angenommen.
 \end{figure}
 
-
-Die Beschleunigungsdaten wurden aus der genannten Kurve mittel zweifacher zeitdiskreter Differentation gebildet (siehe \refImg{fig:SzeneOrigin}, unten).
-
-Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original Kurve und den rekonstruierten Verläufen gebildet werden kann. In diesem Zusammenhang wurde sichergestellt, dass eine Rekonstruktion ohne aufgeprägte Störgrößen möglich ist.
-
-
-
-
-
+Die Beschleunigungsdaten wurden aus der genannten Kurve mittel zweifacher zeitdiskreter Differentation gebildet (siehe \refImg{fig:SzeneOrigin}, unten).\\
+Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original Kurve und den rekonstruierten Verläufen gebildet werden kann. In diesem Zusammenhang wurde sichergestellt, dass eine Rekonstruktion ohne aufgeprägte Störgrößen möglich ist. \comp{SV1}(Seite 123)
 
 
 \newSec[ControlPosAccelNoise]{Rauschen}{4}
-
-\missing[Messfehler, Abweichungen von AD Wandlern, Vibration (bei Beschleunigungsmessdosen)]
-
-
-
+Rauschen eines Signal kann durch die Quantisierung von analogen Daten auftreten \comp{SV1} (Seite 100, Abbildung 4.5) oder in dem Anwendungsfall einer Beschleunigungsmessung auch von Vibrationen des Systems beeinflusst werden.
+Es ist darauf zu achten, dass Überläufe von digitalen Speichertypen vermieden werden, da diese einen Signifikanten Anteil an rauschenden Signalen ausmachen können. \comp{SV1} (Seite 118)
 
 \begin{figure}[ht!]
 \vspace{0.25cm}
@@ -74,11 +62,20 @@ Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original K
 \end{center}
 
 \vspace{0.25cm}
+Um das aufgeprägte Rauschen zu erzeugen wurden Zufallszahlen im Bereich [-1, 1] erzeugt und diese mit dem Faktor einer angenommenen absoluten Genauigkeit (0.375\% für einen Wertebereich [-15 m/s², 15 m/s²]) und einer angenommenen relativen Genauigkeit (0.5\%) verrechnet.
 \end{figure}
+
+
+
+
+
+
+
 
 
 \newSec[ControlPosAccelOutlier]{Ausreißer}{4}
 
+\missing[Erklären, wie diese entstehen]
 
 \begin{figure}[ht!]
 \vspace{0.25cm}
@@ -90,15 +87,17 @@ Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original K
 \end{center}
 
 \vspace{0.25cm}
+Die Höhe der aufgeprägten Ausreißer wurde mittel einer Datenreihe von Zufallszahlen im Bereich [-1, 1], verrechnet mit dem beliebigen Faktor 0.125, generiert. Für die zeitliche Lage wurde eine Datenreihe von Zufallszahlen im Bereich [0, 1] mit einem Schwellwert von 0.925 verglichen. Daraus folgt, dass etwa 7.5\% der Datenwerte einen zusätzlichen Wert aufgeprägt bekommen.
 \end{figure}
+
+
+1977 wurde von Tukey beschrieben, dass ein gleitender Median für die Glättung einer Datenreihe eingesetzt werden kann \comp{DataAnalysis1}(Seite 210). Im Buch wird ein Median über drei Werte vorgeschlagen. Eine Erweitung der Anzahl der einbezogenen Werte ist möglich, wobei zu berücksichtigen ist, dass die Median-Funktion bei einer geraden Anzahl an Werten den Durchschnitt der mittleren Werte bildet.  \missing[Das ist allgemeinbildung in Mathe. Es gibt zwar ein Buch (H. Cramér, "Mathematical methods of statistics" , Princeton Univ. Press (1946) --Info von https://encyclopediaofmath.org/wiki/Median\_(in\_statistics)), aber da kommt man extrem schwer ran. reicht es, hier nur das Buch zu nennen, ohne explizite Seitenzahl?]
 
 
 
 
 
 \newSec[ControlPosAccelOffset]{konstante Nullpunkt-Abweichung}{4}
-
-
 
 
 
@@ -112,10 +111,8 @@ Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original K
 \end{center}
 
 \vspace{0.25cm}
+Die hier gezeigte Abweichung der Beschleunigungsdaten beträgt 0.0025 m/s². Die Superposition der rekonstruierten Kurve entspricht einer in grau dargestellten Parabel mit einem Streckfaktor von $\frac{\Delta a}{2}$.
 \end{figure}
-
-
-
 
 
 
