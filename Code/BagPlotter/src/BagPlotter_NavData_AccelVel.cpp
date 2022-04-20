@@ -38,6 +38,9 @@ void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 	Datas.addEntry("vx", std::to_string(navdataPtr->vx));
 	Datas.addEntry("vy", std::to_string(navdataPtr->vy));
 	Datas.addEntry("vz", std::to_string(navdataPtr->vz));
+	Datas.addEntry("rx", std::to_string(navdataPtr->rotX));
+	Datas.addEntry("ry", std::to_string(navdataPtr->rotY));
+	Datas.addEntry("rz", std::to_string(navdataPtr->rotZ));
 	Datas.addEntry("h", std::to_string(navdataPtr->altd));
 
 	Counter++;
@@ -68,6 +71,9 @@ int main(int argc, char** argv)
 	Datas.addKey("vx");
 	Datas.addKey("vy");
 	Datas.addKey("vz");
+	Datas.addKey("rx");
+	Datas.addKey("ry");
+	Datas.addKey("rz");
 	Datas.addKey("h");
 
 
@@ -102,7 +108,7 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		const size_t Intervall = 250;
+		const size_t Intervall = 300;
 		size_t Offset = 0;
 		
 		std::cout << "File not opened. >" << FilePath.c_str() << "<" << std::endl;
