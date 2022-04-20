@@ -1,6 +1,6 @@
 \newSec[Flight]{Analyse realer Flugdaten}{1}
 
-In diesem Kapitel werden die Daten eines Testflugs analysiert.
+In diesem Kapitel werden die Daten eines Testflugs mit der \Ar\ analysiert.
 
 
 
@@ -49,7 +49,8 @@ Die Status-Änderung bei etwa 20.6 s entspricht einer Notlandung aufgrund niedri
 \end{center}
 
 \vspace{0.25cm}
-
+Zu sehen sind die gemessenen Beschleunigungswerte der horizontalen Achsen. Ausreißer wurden in dieser Grafik ignoriert, um einen detallierteren Verlauf kleinerer Werte ersichtlich zu machen. An dieser Stelle soll auf die Nullpunkt-Abweichung der Beschleunigungsdaten hingewiesen werden.
+Die Ausreißer können teilweise auf Berührungen des \Quad[s] mit einem Hindernis (Wand) zurückgeführt werden. 
 \end{figure}
 
 
@@ -63,7 +64,8 @@ Die Status-Änderung bei etwa 20.6 s entspricht einer Notlandung aufgrund niedri
 \end{center}
 
 \vspace{0.25cm}
-
+Der Anstieg bei etwa 12 s entspricht dem Abheben des \Quad[s].\\
+Der Ausreißer nach unten bei etwa 21 s entspricht der Initialisierung der Landung, gefolgt von einem Ausreißer nach oben bei etwa 22 s, welcher das Auftreffen des \Quad[s] auf dem Untergrund anzeigt. Hier ist von korrekt gemessenen Werten auszugehen.
 \end{figure}
 
 
@@ -94,7 +96,7 @@ Die Status-Änderung bei etwa 20.6 s entspricht einer Notlandung aufgrund niedri
 
 Wie \refImg{fig:Flightaxay} entnommen werden kann, sind die Werte für die Bescleunigungen entlang der x- und y-Achsen nicht auf \bzw\ um den Wert 0 kalibriert. Eine Kalibrierung des \Quad[s] wird unmittelbar vor dem Start gesendet und kann auch unabhängig durch eine User-Eingabe ausgelöst werden.
 
-Die Gravitation ist in \refImg{fig:Flightaz} abzulesen.
+Die Gravitation ist in \refImg{fig:Flightaz} ablesbar.
 
 Entsprechend \refCap{ControlPosAccelOffset} sind diese Abweichungen zu korrigieren.
 Als Ansatz kann hier eine Mittlung der Werte bis zum Senden der Start-Aufforderung gewählt werden. Aus \refImg{fig:Flightaxay} und \refImg{fig:Flightaz} ist ersichtlich, dass hier keine signifikanten Schwankungen auftreten. 
@@ -110,10 +112,18 @@ Als Ansatz kann hier eine Mittlung der Werte bis zum Senden der Start-Aufforderu
 
 
 
- Bei beiden Filtern ist eine deutliche Abweichung ersichtlich.
+Bei beiden Filtern ist eine deutliche Abweichung ersichtlich.
 
 
 entsprechend \refCap{ControlPosAccelOffset} um
+
+Aus der Rekonstruktion in \refImg{fig:FlightHeightReconst} lässt sich zeigen, dass markante Verläufe abgebildet werden können.
+
+Die rekonstruierte Kurve ist jedoch in den negativen Bereich verschoben. Dies lässt sich mit der fehlenden Datenübertragung beim Start des \Quad[s] begründen. 
+Darüber hinaus ist eine konstante Geschwindigkeit nach der Landung anhand der konstanten Steigung der rekonstruierten Kurve in diesem Bereich ersichtlich.
+
+
+
 
 
 
@@ -129,7 +139,7 @@ entsprechend \refCap{ControlPosAccelOffset} um
 \end{center}
 
 \vspace{0.25cm}
-Das Bild oben zeigt die doppelte Integration von Daten, von welchen eine konstante Abweichung subtrahiert wurde. 
+Das Bild oben zeigt die doppelte Integration von Daten, von welchen eine konstante Abweichung subtrahiert wurde und in blau den gemessenen Höhenverlauf.\\
 Für die Bilder unten wurde auf die abweichungskorrigierten Daten ein Median-Filter (links) und ein Mittelwert-Filter (rechts) angewandt.
 \end{figure}
 

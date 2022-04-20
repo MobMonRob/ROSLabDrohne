@@ -7,6 +7,7 @@ Der \textit{Domain Layer} stellt als Teil der \clean\ die Ebene dar, in der allg
 \newSec{Optional}{4}
 Die Klasse \CodeClass{Optional} soll dem Ringbuffer ermöglichen, das Nichtvorhandensein von Einträgen darstellen zu können. Diese Klasse ist als \textit{template} implementiert und enthält neben dem Speicherplatz für die generische Instanz einen bool'schen Wert als Validierung.
 Hiermit wird das Arbeit mit \textit{Null-pointern} im Kontext desr Klasse \CodeClass{Ringbuffer} vermieden.
+\note{Mit der Verwendung von c++17 ist eine vergleichbare Klasse Teil der Standard-Bibliothek. Die Sprachversion des Projekts ist c++11.}
 
 
 \newSec{Ringbuffer}{4}
