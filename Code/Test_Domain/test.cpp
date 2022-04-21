@@ -670,7 +670,7 @@ TEST(Class_Vector3D, Rotate_0)
 
 TEST(Class_Vector3D, Rotate_X90)
 {
-	double Angle = PI / 2;
+	double Angle = Fixed_PI.getValue() / 2;
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateX(Angle);
@@ -688,7 +688,7 @@ TEST(Class_Vector3D, Rotate_X90)
 
 TEST(Class_Vector3D, Rotate_X180)
 {
-	double Angle = PI;
+	double Angle = Fixed_PI.getValue();
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateX(Angle);
@@ -706,7 +706,7 @@ TEST(Class_Vector3D, Rotate_X180)
 
 TEST(Class_Vector3D, Rotate_Y90)
 {
-	double Angle = PI / 2;
+	double Angle = Fixed_PI.getValue() / 2;
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateY(Angle);
@@ -724,7 +724,7 @@ TEST(Class_Vector3D, Rotate_Y90)
 
 TEST(Class_Vector3D, Rotate_Y180)
 {
-	double Angle = PI;
+	double Angle = Fixed_PI.getValue();
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateY(Angle);
@@ -742,7 +742,7 @@ TEST(Class_Vector3D, Rotate_Y180)
 
 TEST(Class_Vector3D, Rotate_Z90)
 {
-	double Angle = PI / 2;
+	double Angle = Fixed_PI.getValue() / 2;
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateZ(Angle);
@@ -760,7 +760,7 @@ TEST(Class_Vector3D, Rotate_Z90)
 
 TEST(Class_Vector3D, Rotate_Z180)
 {
-	double Angle = PI;
+	double Angle = Fixed_PI.getValue();
 	Vector3D V1(Unit_Length, 1, 2, 3);
 
 	Vector3D Result = V1.rotateZ(Angle);

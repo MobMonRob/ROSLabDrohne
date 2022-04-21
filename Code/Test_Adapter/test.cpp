@@ -49,9 +49,15 @@ TEST(Class_StateHandler, Average_Single)
 		SH.addEntry(State1);
 	}
 
-	const IMUState Result = SH.getAvgState();
+	IMUState Result = SH.getAvgState();
+	const IMUState Expectation = State1;
 
-	EXPECT_EQ(Result, State1);
+	if (!(Result == Expectation))
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
 }
 
 TEST(Class_StateHandler, Average_Double)
@@ -60,13 +66,13 @@ TEST(Class_StateHandler, Average_Double)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleVelRad, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleRad, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
 	IMUState State2(
 		Vector3D(Unit_Acceleration, 5, 6, 7),
-		Vector3D(Unit_AngleVelRad, 0.5, 0.6, 0.7),
+		Vector3D(Unit_AngleRad, 0.5, 0.6, 0.7),
 		Value(Unit_Length, 15),
 		Timestamp(FixedPoint<Accuracy_Time>(10))
 	);
@@ -84,14 +90,19 @@ TEST(Class_StateHandler, Average_Double)
 		}
 	}
 
-	const IMUState Result = SH.getAvgState();
+	IMUState Result = SH.getAvgState();
 
 	const IMUState Expectation(
 		Vector3D(Unit_Acceleration, 3, 4, 5),
-		Vector3D(Unit_AngleVelRad, 0.3, 0.4, 0.5),
+		Vector3D(Unit_AngleRad, 0.3, 0.4, 0.5),
 		Value(Unit_Length, 10),
 		Timestamp(FixedPoint<Accuracy_Time>(10)));
 
+	if (!(Result == Expectation))
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+	
 	EXPECT_EQ(Result, Expectation);
 }
 
@@ -102,7 +113,7 @@ TEST(Class_StateHandler, Median_Single)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleRad, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
@@ -131,13 +142,13 @@ TEST(Class_StateHandler, Median_Double)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleRad, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
 	IMUState State2(
-		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(3),
-		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(3),
+		State1.getLinear() * FixedPoint<Accuracy_Value>(3),
+		State1.getRotational() * FixedPoint<Accuracy_Value>(3),
 		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(3),
 		State1.getTimestamp());
 
@@ -148,8 +159,8 @@ TEST(Class_StateHandler, Median_Double)
 	IMUState Result = SH.getMedianState();
 
 	const IMUState Expectation(
-		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(2),
-		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(2),
+		State1.getLinear() * FixedPoint<Accuracy_Value>(2),
+		State1.getRotational() * FixedPoint<Accuracy_Value>(2),
 		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(2),
 		State1.getTimestamp());
 
@@ -167,18 +178,18 @@ TEST(Class_StateHandler, Median_Tripple)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleVelDeg, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleRad, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
 	IMUState State2(
-		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(2),
-		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(2),
+		State1.getLinear() * FixedPoint<Accuracy_Value>(2),
+		State1.getRotational() * FixedPoint<Accuracy_Value>(2),
 		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(2),
 		State1.getTimestamp());
 	IMUState State3(
-		State1.getLinearAcceleration() * FixedPoint<Accuracy_Value>(8),
-		State1.getRotationalVelocity() * FixedPoint<Accuracy_Value>(8),
+		State1.getLinear() * FixedPoint<Accuracy_Value>(8),
+		State1.getRotational() * FixedPoint<Accuracy_Value>(8),
 		State1.getGroundClearance() * FixedPoint<Accuracy_Value>(8),
 		State1.getTimestamp());
 
@@ -198,3 +209,43 @@ TEST(Class_StateHandler, Median_Tripple)
 
 	EXPECT_EQ(Result, Expectation);
 }
+
+
+
+
+
+
+
+
+
+TEST(Class_StateBuilder, Offset)
+{
+	const int EntriesMedian = 10;
+	const int EntriesAverage = 10;
+	const int EntriesOffset = 10;
+	StateBuilder SH(EntriesMedian, EntriesAverage, EntriesOffset);
+	IMUState State1(
+		Vector3D(Unit_Acceleration, 1, 2, 3),
+		Vector3D(Unit_AngleVelRad, 0.1, 0.2, 0.3),
+		Value(Unit_Length, 5),
+		Timestamp(FixedPoint<Accuracy_Time>(1))
+	);
+
+
+
+
+
+	// How to execute this Test?
+}
+
+
+
+
+
+
+
+
+
+
+
+
