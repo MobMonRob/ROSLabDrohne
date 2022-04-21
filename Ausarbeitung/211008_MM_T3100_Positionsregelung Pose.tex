@@ -1,4 +1,9 @@
-\newSec[ControlPosPose]{Positionsregelung von \Quad[n] einer Pose}{2}
+\newSec[ControlPosPose]{Positionsregelung von \Quad[n] mittels Pose}{2}
+Die Freiheitsgrade einer Drohne können grundsätzlich separat geregelt werden.
+Jedoch ist die Kraft in z-Richtung abhängig von der Ausrichtung (Roll und Pitch) des \Quad[s]. Dies ist aus \refImg{fig:ForcesRolled} ersichtlich. Der \Quad\ wird als Folge einer Veränderung der Roll- und Pitch-Winkel an Höhe verlieren. Der Höhenregler wird diese Veränderung nachführen.
+Um ein Nachregeln des \Quad[s] bei einer Orientierungsänderung in der Horizontalen abschwächen zu können, kann der veränderte Schubbedarf aus den gemessenen oder berechneten Roll- und Pitch-Winkeln abgeleitet und zu dem Schubsignal aufsummiert werden.
 
+
+Es ist zu beachten, dass sie Parallelität des \Quad-Koordinatensystem zum lokalen \bzw\ globalen Koordinatensystem bei einer rotation um die z-Achse verloren geht. Hierzu ist die translative Bewegung entgegengesetzt dieser Rotation zu transformieren. Somit kann die Position bezogen auf das lokale \bzw\ globale Koordinatensystem ermittelt werden. \missing[Quelle? evtl Vorlesung?]
 
 

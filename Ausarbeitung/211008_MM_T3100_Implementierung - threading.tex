@@ -19,4 +19,3 @@ Wie der Name der Klasse \CodeClass{AutoPublisher} erahnen lässt, wird hier ein 
 
 \newSec{AutoClient}{4}
 Die Klasse \CodeClass{AutoClient} kapselt eine Instanz der Klasse \CodeClass{ros::ServiceClient} und bietet somit die Option, Service-Anfragen regelmäßig senden zu können.
-Für dieses Projekt ist dies notwendig, da die Anfrage für den \textit{FlightMode} \glqq\texttt{OFFBOARD}\grqq mit einer Frequenz von mindestend $2 Hz$ als \textit{Alive}-Nachricht genutzt wird. Wird die Zeit von $500 ms$ ohne Anfrage überschritten, fällt der \textit{Flight Controller} auf den zuvor verwendeten \textit{FlightMode} zurück.
