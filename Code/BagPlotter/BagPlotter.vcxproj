@@ -148,9 +148,8 @@
     <Xml Include="package.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BagPlotter_GeomTwist.cpp" />
-    <ClCompile Include="src\BagPlotter_NavData_AccelVel.cpp" />
     <ClCompile Include="src\DataCollector.cpp" />
+    <ClCompile Include="src\parrotPlotter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BagPlotter\DataCollector.h" />

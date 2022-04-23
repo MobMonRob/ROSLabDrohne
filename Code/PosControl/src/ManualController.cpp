@@ -20,6 +20,7 @@ double Roll = 0.0;
 double Pitch = 0.0;
 double Yarn = 0.0;
 double Thrust = 0.0;
+double Height = 0.0;
 bool dirty = false;
 
 
@@ -53,11 +54,11 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 
 	case 'i':
-		Thrust += 0.025;
+		Height += 0.025;
 		break;
 
 	case 'k':
-		Thrust -= 0.1;
+		Height -= 0.1;
 		break;
 
 	case 'j':
