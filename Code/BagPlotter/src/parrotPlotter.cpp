@@ -36,23 +36,26 @@ void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& NavdataPtr)
 		Time_Offset = NavdataPtr->header.stamp;
 	}
 	
-	Datas.addDataset();
+	if (!Datas.addEntry("Time", std::to_string(NavdataPtr->header.stamp.toSec())))
+	{
+		Datas.addDataset();
+		Datas.addEntry("Time", std::to_string(NavdataPtr->header.stamp.toSec()));
+		Datas.addEntry("State", std::to_string(NavdataPtr->state));
+		Datas.addEntry("ax", std::to_string(NavdataPtr->ax));
+		Datas.addEntry("ay", std::to_string(NavdataPtr->ay));
+		Datas.addEntry("az", std::to_string(NavdataPtr->az));
+		Datas.addEntry("vx", std::to_string(NavdataPtr->vx));
+		Datas.addEntry("vy", std::to_string(NavdataPtr->vy));
+		Datas.addEntry("vz", std::to_string(NavdataPtr->vz));
+		Datas.addEntry("rx", std::to_string(NavdataPtr->rotX));
+		Datas.addEntry("ry", std::to_string(NavdataPtr->rotY));
+		Datas.addEntry("rz", std::to_string(NavdataPtr->rotZ));
+		Datas.addEntry("h", std::to_string(NavdataPtr->altd));
+		Datas.addEntry("Rotors", std::to_string(NavdataPtr->motor1 + NavdataPtr->motor2 + NavdataPtr->motor3 + NavdataPtr->motor4));
 
-	Datas.addEntry("Time", std::to_string(NavdataPtr->header.stamp.toSec()));
-	Datas.addEntry("State", std::to_string(NavdataPtr->state));
-	Datas.addEntry("ax", std::to_string(NavdataPtr->ax));
-	Datas.addEntry("ay", std::to_string(NavdataPtr->ay));
-	Datas.addEntry("az", std::to_string(NavdataPtr->az));
-	Datas.addEntry("vx", std::to_string(NavdataPtr->vx));
-	Datas.addEntry("vy", std::to_string(NavdataPtr->vy));
-	Datas.addEntry("vz", std::to_string(NavdataPtr->vz));
-	Datas.addEntry("rx", std::to_string(NavdataPtr->rotX));
-	Datas.addEntry("ry", std::to_string(NavdataPtr->rotY));
-	Datas.addEntry("rz", std::to_string(NavdataPtr->rotZ));
-	Datas.addEntry("h", std::to_string(NavdataPtr->altd));
-
-	Counter++;
-	UpdateMessage = ros::Time::now();
+		Counter++;
+		UpdateMessage = ros::Time::now();
+	}
 }
 
 void callbackCommands(const geometry_msgs::Twist::ConstPtr& CommandPtr)
@@ -70,7 +73,7 @@ int main(int argc, char** argv)
 	ROS_INFO("Started New Node: Bagfile Plotter");
 	
 	std::fstream OutputFile;
-	std::string FilePath = "/home/Documents/BagOutput_NavData.txt";
+	std::string FilePath = "Bag.txt";
 	
 
 	OutputFile.open(FilePath.c_str(), std::fstream::out);
@@ -88,6 +91,7 @@ int main(int argc, char** argv)
 	Datas.addKey("ry");
 	Datas.addKey("rz");
 	Datas.addKey("h");
+	Datas.addKey("Rotors");
 	Datas.addKey("UserKey");
 	Datas.addKey("Cmd_vx");
 	Datas.addKey("Cmd_vy");
@@ -96,7 +100,7 @@ int main(int argc, char** argv)
 
 
 	{
-		ros::init(argc, argv, "BagPlotter_NavData");
+		ros::init(argc, argv, "BagPlotter_parrot");
 		ros::NodeHandle nh_;
 		ros::Subscriber SubIMU_;
 		ros::Subscriber SubUser_ = nh_.subscribe("ardrone/navdata", 1, callbackNavdata);
