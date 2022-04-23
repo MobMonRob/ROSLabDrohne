@@ -37,7 +37,6 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 	{
 	case 'w':
 		Pitch += 0.1;
-		dirty = true;
 		break;
 
 	case 's':
@@ -47,32 +46,26 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 	case 'a':
 		Roll += 0.1;
-		dirty = true;
 		break;
 
 	case 'd':
 		Roll -= 0.1;
-		dirty = true;
 		break;
 
 	case 'i':
 		Thrust += 0.025;
-		dirty = true;
 		break;
 
 	case 'k':
 		Thrust -= 0.1;
-		dirty = true;
 		break;
 
 	case 'j':
 		Yarn += 0.1;
-		dirty = true;
 		break;
 
 	case 'l':
 		Yarn -= 0.1;
-		dirty = true;
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
@@ -101,6 +94,15 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		ROS_INFO("unprocessable Key: %c", Key);
 		break;
 	}
+
+
+
+	Roll = (Roll > 1) ? 1 : ((Roll < -1) ? -1 : Roll);
+	Pitch = (Pitch > 1) ? 1 : ((Pitch < -1) ? -1 : Pitch);
+	Yarn = (Yarn > 1) ? 1 : ((Yarn < -1) ? -1 : Yarn);
+	Thrust = (Thrust > 1) ? 1 : ((Thrust < -1) ? -1 : Thrust);
+
+	dirty = true;
 
 	SmoothTime = ros::Time::now();
 }

@@ -17,6 +17,8 @@ parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController
 	ROS_INFO("Starting parrotIMU...");
 	ros::spinOnce();
 
+	this->reset();
+
 	ROS_INFO("Started parrotIMU");
 }
 
