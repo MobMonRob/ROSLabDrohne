@@ -14,7 +14,7 @@ public:
 	
 	void setIntputAddr(Outputable* InputAddr) { this->Inputable_ = InputAddr; };
 	
-	virtual Unit getInputUnit() { return this->Input_; };
+	virtual Unit getInputUnit() override { return this->Input_; };
 	virtual Outputable* getInputAddr() { return this->Inputable_; };
 
 private:

@@ -13,7 +13,6 @@ public:
 	Output(Unit UnitOutput) : Output_(UnitOutput) {};
 
 	Unit getOutputUnit() { return this->Output_; };
-	virtual TimedValue getOutput() = 0;
 
 protected:
 	void setOutputUnit(Unit UnitOutput) { this->Output_ = UnitOutput; };
