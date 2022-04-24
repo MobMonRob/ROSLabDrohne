@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <PosControl/PosBridge.h>
+#include <PosControl/MainClass.h>
 
 
 int main(int argc, char** argv)
@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	
 	ros::init(argc, argv, "AutoController");
 	
-	PosBridge Bridge;
+	MainClass Bridge;
 	ros::Time UpdatePose = ros::Time::now();
 	ros::Duration DurationPose(1);
 

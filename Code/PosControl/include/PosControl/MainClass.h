@@ -1,5 +1,5 @@
-#ifndef POSBRIDGE_H
-#define POSBRIDGE_H
+#ifndef MAINCLASS_H
+#define MAINCLASS_H
 
 #include <ros/ros.h>
 
@@ -12,11 +12,11 @@
 #include "PosControl/PoseBuilder.h"
 #include "PosControl/Transmitter_Mock.h"
 
-class PosBridge
+class MainClass
 {
 public:
-	PosBridge();
-	~PosBridge();
+	MainClass();
+	~MainClass();
 	
 
 	void printPose();
@@ -37,4 +37,4 @@ private:
 	parrotControl Controller_;
 };
 
-#endif // POSBRIDGE_H
+#endif // MAINCLASS_H

@@ -1,4 +1,4 @@
-#include <PosControl/PosBridge.h>
+#include <PosControl/MainClass.h>
 
 #include <iostream>
 
@@ -6,12 +6,12 @@
 
 
 
-PosBridge::PosBridge()
-	: Sub_(nh_.subscribe("KeyReader", 1, &PosBridge::callbackKeys, this)),
+MainClass::MainClass()
+	: Sub_(nh_.subscribe("KeyReader", 1, &MainClass::callbackKeys, this)),
 	PoseController_(&this->Transmitter_),
 	Controller_(&this->PoseBuilder_, &this->PoseController_, &this->Transmitter_)
 {
-	ROS_INFO("Starting PosBridge...");
+	ROS_INFO("Starting MainClass...");
 	
 	//std::cout << "new ActionAdapter" << std::endl;
 	//this->ActionAdapter_ = new ActionAdapter(&this->coexController_);
@@ -19,26 +19,26 @@ PosBridge::PosBridge()
 	//this->StateBuilder_ = new StateBuilder(&this->coexController_, this->ActionAdapter_);
 	//this->coexController_.addCallable(this->StateBuilder_);
 
-	ROS_INFO("Started PosBridge");
+	ROS_INFO("Started MainClass");
 }
 
 
-PosBridge::~PosBridge()
+MainClass::~MainClass()
 {
-	ROS_INFO("Terminating PosBridge...");
+	ROS_INFO("Terminating MainClass...");
 
 	//this->coexController_.deleteCallable(this->StateBuilder_);
 	//delete this->StateBuilder_;
 	//delete this->ActionAdapter_;
 
-	ROS_INFO("Terminated PosBridge");
+	ROS_INFO("Terminated MainClass");
 }
 
 
 
 
 
-void PosBridge::printPose()
+void MainClass::printPose()
 {
 	ROS_INFO(this->PoseBuilder_.getPose().getString().c_str());
 }
@@ -51,7 +51,7 @@ void PosBridge::printPose()
 
 
 
-void PosBridge::callbackKeys(const std_msgs::Char::ConstPtr& msg)
+void MainClass::callbackKeys(const std_msgs::Char::ConstPtr& msg)
 {
 	char Key = msg->data;
 
@@ -126,7 +126,7 @@ void PosBridge::callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 
 	case 'q':	// Destructor
-		this->~PosBridge();
+		this->~MainClass();
 		break;
 
 	default:

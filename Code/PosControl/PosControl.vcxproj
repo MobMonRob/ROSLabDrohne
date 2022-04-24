@@ -146,8 +146,7 @@
   <ItemGroup>
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
-    <ClCompile Include="src\ManualController.cpp" />
-    <ClCompile Include="src\PosBridge.cpp" />
+    <ClCompile Include="src\MainClass.cpp" />
     <ClCompile Include="src\PoseBuilder.cpp" />
     <ClCompile Include="src\RosBridge.cpp" />
     <ClCompile Include="src\Transmitter_Mock.cpp" />
@@ -170,7 +169,7 @@
     <ClInclude Include="include\PosControl\Header.h" />
     <ClInclude Include="include\PosControl\Integral1.h" />
     <ClInclude Include="include\PosControl\Integral2.h" />
-    <ClInclude Include="include\PosControl\PosBridge.h" />
+    <ClInclude Include="include\PosControl\MainClass.h" />
     <ClInclude Include="include\PosControl\PoseBuilder.h" />
     <ClInclude Include="include\PosControl\Transmitter_Mock.h" />
   </ItemGroup>
