@@ -89,8 +89,11 @@ bool parrotStatus::setArmState(bool ArmState)
 
 		PubCmd = this->nh_.advertise<std_msgs::Empty>("ardrone/land", 1);
 
-		PubCmd.publish(std_msgs::Empty());
-		ros::spinOnce();
+		while (!(this->isGrounded() || this->getStatusID() == 0))
+		{
+			PubCmd.publish(std_msgs::Empty());
+			ros::spinOnce();
+		}
 
 		ReturnBool = true;
 	}

@@ -20,6 +20,7 @@ double Roll = 0.0;
 double Pitch = 0.0;
 double Yarn = 0.0;
 double Thrust = 0.0;
+double Height = 0.0;
 bool dirty = false;
 
 
@@ -36,43 +37,36 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 	switch (Key)
 	{
 	case 'w':
-		Pitch += 0.005;
-		dirty = true;
+		Pitch += 0.1;
 		break;
 
 	case 's':
-		Pitch -= 0.005;
+		Pitch -= 0.1;
 		dirty = true;
 		break;
 
 	case 'a':
-		Roll += 0.005;
-		dirty = true;
+		Roll += 0.1;
 		break;
 
 	case 'd':
-		Roll -= 0.005;
-		dirty = true;
+		Roll -= 0.1;
 		break;
 
 	case 'i':
-		Thrust += 0.001;
-		dirty = true;
+		Height += 0.025;
 		break;
 
 	case 'k':
-		Thrust -= 0.005;
-		dirty = true;
+		Height -= 0.1;
 		break;
 
 	case 'j':
-		Yarn += 0.005;
-		dirty = true;
+		Yarn += 0.1;
 		break;
 
 	case 'l':
-		Yarn -= 0.005;
-		dirty = true;
+		Yarn -= 0.1;
 		break;
 
 	case 't':	// Takeoff (Arm Vehicle)
@@ -102,6 +96,15 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 	}
 
+
+
+	Roll = (Roll > 1) ? 1 : ((Roll < -1) ? -1 : Roll);
+	Pitch = (Pitch > 1) ? 1 : ((Pitch < -1) ? -1 : Pitch);
+	Yarn = (Yarn > 1) ? 1 : ((Yarn < -1) ? -1 : Yarn);
+	Thrust = (Thrust > 1) ? 1 : ((Thrust < -1) ? -1 : Thrust);
+
+	dirty = true;
+
 	SmoothTime = ros::Time::now();
 }
 
@@ -123,11 +126,11 @@ int main(int argc, char** argv)
 	parrotTransmitter Transmitter_;
 	StateController_ = new parrotStatus(&Battery);
 
-	const double SmoothFactor = 0.85;
+	const double SmoothFactor = 0.875;
 	ros::Duration SmoothDuration(0.1);
 	ros::Time InfoTime = ros::Time::now();
 	ros::Duration InfoDuration(1);
-	ros::Rate SpinRate(75);
+	ros::Rate SpinRate(200);
 
 	while (ros::ok())
 	{
@@ -138,15 +141,12 @@ int main(int argc, char** argv)
 			Yarn *= SmoothFactor;
 			Thrust *= SmoothFactor;
 
+			dirty = true;
+
 			SmoothTime = ros::Time::now();
 		}
 
-		if (ros::Time::now() - InfoTime > InfoDuration)
-		{
-			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
-
-			InfoTime = ros::Time::now();
-		}
+		dirty = ros::Time::now() - InfoTime > InfoDuration;
 
 		if (dirty)
 		{

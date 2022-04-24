@@ -14,7 +14,6 @@
 
 TEST(Class_PoseController, callTransmitter)
 {
-
 	MockTransmitable Transmitter;
 	{	// Train Mock
 		ON_CALL(Transmitter, transmitAction(testing::_, testing::_, testing::_, testing::_)).WillByDefault(testing::Return(true));
@@ -32,4 +31,6 @@ TEST(Class_PoseController, callTransmitter)
 
 
 	bool Result = PC.feedbackPose(P);
+
+	// Verify
 }

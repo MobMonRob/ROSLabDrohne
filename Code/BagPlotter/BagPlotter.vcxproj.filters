@@ -25,13 +25,10 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BagPlotter_NavData_AccelVel.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\DataCollector.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\BagPlotter_GeomTwist.cpp">
+    <ClCompile Include="src\parrotPlotter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

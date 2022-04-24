@@ -53,11 +53,19 @@ add_executable(BagPlotter_GT
 	src/DataCollector.cpp
 	src/BagPlotter_GeomTwist.cpp
 )
+add_executable(parrot
+	include/BagPlotter/DataCollector.h
+	src/DataCollector.cpp
+	src/parrotPlotter.cpp
+)
 
 ## Add cmake target dependencies of the executable
 add_dependencies(BagPlotter_ND_AV ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(BagPlotter_GT ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(parrot ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(BagPlotter_ND_AV ${catkin_LIBRARIES})
 target_link_libraries(BagPlotter_GT ${catkin_LIBRARIES})
+target_link_libraries(parrot ${catkin_LIBRARIES})
+
