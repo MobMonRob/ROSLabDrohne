@@ -42,6 +42,10 @@ public:
 	void reset(Vector3D Position, Vector3D Orientation);
 
 private:
+	bool updatePosition(Vector3D LinearAcceleration, Vector3D Orientation, Timestamp Time);
+	bool updateOrientation(Vector3D RotationalAngle, Timestamp Time);
+
+private:
 	Timestamp Time_;
 	
 	Integral2 PositionX_;
