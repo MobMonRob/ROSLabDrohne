@@ -83,6 +83,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_01_Test_Domain", "Test_D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BagPlotter", "BagPlotter\BagPlotter.vcxproj", "{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test_parrot", "Test_parrot\Test_parrot.vcxproj", "{1346994C-4B8A-4A3E-ABD1-84A41846CF89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -203,6 +205,14 @@ Global
 		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x64.Build.0 = Release|x64
 		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x86.ActiveCfg = Release|Win32
 		{BD08B2CC-B9BD-4919-85D9-43AACFE0CF73}.Release|x86.Build.0 = Release|Win32
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Debug|x64.ActiveCfg = Debug|x64
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Debug|x64.Build.0 = Debug|x64
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Debug|x86.ActiveCfg = Debug|Win32
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Debug|x86.Build.0 = Debug|Win32
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Release|x64.ActiveCfg = Release|x64
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Release|x64.Build.0 = Release|x64
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Release|x86.ActiveCfg = Release|Win32
+		{1346994C-4B8A-4A3E-ABD1-84A41846CF89}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
