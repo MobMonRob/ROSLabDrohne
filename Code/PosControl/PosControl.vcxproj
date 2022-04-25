@@ -147,6 +147,9 @@
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
     <ClCompile Include="src\MainClass.cpp" />
+    <ClCompile Include="src\ManualController.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\PoseBuilder.cpp" />
     <ClCompile Include="src\RosBridge.cpp" />
     <ClCompile Include="src\Transmitter_Mock.cpp" />

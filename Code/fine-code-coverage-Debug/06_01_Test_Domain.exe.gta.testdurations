@@ -5,7 +5,7 @@
     <TestDuration Test="Class_FixedPoint.InitInt10_raw0" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10_raw3" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10E4_raw3" Duration="1" />
-    <TestDuration Test="Class_FixedPoint.InitInt10_rawNeg3" Duration="9" />
+    <TestDuration Test="Class_FixedPoint.InitInt10_rawNeg3" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10_raw6" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10E7_raw6" Duration="1" />
     <TestDuration Test="Class_FixedPoint.InitInt10_rawNeg6" Duration="1" />
@@ -53,8 +53,8 @@
     <TestDuration Test="Class_Vector3D.OpEquals_FalseX" Duration="1" />
     <TestDuration Test="Class_Vector3D.OpEquals_FalseY" Duration="1" />
     <TestDuration Test="Class_Vector3D.OpEquals_FalseZ" Duration="1" />
-    <TestDuration Test="Class_Vector3D.Rotate_0" Duration="2" />
-    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="2" />
+    <TestDuration Test="Class_Vector3D.Rotate_0" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Rotate_X90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_X180" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Y90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Y180" Duration="1" />
