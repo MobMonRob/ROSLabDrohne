@@ -27,7 +27,6 @@ protected:
 	void reset();
 
 private:
-	Pose Pose_;
 	PoseBuildable* PoseBuilder_;
 	PoseControlable* PoseController_;
 };

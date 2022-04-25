@@ -31,9 +31,15 @@
     <ClCompile Include="src\parrotPlotter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DataLoader.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BagPlotter\DataCollector.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DataLoader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
