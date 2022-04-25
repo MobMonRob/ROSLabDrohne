@@ -150,13 +150,13 @@
     <Xml Include="package.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataLoader.cpp" />
     <ClCompile Include="src\DataCollector.cpp" />
+    <ClCompile Include="src\DataLoader.cpp" />
     <ClCompile Include="src\parrotPlotter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataLoader.h" />
     <ClInclude Include="include\BagPlotter\DataCollector.h" />
+    <ClInclude Include="include\BagPlotter\DataLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

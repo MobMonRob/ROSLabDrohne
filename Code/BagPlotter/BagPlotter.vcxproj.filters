@@ -31,7 +31,7 @@
     <ClCompile Include="src\parrotPlotter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="DataLoader.cpp">
+    <ClCompile Include="src\DataLoader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,7 +39,7 @@
     <ClInclude Include="include\BagPlotter\DataCollector.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="DataLoader.h">
+    <ClInclude Include="include\BagPlotter\DataLoader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
