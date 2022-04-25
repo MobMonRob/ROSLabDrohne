@@ -4,13 +4,10 @@
 #include <mutex>
 
 #include "DroneController/Timeable.h"
-
 #include "DroneController/IMUState.h"
 #include "DroneController/Pose.h"
 #include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
-
-
 
 
 class IMUable : public Timeable
@@ -36,3 +33,7 @@ private:
 };
 
 #endif // IMUABLE_H
+
+
+
+

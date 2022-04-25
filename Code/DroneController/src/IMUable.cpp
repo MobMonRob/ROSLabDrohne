@@ -30,7 +30,7 @@ bool IMUable::triggerController()
 
 	if (this->PoseController_ != nullptr)
 	{
-		ReturnBool = this->PoseController_->feedbackPose(this->Pose_);
+		ReturnBool = this->PoseController_->feedbackPose(this->getPose());
 	}
 
 	return ReturnBool;
