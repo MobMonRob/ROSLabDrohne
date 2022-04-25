@@ -34,9 +34,15 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClInclude Include="IMU_Mock.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PoseBuildable_Mock.h" />
+    <ClInclude Include="PoseControlable_Mock.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IMU_Mock.cpp" />
+    <ClCompile Include="PoseBuildable_Mock.cpp" />
+    <ClCompile Include="PoseControlable_Mock.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

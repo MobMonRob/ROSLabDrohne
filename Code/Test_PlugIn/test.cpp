@@ -74,8 +74,8 @@ TEST(Class_PoseBuilder, AccelPos_X_10s)
 	{
 		const FixedPoint<Accuracy_Value> Result = Results.at(i).getX();
 		const FixedPoint<Accuracy_Value> ExpectatedValue = Expectations.at(i).getX();
-		double Error = 100 * std::abs(Result.getValue() / ExpectatedValue.getValue() - 1);
-		bool Expectation = Error <= ErrorMax;
+		double Error = 100 * (Result.getValue() / ExpectatedValue.getValue() - 1);
+		bool Expectation = std::abs(Error) <= ErrorMax;
 
 
 		if (!Expectation)
