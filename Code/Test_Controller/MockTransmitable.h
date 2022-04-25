@@ -11,7 +11,7 @@
 class MockTransmitable : public Transmitable
 {
 public:
-
 	MOCK_METHOD(bool, transmitAction, (double pitch, double roll, double thrust, double yarn), (override));
+
 };
 
