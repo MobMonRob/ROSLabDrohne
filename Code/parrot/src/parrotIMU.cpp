@@ -8,11 +8,13 @@
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 	: IMUable(PoseBuilder, PoseController),
+	StateBuilder_(1, 1, 1),
 	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
 	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
 	SubIMU_(this->nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
-	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
+	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this)),
+	ValidData_(false)
 {
 	ROS_INFO("Starting parrotIMU...");
 	ros::spinOnce();
@@ -41,6 +43,12 @@ bool parrotIMU::calibrate()
 
 	ReturnBool = ClientIMUCalib.call(Cmd);
 
+	if (ReturnBool)
+	{
+		this->StateBuilder_.setValid(true);
+		this->PoseBuilder_->setValid(true);
+	}
+
 	return ReturnBool;
 }
 
@@ -48,22 +56,25 @@ bool parrotIMU::calibrate()
 
 void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
-	Timestamp Time(navdataPtr->header.stamp.toSec());
-	Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
-	Vector3D RotationalRad(Unit_AngleRad, 
-		FixedPoint<Accuracy_Value>(navdataPtr->rotX) * Value_DEGToRAD.getValue(),
-		FixedPoint<Accuracy_Value>(navdataPtr->rotY) * Value_DEGToRAD.getValue(),
-		FixedPoint<Accuracy_Value>(navdataPtr->rotZ) * Value_DEGToRAD.getValue());
-	Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
-	
-	// maybe trigger new Thread??
-	IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalRad, GroundClearance);
+	if (this->StateBuilder_.getValid())
+	{
+		Timestamp Time(navdataPtr->header.stamp.toSec());
+		Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
+		Vector3D RotationalDeg(Unit_AngleDeg,
+			FixedPoint<Accuracy_Value>(navdataPtr->rotX),
+			FixedPoint<Accuracy_Value>(navdataPtr->rotY),
+			FixedPoint<Accuracy_Value>(navdataPtr->rotZ));
+		Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 
-	// How to null a State when on the Ground? It that necessary?
-	this->calcPose(State);
-	this->triggerController();
+		// maybe trigger new Thread??
+		IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalDeg, GroundClearance);
 
-	this->publishPose();
+		// How to null a State when on the Ground? It that necessary?
+		this->calcPose(State);
+		this->triggerController();
+
+		this->publishPose();
+	}
 }
 
 void parrotIMU::callbackIMU(const sensor_msgs::Imu::ConstPtr& IMUPtr)

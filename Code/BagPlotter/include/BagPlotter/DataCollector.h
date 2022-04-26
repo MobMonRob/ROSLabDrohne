@@ -22,7 +22,7 @@ public:
 	size_t getSize() const { return this->Data_.size(); };
 	std::vector<std::string> getHeader() const { return this->Header_; };
 	std::string getData(size_t ID, std::string Key);
-	std::string getString(size_t StartID = -1, size_t EndID = -1, bool HeaderIncluded = true);
+	std::string getString(size_t StartID = 0, size_t EndID = (size_t)-1, bool HeaderIncluded = true);
 	std::string getString_Header();
 
 	bool isKey(std::string Key);

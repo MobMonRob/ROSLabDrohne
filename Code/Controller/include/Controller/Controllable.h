@@ -5,7 +5,7 @@
 
 #include "Controller/ControllerType.h"
 
-const int Accuracy_K = -6;
+const int Accuracy_K = Accuracy_Value;
 
 class Controllable
 {

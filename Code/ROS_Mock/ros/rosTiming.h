@@ -15,6 +15,9 @@ namespace ros
 	class Time
 	{
 	public:
+		Time() : Time(0) {};
+		Time(double Seconds) : Seconds_(Seconds) {};
+		
 		Time operator-(const Time& T) { return Time(); };
 		bool operator>(const Duration& T) { return false; };
 		bool operator<(const Duration& T) { return false; };
@@ -24,10 +27,13 @@ namespace ros
 		bool operator==(const Time& T) { return false; };
 		bool operator==(Time& T) { return false; };
 
-		double toSec() { return 0; };
+		double toSec() { return this->Seconds_; };
 
 
 		static Time now() { return Time(); };
+
+	private:
+		double Seconds_;
 	};
 
 

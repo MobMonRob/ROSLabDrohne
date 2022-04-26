@@ -7,10 +7,12 @@ DataLoader::DataLoader(DataCollector* Collector, std::string FilePath)
 	: Collector_(Collector),
 	File_(FilePath, std::ios::in)
 {
-	if (this->File_.good())
+	if (this->File_.is_open())
 	{
 		this->readHeader();
 		this->readContent();
+
+		std::cout << "Loaded " << this->Collector_->getSize() << " Lines from File. >" << FilePath << "<" << std::endl;
 	}
 	else
 	{

@@ -26,8 +26,10 @@ protected:
 	bool triggerController();
 	void reset();
 
-private:
+protected:
 	PoseBuildable* PoseBuilder_;
+
+private:
 	PoseControlable* PoseController_;
 };
 

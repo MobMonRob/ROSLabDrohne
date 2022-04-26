@@ -60,5 +60,8 @@
     <TestDuration Test="Class_Vector3D.Rotate_Y180" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z90" Duration="1" />
     <TestDuration Test="Class_Vector3D.Rotate_Z180" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Multiply" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Multiply_1" Duration="1" />
+    <TestDuration Test="Class_Vector3D.Multiply_5" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

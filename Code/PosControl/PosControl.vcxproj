@@ -90,13 +90,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock;../Controller/include;../parrot/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock;../BagPlotter/include;../Controller/include;../parrot/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../parrot/Debug;../Controller/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;TimedDifference.obj;IMUState.obj;StateHandler.obj;termios.obj;ros_Talker.obj;ros.obj;Batteryable.obj;Statusable.obj;IMUable.obj;Pose.obj;PoseControlable.obj;PoseController.obj;parrotBattery.obj;DroneControlable.obj;parrotControl.obj;parrotTransmitter.obj;parrotIMU.obj;parrotStatus.obj;SafetyProvider.obj;StateBuilder.obj;PercentageOK.obj;VoltageOK.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../BagPlotter/Debug;../parrot/Debug;../Controller/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;Controllable.obj;Controller_Basic.obj;Controller_D.obj;Controller_I.obj;Controller_Input.obj;Controller_P.obj;Controller_PID.obj;Controller_PT.obj;ControllerSystem.obj;Input.obj;TimedDifference.obj;IMUState.obj;StateHandler.obj;termios.obj;ros_Talker.obj;ros.obj;Batteryable.obj;Statusable.obj;IMUable.obj;Pose.obj;PoseControlable.obj;PoseController.obj;parrotBattery.obj;DroneControlable.obj;parrotControl.obj;parrotTransmitter.obj;parrotIMU.obj;parrotStatus.obj;SafetyProvider.obj;StateBuilder.obj;PercentageOK.obj;VoltageOK.obj;DataCollector.obj;DataLoader.obj;DataPersister.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
     <ClCompile Include="src\MainClass.cpp" />
@@ -151,7 +152,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\PoseBuilder.cpp" />
-    <ClCompile Include="src\RosBridge.cpp" />
+    <ClCompile Include="src\RosBridge.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Transmitter_Mock.cpp" />
   </ItemGroup>
   <ItemGroup>

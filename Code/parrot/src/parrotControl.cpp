@@ -9,6 +9,7 @@ parrotControl::parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Contro
 	Battery_(20.0),
 	IMU_(PoseBuilder, Controller)
 {
+	this->IMU_.calibrate();
 }
 
 

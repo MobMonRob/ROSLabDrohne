@@ -34,12 +34,18 @@
     <ClCompile Include="src\DataLoader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\DataPersister.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BagPlotter\DataCollector.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\BagPlotter\DataLoader.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BagPlotter\DataPersister.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

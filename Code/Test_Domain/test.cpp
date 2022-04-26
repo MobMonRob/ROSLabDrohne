@@ -651,6 +651,43 @@ TEST(Class_Vector3D, OpEquals_FalseZ)
 	EXPECT_FALSE(Result);
 }
 
+TEST(Class_Vector3D, Multiply_1)
+{
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1 * FixedPoint<Accuracy_Value>(1);
+
+	Vector3D Expectation(Unit_Length, 1, 2, 3);
+
+
+	if (Result != Expectation)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
+}
+
+TEST(Class_Vector3D, Multiply_5)
+{
+	Vector3D V1(Unit_Length, 1, 2, 3);
+
+	Vector3D Result = V1 * FixedPoint<Accuracy_Value>(5);
+	
+	Vector3D Expectation(Unit_Length, 5, 10, 15);
+
+
+	if (Result != Expectation)
+	{
+		std::cout << Result.getString() << std::endl;
+	}
+
+	EXPECT_EQ(Result, Expectation);
+}
+
+
+
+
 TEST(Class_Vector3D, Rotate_0)
 {
 	Vector3D V1(Unit_Length, 1, 2, 3);

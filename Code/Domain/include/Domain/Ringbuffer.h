@@ -17,6 +17,7 @@ public:
 
 	Optional<DataType> getData(size_t Index = 0);
 	std::size_t getSize() { return this->Buffer_.size(); };
+	std::size_t getSizeMax() { return this->MaxSize_; };
 
 	void clear() { this->Buffer_.clear(); };
 

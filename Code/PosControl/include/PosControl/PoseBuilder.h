@@ -24,10 +24,9 @@ class PoseBuilder : public PoseBuildable
 public:
 	PoseBuilder(FixedPoint<Accuracy_Value> InitX = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitY = FixedPoint<Accuracy_Value>(), FixedPoint<Accuracy_Value> InitZ = FixedPoint<Accuracy_Value>());
 
-
 	void setPosition(Vector3D Position, Vector3D Uncertainty = Vector3D(Unit_None)) override;
 	void setOrientation(Vector3D Orientation, Vector3D Uncertainty = Vector3D(Unit_None)) override;
-
+	
 	Pose getPose() override;
 	Timestamp getTime() const override { return this->Time_; };
 	Vector3D getPosition() override;
@@ -35,7 +34,7 @@ public:
 	//Vector3D getOrientation() override;
 	Vector3D getOrientation() override { return this->Orientation_; };
 	Vector3D getOrientationUncertainty() const override { return this->OrientationUncertainty_; };
-
+	
 	bool updatePose(IMUState State) override;
 
 	void reset() override { this->reset(Vector3D(this->getPosition().getUnit()), Vector3D(this->getOrientation().getUnit())); };
@@ -58,6 +57,7 @@ private:
 	Integral1 OrientationZ_;*/
 	Vector3D Orientation_;
 	Vector3D OrientationUncertainty_;
+
 };
 
 #endif // POSEBUILDER_H

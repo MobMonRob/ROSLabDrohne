@@ -152,11 +152,13 @@
   <ItemGroup>
     <ClCompile Include="src\DataCollector.cpp" />
     <ClCompile Include="src\DataLoader.cpp" />
+    <ClCompile Include="src\DataPersister.cpp" />
     <ClCompile Include="src\parrotPlotter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BagPlotter\DataCollector.h" />
     <ClInclude Include="include\BagPlotter\DataLoader.h" />
+    <ClInclude Include="include\BagPlotter\DataPersister.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
