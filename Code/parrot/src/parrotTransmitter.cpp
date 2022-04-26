@@ -35,12 +35,12 @@ bool parrotTransmitter::transmitAction(double roll, double pitch, double yarn, d
 		
 		if ((this->SendMask_ & TRANSMIT_ROLL) != 0)
 		{
-			Msg.linear.x = roll;
+			Msg.linear.x = pitch;
 		}
 
 		if ((this->SendMask_ & TRANSMIT_PITCH) != 0)
 		{
-			Msg.linear.y = pitch;
+			Msg.linear.y = roll;
 		}
 
 		if ((this->SendMask_ & TRANSMIT_YARN) != 0)
@@ -56,8 +56,8 @@ bool parrotTransmitter::transmitAction(double roll, double pitch, double yarn, d
 
 	if (Msg.linear.x == 0.0 && Msg.linear.y == 0.0 && Msg.linear.z == 0.0 && Msg.angular.z == 0.0)
 	{	// AntiHover
-		Msg.angular.x = 0.00000000001;
-		Msg.angular.y = 0.00000000001;
+		Msg.angular.x = 0.00001;
+		Msg.angular.y = 0.00001;
 	}
 
 	{	// send
