@@ -58,7 +58,7 @@ add_executable(AutoController
 	include/PosControl/Header.h
 	src/Integral1.cpp
 	src/Integral2.cpp
-	src/PosBridge.cpp
+	src/MainClass.cpp
 	src/PoseBuilder.cpp
 	src/RosBridge.cpp
 	src/Transmitter_Mock.cpp

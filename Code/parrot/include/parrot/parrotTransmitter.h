@@ -10,9 +10,9 @@
 
 
 #define TRANSMIT_ROLL	1
-#define TRANSMIT_PITCH	1
-#define TRANSMIT_YARN	1
-#define TRANSMIT_THRUST	1
+#define TRANSMIT_PITCH	2
+#define TRANSMIT_YARN	4
+#define TRANSMIT_THRUST	8
 
 
 class parrotTransmitter : public Transmitable

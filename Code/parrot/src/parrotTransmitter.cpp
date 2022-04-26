@@ -33,12 +33,12 @@ bool parrotTransmitter::transmitAction(double roll, double pitch, double yarn, d
 		 * https://ardrone-autonomy.readthedocs.io/en/latest/commands.html
 		 */
 		
-		if ((this->SendMask_ & TRANSMIT_ROLL) != 0)
+		if ((this->SendMask_ & TRANSMIT_PITCH) != 0)
 		{
 			Msg.linear.x = pitch;
 		}
 
-		if ((this->SendMask_ & TRANSMIT_PITCH) != 0)
+		if ((this->SendMask_ & TRANSMIT_ROLL) != 0)
 		{
 			Msg.linear.y = roll;
 		}
