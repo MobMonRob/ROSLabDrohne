@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\Test_parrot.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="BagLoader.SplitString" Duration="1" />
+    <TestDuration Test="BagLoader.LoadFile" Duration="1" />
+    <TestDuration Test="BagLoader.LoadFileData" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

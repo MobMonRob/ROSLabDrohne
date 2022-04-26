@@ -3,11 +3,6 @@
 #include <algorithm>
 
 
-
-
-
-
-
 Timestamp StateHandler::getTime()
 {
 	Timestamp ReturnTime;
@@ -21,32 +16,35 @@ Timestamp StateHandler::getTime()
 	return ReturnTime;
 }
 
-
-
-
 IMUState StateHandler::getAvgState()
 {
-	int BufferSize = this->getSize();
+	std::size_t BufferSize = this->getSize();
 	FixedPoint<Accuracy_Vector> Devider(0);
 	IMUState Sum;
 
-
-	for (int i = 0; i < BufferSize; i++)
+	if (BufferSize > 0)
 	{
-		Optional<IMUState> Data = this->getData(i);
-
-
-		if (Data.getValid())
+		for (std::size_t i = 0; i < BufferSize; i++)
 		{
-			Sum += Data.getData();
-			Devider += FixedPoint<Accuracy_Vector>(1);
+			Optional<IMUState> Data = this->getData(i);
+
+
+			if (Data.getValid())
+			{
+				Sum += Data.getData();
+				Devider += FixedPoint<Accuracy_Vector>(1);
+			}
 		}
+
+		return IMUState(Sum.getLinear() / Devider,
+			Sum.getRotational() / Devider,
+			Sum.getGroundClearance() / Devider,
+			Sum.getTimestamp());
 	}
-	
-	return IMUState(Sum.getLinear() / Devider,
-		Sum.getRotational() / Devider,
-		Sum.getGroundClearance() / Devider,
-		Sum.getTimestamp());
+	else
+	{
+		return IMUState();
+	}
 }
 
 IMUState StateHandler::getMedianState()
@@ -55,7 +53,7 @@ IMUState StateHandler::getMedianState()
 	Vector3D R(Unit_AngleVelDeg);
 	Value GC;
 	Timestamp Time = this->getTime();
-	int BufferSize = this->getSize();
+	std::size_t BufferSize = this->getSize();
 
 
 	if (BufferSize > 0)
@@ -97,6 +95,7 @@ IMUState StateHandler::getMedianState()
 		}
 
 		{	// sort
+			// maybe use nth_element?
 			std::sort(VectorAx.begin(), VectorAx.end());
 			std::sort(VectorAy.begin(), VectorAy.end());
 			std::sort(VectorAz.begin(), VectorAz.end());
@@ -137,3 +136,72 @@ IMUState StateHandler::getMedianState()
 
 	return IMUState(A, R, GC, Time);
 }
+
+IMUState StateHandler::getVariance()
+{
+	std::vector<FixedPoint<Accuracy_Value>> VectorAx;
+	std::vector<FixedPoint<Accuracy_Value>> VectorAy;
+	std::vector<FixedPoint<Accuracy_Value>> VectorAz;
+	std::vector<FixedPoint<Accuracy_Value>> VectorRx;
+	std::vector<FixedPoint<Accuracy_Value>> VectorRy;
+	std::vector<FixedPoint<Accuracy_Value>> VectorRz;
+	Value VectorGC;
+
+
+	for (int i = 0; i < this->getSize(); i++)
+	{
+		Optional<IMUState> DataWrapper = this->getData(i);
+
+
+		if (DataWrapper.getValid())
+		{
+			IMUState State = DataWrapper.getData();
+			Vector3D LinearAcceleration = State.getLinear();
+			Vector3D RotationalVelocity = State.getRotational();
+
+
+			VectorAx.push_back(LinearAcceleration.getX());
+			VectorAy.push_back(LinearAcceleration.getY());
+			VectorAz.push_back(LinearAcceleration.getZ());
+
+			VectorRx.push_back(RotationalVelocity.getX());
+			VectorRy.push_back(RotationalVelocity.getY());
+			VectorRz.push_back(RotationalVelocity.getZ());
+
+			VectorGC = State.getGroundClearance();
+		}
+	}
+
+	return IMUState(Vector3D(Unit(""), StateHandler::calcVariance(VectorAx), StateHandler::calcVariance(VectorAy), StateHandler::calcVariance(VectorAz)),
+		Vector3D(Unit(""), StateHandler::calcVariance(VectorRx), StateHandler::calcVariance(VectorRy), StateHandler::calcVariance(VectorRz)),
+		VectorGC,
+		this->getTime());
+}
+
+
+FixedPoint<Accuracy_Value> StateHandler::calcVariance(std::vector<FixedPoint<Accuracy_Value>> Data)
+{
+	FixedPoint<Accuracy_Value> ReturnValue;
+	FixedPoint<Accuracy_Value> Average;
+	std::size_t Counter = 0;
+
+	
+	for (std::vector<FixedPoint<Accuracy_Value>>::iterator it = Data.begin(); it != Data.end(); it++)
+	{
+		Average += *it;
+		Counter++;
+	}
+
+	if (Counter > 1)
+	{
+		Average /= static_cast<int>(Counter);
+
+		for (std::vector<FixedPoint<Accuracy_Value>>::iterator it = Data.begin(); it != Data.end(); it++)
+		{
+			ReturnValue += (*it - Average) * (*it - Average);
+		}
+	}
+
+	return ReturnValue;
+}
+

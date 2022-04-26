@@ -38,7 +38,7 @@ TEST(Class_StateHandler, Average_Single)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleVelRad, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleDeg, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
@@ -66,13 +66,13 @@ TEST(Class_StateHandler, Average_Double)
 	StateHandler SH(MaxEntries);
 	IMUState State1(
 		Vector3D(Unit_Acceleration, 1, 2, 3),
-		Vector3D(Unit_AngleRad, 0.1, 0.2, 0.3),
+		Vector3D(Unit_AngleDeg, 0.1, 0.2, 0.3),
 		Value(Unit_Length, 5),
 		Timestamp(FixedPoint<Accuracy_Time>(1))
 	);
 	IMUState State2(
 		Vector3D(Unit_Acceleration, 5, 6, 7),
-		Vector3D(Unit_AngleRad, 0.5, 0.6, 0.7),
+		Vector3D(Unit_AngleDeg, 0.5, 0.6, 0.7),
 		Value(Unit_Length, 15),
 		Timestamp(FixedPoint<Accuracy_Time>(10))
 	);
@@ -94,7 +94,7 @@ TEST(Class_StateHandler, Average_Double)
 
 	const IMUState Expectation(
 		Vector3D(Unit_Acceleration, 3, 4, 5),
-		Vector3D(Unit_AngleRad, 0.3, 0.4, 0.5),
+		Vector3D(Unit_AngleDeg, 0.3, 0.4, 0.5),
 		Value(Unit_Length, 10),
 		Timestamp(FixedPoint<Accuracy_Time>(10)));
 

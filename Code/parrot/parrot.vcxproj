@@ -89,13 +89,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Domain/include;../DroneController/include;../Adapter/include;../ROS_Mock;../BagPlotter/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseControlable.obj;DroneControlable.obj;StateBuilder.obj;PercentageOK.obj;VoltageOK.obj;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseControlable.obj;DroneControlable.obj;StateBuilder.obj;PercentageOK.obj;VoltageOK.obj;DataCollector.obj;DataLoader.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../BagPlotter/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,6 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="parrot.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\MessageTracker.cpp" />
     <ClCompile Include="src\parrotBattery.cpp" />
     <ClCompile Include="src\parrotControl.cpp" />

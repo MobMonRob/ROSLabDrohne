@@ -15,7 +15,7 @@ IMUState::IMUState(Vector3D Translative, Vector3D Angular, Value GroundClearance
 		this->Accelerations_ = Translative;
 	}
 
-	if (Angular.getUnit() == Unit_AngleVelRad)
+	if (Angular.getUnit() == Unit_AngleDeg)
 	{
 		this->Angles_ = Angular;
 	}
@@ -72,7 +72,7 @@ IMUState IMUState::operator-(const IMUState& S)
 	return IMUState(this->getLinear() - S.Accelerations_,
 		this->getRotational() - S.Angles_,
 		this->getGroundClearance() - S.GroundClearance_,
-		(this->getTimestamp() > S.Time_ ? this->getTimestamp() : S.Time_));
+		this->getTimestamp());
 }
 
 

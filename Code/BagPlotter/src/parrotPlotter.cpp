@@ -11,7 +11,7 @@
 
 
 #include "BagPlotter/DataCollector.h"
-
+#include "BagPlotter/DataLoader.h"
 
 /*
  * https://ardrone-autonomy.readthedocs.io/en/latest/reading.html

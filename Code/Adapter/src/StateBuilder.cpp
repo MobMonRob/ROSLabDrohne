@@ -1,6 +1,6 @@
 #include <Adapter/StateBuilder.h>
 
-
+#include <iostream>
 
 
 
@@ -8,7 +8,7 @@
 StateBuilder::StateBuilder(int MedianingEntries, int AveragingEntries, int OffsetingEntries)
 	: AvgHandler_(AveragingEntries),
 	OffsetHandler_(OffsetingEntries),
-	Offsetting_(false)
+	Offsetting_(true)
 {
 }
 
@@ -38,26 +38,42 @@ IMUState StateBuilder::createState(Timestamp Time,
 	return this->createState(Time, LinAccel, RotVel, GroundClearance);
 }
 
-IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalVelocity, Value GroundClearance)
+IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalValues, Value GroundClearance)
 {
-	IMUState Entry(LinearAcceleration, RotationalVelocity, GroundClearance, Time);
+	IMUState Entry(LinearAcceleration, RotationalValues, GroundClearance, Time);
+
 
 	if (this->OffsetTime_ == Timestamp())
 	{
 		this->OffsetTime_ = Time;
+
+		std::cout << "set OffsetTime to " << this->OffsetTime_.getTime().getValue() << std::endl;
 	}
 
 	if (this->getOffsetting() || this->OffsetHandler_.getSize() < 1)
 	{
-		this->OffsetHandler_.addEntry(Entry);
+		this->OffsetHandler_.addEntry(Entry - this->OffsetTime_);
 	}
-
+	
 	this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
 	this->AvgHandler_.addEntry(this->getStateMedianRaw());
 
 	return this->getState();
 }
 
+
+IMUState StateBuilder::getState()
+{
+	IMUState ReturnItem;
+
+
+	if (!this->getOffsetting())
+	{
+		ReturnItem = this->getStateAvgRaw() - this->getOffsetState();
+	}
+
+	return ReturnItem;
+}
 
 
 void StateBuilder::clearStateHandler()

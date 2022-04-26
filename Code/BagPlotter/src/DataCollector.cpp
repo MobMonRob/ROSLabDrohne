@@ -51,11 +51,7 @@ std::string DataCollector::getString(size_t StartID, size_t EndID, bool HeaderIn
 		ReturnString.append(this->getString_Header()).append("\n");
 	}
 
-	if (StartID < 0)
-	{
-		StartID = 0;
-	}
-	if (EndID < 0 || EndID >= this->getSize())
+	if (EndID >= this->getSize())
 	{
 		EndID = this->getSize() - 1;
 	}
