@@ -3,11 +3,6 @@
 #include <algorithm>
 
 
-
-
-
-
-
 Timestamp StateHandler::getTime()
 {
 	Timestamp ReturnTime;
@@ -21,32 +16,35 @@ Timestamp StateHandler::getTime()
 	return ReturnTime;
 }
 
-
-
-
 IMUState StateHandler::getAvgState()
 {
-	int BufferSize = this->getSize();
+	std::size_t BufferSize = this->getSize();
 	FixedPoint<Accuracy_Vector> Devider(0);
 	IMUState Sum;
 
-
-	for (int i = 0; i < BufferSize; i++)
+	if (BufferSize > 0)
 	{
-		Optional<IMUState> Data = this->getData(i);
-
-
-		if (Data.getValid())
+		for (std::size_t i = 0; i < BufferSize; i++)
 		{
-			Sum += Data.getData();
-			Devider += FixedPoint<Accuracy_Vector>(1);
+			Optional<IMUState> Data = this->getData(i);
+
+
+			if (Data.getValid())
+			{
+				Sum += Data.getData();
+				Devider += FixedPoint<Accuracy_Vector>(1);
+			}
 		}
+
+		return IMUState(Sum.getLinear() / Devider,
+			Sum.getRotational() / Devider,
+			Sum.getGroundClearance() / Devider,
+			Sum.getTimestamp());
 	}
-	
-	return IMUState(Sum.getLinear() / Devider,
-		Sum.getRotational() / Devider,
-		Sum.getGroundClearance() / Devider,
-		Sum.getTimestamp());
+	else
+	{
+		return IMUState();
+	}
 }
 
 IMUState StateHandler::getMedianState()
@@ -181,8 +179,6 @@ IMUState StateHandler::getVariance()
 }
 
 
-
-
 FixedPoint<Accuracy_Value> StateHandler::calcVariance(std::vector<FixedPoint<Accuracy_Value>> Data)
 {
 	FixedPoint<Accuracy_Value> ReturnValue;
@@ -196,14 +192,16 @@ FixedPoint<Accuracy_Value> StateHandler::calcVariance(std::vector<FixedPoint<Acc
 		Counter++;
 	}
 
-	Average /= static_cast<int>(Counter);
-
-	for (std::vector<FixedPoint<Accuracy_Value>>::iterator it = Data.begin(); it != Data.end(); it++)
+	if (Counter > 1)
 	{
-		ReturnValue += (*it - Average) * (*it - Average);
+		Average /= static_cast<int>(Counter);
+
+		for (std::vector<FixedPoint<Accuracy_Value>>::iterator it = Data.begin(); it != Data.end(); it++)
+		{
+			ReturnValue += (*it - Average) * (*it - Average);
+		}
 	}
 
-	return FixedPoint<Accuracy_Value>();
+	return ReturnValue;
 }
-
 

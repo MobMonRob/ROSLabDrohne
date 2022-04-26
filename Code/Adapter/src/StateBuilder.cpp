@@ -53,13 +53,10 @@ IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, 
 	if (this->getOffsetting() || this->OffsetHandler_.getSize() < 1)
 	{
 		this->OffsetHandler_.addEntry(Entry - this->OffsetTime_);
-
-
 	}
 	
 	this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
 	this->AvgHandler_.addEntry(this->getStateMedianRaw());
-	//this->AvgHandler_.addEntry(Entry - this->OffsetTime_);
 
 	return this->getState();
 }
