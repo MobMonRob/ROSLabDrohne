@@ -1,2 +1,0 @@
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\04_02_parrot.exe.lastcodeanalysissucceeded
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\parrot\Debug\NativeCodeAnalysis.read.1.tlog

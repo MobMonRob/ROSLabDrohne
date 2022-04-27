@@ -8,7 +8,7 @@
 
 
 
-
+/*
 TEST(Class_Integral1, AutoCalculation)
 {
 	Integral1 Integ1(Unit_Velocity, Unit_Length);
@@ -86,7 +86,7 @@ TEST(Class_PoseBuilder, AccelPos_X_10s)
 		EXPECT_TRUE(Expectation);
 	}
 }
-
+*/
 /*
 * Not in use, because there is no need for an interation within PosBuilder - Orientation
 * 

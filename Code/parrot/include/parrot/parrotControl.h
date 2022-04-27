@@ -22,7 +22,7 @@ public:
 	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, Transmitable* Transmitter);
 
 
-
+	bool setSetpointPose(Pose Setpoint) override { return false; };
 
 	bool calibrate() { return this->IMU_.calibrate(); };
 
