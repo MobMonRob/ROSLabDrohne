@@ -2,7 +2,6 @@
 #define PARROTIMU_H
 
 #include "DroneController/IMUable.h"
-#include "Domain/SafetyProvider.h"
 
 #include <ros/ros.h>
 #include <ardrone_autonomy/Navdata.h>
@@ -13,7 +12,7 @@
 #include "Adapter/StateBuilder.h"
 
 
-class parrotIMU : public IMUable, protected SafetyProvider
+class parrotIMU : public IMUable
 {
 public:
 	parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
@@ -43,7 +42,6 @@ private:
 	ros::Subscriber SubNav_;
 
 	StateBuilder StateBuilder_;
-	bool ValidData_;
 };
 
 #endif // PARROTIMU_H

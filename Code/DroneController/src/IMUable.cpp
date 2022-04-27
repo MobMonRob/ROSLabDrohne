@@ -1,10 +1,13 @@
 #include "DroneController/IMUable.h"
 
 
-IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
+IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController, FixedPoint<Accuracy_Value> ImpactThreshold)
 	: PoseBuilder_(PoseBuilder),
-	PoseController_(PoseController)
+	PoseController_(PoseController),
+	ImpactRequirement_(ImpactThreshold),
+	Valid_(false)
 {
+	this->addRequirement(&this->ImpactRequirement_);
 }
 
 

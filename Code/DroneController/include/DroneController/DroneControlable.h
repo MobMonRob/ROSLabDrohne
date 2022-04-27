@@ -30,6 +30,11 @@ public:
 	// Transmitter
 	bool transmitAction(double pitch, double roll, double thrust, double yarn) { return this->Transmitter_->transmitAction(pitch, roll, thrust, yarn); };
 
+	// Controlling
+	virtual bool setSetpointPose(Pose Setpoint) = 0;
+
+
+
 protected:
 	Statusable* Status_;
 	Batteryable* Battery_;

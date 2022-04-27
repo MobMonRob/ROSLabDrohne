@@ -12,7 +12,7 @@ public:
 	
 	void setOffsetState(IMUState S);
 	void setOffsetting(bool Offsetting) { this->Offsetting_ = Offsetting; };
-	void setValid(bool Validation) { this->Valid_ = Validation; };
+	void setValidFlag(bool Validation) { this->Valid_ = Validation; };
 
 	IMUState createState(Timestamp Time,
 		FixedPoint<Accuracy_Value> LinAccelX, FixedPoint<Accuracy_Value> LinAccelY, FixedPoint<Accuracy_Value> LinAccelZ,
@@ -25,7 +25,7 @@ public:
 	IMUState getStateAvgRaw() { return this->AvgHandler_.getAvgState(); };
 	IMUState getOffsetState() { return this->OffsetHandler_.getAvgState(); };
 	bool getOffsetting() const { return this->Offsetting_; };
-	bool getValid() const { return this->Valid_; };
+	bool getValidFlag() const { return this->Valid_; };
 
 	void clearStateHandler();
 	void reset();

@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseControlable.obj;DroneControlable.obj;StateBuilder.obj;PercentageOK.obj;VoltageOK.obj;DataCollector.obj;DataLoader.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;IMUable.obj;IMUState.obj;StateHandler.obj;ros_Talker.obj;ros.obj;SafetyProvider.obj;Batteryable.obj;Statusable.obj;Pose.obj;PoseControlable.obj;DroneControlable.obj;StateBuilder.obj;Watchdog.obj;TimeoutOK.obj;PercentageOK.obj;VoltageOK.obj;ImpactOK.obj;DataCollector.obj;DataLoader.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;../Application/Debug;../Adapter/Debug;../ROS_Mock/Debug;../BagPlotter/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

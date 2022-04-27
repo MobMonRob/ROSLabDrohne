@@ -8,7 +8,8 @@
 StateBuilder::StateBuilder(int MedianingEntries, int AveragingEntries, int OffsetingEntries)
 	: AvgHandler_(AveragingEntries),
 	OffsetHandler_(OffsetingEntries),
-	Offsetting_(true)
+	Offsetting_(true),
+	Valid_(false)
 {
 }
 

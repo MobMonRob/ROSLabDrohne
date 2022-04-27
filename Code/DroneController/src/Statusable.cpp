@@ -3,10 +3,10 @@
 #include "Domain/SafetyTranslative.h"
 
 
-Statusable::Statusable(Batteryable* Batteryable)
+Statusable::Statusable()
 	: StatusID_(-1)
 {
-	this->addRequirement(SafetyTranslative(Batteryable));
+	this->addReceiver(this);
 }
 
 

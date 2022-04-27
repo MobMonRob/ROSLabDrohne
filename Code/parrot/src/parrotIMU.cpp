@@ -7,19 +7,18 @@
 
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
-	: IMUable(PoseBuilder, PoseController),
+	: IMUable(PoseBuilder, PoseController, FixedPoint<Accuracy_Value>(5)),
 	StateBuilder_(1, 1, 1),
 	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
 	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
 	SubIMU_(this->nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
-	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this)),
-	ValidData_(false)
+	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
 {
 	ROS_INFO("Starting parrotIMU...");
 	ros::spinOnce();
 
-	this->reset();
+	this->calibrate();
 
 	ROS_INFO("Started parrotIMU");
 }
@@ -45,8 +44,9 @@ bool parrotIMU::calibrate()
 
 	if (ReturnBool)
 	{
-		this->StateBuilder_.setValid(true);
-		this->PoseBuilder_->setValid(true);
+		this->StateBuilder_.setValidFlag(true);
+		this->PoseBuilder_->setValidFlag(true);
+		this->setValidFlag(true);
 	}
 
 	return ReturnBool;
@@ -56,7 +56,7 @@ bool parrotIMU::calibrate()
 
 void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
-	if (this->StateBuilder_.getValid())
+	if (this->StateBuilder_.getValidFlag())
 	{
 		Timestamp Time(navdataPtr->header.stamp.toSec());
 		Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
@@ -68,6 +68,9 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 
 		// maybe trigger new Thread??
 		IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalDeg, GroundClearance);
+
+		this->ImpactRequirement_.updateAcceleration(State.getLinear());
+		this->meetsRequirements();
 
 		// How to null a State when on the Ground? It that necessary?
 		this->calcPose(State);

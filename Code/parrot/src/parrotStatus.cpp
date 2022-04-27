@@ -6,8 +6,8 @@
 
 
 
-parrotStatus::parrotStatus(parrotBattery* Battery, parrotIMU* IMU)
-	: Statusable(Battery),
+parrotStatus::parrotStatus(parrotIMU* IMU)
+	: Statusable(),
 	nh_(),
 	Sub_(nh_.subscribe("ardrone/navdata", 1, &parrotStatus::callbackNavdata, this)),
 	IMU_(IMU)
@@ -16,7 +16,7 @@ parrotStatus::parrotStatus(parrotBattery* Battery, parrotIMU* IMU)
 	ros::spinOnce();
 
 	this->initSystemStatus();
-	
+
 	ROS_INFO("Started parrotStatus");
 }
 
@@ -39,7 +39,7 @@ bool parrotStatus::setArmState(bool ArmState)
 
 	if (ArmState)
 	{
-		if (this->meetsRequirements())
+		if (this->meetsRequirements(this->getTime()))
 		{
 			if (this->isGrounded() || this->getStatusID() == 0)
 			{
@@ -206,10 +206,7 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 	this->setStatusID(navdataPtr->state);
 	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
 
-	if (!this->meetsRequirements())
-	{
-		this->setArmState(false);
-	}
+	this->meetsRequirements(this->getTime());
 
 	if (StatusChange && this->IMU_ != nullptr)
 	{
