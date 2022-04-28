@@ -4,10 +4,11 @@
 IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController, FixedPoint<Accuracy_Value> ImpactThreshold)
 	: PoseBuilder_(PoseBuilder),
 	PoseController_(PoseController),
-	ImpactRequirement_(ImpactThreshold),
+	ImpactRequirement_(new ImpactOK(ImpactThreshold)),
 	Valid_(false)
 {
-	this->addRequirement(&this->ImpactRequirement_);
+	this->addRequirement(this->ImpactRequirement_);
+	this->addReceiver(this);
 }
 
 

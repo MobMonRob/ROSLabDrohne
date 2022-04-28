@@ -1,5 +1,7 @@
 #include "parrot/parrotIMU.h"
 
+#include <iostream>
+
 #include "Domain/Vector3D.h"
 #include "std_srvs/Empty.h"
 
@@ -8,12 +10,13 @@
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 	: IMUable(PoseBuilder, PoseController, FixedPoint<Accuracy_Value>(5)),
-	StateBuilder_(1, 1, 1),
+	StateBuilder_(3, 1, 25),
 	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
 	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
 	SubIMU_(this->nh_.subscribe("ardrone/imu", 1, &parrotIMU::callbackIMU, this)),
-	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this))
+	SubNav_(this->nh_.subscribe("ardrone/navdata", 1, &parrotIMU::callbackNavdata, this)),
+	MsgCount_(0)
 {
 	ROS_INFO("Starting parrotIMU...");
 	ros::spinOnce();
@@ -33,6 +36,17 @@ parrotIMU::~parrotIMU()
 
 
 
+void parrotIMU::setFlightState(bool FlightState)
+{
+	this->StateBuilder_.setOffsettingFlag(!FlightState);
+
+	if (FlightState)
+	{
+		this->PoseBuilder_->setCalculationFlag(true);
+	}
+}
+
+
 bool parrotIMU::calibrate()
 {
 	bool ReturnBool = false;
@@ -44,12 +58,28 @@ bool parrotIMU::calibrate()
 
 	if (ReturnBool)
 	{
+		this->StateBuilder_.reset();
 		this->StateBuilder_.setValidFlag(true);
-		this->PoseBuilder_->setValidFlag(true);
+		this->PoseBuilder_->reset();
+		//this->PoseBuilder_->setValidFlag(true);
 		this->setValidFlag(true);
+		this->MsgCount_ = 0;
 	}
 
 	return ReturnBool;
+}
+
+void parrotIMU::safetyTriggered()
+{
+	std::cout << "parrotIMU::safetyTriggered" << std::endl;
+
+	this->StateBuilder_.setValidFlag(false);
+
+	this->PoseBuilder_->setValidFlag(false);
+	this->PoseBuilder_->setCalibrationFlag(false);
+	this->PoseBuilder_->setCalculationFlag(false);
+
+	IMUable::safetyTriggered();
 }
 
 
@@ -60,19 +90,29 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 	{
 		Timestamp Time(navdataPtr->header.stamp.toSec());
 		Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
-		Vector3D RotationalDeg(Unit_AngleDeg,
+		Vector3D Rotational(Unit_State_Angular,
 			FixedPoint<Accuracy_Value>(navdataPtr->rotX),
 			FixedPoint<Accuracy_Value>(navdataPtr->rotY),
 			FixedPoint<Accuracy_Value>(navdataPtr->rotZ));
 		Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 
 		// maybe trigger new Thread??
-		IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), RotationalDeg, GroundClearance);
+		IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), Rotational, GroundClearance);
 
-		this->ImpactRequirement_.updateAcceleration(State.getLinear());
+		this->ImpactRequirement_->updateAcceleration(State.getLinear());
 		this->meetsRequirements();
 
-		// How to null a State when on the Ground? It that necessary?
+		if (++MsgCount_ == 150)
+		{
+			this->StateBuilder_.setOffsettingFlag(false);
+			this->PoseBuilder_->setCalibrationFlag(true);
+		}
+
+		if (((navdataPtr->motor1 + navdataPtr->motor2 + navdataPtr->motor3 + navdataPtr->motor4) > TakeoffRotorSpeed || (navdataPtr->altd) > 0) && this->getValidFlag())
+		{
+			this->PoseBuilder_->setValidFlag(true);
+		}
+
 		this->calcPose(State);
 		this->triggerController();
 
@@ -95,8 +135,6 @@ void parrotIMU::publishState()
 {
 	geometry_msgs::Twist Msg;
 	IMUState State = this->StateBuilder_.getState();
-
-
 
 
 	Msg.linear.x = State.getLinear().getX().getValue();

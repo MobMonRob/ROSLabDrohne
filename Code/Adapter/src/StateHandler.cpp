@@ -129,7 +129,7 @@ IMUState StateHandler::getMedianState()
 
 
 			A = Vector3D(Unit_Acceleration, VectorAx.at(Index), VectorAy.at(Index), VectorAz.at(Index));
-			R = Vector3D(Unit_AngleVelDeg, VectorRx.at(Index), VectorRy.at(Index), VectorRz.at(Index));
+			R = Vector3D(Unit_State_Angular, VectorRx.at(Index), VectorRy.at(Index), VectorRz.at(Index));
 			GC = VectorGC.at(Index);
 		}
 	}
@@ -172,8 +172,8 @@ IMUState StateHandler::getVariance()
 		}
 	}
 
-	return IMUState(Vector3D(Unit(""), StateHandler::calcVariance(VectorAx), StateHandler::calcVariance(VectorAy), StateHandler::calcVariance(VectorAz)),
-		Vector3D(Unit(""), StateHandler::calcVariance(VectorRx), StateHandler::calcVariance(VectorRy), StateHandler::calcVariance(VectorRz)),
+	return IMUState(Vector3D(Unit_None, StateHandler::calcVariance(VectorAx), StateHandler::calcVariance(VectorAy), StateHandler::calcVariance(VectorAz)),
+		Vector3D(Unit_None, StateHandler::calcVariance(VectorRx), StateHandler::calcVariance(VectorRy), StateHandler::calcVariance(VectorRz)),
 		VectorGC,
 		this->getTime());
 }

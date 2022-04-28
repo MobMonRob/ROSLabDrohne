@@ -62,8 +62,8 @@ namespace ros
 	class ServiceClient
 	{
 	public:
-		bool call(Msg) { return false; };
-		bool call(std_srvs::Empty) { return false; };
+		bool call(Msg) { return true; };
+		bool call(std_srvs::Empty) { return true; };
 		std::string getService() { return std::string(); };
 	};
 

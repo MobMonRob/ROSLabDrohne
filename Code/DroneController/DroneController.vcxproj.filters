@@ -63,6 +63,9 @@
     <ClCompile Include="src\ImpactOK.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\PoseBuildable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DroneController\Batteryable.h">

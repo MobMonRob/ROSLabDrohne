@@ -70,6 +70,15 @@ void Vector3D::operator+=(const Vector3D& V)
 	}
 }
 
+void Vector3D::operator-=(const Vector3D& V)
+{
+	if (V.getUnit() == this->getUnit())
+	{
+		this->X_ -= V.X_;
+		this->Y_ -= V.Y_;
+		this->Z_ -= V.Z_;
+	}
+}
 
 
 

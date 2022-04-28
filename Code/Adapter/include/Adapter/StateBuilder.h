@@ -11,7 +11,8 @@ public:
 	StateBuilder(int MedianingEntries = 3, int AveragingEntries = 3, int OffsetingEntries = 10);
 	
 	void setOffsetState(IMUState S);
-	void setOffsetting(bool Offsetting) { this->Offsetting_ = Offsetting; };
+	void setOffsettingFlag(bool Flag);
+	void setOffsetTime(Timestamp Time);
 	void setValidFlag(bool Validation) { this->Valid_ = Validation; };
 
 	IMUState createState(Timestamp Time,
@@ -23,8 +24,8 @@ public:
 	IMUState getState();
 	IMUState getStateMedianRaw() { return this->MedianHandler_.getMedianState(); };
 	IMUState getStateAvgRaw() { return this->AvgHandler_.getAvgState(); };
-	IMUState getOffsetState() { return this->OffsetHandler_.getAvgState(); };
-	bool getOffsetting() const { return this->Offsetting_; };
+	IMUState getOffsetState() { return this->OffsetState_; };
+	bool getOffsettingFlag() const { return this->Offsetting_; };
 	bool getValidFlag() const { return this->Valid_; };
 
 	void clearStateHandler();
@@ -35,6 +36,7 @@ private:
 	StateHandler AvgHandler_;
 	StateHandler OffsetHandler_;
 	Timestamp OffsetTime_;
+	IMUState OffsetState_;
 	bool Offsetting_;
 	bool Valid_;
 };

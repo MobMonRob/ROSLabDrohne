@@ -22,8 +22,33 @@ void StateBuilder::setOffsetState(IMUState S)
 	this->OffsetHandler_.addEntry(S);
 }
 
+void StateBuilder::setOffsettingFlag(bool Flag)
+{
+	std::cout << "StateOffsettig = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
 
+	if (!Flag)
+	{
+		this->OffsetState_ = this->OffsetHandler_.getAvgState();
+
+		if (this->getOffsettingFlag())
+		{
+			std::cout << "StateOffset: " << this->getOffsetState().getString() << std::endl;
+		}
+	}
+
+	this->Offsetting_ = Flag;
+}
+
+void StateBuilder::setOffsetTime(Timestamp Time)
+{
+	if (this->OffsetTime_ == Timestamp())
+	{
+		this->OffsetTime_ = Time;
+
+		std::cout << "OffsetTime = " << this->OffsetTime_.getTime().getValue() << std::endl;
+	}
+}
 
 
 
@@ -41,23 +66,21 @@ IMUState StateBuilder::createState(Timestamp Time,
 
 IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalValues, Value GroundClearance)
 {
-	IMUState Entry(LinearAcceleration, RotationalValues, GroundClearance, Time);
-
-
-	if (this->OffsetTime_ == Timestamp())
+	if (this->getValidFlag())
 	{
-		this->OffsetTime_ = Time;
+		IMUState Entry(LinearAcceleration, RotationalValues, GroundClearance, Time);
 
-		std::cout << "set OffsetTime to " << this->OffsetTime_.getTime().getValue() << std::endl;
-	}
 
-	if (this->getOffsetting() || this->OffsetHandler_.getSize() < 1)
-	{
-		this->OffsetHandler_.addEntry(Entry - this->OffsetTime_);
+		this->setOffsetTime(Time);
+
+		this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
+		this->AvgHandler_.addEntry(this->getStateMedianRaw());
+
+		if (this->getOffsettingFlag() || this->OffsetHandler_.getSize() < 1)
+		{
+			this->OffsetHandler_.addEntry(Entry - this->OffsetTime_);
+		}
 	}
-	
-	this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
-	this->AvgHandler_.addEntry(this->getStateMedianRaw());
 
 	return this->getState();
 }
@@ -68,9 +91,9 @@ IMUState StateBuilder::getState()
 	IMUState ReturnItem;
 
 
-	if (!this->getOffsetting())
+	if (this->getValidFlag() && !this->getOffsettingFlag())
 	{
-		ReturnItem = this->getStateAvgRaw() - this->getOffsetState();
+		ReturnItem = (this->getStateAvgRaw() - this->getOffsetState()) + this->OffsetTime_;
 	}
 
 	return ReturnItem;
@@ -86,8 +109,12 @@ void StateBuilder::clearStateHandler()
 
 void StateBuilder::reset()
 {
+	std::cout << "StateBuilder Reset..." << std::endl;
+
 	this->clearStateHandler();
 	this->OffsetHandler_.clear();
+	this->setOffsettingFlag(true);
+	this->OffsetState_ = IMUState();
 }
 
 

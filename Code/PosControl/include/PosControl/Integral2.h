@@ -18,6 +18,7 @@ public:
 	bool setInput(TimedValue V, bool AutoCalculation = true);
 
 	TimedValue getOutput() { return this->Integral2_.getOutput(); };
+	TimedValue getOutputHidden() { return this->Integral1_.getOutput(); };
 	Unit getOutputUnit() { return this->Integral2_.getOutputUnit(); };
 
 	void reset() {this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),

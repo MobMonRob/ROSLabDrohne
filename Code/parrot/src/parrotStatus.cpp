@@ -201,6 +201,11 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 	if (StatusChange)
 	{
 		ROS_INFO("Status changed to %s.", this->getStatusTranslation(navdataPtr->state).c_str());
+
+		if (navdataPtr->state == 0 && (this->isGrounded() || this->isFlying()))
+		{
+			this->triggerReceivers();
+		}
 	}
 
 	this->setStatusID(navdataPtr->state);

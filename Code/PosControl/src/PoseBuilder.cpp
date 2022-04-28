@@ -13,7 +13,7 @@ PoseBuilder::PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_V
 	/*OrientationX_(Unit_AngleVelRad, Unit_AngleRad),
 	OrientationY_(Unit_AngleVelRad, Unit_AngleRad),
 	OrientationZ_(Unit_AngleVelRad, Unit_AngleRad),*/
-	Orientation_(Unit_AngleRad),
+	Orientation_(Unit_State_Angular),
 	OrientationUncertainty_(Unit_None)
 {
 }
@@ -22,9 +22,13 @@ PoseBuilder::PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_V
 
 
 
-void PoseBuilder::setPosition(Vector3D Position, Vector3D Uncertainty)
+void PoseBuilder::setPosition(Vector3D Position, Vector3D Velocity, Vector3D Uncertainty)
 {
-	std::cout << "setPosition() not implemented, yet." << std::endl;
+	std::cout << "setPosition()" << std::endl;
+
+	this->PositionX_.reset(Value(Position.getUnit(), Position.getX()), Value(Velocity.getUnit(), Velocity.getX()));
+	this->PositionY_.reset(Value(Position.getUnit(), Position.getY()), Value(Velocity.getUnit(), Velocity.getY()));
+	this->PositionZ_.reset(Value(Position.getUnit(), Position.getZ()), Value(Velocity.getUnit(), Velocity.getZ()));
 }
 
 void PoseBuilder::setOrientation(Vector3D Orientation, Vector3D Uncertainty)
@@ -37,9 +41,10 @@ void PoseBuilder::setOrientation(Vector3D Orientation, Vector3D Uncertainty)
 
 
 
+
 Pose PoseBuilder::getPose()
 {
-	if (this->getTime() > Timestamp())
+	if (this->getCalculationFlag())
 	{
 		return Pose(this->getTime(),
 			this->getPosition(),
@@ -48,16 +53,45 @@ Pose PoseBuilder::getPose()
 			this->getPositionUncertainty());
 	}
 
-	return Pose(Timestamp(), Vector3D(Unit_Length), Vector3D(Unit_AngleRad));
+	return Pose(Timestamp(), Vector3D(this->getPosition().getUnit()), Vector3D(this->getOrientation().getUnit()));
 }
 
 Vector3D PoseBuilder::getPosition()
 {
-	return Vector3D(Unit_Length,
-		this->PositionX_.getOutput().getValue(),
-		this->PositionY_.getOutput().getValue(),
-		this->PositionZ_.getOutput().getValue());
+	if (this->getValidFlag() && this->getCalculationFlag())
+	{
+		return Vector3D(this->PositionX_.getOutputUnit(),
+			this->PositionX_.getOutput().getValue(),
+			this->PositionY_.getOutput().getValue(),
+			this->PositionZ_.getOutput().getValue());
+	}
+
+	return Vector3D(Unit_Acceleration);
 }
+
+Vector3D PoseBuilder::getVelocity()
+{
+	if (this->getValidFlag() && this->getCalculationFlag())
+	{
+		return Vector3D(this->PositionX_.getOutputHidden().getUnit(),
+			this->PositionX_.getOutputHidden().getValue(),
+			this->PositionY_.getOutputHidden().getValue(),
+			this->PositionZ_.getOutputHidden().getValue());
+	}
+
+	return Vector3D(Unit_Velocity);
+}
+
+Vector3D PoseBuilder::getOrientation()
+{
+	if (this->getValidFlag() && this->getCalculationFlag())
+	{
+		return this->Orientation_;
+	}
+	
+	return Vector3D(this->Orientation_.getUnit());
+}
+
 /*
 Vector3D PoseBuilder::getOrientation()
 {
@@ -68,22 +102,47 @@ Vector3D PoseBuilder::getOrientation()
 }
 */
 
+
 bool PoseBuilder::updatePose(IMUState State)
 {
 	bool ReturnBool = false;
 
-	
 
-	if (this->getTime() > Timestamp())
+	if (this->getCalibrationFlag() || this->getCalculationFlag())
 	{
-		this->updatePosition(State.getLinear(), this->getOrientation(), State.getTimestamp());
-		this->updateOrientation(State.getRotational(), State.getTimestamp());
+		Vector3D StateAcceleration = State.getLinear();
+		Vector3D StateOrientation = State.getRotational();
+		Timestamp Time = State.getTimestamp();
+
+
+		if (this->getCalibrationFlag())
+		{
+			this->setCalibrationBegin(Time);
+
+			Time -= this->getCalibrationBegin();
+		}
+
+		if (this->getCalculationFlag())
+		{
+			this->setCalculationBegin(Time);
+
+			StateAcceleration;// -= this->getOffsetAcceleration();
+
+			Time -= this->getCalculationBegin();
+		}
+		
+		if (this->getTime() < State.getTimestamp())
+		{
+			this->updateOrientation(StateOrientation, Time);
+			this->updatePosition(StateAcceleration, this->getOrientation(), Time);
 
 
 
-		// Calc Error / Drift
 
-		ReturnBool = true;
+			// Calc Error / Drift
+
+			ReturnBool = true;
+		}
 	}
 
 	this->Time_ = State.getTimestamp();
@@ -93,10 +152,12 @@ bool PoseBuilder::updatePose(IMUState State)
 
 bool PoseBuilder::updatePosition(Vector3D LinearAcceleration, Vector3D Orientation, Timestamp Time)
 {
+	/*
 	LinearAcceleration = LinearAcceleration.rotate(
 		Orientation.getX().getValue(),
 		Orientation.getY().getValue(),
 		Orientation.getZ().getValue());
+	*/
 
 	this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getX(), Time), true);
 	this->PositionY_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getY(), Time), true);
@@ -117,18 +178,40 @@ bool PoseBuilder::updateOrientation(Vector3D RotationalAngle, Timestamp Time)
 	return true;
 }
 
+void PoseBuilder::calcOffset()
+{
+	Timestamp TimeDelta = this->getTime() - this->getCalibrationBegin();
 
+
+	if (TimeDelta > Timestamp())
+	{
+		FixedPoint<Accuracy_Value> sqrtTimeDelta = FixedPoint<Accuracy_Value>(std::sqrt(TimeDelta.getTime().getValue())); // FixedPoint does not implement a sqrt-Method.
+		FixedPoint<Accuracy_Value> DriftX = this->PositionX_.getOutput().getValue();
+		FixedPoint<Accuracy_Value> DriftY = this->PositionY_.getOutput().getValue();
+		FixedPoint<Accuracy_Value> DriftZ = this->PositionZ_.getOutput().getValue();
+		FixedPoint<Accuracy_Value> Devider = TimeDelta.getTime()* TimeDelta.getTime() * FixedPoint<Accuracy_Value>(2);
+
+		
+		this->setOffsetAcceleration(DriftX / Devider,
+			DriftY / Devider,
+			DriftZ / Devider);
+			
+
+		std::cout << "PoseCalibration (" << TimeDelta.getTime().getValue() <<"s): " << this->getOffsetAcceleration().getString() << std::endl;
+	}
+}
 
 
 void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
 {
-	this->PositionX_.reset(Value(Position.getUnit(), Position.getX()));
-	this->PositionY_.reset(Value(Position.getUnit(), Position.getY()));
-	this->PositionZ_.reset(Value(Position.getUnit(), Position.getZ()));
-	/*this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getX()));
-	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getY()));
-	this->OrientationX_.reset(Value(Orientation.getUnit(), Orientation.getZ()));*/
-	this->Orientation_ = Orientation;
+	std::cout << "PoseBuilder Reset..." << std::endl;
+
+	setCalibrationFlag(false);
+	setCalculationFlag(false);
+	this->setOffsetAcceleration(0, 0, 0);
+
+	this->setPosition(Position);
+	this->setOrientation(Orientation);
 }
 
 

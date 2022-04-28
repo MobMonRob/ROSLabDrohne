@@ -150,6 +150,7 @@
     <ClCompile Include="src\ImpactWatcher.cpp" />
     <ClCompile Include="src\IMUable.cpp" />
     <ClCompile Include="src\PercentageOK.cpp" />
+    <ClCompile Include="src\PoseBuildable.cpp" />
     <ClCompile Include="src\PoseControlable.cpp" />
     <ClCompile Include="src\IMUState.cpp" />
     <ClCompile Include="src\Pose.cpp" />

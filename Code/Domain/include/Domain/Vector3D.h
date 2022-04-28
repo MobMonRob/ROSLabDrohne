@@ -24,6 +24,7 @@ public:
 	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Accuracy_Vector>(Divisor); };
 	Vector3D operator/ (FixedPoint<Accuracy_Vector> Divisor);
 	void operator+= (const Vector3D& V);
+	void operator-= (const Vector3D& V);
 
 	Unit getUnit() const { return this->Unit_; };
 	FixedPoint<Accuracy_Vector> getX() const { return this->X_; };

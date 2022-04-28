@@ -25,10 +25,10 @@ const Unit Unit_None("");
 
 const Unit Unit_Length("m");
 const Unit Unit_Velocity("m/s");
-const Unit Unit_Acceleration("m/s²");
+const Unit Unit_Acceleration("m/(s*s)");
 
-const Unit Unit_AngleDeg("°");
-const Unit Unit_AngleVelDeg("°/s");
+const Unit Unit_AngleDeg("deg");
+const Unit Unit_AngleVelDeg("deg/s");
 const Unit Unit_AngleRad("rad");
 const Unit Unit_AngleVelRad("rad/s");
 
@@ -37,7 +37,7 @@ const Unit Unit_Percent("%");
 const Unit Unit_Force("N");
 const Unit Unit_Force_Moment("Nm");
 
-const Unit Unit_Pressure("N/mm²");
+const Unit Unit_Pressure("N/(mm*mm)");
 const Unit Unit_Pressure_mPa("mPa");
 
 const Unit Unit_Frequence("1/s");

@@ -1,6 +1,7 @@
 #ifndef IMUABLE_H
 #define IMUABLE_H
 
+#include <iostream>
 #include <mutex>
 
 #include "DroneController/Timeable.h"
@@ -27,7 +28,7 @@ public:
 	Pose getPose() { return this->PoseBuilder_->getPose(); };
 	bool getValidFlag() const { return this->Valid_; };
 
-	void safetyTriggered() override { this->setValidFlag(false); };
+	void safetyTriggered() override { std::cout << "IMUable::safetyTriggered" << std::endl; this->setValidFlag(false); };
 
 protected:
 	void setValidFlag(bool Validation) { this->Valid_ = Validation; };
@@ -37,7 +38,7 @@ protected:
 
 protected:
 	PoseBuildable* PoseBuilder_;
-	ImpactOK ImpactRequirement_;
+	ImpactOK* ImpactRequirement_;
 
 private:
 	PoseControlable* PoseController_;

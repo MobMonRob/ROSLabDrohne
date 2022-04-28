@@ -12,7 +12,7 @@
 class DataPersister
 {
 public:
-	static size_t persist(DataCollector* Collector, std::string FilePath);
+	static size_t persist(DataCollector* Collector, std::string FilePath, std::size_t PrintCount = 2);
 
 };
 

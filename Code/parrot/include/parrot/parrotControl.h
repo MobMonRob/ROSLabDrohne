@@ -1,12 +1,12 @@
 #ifndef PARROTCONTROL_H
 #define PARROTCONTROL_H
 
-#include "DroneController/DroneControlable.h"
-
 #include <ros/ros.h>
 
-#include "Domain/Vector3D.h"
+#include "DroneController/DroneControlable.h"
 #include "DroneController/Timeable.h"
+
+#include "Domain/Vector3D.h"
 #include "DroneController/PoseBuildable.h"
 #include "DroneController/PoseControlable.h"
 
@@ -32,7 +32,6 @@ public:
 	double getGroundClearance() { return this->Orientation_->getGroundClearance(); };
 	double getGroundClearance_deangled() { return this->Orientation_->getGroundClearance_deangled(); };
 	
-	mavros_msgs::ManualControl getRC_normalized();
 	*/
 
 private:

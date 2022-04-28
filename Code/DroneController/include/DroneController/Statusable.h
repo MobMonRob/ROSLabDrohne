@@ -1,6 +1,7 @@
 #ifndef STATUSABLE_H
 #define STATUSABLE_H
 
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -28,7 +29,7 @@ public:
 	virtual bool isGrounded() = 0;
 	virtual bool isFlying() = 0;
 
-	void safetyTriggered() override { this->setArmState(false); };
+	void safetyTriggered() override { std::cout << "Statusable::safetyTriggered" << std::endl; this->setArmState(false); };
 
 protected:
 	void setStatusID(int ID) { this->StatusID_ = ID; };

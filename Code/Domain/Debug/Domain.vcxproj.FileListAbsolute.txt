@@ -1,2 +1,0 @@
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Debug\01_Domain.exe.lastcodeanalysissucceeded
-C:\Users\maag\Git-Repos\DHBW_SARB\ROSLabDrohne\Code\Domain\Debug\NativeCodeAnalysis.read.1.tlog

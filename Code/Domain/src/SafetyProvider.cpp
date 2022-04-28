@@ -11,6 +11,11 @@ bool SafetyProvider::meetsRequirements()
 		ReturnBool &= this->Requirements_.at(i)->meets();
 	}
 
+	if (!ReturnBool)
+	{
+		this->triggerReceivers();
+	}
+
 	return ReturnBool;
 }
 

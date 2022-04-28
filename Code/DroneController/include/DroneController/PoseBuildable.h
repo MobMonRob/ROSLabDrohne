@@ -10,10 +10,15 @@
 class PoseBuildable
 {
 public:
-	virtual void setPosition(Vector3D Position, Vector3D Uncertainty = Vector3D(Unit_None)) = 0;
+	PoseBuildable();
+	
+	
+	
+	virtual void setPosition(Vector3D Position = Vector3D(Unit_Acceleration), Vector3D Velocity = Vector3D(Unit_Velocity), Vector3D Uncertainty = Vector3D(Unit_None)) = 0;
 	virtual void setOrientation(Vector3D Orientation, Vector3D Uncertainty = Vector3D(Unit_None)) = 0;
-	void setValidFlag(bool Validation) { this->Valid_ = Validation; };
-	void setCalibration(bool Calibration) { this->Calibration_ = Calibration; };
+	void setValidFlag(bool Flag);
+	void setCalibrationFlag(bool Flag);
+	void setCalculationFlag(bool Flag);
 
 	virtual Pose getPose() = 0;
 	virtual Timestamp getTime() const = 0;
@@ -22,16 +27,34 @@ public:
 	virtual Vector3D getOrientation() = 0;
 	virtual Vector3D getOrientationUncertainty() const = 0;
 	bool getValidFlag() const { return this->Valid_; };
-	bool getCalibration() const { return this->Calibration_; };
+	bool getCalibrationFlag() const { return this->Calibration_; };
+	Vector3D getOffsetAcceleration() const { return this->AccelerationOffset_; };
+	bool getCalculationFlag() const { return this->Calculate_; };
 
 	virtual bool updatePose(IMUState State) = 0;
 
 	virtual void reset() = 0;
 
+protected:
+	void setCalibrationBegin(Timestamp Time);
+	void setOffsetAcceleration(FixedPoint<Accuracy_Value> OffsetX, FixedPoint<Accuracy_Value> OffsetY, FixedPoint<Accuracy_Value> OffsetZ);
+	virtual void calcOffset() = 0;
+	void setCalculationBegin(Timestamp Time);
+
+	Timestamp getCalibrationBegin() const { return this->CalibrationBegin_; };
+	Timestamp getCalculationBegin() const { return this->CalculationBegin_; };
+
+
+
 private:
 	bool Valid_;
-	bool Calibration_;
 
+	bool Calibration_;
+	Timestamp CalibrationBegin_;
+	Vector3D AccelerationOffset_;
+	
+	bool Calculate_;
+	Timestamp CalculationBegin_;
 };
 
 #endif // POSEBUILDABLE_H
