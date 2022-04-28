@@ -21,9 +21,6 @@ class parrotControl : public DroneControlable, public Timeable
 public:
 	parrotControl(PoseBuildable* PoseBuilder, PoseControlable* Controller, Transmitable* Transmitter);
 
-
-	bool setSetpointPose(Pose Setpoint) override { return false; };
-
 	bool calibrate() { return this->IMU_.calibrate(); };
 
 	bool reset() { return this->Status_.resetStatus(); };

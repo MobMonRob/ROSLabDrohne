@@ -5,8 +5,12 @@
 
 
 
-DroneControlable::DroneControlable(Statusable* Status, Batteryable* Battery, IMUable* IMU, Transmitable* Transmitter)
-	: Status_(Status), Battery_(Battery), IMU_(IMU), Transmitter_(Transmitter)
+DroneControlable::DroneControlable(Statusable* Status, Batteryable* Battery, IMUable* IMU, PoseControlable* Controller, Transmitable* Transmitter)
+	: Status_(Status), 
+	Battery_(Battery), 
+	IMU_(IMU), 
+	Controller_(Controller),
+	Transmitter_(Transmitter)
 {
 	this->addRequirement(new SafetyTranslative(this->Battery_));
 	this->addRequirement(new SafetyTranslative(this->Status_));

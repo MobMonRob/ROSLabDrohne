@@ -43,12 +43,18 @@ add_library(DroneController_lib
 	src/DroneControlable.cpp
 	src/IMUable.cpp
 	src/IMUState.cpp
-	src/PercentageOK.cpp
 	src/Pose.cpp
+	src/PoseBuildable.cpp
 	src/PoseControlable.cpp
 	src/Rotor.cpp
 	src/Statusable.cpp
 	src/Thrustable.cpp
+	src/Watchdog.cpp
+	src/ImpactWatcher.cpp
+	src/ImpactOK.cpp
+	src/PercentageOK.cpp
+	src/PercentageOK.cpp
+	src/TimeoutOK.cpp
 	src/VoltageOK.cpp
 )
 

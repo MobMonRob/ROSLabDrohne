@@ -32,11 +32,17 @@ public:
 	void reset();
 
 private:
+	void updateOffset();
+
+
+
+private:
 	StateHandler MedianHandler_;
 	StateHandler AvgHandler_;
 	StateHandler OffsetHandler_;
 	Timestamp OffsetTime_;
 	IMUState OffsetState_;
+	IMUState OffsetVariance_;
 	bool Offsetting_;
 	bool Valid_;
 };

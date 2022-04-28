@@ -12,7 +12,7 @@
 class DroneControlable : public SafetyProvider
 {
 public:
-	DroneControlable(Statusable* Status, Batteryable* Battery, IMUable* IMU, Transmitable* Transmitter);
+	DroneControlable(Statusable* Status, Batteryable* Battery, IMUable* IMU, PoseControlable* Controller, Transmitable* Transmitter);
 
 
 	// Status
@@ -31,7 +31,7 @@ public:
 	bool transmitAction(double pitch, double roll, double thrust, double yarn) { return this->Transmitter_->transmitAction(pitch, roll, thrust, yarn); };
 
 	// Controlling
-	virtual bool setSetpointPose(Pose Setpoint) = 0;
+	void setSetpointPose(Pose Setpoint) { this->Controller_->setPose(Setpoint); };
 
 
 
@@ -39,6 +39,7 @@ protected:
 	Statusable* Status_;
 	Batteryable* Battery_;
 	IMUable* IMU_;
+	PoseControlable* Controller_;
 	Transmitable* Transmitter_;
 };
 

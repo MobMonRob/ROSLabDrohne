@@ -68,10 +68,16 @@ add_executable(ManualController
 	src/ManualController.cpp
 )
 
+add_executable(RotationDetector 
+	src/AngleDetector.cpp
+)
+
 ## Add cmake target dependencies of the executable
 add_dependencies(AutoController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 add_dependencies(ManualController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} parrotController)
+add_dependencies(RotationDetector ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(AutoController ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
 target_link_libraries(ManualController ${catkin_LIBRARIES} parrotController)
+target_link_libraries(RotationDetector ${catkin_LIBRARIES} Domain_lib)

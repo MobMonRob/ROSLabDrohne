@@ -146,6 +146,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\AngleDetector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Integral1.cpp" />
     <ClCompile Include="src\Integral2.cpp" />
     <ClCompile Include="src\MainClass.cpp" />

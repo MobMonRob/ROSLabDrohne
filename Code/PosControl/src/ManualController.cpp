@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 
 	parrotBattery Battery(20.0);
 	parrotTransmitter Transmitter_;
-	StateController_ = new parrotStatus(&Battery);
+	StateController_ = new parrotStatus();
 
 	const double SmoothFactor = 0.875;
 	ros::Duration SmoothDuration(0.1);

@@ -95,38 +95,20 @@ std::string Vector3D::getString()
 	return ReturnString;
 }
 
-Vector3D Vector3D::rotate(double AngleX, double AngleY, double AngleZ)
+Vector3D Vector3D::rotate_Euler(FixedPoint<Accuracy_Vector> AngleX, FixedPoint<Accuracy_Vector> AngleY, FixedPoint<Accuracy_Vector> AngleZ)
 {
-	/*
-	FixedPoint<Vector_Accuracy> sinX(sin(AngleX));
-	FixedPoint<Vector_Accuracy> cosX(cos(AngleX));
-	FixedPoint<Vector_Accuracy> sinY(sin(AngleY));
-	FixedPoint<Vector_Accuracy> cosY(cos(AngleY));
-	FixedPoint<Vector_Accuracy> sinZ(sin(AngleZ));
-	FixedPoint<Vector_Accuracy> cosZ(cos(AngleZ));
+	return this->rotateZ(AngleX).rotateY(AngleY).rotateZ(AngleZ);
+}
 
-	// from Wiki https://en.wikipedia.org/wiki/Rotation_matrix, intrinsic
-	FixedPoint<Vector_Accuracy> X = this->getX() * (cosX * cosY)
-		+ this->getY() * (cosX * sinY * sinZ - sinX * cosZ)
-		+ this->getZ() * (cosX * sinY * cosZ + sinX * sinZ);
-	FixedPoint<Vector_Accuracy> Y = this->getX() * (sinX * cosY)
-		+ this->getY() * (sinX * sinY * sinZ + cosX * cosZ)
-		+ this->getZ() * (sinX * sinY * cosZ - cosX * sinZ);
-	FixedPoint<Vector_Accuracy> Z = this->getX() * (sinY * FixedPoint<Vector_Accuracy>(-1))
-		+ this->getY() * (cosY * sinZ)
-		+ this->getZ() * (cosY * cosZ);
-
-
-	return Vector3D(this->getUnit(), X, Y, Z);
-	*/
-
+Vector3D Vector3D::rotate_RollPitchYaw(FixedPoint<Accuracy_Vector> AngleX, FixedPoint<Accuracy_Vector> AngleY, FixedPoint<Accuracy_Vector> AngleZ)
+{
 	return this->rotateX(AngleX).rotateY(AngleY).rotateZ(AngleZ);
 }
 
-Vector3D Vector3D::rotateX(double Angle)
+Vector3D Vector3D::rotateX(FixedPoint<Accuracy_Vector> Angle)
 {
-	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
-	FixedPoint<Accuracy_Vector> COS(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle.getValue()));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle.getValue()));
 
 	FixedPoint<Accuracy_Vector> Y = this->getY() * COS
 		- this->getZ() * SIN;
@@ -137,10 +119,10 @@ Vector3D Vector3D::rotateX(double Angle)
 	return Vector3D(this->getUnit(), this->getX(), Y, Z);
 }
 
-Vector3D Vector3D::rotateY(double Angle)
+Vector3D Vector3D::rotateY(FixedPoint<Accuracy_Vector> Angle)
 {
-	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
-	FixedPoint<Accuracy_Vector> COS(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle.getValue()));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle.getValue()));
 
 
 	FixedPoint<Accuracy_Vector> X = this->getX() * COS
@@ -152,10 +134,10 @@ Vector3D Vector3D::rotateY(double Angle)
 	return Vector3D(this->getUnit(), X, this->getY(), Z);
 }
 
-Vector3D Vector3D::rotateZ(double Angle)
+Vector3D Vector3D::rotateZ(FixedPoint<Accuracy_Vector> Angle)
 {
-	FixedPoint<Accuracy_Vector> SIN(sin(Angle));
-	FixedPoint<Accuracy_Vector> COS(cos(Angle));
+	FixedPoint<Accuracy_Vector> SIN(sin(Angle.getValue()));
+	FixedPoint<Accuracy_Vector> COS(cos(Angle.getValue()));
 
 	FixedPoint<Accuracy_Vector> X = this->getX() * COS
 		- this->getY() * SIN;

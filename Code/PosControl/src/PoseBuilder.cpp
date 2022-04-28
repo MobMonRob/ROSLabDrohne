@@ -152,13 +152,6 @@ bool PoseBuilder::updatePose(IMUState State)
 
 bool PoseBuilder::updatePosition(Vector3D LinearAcceleration, Vector3D Orientation, Timestamp Time)
 {
-	/*
-	LinearAcceleration = LinearAcceleration.rotate(
-		Orientation.getX().getValue(),
-		Orientation.getY().getValue(),
-		Orientation.getZ().getValue());
-	*/
-
 	this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getX(), Time), true);
 	this->PositionY_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getY(), Time), true);
 	this->PositionZ_.setInput(TimedValue(LinearAcceleration.getUnit(), LinearAcceleration.getZ(), Time), true);
