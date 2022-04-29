@@ -5,8 +5,7 @@
 
 
 PoseBuilder::PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_Value> InitY, FixedPoint<Accuracy_Value> InitZ)
-	: Time_(),
-	PositionX_(Unit_Acceleration, Unit_Velocity, Unit_Length, InitX),
+	: PositionX_(Unit_Acceleration, Unit_Velocity, Unit_Length, InitX),
 	PositionY_(Unit_Acceleration, Unit_Velocity, Unit_Length, InitY),
 	PositionZ_(Unit_Acceleration, Unit_Velocity, Unit_Length, InitZ),
 	PositionUncertainty_(Unit_None),
@@ -24,7 +23,7 @@ PoseBuilder::PoseBuilder(FixedPoint<Accuracy_Value> InitX, FixedPoint<Accuracy_V
 
 void PoseBuilder::setPosition(Vector3D Position, Vector3D Velocity, Vector3D Uncertainty)
 {
-	std::cout << "setPosition()" << std::endl;
+	std::cout << this->getTimeLocalString() << " setPosition()" << std::endl;
 
 	this->PositionX_.reset(Value(Position.getUnit(), Position.getX()), Value(Velocity.getUnit(), Velocity.getX()));
 	this->PositionY_.reset(Value(Position.getUnit(), Position.getY()), Value(Velocity.getUnit(), Velocity.getY()));
@@ -33,7 +32,7 @@ void PoseBuilder::setPosition(Vector3D Position, Vector3D Velocity, Vector3D Unc
 
 void PoseBuilder::setOrientation(Vector3D Orientation, Vector3D Uncertainty)
 {
-	std::cout << "setOrientation() not implemented, yet." << std::endl;
+	std::cout << this->getTimeLocalString() << " setOrientation() not implemented, yet." << std::endl;
 }
 
 
@@ -112,40 +111,25 @@ bool PoseBuilder::updatePose(IMUState State)
 	{
 		Vector3D StateAcceleration = State.getLinear();
 		Vector3D StateOrientation = State.getRotational();
-		Timestamp Time = State.getTimestamp();
 
 
-		if (this->getCalibrationFlag())
-		{
-			this->setCalibrationBegin(Time);
-
-			Time -= this->getCalibrationBegin();
-		}
+		this->setTime(State.getTimestamp());
 
 		if (this->getCalculationFlag())
 		{
-			this->setCalculationBegin(Time);
-
-			StateAcceleration;// -= this->getOffsetAcceleration();
-
-			Time -= this->getCalculationBegin();
+			StateAcceleration -= this->getOffsetAcceleration();
 		}
 		
-		if (this->getTime() < State.getTimestamp())
+		if (this->getTimeLocal() < State.getTimestamp())
 		{
-			this->updateOrientation(StateOrientation, Time);
-			this->updatePosition(StateAcceleration, this->getOrientation(), Time);
-
-
-
+			this->updateOrientation(StateOrientation, this->getTimeLocal());
+			this->updatePosition(StateAcceleration, this->getOrientation(), this->getTimeLocal());
 
 			// Calc Error / Drift
 
 			ReturnBool = true;
 		}
 	}
-
-	this->Time_ = State.getTimestamp();
 
 	return ReturnBool;
 }
@@ -173,16 +157,12 @@ bool PoseBuilder::updateOrientation(Vector3D RotationalAngle, Timestamp Time)
 
 void PoseBuilder::calcOffset()
 {
-	Timestamp TimeDelta = this->getTime() - this->getCalibrationBegin();
-
-
-	if (TimeDelta > Timestamp())
+	if (this->getTimeLocal() > Timestamp())
 	{
-		FixedPoint<Accuracy_Value> sqrtTimeDelta = FixedPoint<Accuracy_Value>(std::sqrt(TimeDelta.getTime().getValue())); // FixedPoint does not implement a sqrt-Method.
 		FixedPoint<Accuracy_Value> DriftX = this->PositionX_.getOutput().getValue();
 		FixedPoint<Accuracy_Value> DriftY = this->PositionY_.getOutput().getValue();
 		FixedPoint<Accuracy_Value> DriftZ = this->PositionZ_.getOutput().getValue();
-		FixedPoint<Accuracy_Value> Devider = TimeDelta.getTime()* TimeDelta.getTime() * FixedPoint<Accuracy_Value>(2);
+		FixedPoint<Accuracy_Value> Devider = this->getTimeLocal().getTime() * this->getTimeLocal().getTime() / FixedPoint<Accuracy_Value>(4);
 
 		
 		this->setOffsetAcceleration(DriftX / Devider,
@@ -190,14 +170,14 @@ void PoseBuilder::calcOffset()
 			DriftZ / Devider);
 			
 
-		std::cout << "PoseCalibration (" << TimeDelta.getTime().getValue() <<"s): " << this->getOffsetAcceleration().getString() << std::endl;
+		std::cout << this->getTimeLocalString() << " PoseCalibration (" << this->getTimeLocal().getTime().getValue() <<"s): " << this->getOffsetAcceleration().getString() << std::endl;
 	}
 }
 
 
 void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
 {
-	std::cout << "PoseBuilder Reset..." << std::endl;
+	std::cout << this->getTimeLocalString() << " PoseBuilder Reset..." << std::endl;
 
 	setCalibrationFlag(false);
 	setCalculationFlag(false);

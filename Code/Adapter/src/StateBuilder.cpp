@@ -24,7 +24,7 @@ void StateBuilder::setOffsetState(IMUState S)
 
 void StateBuilder::setOffsettingFlag(bool Flag)
 {
-	std::cout << "StateOffsettig = " << (Flag ? "TRUE" : "FALSE") << std::endl;
+	std::cout << this->getTimeLocalString() << " StateOffsettig = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
 
 	if (!Flag)
@@ -33,7 +33,7 @@ void StateBuilder::setOffsettingFlag(bool Flag)
 
 		if (this->getOffsettingFlag())
 		{
-			std::cout << "StateOffset: " << this->getOffsetState().getString() << std::endl;
+			std::cout << this->getTimeLocalString() << " StateOffset: " << this->getOffsetState().getString() << std::endl;
 		}
 	}
 
@@ -46,7 +46,7 @@ void StateBuilder::setOffsetTime(Timestamp Time)
 	{
 		this->OffsetTime_ = Time;
 
-		std::cout << "OffsetTime = " << this->OffsetTime_.getTime().getValue() << std::endl;
+		std::cout << this->getTimeLocalString() << " OffsetTime = " << this->OffsetTime_.getTime().getValue() << std::endl;
 	}
 }
 
@@ -71,7 +71,7 @@ IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, 
 	if (this->getValidFlag())
 	{
 		Vector3D Rotation_rad = RotationalValues * FixedPoint<Accuracy_Value>::convert(Fixed_PI) / FixedPoint<Accuracy_Value>(180);
-		Vector3D AccelerationRotated = LinearAcceleration.rotate_RollPitchYaw(Rotation_rad.getX(), Rotation_rad.getY(), Rotation_rad.getZ());
+		Vector3D AccelerationRotated = LinearAcceleration.rotate_RollPitchYaw(Rotation_rad.getX(), Rotation_rad.getY(), 0);
 		IMUState Entry(AccelerationRotated, RotationalValues, GroundClearance, this->getTime());
 
 
@@ -113,7 +113,7 @@ void StateBuilder::clearStateHandler()
 
 void StateBuilder::reset()
 {
-	std::cout << "StateBuilder Reset..." << std::endl;
+	std::cout << this->getTimeLocalString() << " StateBuilder Reset..." << std::endl;
 
 	this->clearStateHandler();
 	this->OffsetHandler_.clear();
@@ -130,7 +130,7 @@ void StateBuilder::updateOffset()
 {
 	if (this->OffsetHandler_.getSize() == this->OffsetHandler_.getSizeMax())
 	{
-		std::cout << "StateBuilder::updateOffset()" << std::endl;
+		//std::cout << this->getTimeLocalString() << " StateBuilder::updateOffset()" << std::endl;
 
 
 		IMUState Offset = this->OffsetHandler_.getAvgState();

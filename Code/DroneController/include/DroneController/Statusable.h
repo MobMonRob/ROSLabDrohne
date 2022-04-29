@@ -29,7 +29,7 @@ public:
 	virtual bool isGrounded() = 0;
 	virtual bool isFlying() = 0;
 
-	void safetyTriggered() override { std::cout << "Statusable::safetyTriggered" << std::endl; this->setArmState(false); };
+	void safetyTriggered() override { std::cout << this->getTimeLocalString() << " Statusable::safetyTriggered" << std::endl; this->setArmState(false); };
 
 protected:
 	void setStatusID(int ID) { this->StatusID_ = ID; };

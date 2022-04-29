@@ -28,7 +28,6 @@ public:
 	void setOrientation(Vector3D Orientation, Vector3D Uncertainty = Vector3D(Unit_None)) override;
 
 	Pose getPose() override;
-	Timestamp getTime() const override { return this->Time_; };
 	Vector3D getPosition() override;
 	Vector3D getPositionUncertainty() const override { return this->PositionUncertainty_; };
 	Vector3D getVelocity();
@@ -48,8 +47,6 @@ private:
 	void calcOffset() override;
 
 private:
-	Timestamp Time_;
-	
 	Integral2 PositionX_;
 	Integral2 PositionY_;
 	Integral2 PositionZ_;

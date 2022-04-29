@@ -19,8 +19,6 @@ bool IMUable::calcPose(IMUState S)
 
 	if (this->PoseBuilder_ != nullptr)
 	{
-		this->setTime(S.getTimestamp());
-
 		ReturnBool = this->PoseBuilder_->updatePose(S);
 	}
 

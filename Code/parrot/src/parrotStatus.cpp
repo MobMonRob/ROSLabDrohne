@@ -198,6 +198,8 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 	bool StatusChange = this->getStatusID() != navdataPtr->state;
 
 
+	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
+
 	if (StatusChange)
 	{
 		ROS_INFO("Status changed to %s.", this->getStatusTranslation(navdataPtr->state).c_str());
@@ -209,9 +211,8 @@ void parrotStatus::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& na
 	}
 
 	this->setStatusID(navdataPtr->state);
-	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
 
-	this->meetsRequirements(this->getTime());
+	this->meetsRequirements(this->getTimeLocal());
 
 	if (StatusChange && this->IMU_ != nullptr)
 	{

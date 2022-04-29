@@ -65,10 +65,11 @@ void createNavData(DataCollector* NavDataCollector, size_t Index, ardrone_autono
     }
 }
 
-void addDataset(DataCollector* Collector, IMUState State)
+void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, IMUState State)
 {
     Collector->addDataset();
-    Collector->addEntry("Time", std::to_string(State.getTimestamp().getTime().getValue()));
+    Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
+    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
 
     Collector->addEntry("ax", std::to_string(State.getLinear().getX().getValue()));
     Collector->addEntry("ay", std::to_string(State.getLinear().getY().getValue()));
@@ -81,10 +82,11 @@ void addDataset(DataCollector* Collector, IMUState State)
     Collector->addEntry("Height", std::to_string(State.getGroundClearance().getValue().getValue()));
 }
 
-void addDataset(DataCollector* Collector, Pose Pose, Vector3D Velocity)
+void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, Pose Pose, Vector3D Velocity)
 {
     Collector->addDataset();
-    Collector->addEntry("Time", std::to_string(Pose.getTime().getTime().getValue()));
+    Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
+    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
 
     Collector->addEntry("px", std::to_string(Pose.getPosition().getX().getValue()));
     Collector->addEntry("py", std::to_string(Pose.getPosition().getY().getValue()));
@@ -102,7 +104,9 @@ void addDataset(DataCollector* Collector, Pose Pose, Vector3D Velocity)
 void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, StateBuilder* StateBuild, PoseBuilder* PoseBuild)
 {
     Collector->addDataset();
-    Collector->addEntry("Time", std::to_string(Status->getTime().getTime().getValue()));
+    Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
+    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
+
     Collector->addEntry("Status_StatusID", std::to_string(Status->getStatusID()));
     Collector->addEntry("Status_Ground", std::to_string(Status->isGrounded()));
     Collector->addEntry("Status_Flight", std::to_string(Status->isFlying()));
@@ -180,7 +184,8 @@ int main()
         }
         
         {   // Prepare DataState
-            DataState.addKey("Time");
+            DataState.addKey("TimeGlobal");
+            DataState.addKey("TimeLocal");
             DataState.addKey("ax");
             DataState.addKey("ay");
             DataState.addKey("az");
@@ -191,7 +196,8 @@ int main()
         }
 
         {   // Prepare DataPose
-            DataPose.addKey("Time");
+            DataPose.addKey("TimeGlobal");
+            DataPose.addKey("TimeLocal");
             DataPose.addKey("px");
             DataPose.addKey("py");
             DataPose.addKey("pz");
@@ -204,7 +210,8 @@ int main()
         }
 
         {   // Prepare DataFlags
-            DataFlags.addKey("Time");
+            DataFlags.addKey("TimeGlobal");
+            DataFlags.addKey("TimeLocal");
             DataFlags.addKey("Status_StatusID");
             DataFlags.addKey("Status_Ground");
             DataFlags.addKey("Status_Flight");
@@ -236,6 +243,7 @@ int main()
             if ((i == 957 && FileName == "Bag 220426_Flight_Backward_Forward") ||
                 (i == 1415 && FileName == "Bag 220423_Hover"))
             {
+                IMU.resetValidFlag();
                 IMU.calibrate();
             }
 
@@ -251,8 +259,8 @@ int main()
             }
 
             {   // Get IMU-Data
-                addDataset(&DataState, IMU.getState());
-                addDataset(&DataPose, IMU.getPose(), PoseBuild.getVelocity());
+                addDataset(&DataState, &Status, &IMU, IMU.getState());
+                addDataset(&DataPose, &Status, &IMU, IMU.getPose(), PoseBuild.getVelocity());
                 addDataset(&DataFlags, &Status, &IMU, IMU.getStatebuilder(), &PoseBuild);
             }
         }

@@ -22,6 +22,7 @@ public:
 	IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController, FixedPoint<Accuracy_Value> ImpactThreshold);
 
 	virtual void setFlightState(bool FlightState) = 0;
+	void resetValidFlag() { this->setValidFlag(false); };
 	
 	Vector3D getPosition() { return this->PoseBuilder_->getPosition(); };
 	Vector3D getOrientation() { return this->PoseBuilder_->getOrientation(); };

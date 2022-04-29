@@ -4,8 +4,12 @@
 
 #include <std_msgs/Char.h>
 
+#include "parrot/parrotIMU.h"
 #include "parrot/parrotTransmitter.h"
 
+
+#include "Controller/PoseController.h"
+#include "PosControl/PoseBuilder.h"
 
 
 
@@ -125,6 +129,15 @@ int main(int argc, char** argv)
 	parrotBattery Battery(20.0);
 	parrotTransmitter Transmitter_;
 	StateController_ = new parrotStatus();
+	PoseBuilder PoseBuild;
+	PoseController PoseControl(nullptr);
+	parrotIMU IMU(&PoseBuild, &PoseControl);
+
+	{
+		IMU.addReceiver(StateController_);
+		StateController_->addReceiver(&IMU);
+	}
+
 
 	const double SmoothFactor = 0.875;
 	ros::Duration SmoothDuration(0.1);
@@ -139,7 +152,8 @@ int main(int argc, char** argv)
 			Roll *= SmoothFactor;
 			Pitch *= SmoothFactor;
 			Yarn *= SmoothFactor;
-			Thrust *= SmoothFactor;
+			Height *= SmoothFactor;
+			Thrust = Height;
 
 			dirty = true;
 

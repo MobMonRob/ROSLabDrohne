@@ -17,7 +17,7 @@ void PoseBuildable::setValidFlag(bool Flag)
 {
 	if (Flag != this->getValidFlag())
 	{
-		std::cout << "PoseBuildable::setValidFlag = " << (Flag ? "TRUE" : "FALSE") << std::endl;
+		std::cout << this->getTimeLocalString() << " PoseBuildable::setValidFlag = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
 
 		this->setPosition();
@@ -32,7 +32,7 @@ void PoseBuildable::setCalibrationFlag(bool Flag)
 {
 	if (Flag != this->getCalibrationFlag())
 	{
-		std::cout << "PoseCalibration = " << (Flag ? "TRUE" : "FALSE") << std::endl;
+		std::cout << this->getTimeLocalString() << " PoseCalibration = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
 		if (Flag)
 		{
@@ -46,7 +46,8 @@ void PoseBuildable::setCalibrationFlag(bool Flag)
 		}
 
 		this->Calibration_ = Flag;
-		this->CalibrationBegin_ = Timestamp();
+		this->resetTimeOffsetLocal();
+		std::cout << this->getTimeLocalString() << " PoseCalibration done" << std::endl;
 	}
 }
 
@@ -56,7 +57,7 @@ void PoseBuildable::setCalibrationBegin(Timestamp Time)
 	{
 		this->CalibrationBegin_ = Time;
 
-		std::cout << "CalibirationTime = " << this->CalibrationBegin_.getTime().getValue() << std::endl;
+		std::cout << this->getTimeLocalString() << " CalibirationTime = " << this->CalibrationBegin_.getTime().getValue() << std::endl;
 	}
 }
 
@@ -70,7 +71,7 @@ void PoseBuildable::setCalculationFlag(bool Flag)
 {
 	if (Flag != this->getCalculationFlag())
 	{
-		std::cout << "PoseCalculation = " << (Flag ? "TRUE" : "FALSE") << std::endl;
+		std::cout << this->getTimeLocalString() << " PoseCalculation = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
 		if (Flag)
 		{
@@ -79,7 +80,8 @@ void PoseBuildable::setCalculationFlag(bool Flag)
 		}
 
 		this->Calculate_ = Flag;
-		this->CalculationBegin_ = Timestamp();
+		this->resetTimeOffsetLocal();
+		std::cout << this->getTimeLocalString() << " PoseCalculation done" << std::endl;
 	}
 }
 
@@ -89,7 +91,7 @@ void PoseBuildable::setCalculationBegin(Timestamp Time)
 	{
 		this->CalculationBegin_ = Time;
 
-		std::cout << "CalculationTime = " << this->CalculationBegin_.getTime().getValue() << std::endl;
+		std::cout << this->getTimeLocalString() << " CalculationTime = " << this->CalculationBegin_.getTime().getValue() << std::endl;
 	}
 }
 

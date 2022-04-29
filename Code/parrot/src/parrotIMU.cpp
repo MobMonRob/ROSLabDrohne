@@ -10,7 +10,7 @@
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 	: IMUable(PoseBuilder, PoseController, FixedPoint<Accuracy_Value>(5)),
-	StateBuilder_(3, 3, 25),
+	StateBuilder_(4, 4, StateBuffer),
 	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
 	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
@@ -49,21 +49,25 @@ void parrotIMU::setFlightState(bool FlightState)
 
 bool parrotIMU::calibrate()
 {
-	bool ReturnBool = false;
-	ros::ServiceClient ClientIMUCalib = this->nh_.serviceClient<std_srvs::Empty>("ardrone/imu_recalib");
-	std_srvs::Empty Cmd;
+	bool ReturnBool = this->getValidFlag();
 
 
-	ReturnBool = ClientIMUCalib.call(Cmd);
-
-	if (ReturnBool)
+	if (!ReturnBool)
 	{
-		this->StateBuilder_.reset();
-		this->StateBuilder_.setValidFlag(true);
-		this->PoseBuilder_->reset();
-		//this->PoseBuilder_->setValidFlag(true);
-		this->setValidFlag(true);
-		this->MsgCount_ = 0;
+		ros::ServiceClient ClientIMUCalib = this->nh_.serviceClient<std_srvs::Empty>("ardrone/imu_recalib");
+		std_srvs::Empty Cmd;
+
+
+		ReturnBool = ClientIMUCalib.call(Cmd);
+
+		if (ReturnBool)
+		{
+			this->StateBuilder_.reset();
+			this->StateBuilder_.setValidFlag(true);
+			this->PoseBuilder_->reset();
+			this->setValidFlag(true);
+			this->MsgCount_ = 0;
+		}
 	}
 
 	return ReturnBool;
@@ -71,7 +75,7 @@ bool parrotIMU::calibrate()
 
 void parrotIMU::safetyTriggered()
 {
-	std::cout << "parrotIMU::safetyTriggered" << std::endl;
+	std::cout << this->getTimeLocalString() << " parrotIMU::safetyTriggered" << std::endl;
 
 	this->StateBuilder_.setValidFlag(false);
 
@@ -86,9 +90,10 @@ void parrotIMU::safetyTriggered()
 
 void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
 {
+	this->setTime(Timestamp(navdataPtr->header.stamp.toSec()));
+
 	if (this->StateBuilder_.getValidFlag())
 	{
-		Timestamp Time(navdataPtr->header.stamp.toSec());
 		Vector3D Linear(Unit_Acceleration, navdataPtr->ax, navdataPtr->ay, navdataPtr->az);
 		Vector3D Rotational(Unit_State_Angular,
 			FixedPoint<Accuracy_Value>(navdataPtr->rotX),
@@ -97,27 +102,28 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 		Value GroundClearance(Unit_Length, FixedPoint<Accuracy_Value>(static_cast<int>(navdataPtr->altd)));
 
 		// maybe trigger new Thread??
-		IMUState State = this->StateBuilder_.createState(Time, Linear * Value_GravitationConstant.getValue(), Rotational, GroundClearance);
+		IMUState State = this->StateBuilder_.createState(this->getTime(), Linear * Value_GravitationConstant.getValue(), Rotational, GroundClearance);
 
 		this->ImpactRequirement_->updateAcceleration(State.getLinear());
 		this->meetsRequirements();
-
-		if (++MsgCount_ == 75)
+		
+		if (++MsgCount_ == 2* StateBuffer)
 		{
 			this->StateBuilder_.setOffsettingFlag(false);
 			this->PoseBuilder_->setCalibrationFlag(true);
 		}
-
+		
 		if (((navdataPtr->motor1 + navdataPtr->motor2 + navdataPtr->motor3 + navdataPtr->motor4) > TakeoffRotorSpeed || (navdataPtr->altd) > 0) && this->getValidFlag())
 		{
 			this->PoseBuilder_->setCalculationFlag(true);
 			this->PoseBuilder_->setValidFlag(true);
 		}
-
+		
 		this->calcPose(State);
 		this->triggerController();
 
 		this->publishPose();
+		
 	}
 }
 
