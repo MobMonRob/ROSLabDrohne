@@ -66,16 +66,16 @@ IMUState StateBuilder::createState(Timestamp Time,
 
 IMUState StateBuilder::createState(Timestamp Time, Vector3D LinearAcceleration, Vector3D RotationalValues, Value GroundClearance)
 {
+	this->setTime(Time);
+
 	if (this->getValidFlag())
 	{
 		Vector3D Rotation_rad = RotationalValues * FixedPoint<Accuracy_Value>::convert(Fixed_PI) / FixedPoint<Accuracy_Value>(180);
 		Vector3D AccelerationRotated = LinearAcceleration.rotate_RollPitchYaw(Rotation_rad.getX(), Rotation_rad.getY(), Rotation_rad.getZ());
-		IMUState Entry(AccelerationRotated, RotationalValues, GroundClearance, Time);
+		IMUState Entry(AccelerationRotated, RotationalValues, GroundClearance, this->getTime());
 
 
-		this->setOffsetTime(Time);
-
-		this->MedianHandler_.addEntry(Entry - this->OffsetTime_);
+		this->MedianHandler_.addEntry(Entry);
 		this->AvgHandler_.addEntry(this->getStateMedianRaw());
 
 		if (this->getOffsettingFlag() || this->OffsetHandler_.getSize() < 1)

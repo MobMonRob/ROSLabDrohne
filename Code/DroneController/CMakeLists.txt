@@ -49,6 +49,7 @@ add_library(DroneController_lib
 	src/Rotor.cpp
 	src/Statusable.cpp
 	src/Thrustable.cpp
+	src/Timeable.cpp
 	src/Watchdog.cpp
 	src/ImpactWatcher.cpp
 	src/ImpactOK.cpp

@@ -1,11 +1,12 @@
 #ifndef STATEBUILDER_H
 #define STATEBUILDER_H
 
+#include "DroneController/Timeable.h"
 #include "DroneController/IMUState.h"
 #include "Adapter/StateHandler.h"
 
 
-class StateBuilder
+class StateBuilder : public Timeable
 {
 public:
 	StateBuilder(int MedianingEntries = 3, int AveragingEntries = 3, int OffsetingEntries = 10);

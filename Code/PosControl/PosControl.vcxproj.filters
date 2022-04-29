@@ -6,9 +6,6 @@
     <ClCompile Include="src\PoseBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\RosBridge.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\Integral1.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -24,10 +21,13 @@
     <ClCompile Include="src\ManualController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\AngleDetector.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\AngleDetector.cpp">
+    <ClCompile Include="Simulant.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

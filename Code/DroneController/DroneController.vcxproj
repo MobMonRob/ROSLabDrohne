@@ -157,6 +157,7 @@
     <ClCompile Include="src\Rotor.cpp" />
     <ClCompile Include="src\Thrustable.cpp" />
     <ClCompile Include="src\Statusable.cpp" />
+    <ClCompile Include="src\Timeable.cpp" />
     <ClCompile Include="src\TimeoutOK.cpp" />
     <ClCompile Include="src\VoltageOK.cpp" />
     <ClCompile Include="src\Watchdog.cpp" />

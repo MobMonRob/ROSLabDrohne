@@ -7,13 +7,21 @@
 class Timeable
 {
 public:
-	virtual Timestamp getTime() { return this->Time_; };
+	Timeable(Timestamp TimeOffset = Timestamp()) {};
+	
+	virtual Timestamp getTime() { return this->Time_ - Timeable::getTimeOffset(); };
+
+	static Timestamp getTimeOffset() { return Timeable::TimeOffset_; };
 
 protected:
-	void setTime(Timestamp Time) { this->Time_ = Time; };
+	void setTime(Timestamp Time);
+
+private:
+	static void setTimeOffset(Timestamp Time) { Timeable::TimeOffset_ = Time; };
 
 private:
 	Timestamp Time_;
+	static Timestamp TimeOffset_;
 };
 
 #endif // TIMEABLE_H
