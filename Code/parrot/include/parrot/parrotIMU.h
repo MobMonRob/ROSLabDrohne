@@ -11,7 +11,7 @@
 #include "DroneController/PoseControlable.h"
 #include "Adapter/StateBuilder.h"
 
-const int TakeoffRotorSpeed = 10;
+const int TakeoffRotorSpeed = 400;
 const int StateBuffer = 25;
 
 

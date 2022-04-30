@@ -113,9 +113,13 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 			this->PoseBuilder_->setCalibrationFlag(true);
 		}
 		
-		if (((navdataPtr->motor1 + navdataPtr->motor2 + navdataPtr->motor3 + navdataPtr->motor4) > TakeoffRotorSpeed || (navdataPtr->altd) > 0) && this->getValidFlag())
+
+		if (((navdataPtr->motor1 + navdataPtr->motor2 + navdataPtr->motor3 + navdataPtr->motor4) > 0 || (navdataPtr->altd) > 0) && this->getValidFlag())
 		{
 			this->PoseBuilder_->setCalculationFlag(true);
+		}
+		if (((navdataPtr->motor1 + navdataPtr->motor2 + navdataPtr->motor3 + navdataPtr->motor4) > TakeoffRotorSpeed || (navdataPtr->altd) > 0) && this->getValidFlag())
+		{
 			this->PoseBuilder_->setValidFlag(true);
 		}
 		

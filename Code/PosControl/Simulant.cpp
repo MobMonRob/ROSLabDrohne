@@ -160,7 +160,8 @@ int main()
 
     std::string FilePath = "C:\\Users\\maag\\Documents\\Maag\\Studium\\T3100\\Analyse\\Parrot\\";
     //std::string FileName = "Bag 220426_Flight_Backward_Forward";
-    std::string FileName = "Bag 220423_Hover";
+    //std::string FileName = "Bag 220423_Hover";
+    std::string FileName = "Bag 220430_HoverWithVideo";
     std::string FilePath_Input = std::string(FilePath).append(FileName).append(".txt");
     std::string FilePath_Output_State = std::string(FilePath).append(FileName).append(" State.txt");
     std::string FilePath_Output_Pose = std::string(FilePath).append(FileName).append(" Pose.txt");
@@ -241,7 +242,8 @@ int main()
             }
 
             if ((i == 957 && FileName == "Bag 220426_Flight_Backward_Forward") ||
-                (i == 1415 && FileName == "Bag 220423_Hover"))
+                (i == 1415 && FileName == "Bag 220423_Hover") ||
+                ((i == 7 || i == 6623) && FileName == "Bag 220430_HoverWithVideo"))
             {
                 IMU.resetValidFlag();
                 IMU.calibrate();
