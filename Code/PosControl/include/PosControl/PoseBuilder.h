@@ -11,6 +11,7 @@
 #include "DroneController/IMUState.h" 
 #include "DroneController/Pose.h" 
 
+#include "Adapter/StateHandler.h"
 
 
 /* PoseBuilder is expected to get started before Takeoff.
@@ -57,6 +58,8 @@ private:
 	Integral1 OrientationZ_;*/
 	Vector3D Orientation_;
 	Vector3D OrientationUncertainty_;
+
+	StateHandler CalibrationBuffer_;
 };
 
 #endif // POSEBUILDER_H

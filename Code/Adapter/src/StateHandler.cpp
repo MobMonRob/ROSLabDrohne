@@ -3,6 +3,23 @@
 #include <algorithm>
 
 
+
+
+
+IMUState StateHandler::getEntry(size_t Index)
+{
+	IMUState ReturnItem;
+	Optional<IMUState> Item = Ringbuffer::getData(Index);
+
+
+	if (Item.getValid())
+	{
+		ReturnItem = Item.getData();
+	}
+
+	return ReturnItem;
+}
+
 Timestamp StateHandler::getTime()
 {
 	Timestamp ReturnTime;

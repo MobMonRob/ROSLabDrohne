@@ -17,6 +17,7 @@ public:
 
 	std::size_t getSize() { return Ringbuffer::getSize(); };
 	std::size_t getSizeMax() { return Ringbuffer::getSizeMax(); };
+	IMUState getEntry(size_t Index);
 	Timestamp getTime();
 	IMUState getAvgState();
 	IMUState getMedianState();

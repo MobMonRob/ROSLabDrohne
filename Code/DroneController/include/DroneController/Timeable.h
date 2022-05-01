@@ -12,13 +12,14 @@ public:
 	void setTime(Timestamp Time);
 
 	Timestamp getTime() const { return this->Time_; };
-	Timestamp getTimeLocal() const { return (this->getTimeOffsetLocal() > Timestamp()) ? this->getTime() - this->getTimeOffsetLocal() : Timestamp(); };
-	Timestamp getTimeGlobal() const { return (this->getTimeOffsetGlobal() > Timestamp()) ? this->getTime() - Timeable::getTimeOffsetGlobal() : Timestamp(); };
+	Timestamp getTimeLocal() const { return (this->getTime() > Timestamp()) ? this->getTime() - this->getTimeOffsetLocal() : Timestamp(-1); };
+	Timestamp getTimeGlobal() const { return (this->getTime() > Timestamp()) ? this->getTime() - Timeable::getTimeOffsetGlobal() : Timestamp(-1); };
 	
 	Timestamp getTimeOffsetLocal() const { return this->OffsetLocal_; };
 	static Timestamp getTimeOffsetGlobal() { return Timeable::OffsetGlobal_; };
 
-	std::string getTimeLocalString() { return std::string("[").append(std::to_string(this->getTimeLocal().getTime().getValue())).append("]"); };
+	std::string getTimeLocalString() { return this->getTimeString(std::to_string(this->getTimeLocal().getTime().getValue()));};
+	std::string getTimeGlobalString() { return this->getTimeString(std::to_string(this->getTimeGlobal().getTime().getValue())); };
 	void resetTimeOffsetLocal() { this->OffsetLocal_ = Timestamp(); };
 
 protected:
@@ -26,6 +27,7 @@ protected:
 
 private:
 	static void setTimeOffsetGlobal(Timestamp Time);
+	std::string getTimeString(std::string TimeString) { return std::string("[").append(TimeString).append("]"); };
 
 private:
 	Timestamp Time_;

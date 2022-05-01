@@ -24,20 +24,23 @@ void StateBuilder::setOffsetState(IMUState S)
 
 void StateBuilder::setOffsettingFlag(bool Flag)
 {
-	std::cout << this->getTimeLocalString() << " StateOffsettig = " << (Flag ? "TRUE" : "FALSE") << std::endl;
-
-
-	if (!Flag)
+	if (Flag != this->getOffsettingFlag())
 	{
-		this->OffsetState_ = this->OffsetHandler_.getAvgState();
+		std::cout << this->getTimeGlobalString() << " StateBuilder::StateOffsettig = " << (Flag ? "TRUE" : "FALSE") << std::endl;
 
-		if (this->getOffsettingFlag())
+
+		if (!Flag)
 		{
-			std::cout << this->getTimeLocalString() << " StateOffset: " << this->getOffsetState().getString() << std::endl;
-		}
-	}
+			this->OffsetState_ = this->OffsetHandler_.getAvgState();
 
-	this->Offsetting_ = Flag;
+			if (this->getOffsettingFlag())
+			{
+				std::cout << this->getTimeGlobalString() << " StateBuilder::StateOffset: " << this->getOffsetState().getString() << std::endl;
+			}
+		}
+
+		this->Offsetting_ = Flag;
+	}
 }
 
 void StateBuilder::setOffsetTime(Timestamp Time)
@@ -46,7 +49,7 @@ void StateBuilder::setOffsetTime(Timestamp Time)
 	{
 		this->OffsetTime_ = Time;
 
-		std::cout << this->getTimeLocalString() << " OffsetTime = " << this->OffsetTime_.getTime().getValue() << std::endl;
+		std::cout << this->getTimeGlobalString() << " StateBuilder::OffsetTime = " << this->OffsetTime_.getTime().getValue() << std::endl;
 	}
 }
 
@@ -113,7 +116,7 @@ void StateBuilder::clearStateHandler()
 
 void StateBuilder::reset()
 {
-	std::cout << this->getTimeLocalString() << " StateBuilder Reset..." << std::endl;
+	std::cout << this->getTimeLocalString() << " StateBuilder::StateBuilder Reset..." << std::endl;
 
 	this->clearStateHandler();
 	this->OffsetHandler_.clear();

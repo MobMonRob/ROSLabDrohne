@@ -26,6 +26,14 @@ void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3, doub
 {
 	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value2 << "; " << Value3 << "; " << Value4 << std::endl;
 }
+void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3, double Value4, double Value5)
+{
+	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value2 << "; " << Value3 << "; " << Value4 << "; " << Value5 << std::endl;
+}
+void ROS_INFO(std::string Msg, double Value1, double Value2, double Value3, double Value4, double Value5, double Value6)
+{
+	std::cout << "ROS_INFO: " << Msg << "; " << Value1 << "; " << Value2 << "; " << Value3 << "; " << Value4 << "; " << Value5 << "; " << Value6 << std::endl;
+}
 void ROS_INFO(std::string Msg, std::string Str1)
 {
 	std::cout << "ROS_INFO: " << Msg << "; + " << Str1 << std::endl;

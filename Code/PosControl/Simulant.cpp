@@ -61,7 +61,13 @@ void createNavData(DataCollector* NavDataCollector, size_t Index, ardrone_autono
 
     if (NavDataCollector->isData(Index, "Rotors"))
     {
-        NavDataMsg->motor1 = std::atol(NavDataCollector->getData(Index, "Rotors").c_str());
+        int MotorSpeed = std::atoi(NavDataCollector->getData(Index, "Rotors").c_str());
+
+
+        NavDataMsg->motor1 = MotorSpeed / 4;
+        NavDataMsg->motor2 = MotorSpeed / 4;
+        NavDataMsg->motor3 = MotorSpeed / 4;
+        NavDataMsg->motor4 = MotorSpeed / 4;
     }
 }
 
@@ -69,7 +75,6 @@ void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, 
 {
     Collector->addDataset();
     Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
-    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
 
     Collector->addEntry("ax", std::to_string(State.getLinear().getX().getValue()));
     Collector->addEntry("ay", std::to_string(State.getLinear().getY().getValue()));
@@ -86,7 +91,6 @@ void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, 
 {
     Collector->addDataset();
     Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
-    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
 
     Collector->addEntry("px", std::to_string(Pose.getPosition().getX().getValue()));
     Collector->addEntry("py", std::to_string(Pose.getPosition().getY().getValue()));
@@ -105,7 +109,6 @@ void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, 
 {
     Collector->addDataset();
     Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
-    Collector->addEntry("TimeLocal", std::to_string(IMU->getTimeLocal().getTime().getValue()));
 
     Collector->addEntry("Status_StatusID", std::to_string(Status->getStatusID()));
     Collector->addEntry("Status_Ground", std::to_string(Status->isGrounded()));
@@ -186,7 +189,7 @@ int main()
         
         {   // Prepare DataState
             DataState.addKey("TimeGlobal");
-            DataState.addKey("TimeLocal");
+            //DataState.addKey("TimeLocal");
             DataState.addKey("ax");
             DataState.addKey("ay");
             DataState.addKey("az");
@@ -198,7 +201,7 @@ int main()
 
         {   // Prepare DataPose
             DataPose.addKey("TimeGlobal");
-            DataPose.addKey("TimeLocal");
+            //DataPose.addKey("TimeLocal");
             DataPose.addKey("px");
             DataPose.addKey("py");
             DataPose.addKey("pz");
@@ -212,7 +215,7 @@ int main()
 
         {   // Prepare DataFlags
             DataFlags.addKey("TimeGlobal");
-            DataFlags.addKey("TimeLocal");
+            //DataFlags.addKey("TimeLocal");
             DataFlags.addKey("Status_StatusID");
             DataFlags.addKey("Status_Ground");
             DataFlags.addKey("Status_Flight");

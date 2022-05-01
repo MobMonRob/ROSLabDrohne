@@ -49,6 +49,7 @@ private:
 
 	bool Calibration_;
 	Timestamp CalibrationBegin_;
+	Timestamp CalibrationIntervall_;
 	Vector3D AccelerationOffset_;
 	
 	bool Calculate_;
