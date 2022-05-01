@@ -169,7 +169,6 @@
     <ClInclude Include="include\Controller\Controller_Basic.h" />
     <ClInclude Include="include\Controller\Controller_D.h" />
     <ClInclude Include="include\Controller\Controller_I.h" />
-    <ClInclude Include="include\Controller\Controller_Input.h" />
     <ClInclude Include="include\Controller\Controller_P.h" />
     <ClInclude Include="include\Controller\Controller_PID.h" />
     <ClInclude Include="include\Controller\Controller_PT.h" />

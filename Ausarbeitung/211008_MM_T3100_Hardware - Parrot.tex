@@ -21,23 +21,7 @@ X
 
 
 
-
-
-\newSec[Control]{Control Stack}{3}
-
-\missing[Bezeichnung auf deutsch?]
-
-
-
-\missing[Drohne ist nur Client]
-
-\missing[Nutzung von ardrone\_autonomy-\Pack]
-
-
-
-
 \newSec{Sensorik}{3}
-
 
 \begin{itemize}
 \item Beschleunigungssensorik
@@ -55,10 +39,9 @@ X
 
 \newSec[parrotROS]{Interaktion mittels \ROS}{3}
 
-
-
 \newSec[parrotAutonomy]{Treiber \pAuto}{4}
-Für die Ansteuerung der Drohne \Ar\ existiert eine Treiber, welche die initialisierung und die Kommunukation mit der Drohne anbietet. Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] angeboten, welche nachfolgend näher beschrieben werden sollen.
+Für die Ansteuerung der Drohne \Ar\ existiert eine Treiber, welche die Initialisierung und die Kommunukation mit der Drohne anbietet. Die \Ar\ entspricht hierbei einem Client. Der \ROS-Core wird auf dem Host-Rechner ausgeführt.
+Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] angeboten, welche nachfolgend näher beschrieben werden sollen.
 
 
 \newSec[parrotTopics]{Topics}{4}
@@ -110,16 +93,22 @@ Die Übertragung der Video-Daten der beiden Kameras soll an dieser Stelle ledigl
 
 \newSec[parrotIB]{Inbetriebnahme auf separatem Rechner}{3}
 
+Der in \refCap{parrotAutonomy} Treiber kann entsprechend folgender Anleitung isntalliert werden:
+\href{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}
 
-\missing[Batterien halten für knapp 1 Minute oder weniger. Neue wurden bestellt, aber waren erst 3 Wochen vor Abgabe verfügbar. In dieser Zeit wurde maßgeblich an der Ausarbeitung geschrieben.]
-
-
-
-
-
+Für das System werden folgende \ROS-Knoten benötigt:
+\begin{itemize}
+\item roslaunch ardrone\_autonomy ardrone.launch
+\item rosrun PosControl AutoController\\
+\textit{alternativ:} rosrun PosControl ManualController
+\item rosrun keyboard KeyReader
+\end{itemize}
 
 
 \newSec[parrotTrouble]{Troubleshooting}{3}
+
+\newSec[parrotTroubleBattery]{Akkus}{4}
+Die mit der \Ar\ zur Verfügung gestellten Akkus konnten selbst in vollständig geladenen Zustand keine zufriedenstellende Flugdauer garantieren. Hierfür wurden zwei neue Akkus von einem Dritthersteller bezogen. Die Lieferung der bestellten Akkus erfoglte in geringem zeitlichen Abstand zum Projektende.\footnote{\glqq geringer zeitlicher Abstand\grqq\ entspringt in diesem Kontext einem Zeitraum von drei Wochen. In diesem Zeitraum lag die Priorität des Autors auf der schriftlichen Ausarbeitung dieser \Arbeit.}
 
 
 
