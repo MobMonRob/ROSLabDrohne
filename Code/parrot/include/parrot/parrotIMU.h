@@ -11,10 +11,10 @@
 #include "DroneController/PoseControlable.h"
 #include "Adapter/StateBuilder.h"
 
-const int TakeoffRotorSpeed = 580;
-const int StateBuffer = 25;
-
-
+const int Magic_TakeoffRotorSpeed = 580;
+const size_t Magic_Median = 50;
+const size_t Magic_Average = 50;
+const size_t Magic_OffsetBuffer = 75;
 
 class parrotIMU : public IMUable
 {

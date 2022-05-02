@@ -146,7 +146,7 @@ bool PoseBuilder::updatePosition(Vector3D LinearAcceleration, Vector3D Orientati
 	}
 	if (this->getCalculationFlag())
 	{
-		AccelerationRotated += (this->getOffsetAcceleration() /2);
+		AccelerationRotated += (this->getOffsetAcceleration()* Magic_CalibrationFactor);
 	}
 
 	this->PositionX_.setInput(TimedValue(LinearAcceleration.getUnit(), AccelerationRotated.getX(), Time), true);

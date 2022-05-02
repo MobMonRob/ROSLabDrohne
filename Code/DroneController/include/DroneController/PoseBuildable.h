@@ -8,6 +8,8 @@
 #include "DroneController/IMUState.h"
 #include "DroneController/Pose.h"
 
+const FixedPoint<Accuracy_Value> Magic_CalibrationFactor(5);
+
 
 class PoseBuildable : public Timeable
 {

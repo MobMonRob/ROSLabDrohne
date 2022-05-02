@@ -10,7 +10,7 @@
 
 parrotIMU::parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
 	: IMUable(PoseBuilder, PoseController, FixedPoint<Accuracy_Value>(5)),
-	StateBuilder_(25, 35, StateBuffer),
+	StateBuilder_(Magic_Median, Magic_Average, Magic_OffsetBuffer),
 	PubStateRaw_(this->nh_.advertise<geometry_msgs::Twist>("Controller/StateRaw", 1)),
 	PubState_(this->nh_.advertise<geometry_msgs::Twist>("Controller/State", 1)),
 	PubPose_(this->nh_.advertise<geometry_msgs::Twist>("Controller/Pose", 1)),
@@ -107,7 +107,7 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 		this->ImpactRequirement_->updateAcceleration(State.getLinear());
 		this->meetsRequirements();
 		
-		if (++MsgCount_ == 2* StateBuffer)
+		if (++MsgCount_ == 2* Magic_OffsetBuffer)
 		{
 			this->StateBuilder_.setOffsettingFlag(false);
 			this->PoseBuilder_->setCalibrationFlag(true);
@@ -126,7 +126,7 @@ void parrotIMU::callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navda
 			{
 				//this->PoseBuilder_->setCalculationFlag(true);
 			}
-			if (MotorSpeed > TakeoffRotorSpeed || (navdataPtr->altd) > 0)
+			if (MotorSpeed > Magic_TakeoffRotorSpeed || (navdataPtr->altd) > 0)
 			{
 				this->PoseBuilder_->setCalculationFlag(true);
 				this->PoseBuilder_->setValidFlag(true);
