@@ -43,13 +43,14 @@
 Code/.vs/PosControl_sln/v16/Browse.VC.opendb
 
 *.idb
-
 *.ilk
-
 *.pdb
-
 *.log
-
 *.tlog
-
 *.recipe
+
+*.sarif
+
+*/CodeAnalysisResultManifest.txt
+*.NativeCodeAnalysis.xml
+*.NativeCodeAnalysis.all.xml

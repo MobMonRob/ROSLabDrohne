@@ -95,7 +95,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../Domain/Debug;../DroneController/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;IMUable.obj;PoseControlable.obj;IMUState.obj;Pose.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Value.obj;TimedValue.obj;Vector3D.obj;SafetyProvider.obj;IMUable.obj;IMUState.obj;Pose.obj;PoseControlable.obj;Timeable.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

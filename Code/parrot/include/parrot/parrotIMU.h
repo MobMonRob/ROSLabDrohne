@@ -2,7 +2,6 @@
 #define PARROTIMU_H
 
 #include "DroneController/IMUable.h"
-#include "Domain/SafetyProvider.h"
 
 #include <ros/ros.h>
 #include <ardrone_autonomy/Navdata.h>
@@ -12,18 +11,23 @@
 #include "DroneController/PoseControlable.h"
 #include "Adapter/StateBuilder.h"
 
+const int Magic_TakeoffRotorSpeed = 580;
+const size_t Magic_Median = 1;
+const size_t Magic_Average = 1;
+const size_t Magic_OffsetBuffer = 50;
 
-class parrotIMU : public IMUable, protected SafetyProvider
+class parrotIMU : public IMUable
 {
 public:
 	parrotIMU(PoseBuildable* PoseBuilder, PoseControlable* PoseController);
 	~parrotIMU();
 	
-	void setFlightState(bool FlightState) override { this->StateBuilder_.setOffsetting(!FlightState); };
+	void setFlightState(bool FlightState) override;
 	
 	IMUState getState() { return this->StateBuilder_.getState(); };
 
 	bool calibrate();
+	void safetyTriggered() override;
 
 public:	// for Testing and Evaluation. Usually it's private
 	void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr);
@@ -31,8 +35,10 @@ public:	// for Testing and Evaluation. Usually it's private
 	void publishState();
 	void publishPose();
 
-	
 	IMUState getStateOffset() { return this->StateBuilder_.getOffsetState(); };
+	Vector3D getPoseOffsetAcceleration() { return this->PoseBuilder_->getOffsetAcceleration(); };
+
+	StateBuilder* getStatebuilder() { return &this->StateBuilder_; };		// delete after testing!!
 
 private:
 	ros::NodeHandle nh_;
@@ -43,7 +49,9 @@ private:
 	ros::Subscriber SubNav_;
 
 	StateBuilder StateBuilder_;
-	bool ValidData_;
+
+
+	size_t MsgCount_;
 };
 
 #endif // PARROTIMU_H

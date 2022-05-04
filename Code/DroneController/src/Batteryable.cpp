@@ -6,6 +6,6 @@
 
 Batteryable::Batteryable(double PercentageThreshold)
 {
-	this->addRequirement(PercentageOK(this, PercentageThreshold));
+	this->addRequirement(new PercentageOK(this, PercentageThreshold));
 }
 

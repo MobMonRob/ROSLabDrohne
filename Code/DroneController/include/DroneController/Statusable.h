@@ -1,22 +1,24 @@
 #ifndef STATUSABLE_H
 #define STATUSABLE_H
 
+#include <iostream>
 #include <map>
 #include <string>
 
-#include "Domain/SafetyProvider.h"
 #include "DroneController/Timeable.h"
+#include "DroneController/Watchdog.h"
+#include "Domain/SafetyReceiver.h"
 
 #include "Domain/Timestamp.h"
 #include "DroneController/Batteryable.h"
 
 
-class Statusable : public SafetyProvider, public Timeable
+class Statusable : public Timeable, public Watchdog, public SafetyReceiver
 {
 public:
-	Statusable(Batteryable* Batteryable);
+	Statusable();
 
-	virtual bool setArmState(bool ArmState) { return false; };
+	virtual bool setArmState(bool ArmState) = 0;
 
 
 	virtual bool getArmState() { return false; };
@@ -26,6 +28,8 @@ public:
 
 	virtual bool isGrounded() = 0;
 	virtual bool isFlying() = 0;
+
+	void safetyTriggered() override { std::cout << this->getTimeLocalString() << " Statusable::safetyTriggered" << std::endl; this->setArmState(false); };
 
 protected:
 	void setStatusID(int ID) { this->StatusID_ = ID; };

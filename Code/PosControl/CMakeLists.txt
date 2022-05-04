@@ -60,18 +60,28 @@ add_executable(AutoController
 	src/Integral2.cpp
 	src/MainClass.cpp
 	src/PoseBuilder.cpp
-	src/RosBridge.cpp
+	src/Main.cpp
 	src/Transmitter_Mock.cpp
 )
 
 add_executable(ManualController 
+	include/PosControl/Header.h
 	src/ManualController.cpp
+	src/Integral1.cpp
+	src/Integral2.cpp
+	src/PoseBuilder.cpp
+)
+
+add_executable(RotationDetector 
+	src/AngleDetector.cpp
 )
 
 ## Add cmake target dependencies of the executable
 add_dependencies(AutoController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
-add_dependencies(ManualController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} parrotController)
+add_dependencies(ManualController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Controller_lib parrotController)
+add_dependencies(RotationDetector ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(AutoController ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
-target_link_libraries(ManualController ${catkin_LIBRARIES} parrotController)
+target_link_libraries(ManualController ${catkin_LIBRARIES} Controller_lib parrotController)
+target_link_libraries(RotationDetector ${catkin_LIBRARIES} Domain_lib)

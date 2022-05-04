@@ -14,16 +14,20 @@
  * GroundClearance		Unit_Length
  */
 
+const Unit Unit_State_Angular(Unit_AngleDeg);
+
+
 class IMUState
 {
 public:
-	IMUState() : IMUState(Vector3D(Unit_Acceleration), Vector3D(Unit_AngleDeg), Value(Unit_Length), Timestamp()) {};
+	IMUState() : IMUState(Vector3D(Unit_Acceleration), Vector3D(Unit_State_Angular), Value(Unit_Length), Timestamp()) {};
 	IMUState(Vector3D Translative, Vector3D Angular, Value GroundClearance, Timestamp Time);
 
 	bool operator==(const IMUState& S);
 	bool operator==(const IMUState& S) const;
 	void operator+=(const IMUState& S);
 	IMUState operator-(const IMUState& S);
+	IMUState operator+(const Timestamp& T);
 	IMUState operator-(const Timestamp& T);
 
 	Vector3D getLinear() { return this->Accelerations_; };

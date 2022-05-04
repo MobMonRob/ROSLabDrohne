@@ -4,8 +4,12 @@
 
 #include <std_msgs/Char.h>
 
+#include "parrot/parrotIMU.h"
 #include "parrot/parrotTransmitter.h"
 
+
+#include "Controller/PoseController.h"
+#include "PosControl/PoseBuilder.h"
 
 
 
@@ -20,8 +24,17 @@ double Roll = 0.0;
 double Pitch = 0.0;
 double Yarn = 0.0;
 double Thrust = 0.0;
-double Height = 0.0;
+double HeightSet = 0.5;
+double HeightIs = 0.0;
 bool dirty = false;
+
+
+ros::Time NavData_Time;
+double Thrust_kP = 1.0;
+double Thrust_kI = 0.7;
+double Thrust_SumI = 0.0;
+
+
 
 
 void callbackKeys(const std_msgs::Char::ConstPtr& msg)
@@ -54,11 +67,11 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 		break;
 
 	case 'i':
-		Height += 0.025;
+		HeightSet += 0.01;
 		break;
 
 	case 'k':
-		Height -= 0.1;
+		HeightSet -= 0.05;
 		break;
 
 	case 'j':
@@ -98,6 +111,10 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 
 
 
+
+
+
+
 	Roll = (Roll > 1) ? 1 : ((Roll < -1) ? -1 : Roll);
 	Pitch = (Pitch > 1) ? 1 : ((Pitch < -1) ? -1 : Pitch);
 	Yarn = (Yarn > 1) ? 1 : ((Yarn < -1) ? -1 : Yarn);
@@ -108,7 +125,24 @@ void callbackKeys(const std_msgs::Char::ConstPtr& msg)
 	SmoothTime = ros::Time::now();
 }
 
+void callbackNavdata(const ardrone_autonomy::Navdata::ConstPtr& navdataPtr)
+{
+	ros::Time MessageTime = navdataPtr->header.stamp;
 
+
+	HeightIs = static_cast<double>(navdataPtr->altd)/1000.0f;
+
+	if (HeightIs > 0)
+	{
+		double HeightError = HeightSet - HeightIs;
+
+
+		Thrust_SumI += Thrust_kI * HeightError * (MessageTime - NavData_Time).toSec();
+		Thrust = Thrust_kP * HeightError + Thrust_SumI;
+	}
+
+	NavData_Time = MessageTime;
+}
 
 
 
@@ -121,17 +155,27 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "ManualController");
 	ros::NodeHandle nh_;
 	ros::Subscriber Sub_(nh_.subscribe("KeyReader", 1, callbackKeys));
+	ros::Subscriber SubIMU_(nh_.subscribe("ardrone/navdata", 1, &callbackNavdata));
 
 	parrotBattery Battery(20.0);
 	parrotTransmitter Transmitter_;
-	StateController_ = new parrotStatus(&Battery);
+	StateController_ = new parrotStatus();
+	PoseBuilder PoseBuild;
+	PoseController PoseControl(nullptr);
+	parrotIMU IMU(&PoseBuild, &PoseControl);
+	{
+		//Battery.addReceiver(StateController_);
+		StateController_->addReceiver(&IMU);
+		IMU.addReceiver(StateController_);
+	}
 
-	const double SmoothFactor = 0.875;
-	ros::Duration SmoothDuration(0.1);
+	const double SmoothFactor = 0.9;
+	ros::Duration SmoothDuration(0.25);
 	ros::Time InfoTime = ros::Time::now();
 	ros::Duration InfoDuration(1);
 	ros::Rate SpinRate(200);
 
+	
 	while (ros::ok())
 	{
 		if (ros::Time::now() - SmoothTime > SmoothDuration)
@@ -139,7 +183,6 @@ int main(int argc, char** argv)
 			Roll *= SmoothFactor;
 			Pitch *= SmoothFactor;
 			Yarn *= SmoothFactor;
-			Thrust *= SmoothFactor;
 
 			dirty = true;
 
@@ -150,7 +193,7 @@ int main(int argc, char** argv)
 
 		if (dirty)
 		{
-			ROS_INFO("Transmit: r %f, p %f, y %f, t %f.", Roll, Pitch, Yarn, Thrust);
+			ROS_INFO("Transmit: r %f, p %f, y %f, t %f; H %f (%f).", Roll, Pitch, Yarn, Thrust, HeightSet, HeightIs);
 
 			dirty = false;
 			InfoTime = ros::Time::now();

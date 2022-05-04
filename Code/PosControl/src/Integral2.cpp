@@ -23,10 +23,10 @@ bool Integral2::setInput(TimedValue V, bool AutoCalculation)
 	return ReturnBool;
 }
 
-void Integral2::reset(Value Output, Value HiddenOutput)
+void Integral2::reset(Value Output, Value HiddenOutput, Timestamp Time)
 {
-	this->Integral1_.setOutput(HiddenOutput);
-	this->Integral2_.setOutput(Output);
+	this->Integral1_.setOutput(HiddenOutput, Time);
+	this->Integral2_.setOutput(Output, Time);
 }
 
 

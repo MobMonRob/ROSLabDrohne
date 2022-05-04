@@ -12,7 +12,10 @@ class Controller_I : public Controller_Basic
 public:
 	Controller_I(Unit UnitInput, Unit UnitOutput, FixedPoint<Accuracy_K> kI = 1.0, Outputable* InputAddr = nullptr, FixedPoint<Accuracy_K> InitTimedValue = 0.0);
 
-	void setOutput(Value V) { this->Sum_ = TimedValue(V, Timestamp(this->Sum_.getTime())); };
+	void setOutput(TimedValue TV) { this->Sum_ = TV; };
+	void setOutput(Value V, Timestamp T) { this->setOutput(TimedValue(V, T)); };
+	void setOutput(Value V) { this->setOutput(V, Timestamp(this->Sum_.getTime())); };
+	
 
 	TimedValue getOutput();
 

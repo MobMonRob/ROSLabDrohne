@@ -17,14 +17,18 @@ public:
 
 	bool setInput(TimedValue V, bool AutoCalculation = true);
 
+	TimedValue getInput() { return this->Input_.getOutput(); };
 	TimedValue getOutput() { return this->Integral2_.getOutput(); };
+	TimedValue getOutputHidden() { return this->Integral1_.getOutput(); };
 	Unit getOutputUnit() { return this->Integral2_.getOutputUnit(); };
 
-	void reset() {this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
-		Value(this->Integral2_.getOutputUnit(), 0.0)); };
-	void reset(Value Output) { this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
-		Output); };
-	void reset(Value Output, Value HiddenOutput);
+	void reset(Timestamp Time = Timestamp()) {this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
+		Value(this->Integral2_.getOutputUnit(), 0.0),
+		Time); };
+	void reset(Value Output, Timestamp Time = Timestamp()) { this->reset(Value(this->Integral1_.getOutputUnit(), 0.0),
+		Output, 
+		Time); };
+	void reset(Value Output, Value HiddenOutput, Timestamp Time = Timestamp());
 
 private:
 	Controller_Input Input_;

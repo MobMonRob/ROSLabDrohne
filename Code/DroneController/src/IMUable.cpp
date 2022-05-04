@@ -1,10 +1,14 @@
 #include "DroneController/IMUable.h"
 
 
-IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController)
+IMUable::IMUable(PoseBuildable* PoseBuilder, PoseControlable* PoseController, FixedPoint<Accuracy_Value> ImpactThreshold)
 	: PoseBuilder_(PoseBuilder),
-	PoseController_(PoseController)
+	PoseController_(PoseController),
+	ImpactRequirement_(new ImpactOK(ImpactThreshold)),
+	Valid_(false)
 {
+	this->addRequirement(this->ImpactRequirement_);
+	this->addReceiver(this);
 }
 
 
@@ -15,8 +19,6 @@ bool IMUable::calcPose(IMUState S)
 
 	if (this->PoseBuilder_ != nullptr)
 	{
-		this->setTime(S.getTimestamp());
-
 		ReturnBool = this->PoseBuilder_->updatePose(S);
 	}
 

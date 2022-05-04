@@ -19,9 +19,11 @@ public:
 	bool operator<=(const Timestamp& T) { return this->getTime() <= T.Time_; };
 	bool operator>(const Timestamp& T) { return this->getTime() > T.Time_; };
 	bool operator>=(const Timestamp& T) { return this->getTime() >= T.Time_; };
+	Timestamp operator+(const Timestamp& T) { return Timestamp(this->getTime() + T.Time_); };
 	Timestamp operator-(const Timestamp& T) { return Timestamp(this->getTime() - T.Time_); };
+	void operator-=(const Timestamp& T) { this->getTime() -= T.Time_; };
 
-	FixedPoint<Accuracy_Time> getTime() { return this->Time_; };
+	FixedPoint<Accuracy_Time> getTime() const { return this->Time_; };
 
 protected:
 	FixedPoint<Accuracy_Time> Time_;

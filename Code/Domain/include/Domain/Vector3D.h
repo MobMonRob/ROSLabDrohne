@@ -24,6 +24,7 @@ public:
 	Vector3D operator/ (double Divisor) { return *this / FixedPoint<Accuracy_Vector>(Divisor); };
 	Vector3D operator/ (FixedPoint<Accuracy_Vector> Divisor);
 	void operator+= (const Vector3D& V);
+	void operator-= (const Vector3D& V);
 
 	Unit getUnit() const { return this->Unit_; };
 	FixedPoint<Accuracy_Vector> getX() const { return this->X_; };
@@ -31,10 +32,11 @@ public:
 	FixedPoint<Accuracy_Vector> getZ() const { return this->Z_; };
 	std::string getString();
 
-	Vector3D rotate(double AngleX, double AngleY, double AngleZ);
-	Vector3D rotateX(double Angle);
-	Vector3D rotateY(double Angle);
-	Vector3D rotateZ(double Angle);
+	Vector3D rotate_Euler(FixedPoint<Accuracy_Vector> AngleX, FixedPoint<Accuracy_Vector> AngleY, FixedPoint<Accuracy_Vector> AngleZ);
+	Vector3D rotate_RollPitchYaw(FixedPoint<Accuracy_Vector> AngleX, FixedPoint<Accuracy_Vector> AngleY, FixedPoint<Accuracy_Vector> AngleZ);
+	Vector3D rotateX(FixedPoint<Accuracy_Vector> Angle);
+	Vector3D rotateY(FixedPoint<Accuracy_Vector> Angle);
+	Vector3D rotateZ(FixedPoint<Accuracy_Vector> Angle);
 
 private:
 	Unit Unit_;
