@@ -49,8 +49,8 @@ Code/.vs/PosControl_sln/v16/Browse.VC.opendb
 *.tlog
 *.recipe
 
-*.sarif
+*.nativecodeanalysis.sarif
+*.nativecodeanalysis.xml
+*.nativecodeanalysis.all.xml
 
-*/CodeAnalysisResultManifest.txt
-*.NativeCodeAnalysis.xml
-*.NativeCodeAnalysis.all.xml
+Code/.idea/

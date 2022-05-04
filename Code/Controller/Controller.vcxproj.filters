@@ -74,9 +74,6 @@
     <ClInclude Include="include\Controller\Controller_I.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Controller\Controller_Input.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="include\Controller\Controller_P.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
