@@ -12,9 +12,9 @@
 #include "Adapter/StateBuilder.h"
 
 const int Magic_TakeoffRotorSpeed = 580;
-const size_t Magic_Median = 50;
-const size_t Magic_Average = 50;
-const size_t Magic_OffsetBuffer = 75;
+const size_t Magic_Median = 1;
+const size_t Magic_Average = 1;
+const size_t Magic_OffsetBuffer = 50;
 
 class parrotIMU : public IMUable
 {

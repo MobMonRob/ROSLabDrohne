@@ -87,7 +87,7 @@ void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, 
     Collector->addEntry("Height", std::to_string(State.getGroundClearance().getValue().getValue()));
 }
 
-void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, Pose Pose, Vector3D Velocity)
+void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, Pose Pose, Vector3D Velocity, Vector3D Acceleration)
 {
     Collector->addDataset();
     Collector->addEntry("TimeGlobal", std::to_string(Status->getTimeGlobal().getTime().getValue()));
@@ -99,6 +99,10 @@ void addDataset(DataCollector* Collector, parrotStatus* Status, parrotIMU* IMU, 
     Collector->addEntry("vx", std::to_string(Velocity.getX().getValue()));
     Collector->addEntry("vy", std::to_string(Velocity.getY().getValue()));
     Collector->addEntry("vz", std::to_string(Velocity.getZ().getValue()));
+
+    Collector->addEntry("ax", std::to_string(Acceleration.getX().getValue()));
+    Collector->addEntry("ay", std::to_string(Acceleration.getY().getValue()));
+    Collector->addEntry("az", std::to_string(Acceleration.getZ().getValue()));
 
     Collector->addEntry("rx", std::to_string(Pose.getOrientation().getX().getValue()));
     Collector->addEntry("ry", std::to_string(Pose.getOrientation().getY().getValue()));
@@ -208,6 +212,9 @@ int main()
             DataPose.addKey("vx");
             DataPose.addKey("vy");
             DataPose.addKey("vz");
+            DataPose.addKey("ax");
+            DataPose.addKey("ay");
+            DataPose.addKey("az");
             DataPose.addKey("rx");
             DataPose.addKey("ry");
             DataPose.addKey("rz");
@@ -256,7 +263,6 @@ int main()
             {   // Build NavData-Message and push to IMU
                 ardrone_autonomy::Navdata NavDataMsg;
 
-
                 createNavData(&DataInput, i, &NavDataMsg);
 
                 Status.callbackNavdata(&NavDataMsg);
@@ -265,7 +271,7 @@ int main()
 
             {   // Get IMU-Data
                 addDataset(&DataState, &Status, &IMU, IMU.getState());
-                addDataset(&DataPose, &Status, &IMU, IMU.getPose(), PoseBuild.getVelocity());
+                addDataset(&DataPose, &Status, &IMU, IMU.getPose(), PoseBuild.getVelocity(), PoseBuild.getAcceleration());
                 addDataset(&DataFlags, &Status, &IMU, IMU.getStatebuilder(), &PoseBuild);
             }
         }
@@ -283,6 +289,5 @@ int main()
     {   // Analysis
         std::cout << "OffsetState: " << IMU.getStateOffset().getString() << std::endl;
         std::cout << "OffsetPose: " << IMU.getPoseOffsetAcceleration().getString() << std::endl;
-
     }
 }

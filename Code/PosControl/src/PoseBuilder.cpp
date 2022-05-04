@@ -86,6 +86,19 @@ Vector3D PoseBuilder::getVelocity()
 	return Vector3D(Unit_Velocity);
 }
 
+Vector3D PoseBuilder::getAcceleration()
+{
+	if (this->getValidFlag() && this->getCalculationFlag())
+	{
+		return Vector3D(this->PositionX_.getInput().getUnit(),
+			this->PositionX_.getInput().getValue(),
+			this->PositionY_.getInput().getValue(),
+			this->PositionZ_.getInput().getValue());
+	}
+
+	return Vector3D(Unit_Acceleration);
+}
+
 Vector3D PoseBuilder::getOrientation()
 {
 	if (this->getValidFlag() && this->getCalculationFlag())
@@ -220,9 +233,17 @@ void PoseBuilder::reset(Vector3D Position, Vector3D Orientation)
 	this->setOrientation(Orientation);
 }
 
+void PoseBuilder::resetX()
+{
+	this->PositionX_.reset();
+	this->PositionX_.setInput(TimedValue(Value(Unit_Acceleration, 0), this->getTimeLocal()));
+}
 
-
-
+void PoseBuilder::resetY()
+{
+	this->PositionY_.reset();
+	this->PositionY_.setInput(TimedValue(Value(Unit_Acceleration, 0), this->getTimeLocal()));
+}
 
 
 

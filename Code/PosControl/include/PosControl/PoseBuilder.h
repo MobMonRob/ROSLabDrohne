@@ -32,6 +32,7 @@ public:
 	Vector3D getPosition() override;
 	Vector3D getPositionUncertainty() const override { return this->PositionUncertainty_; };
 	Vector3D getVelocity();
+	Vector3D getAcceleration();
 	//Vector3D getOrientation() override;
 	Vector3D getOrientation() override;
 	Vector3D getOrientationUncertainty() const override { return this->OrientationUncertainty_; };
@@ -40,6 +41,8 @@ public:
 
 	void reset() override { this->reset(Vector3D(this->getPosition().getUnit()), Vector3D(this->getOrientation().getUnit())); };
 	void reset(Vector3D Position, Vector3D Orientation);
+	void resetX();
+	void resetY();
 
 private:
 	bool updatePosition(Vector3D LinearAcceleration, Vector3D Orientation, Timestamp Time);
