@@ -1,0 +1,68 @@
+\newSec[Signals]{Signalverarbeitung}{2}
+
+
+\newSec[SignalsOffsetCalc]{Ermittlung der dauerhaften Nullpunkt-Abweichung}{3}
+In \refImg{fig:SzeneOffset} wird eine Abweichung der Beschleunigungswerte vom Nullpunkt deutlich. Die eingesetzte Software wirkt dem in der \CodeClass{StateBuilder} entgegen, indem über eine definierte Anzahl an Eingangswerten der \CodeClass{IMUState} ein Mittelwert gebildet wird. Um an dieser Stelle aussagekräftigere Ergebnisse zu erhalten, wird zudem die Varianz über den zwischengespeicherten Datensatz gebildet. Der Mittelwert mit der geringste Varianz aus einer definierten Anzahl an Stichproben wird als Nullpunkt-Abweichung angenommen. Hierbei ist zu beachten, dass die Attribute der \CodeClass{IMUState} separat betrachtet werden.
+
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=15cm]{Pictures/TestFlight State_az Med1 Avg1 Off50 Calib1.png}}
+\caption{Testflug Signalverarbeitung: Aufarbeitung $a_z$}
+\label{fig:FlightStatusaz}
+\end{center}
+
+\vspace{0.25cm}
+Es zeigt sich, dass die Nullpunkt-Abweichung aus den Eingangsdaten der \Quad-IMU berechnet und zur Aufarbeitung der Daten eingesetzt werden kann.\\
+Als Parameter werden für diese Berechnung jeweils ein Median-Fenster und ein Mittelwert-Fenster der Größe 1 angesetzt. Somit findet keine Veränderung durch diese Filter statt. Es zeigte sich in den Auswertungen, dass ein Median-Fenster bis zur Größe von 15 Werten keinen signifikanten Einfluss auf die berechnete Pose besitzt. Jedoch wirkt sich eine Vergrößerung des Mittelwert-Fensters negativ auf die berechnete Pose aus. Die Abweichung von erwarteten Werten nimmt deutlich zu.
+\end{figure}
+
+
+
+\newSec[SignalsOffsetCalib]{Kalibrierung der Posenberechnung}{3}
+Aus Simulationen mit der in \refCap{Implementierung} beschrieben Software zeigte sich, dass eine einfach Abschätzung der Nullpunkt-Abweichung unach \refCap{SignalsOffsetCalc} nicht vollständig ausreicht. Der Einfluss bereits kleiner Nullpunkt-Abweichung wurde in \refCap{ControlPosAccelOffset} erläutert. Aus Erkenntnissen, aufgezeigt in \refImg{fig:SzeneOffset}, lässt sich nachfolgender mathimatische Zusammenhang ableiten:
+
+\begin{equ}[!ht]
+\begin{equation}
+\Delta P_{Direction}=\frac{\Delta a_{Direction}}{2}*\Delta t^2
+\end{equation}
+\label{equ:OffsetCalib}
+\caption{Übertragungsfunktion des I-Glieds}
+\end{equ}
+
+Entsprechend Formel \ref{equ:OffsetCalib} berechnet die \CodeClass{PoseBuilder} eine nach der Aufarbeitung durch die \CodeClass{StateBuilder} verbleibende Nullpunkt-Abweichung der Beschleunigungswerte. Diese werden zur Berechung der Pose von den Eingangdaten subtrahiert.
+
+In \refImg{fig:FlightPoseVel} kann gezeigt werden, dass sich eine zusätzliche Kalibrierung der Beschleungungsdaten positiv auf die Berechnung der Pose\footnote{In der genannten Abbildung werden die berechneten Geschwindigkeiten aufgetragen.} auswirken kann.
+
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=15cm]{Pictures/TestFlight Velocity Med1 Avg1 Off50 Calib1.png}}
+\caption{Testflug Signalverarbeitung: Kalibrierung}
+\label{fig:FlightPoseVel}
+\end{center}
+
+\vspace{0.25cm}
+
+\missing\
+
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
