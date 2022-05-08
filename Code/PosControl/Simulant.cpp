@@ -259,6 +259,14 @@ int main()
                 IMU.calibrate();
             }
 
+            if (//(i == 957 && FileName == "Bag 220426_Flight_Backward_Forward") ||
+                //(i == 1415 && FileName == "Bag 220423_Hover") ||
+                ((i == 1793 || i == 8308) && FileName == "Bag 220430_HoverWithVideo"))
+            {
+                PoseBuild.resetX();
+                PoseBuild.resetY();
+            }
+
 
             {   // Build NavData-Message and push to IMU
                 ardrone_autonomy::Navdata NavDataMsg;
