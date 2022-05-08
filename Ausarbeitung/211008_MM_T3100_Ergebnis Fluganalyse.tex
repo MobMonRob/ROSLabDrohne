@@ -1,15 +1,28 @@
 \newSec[Flight]{Analyse realer Flugdaten}{2}
 
-In diesem Kapitel werden die Daten eines Testflugs mit der \Ar\ analysiert.
-
-
-
-
-
-
-\newSec[FlightProcess]{Verlauf}{3}
+\newSec[FlightData]{Datenbasis}{3}
 Dieses Kapitel zeigt die verschiedenen Daten des Flugs, um diese in der nachfolgenden Analyse einordnen zu können.
 
+Der gezeigte Datensatz enthält zwei Flüge, welche naheinander aufgenommen wurden. Aus diesen Daten wurden irrelevante Einträge zwischen den Flügen entfernt. Durch diesen Eingriff wurde der berechnete Verlauf des zweiten Fluges nicht beeinflusst, da die Status des \Quad\ zu geeigneten Zeitpunkten zurückgesetzt werden.
+
+Der vom Zustandsautomaten der \Ar\ einnehmbare ZustandIDs sind im \CodePkg{ardrone\_autonomy} wie folgt definiert:
+\begin{table}[!ht]
+\begin{tabular}{ll}
+StatusID & Status-Text    \\ \hline
+0        & Unknown        \\
+1        & Init           \\
+2        & Landed         \\
+3        & Flying         \\
+4        & Hovering       \\
+5        & Test           \\
+6        & Taking off     \\
+7        & Goto Fix Point \\
+8        & Landing        \\
+9        & Looping       
+\end{tabular}
+\end{table}
+\FloatBarrier
+Aus den Flugversuchen zeigte sich, dass StatusID 6 (\textit{Taking off}) nicht gesendet wird. Stattdessen wird StatusID 7 (\textit{Goto Fix Point}) unmittelbar nach der \textit{Takeoff}-Message eingenommen. StatusID 8 (\textit{Landing}) wird durch StatusID 9 (\textit{Looping}) abgebildet. 
 
 
 \begin{figure}[ht!]
@@ -21,88 +34,29 @@ Dieses Kapitel zeigt die verschiedenen Daten des Flugs, um diese in der nachfolg
 \end{center}
 
 \vspace{0.25cm}
-
-
-\missing[override!!]\\
-Der Testflug wird mit der Aufforderung der Status-Änderung bei etwa 9.3 s initialisiert. Davor befindet sich der \Quad\ ruhend auf einer ebenenen Oberfläche.
-Die hier eingenommene StatusID = 7 entspricht \glq Goto Fix Point\grq, wobei hier vermutlich eine Höhe von 0.4 m angenommen werden soll. Zwischen etwa 12.3 s und 13.3 s wird keine Nachricht zum aktualisieren der Daten gesendet. Anschließend wechselt der Status zu \grq Flying\glq.
-Die Status-Änderung bei etwa 20.6 s entspricht einer Notlandung aufgrund niedriger Batterieladung.
+Um die Aussagekraft der Graphik zu gewährleisten wurde die Ordinatenachse lediglich bis zum Wert 7 abgebildet. Hierdurch wird die StatusID der Landephase ausgespart.
 \end{figure}
 
-
-\begin{figure}[ht!]
-\vspace{0.25cm}
-\begin{center}
-\fbox{\includegraphics[width=15cm]{Pictures/Flight Height.png}}
-\caption{Testflug: Höhenverlauf}
-\label{fig:FlightHeight}
-\end{center}
-
-\vspace{0.25cm}
-Äquivalent zu \refImg{fig:FlightStatus} zeigt sich der Verlauf des Höhenprofils des Fluges. Die Daten wurden von der Ultraschall-Messung abgegriffen. Eine Transformation der Einheiten in [$m$] wurde vorgenommen.
-\end{figure}
-
-
-
-
-
-
-
-
-
-\missing[Analyse mit Daten der parrot Drohne]
-
-
-
-
-
-
-
+Aus den Daten kann eine \textit{ground truth} für die Position der z-Achse entnommen werden. Diese Daten stammen von dem auf den Untergrund gerichteten Ultraschall-Sensor.\\
+Eine Genaue Abschätzung der Korrektheit dieser Daten lässt sich nicht aus Vergleichsdaten belegen. Die Genauigkeit des Untraschall-Sensors kann jedoch als höher angenommen werden als die der berechneten Pose.
 
 
 \FloatBarrier
-\newSec[FlightAnalysis]{Analyse}{3}
+\newSec[FlightProcess]{Verlauf des Fluges}{3}
 
-
-\newSec[FlightAnalysisLeak]{Lecks der Datenübertragung}{4}
-
-\missing[Beim Start etwa 1s, etwas später nochmal ein bisschen Probleme...]
-
-
-
-
-
-\newSec[FlightAnalysisOffset]{Offset der Beschleunigungswerte}{4}
-
-Wie \refImg{fig:Flightaxay} entnommen werden kann, sind die Werte für die Bescleunigungen entlang der x- und y-Achsen nicht auf den Wert 0 kalibriert. Eine Kalibrierung des \Quad[s] wird unmittelbar vor dem Start gesendet und kann auch unabhängig durch eine User-Eingabe ausgelöst werden.
-
-Die Gravitation ist in \refImg{fig:Flightaz} ablesbar.
-
-Entsprechend \refCap{ControlPosAccelOffset} sind diese Abweichungen zu korrigieren.
-Als Ansatz kann hier eine Mittlung der Werte bis zum Senden der Start-Aufforderung gewählt werden. Aus \refImg{fig:Flightaxay} und \refImg{fig:Flightaz} ist ersichtlich, dass hier keine signifikanten Schwankungen auftreten. 
-
-
-
-
-
-\newSec[FlightAnalysisReconstruction]{Rekonstruktion der Flughöhe}{4}
+\missing[Hier Abb 18 detailliert geschreiben. Besonders auf Flags eingehen.]
 
 
 
 
 
 
-Bei beiden Filtern ist eine deutliche Abweichung ersichtlich.
 
-\missing[was ist hier los?]
-entsprechend \refCap{ControlPosAccelOffset} um
+\newSec[FlightAnalysisLeak]{Lecks der Datenübertragung}{3}
+Aus den Daten, aufgetragen in \refImg{fig:FlightStatus}, und weiteren Testflugen zeigt sich, dass die Verbindung zwischen dem Host-PC und dem \Quad\ anfällig für Verbindungsunterbrechnungen ist. Während diesen Unterbrechnungen werden für einen Zeitraum von etwa einer Sekunde keine Nachrichten übermittelt. 
 
-Aus der Rekonstruktion in \refImg{fig:FlightHeightReconst} lässt sich zeigen, dass markante Verläufe abgebildet werden können.
-
-Die rekonstruierte Kurve ist jedoch in den negativen Bereich verschoben. Dies lässt sich mit der fehlenden Datenübertragung beim Start des \Quad[s] begründen. 
-Darüber hinaus ist eine konstante Geschwindigkeit nach der Landung anhand der konstanten Steigung der rekonstruierten Kurve in diesem Bereich ersichtlich.
-
-
+Die entwickelte Software sieht für diese Fälle keine Interpolation der Daten vor. Hieraus entstehen Sprünge in den berechneten Daten. Hier können als Beispiel \refImg{fig:FlightPoseVel} und \refImg{} jeweils für die Zeitbereiche um 17 Sekunden und 61 Sekunden herangezogen werden.
+\missing[Bild der berechneten Pose referenzieren.]
 
 
 
