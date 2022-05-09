@@ -1,35 +1,20 @@
 \newSec{Methodik}{1}
 
-
-
-\missing\
-
-Analyse des Systems „Drohne“ (Geometrie, Regel- und Messgrößen)
-Analyse möglicher Messgrößen (Beschleunigungssensorik, evtl. Bilddaten)
-Analyse realer Messdaten aus Flugversuchen
-Modellierung des Regelsystems
-Entwurf eines geeigneten Reglers
-Implementierung des entworfenen Reglers
-Testen und optimieren der Regelparameter
-
-
-
-
 \newSec{Begriffe}{2}
-In diesem Kapitel sollen Begrifflichkeiten definiert werden, welche im allgemeinen Sprachgebrauch mehrdeutig belegt sind.
-
-
-
-
-
-\missing\
+In diesem Kapitel sollen Begrifflichkeiten für diese \Arbeit\ definiert werden, welche im allgemeinen Sprachgebrauch mehrdeutig belegt sind.
 
 \begin{tabbing}
-\hspace{8cm} \= \kill
-Drohne \> \Quad\
-
-
-
+\hspace{5cm} \= \kill
+Drohne \> \Quad\\
+Controller \> Regelkreis zum regeln der Pose
 
 \end{tabbing}
+\missing\
 
+
+\newSec{Vorgehen}{2}
+Die Problemstellung dieser \Arbeit\ (siehe \refCap{Problemstellung}) sieht vor, eine Positions- \bzw\ Posenregelung für einen \Quad\ zu implementieren.\\
+Hierzu wurde das System \Quad\ analysiert und aus den von der Hardware übersendeten Nachrichten, diejenigen Informationen ausgewählt, welche zur Lösung der Problemstellung beitragen. Darüber hinau wird ermittelt, welche Intraktionen mit der Hardware jeweils nötig sind, um eine Regelung aufbauen zu können.\\
+Die Ermittlung einer Position aus Daten von Initialsensoren entspricht einer doppelten Integration (vgl. \refCap{ControlPosAccelCalc}). In \refCap{ControlPosAccelDisturb} zeigt sich der Einfluss von Signalfehlern auf diese Berechnung.\\
+Aus den gesammelten Erkenntnissen wurde anschließend eine Architektur und daraus eine Implementierung entwickelt, welche den Anforderungen dieser \Arbeit\ grundsätzlich genügt.\\
+Zum Abschluss dieser Dokumentation wird das erstellte Programm auf reale Daten angewandt (siehe \refCap{Ergebnis}).
