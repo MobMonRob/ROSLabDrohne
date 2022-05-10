@@ -4,7 +4,7 @@ Das \CodePkg{threading} bietet die Möglichkeit wiederkehrende Aufgaben, abseits
 
 
 \newSec{Thread}{4}
-Diese Klasse bietet die Basis für die Thread-Implementierung, indem die \CodeClass{std::thread} gekapselt wird. Hier wird mit Aufruf der \CodeMeth{start()} eine neue Instanz auf den zugehörigen \textit{Pointer} initialisiert. Zusätzlich implementiert die \CodeClass{Thread} einen Sperr-Mechanismus, um synchrones Schreiben zu vermeiden. \missing[dirty read und so beschreiben?]
+Diese Klasse bietet die Basis für die Thread-Implementierung, indem die \CodeClass{std::thread} gekapselt wird. Hier wird mit Aufruf der \CodeMeth{start()} eine neue Instanz auf den zugehörigen \textit{Pointer} initialisiert. Zusätzlich implementiert die \CodeClass{Thread} einen Sperr-Mechanismus, um synchrones Schreiben auf das Run-Attribut zu vermeiden.
 
 
 \newSec{rosThread}{4}
