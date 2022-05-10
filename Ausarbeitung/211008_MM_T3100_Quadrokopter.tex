@@ -90,24 +90,19 @@ Die Kraft $F_{res}$ wird mit der Gewichtskraft $F_g$ überlagert. Die hieraus re
 
 
 \newSec{Pose}{3}
-Eine Pose ist die Positions- und Lagebeschreibung in einem Raum. \missing[quelle]
-
-
-
-
-
-
-
-
-
+Eine Pose ist die Positions- und Lagebeschreibung im Raum. Hierzu wird ein kartesisches Koordinatensystem zur Positionsbeschreibung genutzt. Die Lage \bzw\ Orientierung wird durch die Rotation um Achsen beschrieben. Hierfür wurden zwei herangehensweisen definiert (siehe \cite{VLRobo2-5}):
+\begin{itemize}
+\item Euler-Winkel (Orientierung um verändertes Koordinatensystem)
+\item Roll-Pitch-Yaw (Orientierung zu den Achsen des Basiskoordinatensystems)
+\end{itemize}
 
 \newSec{lokale Pose}{4}
-\missing
-
+Als lokale Pose wird diejenige Pose bezeichnet, welche sich auf den letzten definierten Nullpunkt (\textit{Basiskoordinatensystem}) der Bewegungsabfolge bezieht.\\
+\note{In dieser \Arbeit\ wird der Nullpunkt während unmittelbar beim Start des \Quad[s] gesetzt. somit verändert sich die lokale Pose regelmäßig.}
 
 
 \newSec{globale Pose}{4}
-\missing
+Unter einer globalen Pose wird die Pose innerhalb eines Welt-Koordinatensystems verstanden. Hierbei kann eine lokale Pose in eine globale Pose transformiert werden,sofern der Nullpunkt der lokalen Pose innerhalb des Welt-Koordinatensystems bekannt ist. Hierfür wird externe Sensorik und ein geeigneter Algorithmus (\zB\ Markov-Localization oder Sequential Monte Carlo \comp{VLRobo2-8}) benötigt.
 
 
 
