@@ -29,8 +29,6 @@ Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] ang
 
 \newSec[parrotTopics]{Topics}{4}
 
-
-
 \begin{figure}[ht!]
 \vspace{0.25cm}
 \begin{center}
@@ -46,40 +44,17 @@ Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] ang
 
 
 
-
 \newSec[parrotTopicsNav]{\rTopic{NavData}}{5}
 Das \rTopic{NavData} fasst alle für die verfügbaren Daten des \Quad[s] in einem Nachricht zusammen. hieraus können geeignete Informationen entnommen werden.
 
 
 \newSec[parrotTopicsCMD]{\rTopic{cmd\_vel}}{5}
-Nur geschwindigkeits-Daten. Keine tatsächliche Übergabe von Neigungswinkeln und so ODER??
-\missing\
-
-
+Entsprechend der Dokumentation werden über das \rTopic{cmd\_vel} die linearen Geschwindigkeiten und die Winkelgeschwindigkeit übertragen. Eine vorgabe der \textit{Roll-Pitch-Yaw}-Winkel ist nicht vorgesehen. \comp{parotCmdVel}\\
 Entsprechen alle Attribute der \texttt{geometry\_msgs::Twist}-Nachricht dem Wert 0, schaltet die \Ar\ in einen Hover-Modus um und versucht, die aktuelle Position zu halten. Zu beachten ist, dass diese Funktion nicht für die Aufgabenstellung herangezogen werden kann, da für den studentischen Laborversuch \textit{Höhenregelung} Daten abweichend des Werts 0 über das \rTopic{cmd\_vel} übermittelt werden.
 
 
 \newSec[parrotTopicsStream]{Video-Streams}{5}
 Die Übertragung der Video-Daten der beiden Kameras soll an dieser Stelle lediglich erwähnt werden.
-
-
-\newSec[parrotService]{Services}{4}
-
-
-
-
-
-
-
-
-
-\newSec[parrotParams]{Parameter}{4}
-
-
-
-
-
-
 
 
 \newSec[parrotIB]{Inbetriebnahme auf separatem Rechner}{3}

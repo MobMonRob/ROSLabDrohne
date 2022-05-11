@@ -35,10 +35,6 @@ Bei der Klasse \CodeClass{Vector3D} handelt es sich um die Abbildung eines Vekto
 Zudem werden in dieser Klasse grundlegende mathematische Operationen für Vektoren implementiert.
 
 
-\newSec{SafetyChecker}{4}
-\missing[evtl löschen?]
-
-
 \newSec{SafetyProvider}{4}
 Die \CodeClass{SafetyProvider} ist in ihrer Funktionalität abgeschlossen.
 Instanzen der \CodeClass{SafetRequirement} werden an einen \textit{SafetyProvider} übergeben. auf Anfrage wird geprüft, ob die übergebenen Instanzen der \CodeClass{SafetRequirement} die erwartungen erfüllen. Ist dies nicht der Fall, wird die \CodeMeth{safetyTriggered} der hinterlegten Instanzen der \CodeClass{SafetReceiver} aufgerufen.
