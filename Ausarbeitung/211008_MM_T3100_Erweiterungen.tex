@@ -4,105 +4,38 @@ Dieses Kapitel soll beschreiben, welche weiteren Sensoren eingesetzt werden kön
 Da es sich bei den möglichen Erweiterungen um eine Fülle von Varianten handelt, sollen diese jeweils nur knapp beschrieben oder lediglich namentlich genannt werden.
 
 
-
 \newSec{Weitere Ansätze der Signalverarbeitung / Pose-Berechnung}{3}
 
+\newSec{Geänderte Integral-Berechnung}{4}
+Das Integral wird in \CodeClass{Controller\_I} in Form eines riemannschen Integrals berechnet, die eingehenden Daten jeweils mit der zuvor vergangenen Zeit multipliziert werden. Bei riemannschen Integralen wird hier der Funktionswert mit der nachfolgenden Höhe (Hier: Zeit) verrechnet.
 
-
+Ein Ansatz zur besseren Berechnung wäre somit, andere Varianten der Integral-Berechnung heranzuziehen.\\
+\note{Aus Berechnung mit einem Mittelwert-Filter, welcher zwei Werte verrechnet, ergab sich, dass ein Trapez-Integral nicht geeignet erscheint.}
 
 
 \newSec{Interne Sensoren}{3}
 
 \newSec{Höherwertige Initialsensoren}{4}
-
+Sollten etwaige Berechnungsfehler oder Problematiken im strukturellen Ablauf eines Flugen -bezogen auf die gesetzten Flags- behoben sein, können höherwertige Sensoren als weitere Verbesserungsmöglichkeit dienen. Hierbei müssen Befestigung am \Quad, Spannungsversorgung dieser IMU, sowie der Datenaustausch mit dem Host-Rechnet durchdacht werden.
 
 \newSec{Magnetometer}{4}
-
+Im Sinne einer Erweiterung könnte ein Verfahren entsprechen \cite{Paper4} eingesetzt werden. Ein tiefergehendes Konzept in Bezug auf die Fortführung dieser \Arbeit\ wird an dieser Stelle nicht genannt.
 
 
 \newSec{Externe Sensoren}{3}
 
-
-\newSec{Bodenkamera}{4}
-
-
-\newSec{Frontkamera}{4}
-
-
-
-\newSec{GPS}{3}
-
-globale Ausrichtung
-
-
+\newSec{Boden- und Frontkamera}{4}
+Mit den Kameras können markante Objekte und hierdurch Veränderungen der Position erfasst werden. 
 
 
 \newSec{Externe Sensoren und Mapping}{3}
+Mittels Mapping-Algorithmen kann die lokale oder globale Pose des \Quad[s] bestimmt werden. Ist die Karte der Umgebung bereits bekannt, kann der \Quad\ mit geeigneten Vorgehensweisen (\zB\ Monte Carlo Algorithmus) die globale Pose selbstständig bestimmen.
 
 
+\newSec{Vorwärts-Berechnung}{4}
+Sind bereits Posen von markanten Objekten bekannt, können diese zur genaueren Schätzung der Pose des \Quad[s] herangezogen werden. Hierbei sind jeweils die Unsicherheiten der bekannten Objekte zu aktualisieren, sofern deren Posen genauer geschätzt werden können.
 
 
-\newSec{Dedektion der Umgebung}{2}
-
-\missing[Auswertung von Objekten und Speicherung der zugehörigen Metadaten]
-
-
-
-\newSec{Vorwärts-Berechnung}{3}
-
-
-
-
-
-
-
-\newSec{Rückwärts-Berechnung bei Ringschluss}{3}
-
-\missing[Position und Genauigkeit der vorherig ermittelten Objekte berechnen, wenn ein bekanntes Objekt erneut gesichtet wurde.]
-
-Aufzeichnung des Weges erforderlich
-
-
-
-\newSec{Sensoriken}{2}
-
-\newSec{Abstandssensoren}{3}
-
-
-
-\newSec{Punktuelle Abstandsmessung}{4}
-
-
-
-\newSec{Linienförmige Abstandsmessung}{4}
-
-
-\newSec{3D Abstandsmessung}{4}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\newSec{Rückwärts-Berechnung bei Ringschluss}{4}
+Wird auf dem Weg eine bekanntes Objekt identifiziert, kann von diesem Objekt aus die vergangenen Posen zurück gerechnet werden und \ggf\ die Pose anderer bekannter Objekte genauer geschätzt werden. Somit wird das Mapping deutlich verbessert. Als Anhaltspunkt soll hier \cite{Paper5} dienen, worin diese Technik für ein verbessertes Mapping in Bezug auf 3D-Laser-Messungen in Mienen eingesetzt wurde.
 

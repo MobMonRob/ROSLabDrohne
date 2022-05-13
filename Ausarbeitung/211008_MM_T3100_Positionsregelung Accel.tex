@@ -2,9 +2,9 @@
 
 \newSec[ControlPosAccelCalc]{Berechnung}{3}
 Für die nchfolgend beschriebene Berechnung der Position einer Pose wird angenommen, dass die Orientierung des \Quad[s] bekannt ist.
-Es ist zu berücksichtigen, dass die Beschleunigungssensorik fest im \Quad\ verbaut ist. Der resultierende Kraft-Vektor ist in ein Koordinatensystem zu transformieren, dessen xy-Ebene parallel zu der Start-Orientierung des \Quad[s] ausgerichtet ist. \missing[Quelle?]
+Es ist zu berücksichtigen, dass die Beschleunigungssensorik fest im \Quad\ verbaut ist. Der resultierende Kraft-Vektor ist in ein Koordinatensystem zu transformieren, dessen xy-Ebene parallel zu der Start-Orientierung des \Quad[s] ausgerichtet ist. %\missing[Quelle?]
 
-Anschließend kann der Kraft-Vektor entlang der Achsen des \Quad-Koordinatensystems aufgeteilt werden und die Beschleunigungen auf den \Quad\ zweifach integiert werden. Dieses Vorgehen gelingt lediglich bei idealen Daten. Da in Störungen auf das Signal wirken können, sind geeignete Methoden der Signalverarbeitung anzuwenden. \missing[Quelle?]
+Anschließend kann der Kraft-Vektor entlang der Achsen des \Quad-Koordinatensystems aufgeteilt werden und die Beschleunigungen auf den \Quad\ zweifach integiert werden. Dieses Vorgehen gelingt lediglich bei idealen Daten. Da in Störungen auf das Signal wirken können, sind geeignete Methoden der Signalverarbeitung anzuwenden. %\missing[Quelle?]
 
 \newSec[ControlPosAccelDisturb]{Signalaufarbeitung}{3}
 Nachfolgend soll auf die Einflüsse einer Messung eingegangen werden, welche sich die Qualität der ermittelten Pose auswirkten. Hierzu werden verschiedene Störgrößen am Beispiel eines Szenarios betrachtet und mögliche Gegenmaßnahmen gezeigt.
@@ -78,11 +78,7 @@ Das zeitliche Intervall des als \glqq Low Resolution\grqq\ markierten Datensatz 
 
 \FloatBarrier
 \newSec[ControlPosAccelOutlier]{Ausreißer}{4}
-
-\missing[Erklären, wie diese entstehen]
-
-
-
+%\missing[Erklären, wie diese entstehen]
 
 \begin{figure}[ht!]
 \vspace{0.25cm}
@@ -117,13 +113,5 @@ In \refImg{fig:SzeneOffset} soll aufgezeigt werden, dass sich eine geringfügig 
 \vspace{0.25cm}
 Die hier gezeigte Abweichung der Beschleunigungsdaten beträgt 0.0025 m/s². Die Superposition der rekonstruierten Kurve entspricht einer in grau dargestellten Parabel mit einem Streckfaktor von $\frac{\Delta a}{2}$.
 \end{figure}
-
-
-
-
-
-
-
-
 
 
