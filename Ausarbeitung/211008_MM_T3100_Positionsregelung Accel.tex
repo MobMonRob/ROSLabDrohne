@@ -1,14 +1,10 @@
 \newSec[ControlPosAccel]{Erzeugung von Posen aus Beschleunigungsdaten}{2}
 
-
-
-
 \newSec[ControlPosAccelCalc]{Berechnung}{3}
 Für die nchfolgend beschriebene Berechnung der Position einer Pose wird angenommen, dass die Orientierung des \Quad[s] bekannt ist.
 Es ist zu berücksichtigen, dass die Beschleunigungssensorik fest im \Quad\ verbaut ist. Der resultierende Kraft-Vektor ist in ein Koordinatensystem zu transformieren, dessen xy-Ebene parallel zu der Start-Orientierung des \Quad[s] ausgerichtet ist. \missing[Quelle?]
 
 Anschließend kann der Kraft-Vektor entlang der Achsen des \Quad-Koordinatensystems aufgeteilt werden und die Beschleunigungen auf den \Quad\ zweifach integiert werden. Dieses Vorgehen gelingt lediglich bei idealen Daten. Da in Störungen auf das Signal wirken können, sind geeignete Methoden der Signalverarbeitung anzuwenden. \missing[Quelle?]
-
 
 \newSec[ControlPosAccelDisturb]{Signalaufarbeitung}{3}
 Nachfolgend soll auf die Einflüsse einer Messung eingegangen werden, welche sich die Qualität der ermittelten Pose auswirkten. Hierzu werden verschiedene Störgrößen am Beispiel eines Szenarios betrachtet und mögliche Gegenmaßnahmen gezeigt.
@@ -27,7 +23,6 @@ Die Kurve setzt sich aus idealisierten Teilstücken zusammen (siehe \refImg{fig:
 \item Abschalten: horizontale Gerade
 \end{itemize}
 
-
 \begin{figure}[ht!]
 \vspace{0.25cm}
 \begin{center}
@@ -42,12 +37,13 @@ In \refImgShort{fig:SzeneOrigin} sind der idealisiete Höhneverlauf (oben) und d
 \end{figure}
 
 Die Beschleunigungsdaten wurden aus der genannten Kurve mittel zweifacher zeitdiskreter Differentation gebildet (siehe \refImg{fig:SzeneOrigin}, unten).\\
-Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original Kurve und den rekonstruierten Verläufen gebildet werden kann. In diesem Zusammenhang wurde sichergestellt, dass eine Rekonstruktion ohne aufgeprägte Störgrößen möglich ist. \comp{SV1}(Seite 123)
+Durch dieses Vorgehen ist sichergestellt, dass ein Vergleich zwischen original Kurve und den rekonstruierten Verläufen gebildet werden kann. In diesem Zusammenhang wurde sichergestellt, dass eine Rekonstruktion ohne aufgeprägte Störgrößen möglich ist. \comp{SV1}%(Seite 123)
+
 
 \FloatBarrier
 \newSec[ControlPosAccelNoise]{Rauschen}{4}
 Rauschen eines Signal kann durch die Quantisierung von analogen Daten auftreten \comp{SV1} (Seite 100, Abbildung 4.5) oder in dem Anwendungsfall einer Beschleunigungsmessung auch von Vibrationen des Systems beeinflusst werden.
-Es ist darauf zu achten, dass Überläufe von digitalen Speichertypen vermieden werden, da diese einen Signifikanten Anteil an rauschenden Signalen ausmachen können. \comp{SV1} (Seite 118)
+Es ist darauf zu achten, dass Überläufe von digitalen Speichertypen vermieden werden, da diese einen Signifikanten Anteil an rauschenden Signalen ausmachen können. \comp{SV1}%(Seite 118)
 
 \begin{figure}[ht!]
 \vspace{0.25cm}
@@ -62,17 +58,31 @@ Es ist darauf zu achten, dass Überläufe von digitalen Speichertypen vermieden 
 Um das aufgeprägte Rauschen zu erzeugen wurden Zufallszahlen im Bereich [-1, 1] erzeugt und diese mit dem Faktor einer angenommenen absoluten Genauigkeit (0.375\% für einen Wertebereich [-15 m/s², 15 m/s²]) und einer angenommenen relativen Genauigkeit (0.5\%) verrechnet.
 \end{figure}
 
-\missing[was dagegen tun? Eigentlich Mittelwert bilden. Aber Mittelwert glättet auch einzelne Werte. Also Höhere Abtastrate!]
+Entsprechend der Literatur \comp{SV1} kann ein Tiefpass-Filter zur Glättung von Rauschen eingesetzt werden. Zur Berechnung des Datensatzes wurde eine vereinfachte Variante eines Tiefpass-Filters 1. Ordnung als online-Verfahren herangezogen \comp{LowPass1}. In \refImg{fig:SzeneNoiseHR} zeit sich, dass ein Tiefpass-Filter nicht den gewünschten Erfolg zeigt. Alternativ wurde ein Median-Filter angewandt, welcher zu geeigneteren Ergebnissen führt.\\
+Zudem zeigt im Vergleich unterschiedlicher Übertragungsraten\footnote{Für den Beispiel-Datensatz wurde hierfür ein kürzeres Zeitintervall gewählt.}, dass eine höhere Übertragungsrate mit vergleichbarem Rauschen eine bessere Rekonstruktion ermöglicht.
 
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=12cm]{Pictures/Szenario Noise HR z.png}}
+\caption{Einfluss von Signalrauschen}
+\label{fig:SzeneNoiseHR}
+\end{center}
 
-
-
+\vspace{0.25cm}
+Die Rekonstruktion der Kurve \glqq z' Noise\glqq\ wird durch einen Median-Filter für eine Wertemenge von 5 Werten als online-Verfahren durchgeführt.\\
+Für die Tiefpass-Filter wurde ein Filter-Faktor von $\frac{31}{32}$ gewählt. Ein höherer Wert ermöglicht eine stärkere Filterung der Eingangsdaten.\\
+Das zeitliche Intervall des als \glqq Low Resolution\grqq\ markierten Datensatz ist um genau eine Größenordnung größer, als das Intervall des  Vergleichsdatensatzes.
+\end{figure}
 
 
 \FloatBarrier
 \newSec[ControlPosAccelOutlier]{Ausreißer}{4}
 
 \missing[Erklären, wie diese entstehen]
+
+
+
 
 \begin{figure}[ht!]
 \vspace{0.25cm}
@@ -87,16 +97,13 @@ Um das aufgeprägte Rauschen zu erzeugen wurden Zufallszahlen im Bereich [-1, 1]
 Die Höhe der aufgeprägten Ausreißer wurde mittel einer Datenreihe von Zufallszahlen im Bereich [-1, 1], verrechnet mit dem beliebigen Faktor 0.125, generiert. Für die zeitliche Lage wurde eine Datenreihe von Zufallszahlen im Bereich [0, 1] mit einem Schwellwert von 0.925 verglichen. Daraus folgt, dass etwa 7.5\% der Datenwerte einen zusätzlichen Wert aufgeprägt bekommen.
 \end{figure}
 
-
-1977 wurde von Tukey beschrieben, dass ein gleitender Median für die Glättung einer Datenreihe eingesetzt werden kann \comp{DataAnalysis1}(Seite 210). Im Buch wird ein Median über drei Werte vorgeschlagen. Eine Erweitung der Anzahl der einbezogenen Werte ist möglich, wobei zu berücksichtigen ist, dass die Median-Funktion bei einer geraden Anzahl an Werten den Durchschnitt der mittleren Werte bildet.  \missing[Das ist allgemeinbildung in Mathe. Es gibt zwar ein Buch (H. Cramér, "Mathematical methods of statistics" , Princeton Univ. Press (1946) --Info von https://encyclopediaofmath.org/wiki/Median\_(in\_statistics)), aber da kommt man extrem schwer ran. reicht es, hier nur das Buch zu nennen, ohne explizite Seitenzahl?]
-
-
+1977 wurde von Tukey beschrieben, dass ein gleitender Median für die Glättung einer Datenreihe eingesetzt werden kann. \comp{DataAnalysis1}%(Seite 210)
+Im Buch wird ein Median über drei Werte vorgeschlagen. Eine Erweitung der Anzahl der einbezogenen Werte ist möglich, wobei zu berücksichtigen ist, dass die Median-Funktion bei einer geraden Anzahl an Werten den Durchschnitt der mittleren Werte bildet.
 
 
 \FloatBarrier
 \newSec[ControlPosAccelOffset]{konstante Nullpunkt-Abweichung}{4}
-
-
+In \refImg{fig:SzeneOffset} soll aufgezeigt werden, dass sich eine geringfügig Abweichung vom Nullpunkt signifikant auf den zweifach integrierten Wert auswirkt.
 
 \begin{figure}[ht!]
 \vspace{0.25cm}

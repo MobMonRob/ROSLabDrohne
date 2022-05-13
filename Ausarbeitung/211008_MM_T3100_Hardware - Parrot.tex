@@ -5,7 +5,6 @@ Hierbei handelt es sich um die Drohne \Ar. Nachfolgend soll die Drohne und die e
 
 
 \newSec{Sensorik}{3}
-
 \begin{itemize}
 \item Beschleunigungssensorik
 \item Magnetometer
@@ -13,11 +12,6 @@ Hierbei handelt es sich um die Drohne \Ar. Nachfolgend soll die Drohne und die e
 \item Frontkamera
 \item Bodenkamera
 \end{itemize}
-
-
-
-
-
 
 
 \newSec[parrotROS]{Interaktion mittels \ROS}{3}
@@ -28,7 +22,6 @@ Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] ang
 
 
 \newSec[parrotTopics]{Topics}{4}
-
 \begin{figure}[ht!]
 \vspace{0.25cm}
 \begin{center}
@@ -38,10 +31,8 @@ Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] ang
 \end{center}
 
 \vspace{0.25cm}
+Die hier gezeigten \Topic[s] beschränken sich auf die \Topic[s] zum steuern des \Quad[s] \Ar.
 \end{figure}
-
-\missing[evtl den vollständigen Graph. Aber darauf sieht man nichts :D]
-
 
 
 \newSec[parrotTopicsNav]{\rTopic{NavData}}{5}
@@ -62,7 +53,7 @@ Die Übertragung der Video-Daten der beiden Kameras soll an dieser Stelle ledigl
 Der in \refCap{parrotAutonomy} Treiber kann entsprechend folgender Anleitung isntalliert werden:\\
 \href{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}
 
-Für das System werden folgende \ROS-Knoten benötigt:
+Für das in dieser \Arbeit\ entwickelte Programm werden folgende \ROS-Knoten benötigt:
 \begin{itemize}
 \item roslaunch ardrone\_autonomy ardrone.launch
 \item rosrun PosControl AutoController\\
