@@ -34,8 +34,23 @@
 *.app
 *.pdb
 *.idb
+*.ilk
 
 # Logfiles
 *.log
 *.tlog
 *.lastbuildstate
+Code/.vs/PosControl_sln/v16/Browse.VC.opendb
+
+*.idb
+*.ilk
+*.pdb
+*.log
+*.tlog
+*.recipe
+
+*.nativecodeanalysis.sarif
+*.nativecodeanalysis.xml
+*.nativecodeanalysis.all.xml
+
+Code/.idea/

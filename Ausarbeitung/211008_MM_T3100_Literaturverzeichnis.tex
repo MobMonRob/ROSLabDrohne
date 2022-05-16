@@ -11,6 +11,7 @@
 \newcommand{\Version}[1]{#1. Auflage}
 \newcommand{\ISBN}[1]{ISBN #1}
 \newcommand{\Article}[1]{Artikel \textit{#1}}
+\newcommand{\Chapter}[1]{Kapitel \textit{#1}}
 \newcommand{\Pages}[1]{Seite #1}
 \newcommand{\NA}{-unbekannt-}
 
@@ -25,8 +26,56 @@
 \NewBibItem{Paper2}{Fresk E., Nikolakopoulos G., Full Quaternion Based Attitude Control for a Quadrotor}
 \Published{19.07.2013}
 
+\NewBibItem{Paper3}{Morton L., Baille L., Ramirez-Iniguez R., Pose Calibrations for Inertial Sensors in Rehabilitation Applications}
+\Published{2013}
+
+\NewBibItem{Paper4}{Yang Z., et al., Hand-Finger Pose Estimation Using Inertial Sensors, Magnetic Sensors and a Magnet}
+\Published{2021}
+
+\NewBibItem{Paper5}{Bosse M., Zlot R., Efficient Large-scale Three-dimensional Mobile Mapping for Underground Mines}
+\Published{2013}
+
+
+
+
 
 % Bücher
+\NewBibItem{RT1}{Heinrich B. (Hrsg.), et al., Kaspers/KOfner Messen - Steuern - Regeln}
+\Version{8., überarbeitete und ergänzte Auflage}
+\Published{2009}
+\ISBN{978-3-8348-0006-0}
+
+\NewBibItem{SV1}{Wendemuth A., Grundlagen der digitalen Signalverarbeitung}
+\Published{2005}
+\ISBN{3-540-21885-8}
+
+\NewBibItem{DataAnalysis1}{Tukey J., Exploratory Data Analysis}
+\Published{1977}
+\ISBN{0-201-07616-0}
+
+\NewBibItem{Einl3}{Leishmann  G., Principles of Helicopter Aerodynamics}
+\Published{2006}
+\ISBN{0-521-85860-7}
+
+
+
+
+% Normen
+\NewBibItem{IEC60050-351}{Internationales Elektrotechnisches Wörterbuch – Teil 351: Leittechnik (IEC 60050-351:2006)}
+\Published{06/2009}
+
+
+
+%Vorlesungen
+\NewBibItem{VLRobo1-4}{Richter M., Vorlesung Robotik 1, Einheit 4, DHBW Karlsruhe, Kurs TINF19B1}
+\Published{13.03.2014}, \Modified{10.03.2021}
+
+\NewBibItem{VLRobo1-5}{Richter M., Vorlesung Robotik 1, Einheit 5, DHBW Karlsruhe, Kurs TINF19B1}
+\Published{13.03.2014}, \Modified{22.03.2022}
+
+\clearpage
+\NewBibItem{VLRobo2-8}{Prof. Dr. Strand M., Vorlesung Robotik 2, Einheit 8 - Positionsschätzung, DHBW Karlsruhe, Kurs TINF19B1}
+\Published{27.04.2022}
 
 
 
@@ -35,6 +84,22 @@
 \NewBibItem{Einl1}{Mey R., Reinhard Mey Textsammlung 14.Auflage}
 \Online{https://www.reinhard-mey.de/texte-fuer-alle/}
 \Published{13.12.2017}, \Requested{08.02.2022}
+
+\NewBibItem{Einl2}{Ikarus}
+\Online{https://griechische-mythologie.fandom.com/wiki/Ikarus}
+\Published{\NA}, \Requested{11.05.2022}
+
+\NewBibItem{Einl4}{Frauenhofer IML, ZF-ZUKUNFTSSTUDIE 2016 - Die letzte Meile}
+\Online{https://publica-rest.fraunhofer.de/server/api/core/bitstreams/6e295b15-7a64-4e19-8895-30f7c650307e/content}
+\Published{24.11.2016}, \Modified{19.12.2016}, \Requested{11.05.2022}
+
+
+
+
+
+
+
+
 
 
 
@@ -49,17 +114,59 @@
 
 
 
+% Regelungstechnik
+\NewBibItem{ContrD}{D-Glied}
+\Online{http://testcon.info/FB\_DE\_D-Glied.html}
+\Published{\NA}, \Requested{13.04.2022}
+
+\NewBibItem{ContrStable}{Stabilität von Regelkreisen (Frequenzkennlinienverfahren)}
+\Online{https://homepages.thm.de/~hg13555/Datenbank/aat/index.php/grundlagen-regelungstechnik/45-stabilitaet-von-regelkreisen-frequenzkennlinienverfahren.html}
+\Published{\NA}, \Requested{15.04.2022}
+
+\NewBibItem{ContrDead}{Die Krux mit der Totzeit}
+\Online{https://www.technik-und-wissen.ch/krux-mit-totzeit-regelungstechnik-mit-smith-praediktor.html}
+\Published{\NA}, \Requested{13.05.2022}
+
+
+
+
+
+
+
+% Signalverarbeitung
+\NewBibItem{LowPass1}{Jentsch M., Hochpass-Filter \& Tiefpass-Filter programmieren}
+\Online{https://www.jentsch.io/hochpass-filter-tiefpass-filter-programmieren/}
+\Published{12.02.2022}, \Requested{13.05.2022}
+
+
+
+
+
+
+
+
+
+
 % ROS
 \NewBibItem{ros1}{ROS - Robot Operating System}
 \Online{https://www.ros.org}
 \Published{\NA}, \Requested{28.11.2021}
+
+\clearpage
+\NewBibItem{rosVersion}{ROS Indigo Igloo}
+\Online{http://wiki.ros.org/indigo}
+\Published{\NA}, \Modified{08.01.2018}, \Requested{16.03.2022}
+
+
 
 
 
 
 
 %Hardware
-
+\NewBibItem{Quad1}{How quadcopters work \& fly: An intro to multirotors}
+\Online{https://www.droneybee.com/how-quadcopters-work/}
+\Published{\NA}, \Modified{20.11.2017}, \Requested{01.04.2022}
 
 
 
@@ -67,30 +174,50 @@
 %Software
 
 
+
+
+
+%COEX
+\NewBibItem{coexAssembly}{Clover 4.2 assembly}
+\Online{https://clover.coex.tech/en/assemble\_4\_2.html}
+\Published{\NA}, \Requested{09.05.2022}
+
+\NewBibItem{coexConfig}{Initial setup}
+\Online{https://clover.coex.tech/en/setup.html}
+\Published{\NA}, \Requested{09.05.2022}
+
+\NewBibItem{coexExample}{MAVROS Offboard control example}
+\Online{https://docs.px4.io/master/en/ros/mavros\_offboard.html}
+\Published{\NA}, \Modified{02.02.2021}, \Requested{16.03.2022}
+
+
+
+
+
+
+
+
+
+
+%Parrot
+\NewBibItem{parotSDK}{AR.Drone Developer Guide}
+\Chapter{AR.Drone 2.0 Overview}, \Pages{5 ff.}
+\Online{https://jpchanson.github.io/ARdrone/ParrotDevGuide.pdf}
+\Published{21.05.2012}, \Requested{17.03.2022}
+
+\NewBibItem{parotCmdVel}{Sending Commands to AR-Drone}
+\Online{https://ardrone-autonomy.readthedocs.io/en/latest/commands.html}
+\Published{\NA}, \Requested{11.05.2022}
+
+
+
+
+
+
+
+
 %Language
-\NewBibItem{cpp1}{Saks D., Better even at the lowest levels}
-\Online{https://www.embedded.com/better-even-at-the-lowest-levels/}
-\Published{01.11.2008}, \Modified{05.12.2020}, \Requested{28.07.2021}
 
-\NewBibItem{c1}{Application Note Object-Oriented Programming in C}
-\Online{https://www.state-machine.com/doc/AN\_OOP\_in\_C.pdf}
-\Published{06.11.2020}, \Requested{28.07.2021}
-
-\NewBibItem{DyString}{Kirk N., How do strings allocate memory in c++?}
-\Online{https://stackoverflow.com/questions/18312658/how-do-strings-allocate-memory-in-c}
-\Published{19.08.2013}, \Requested{17.08.2021}
-
-\NewBibItem{Dy1}{Bansal A., Containers in C++ STL (Standard Template Library)}
-\Online{https://www.geeksforgeeks.org/containers-cpp-stl/}
-\Published{05.03.2018}, \Modified{12.07.2020}, \Requested{17.08.2021}
-
-\NewBibItem{DefASA}{Automatic Storage Duration}
-\Online{https://www.oreilly.com/library/view/c-primer-plus/9780132781145/ch09lev2sec2.html}
-\Published{\NA}, \Requested{17.08.2021}
-
-\NewBibItem{DefDSA}{Noar J., Orda A., Petruschka Y., Dynamic storage allocation with known durations}
-\Online{https://www.sciencedirect.com/science/article/pii/S0166218X99001754}
-\Published{30.03.2000}, \Requested{17.08.2021}
 
 
 

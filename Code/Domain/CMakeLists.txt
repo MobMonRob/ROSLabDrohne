@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(Domain)
 
+add_compile_options(-std=c++11)
+
 find_package(
 	catkin REQUIRED COMPONENTS
 		roscpp
 		rospy
-		std_msgs
-		
-		Abstraction
 )
 
 ###################################
@@ -15,7 +14,7 @@ find_package(
 ###################################
 catkin_package(
 	LIBRARIES Domain_lib
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
@@ -23,31 +22,23 @@ catkin_package(
 ###########
 include_directories(
 	include
-	../Abstraction/include
 	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 add_library(Domain_lib
-	include/Domain/Header.h
-	src/Controllable.cpp
-	src/Controller_Basic.cpp
-	src/Controller_D.cpp
-	src/Controller_I.cpp
-	src/Controller_Input.cpp
-	src/Controller_P.cpp
-	src/Controller_PID.cpp
-	src/Controller_PT.cpp
-	src/ControllerSystem.cpp
-	src/Input.cpp
-	src/TimedDifference.cpp
+	./include/Domain/Header.h
+	src/SafetyProvider.cpp
+	src/TimedValue.cpp
+	src/Value.cpp
+	src/Vector3D.cpp
 )
 
 ## Add cmake target dependencies of the executable
-add_dependencies(Domain_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Abstraction_lib)
+add_dependencies(Domain_lib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(Domain_lib ${catkin_LIBRARIES} Abstraction_lib)
+target_link_libraries(Domain_lib ${catkin_LIBRARIES})
 
 #############
 ## Install ##

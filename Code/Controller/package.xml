@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>Controller</name>
+  <version>0.0.0</version>
+  <description>The Controller package</description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
+  <maintainer email="maag@todo.todo">maag</maintainer>
+
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <license>TODO</license>
+
+
+  <!-- The *depend tags are used to specify dependencies -->
+  <buildtool_depend>catkin</buildtool_depend>
+  
+	<depend>roscpp</depend>
+	<depend>rospy</depend>
+	<depend>std_msgs</depend>
+	
+	<depend>Domain</depend>
+  <depend>DroneController</depend>
+
+</package>

@@ -1,23 +1,20 @@
 #ifndef MSG_H
 #define MSG_H
 
-#include "ros/ros.h"
+#include "../ros/rosTiming.h"
 
 
 class Header
 {
 public:
 	ros::Time stamp;
-
-
-
 };
 
 
 class Msg
 {
 public:
-	Msg() : header() {};
+	Msg() {};
 	Header header;
 };
 

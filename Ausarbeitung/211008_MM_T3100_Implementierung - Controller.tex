@@ -1,0 +1,42 @@
+\newSec[ImplPlugController]{\textit{Controller} Package}{3}
+Die in dieser \Pack\ umfangreiche Vererbungshirarchie wurde umgesetzt, um das parallel hierzu auszuarbeitende \textit{Software Engineering 2}-Projekt ausführlicher umsetzen zu können. Eine schlankeres \Pack\ wäre möglich.\\
+Nachfolgend sollen die implementierten Klassen dieses \Pack\ näher erläutert werden:
+
+
+\newSec{Controllable}{4}
+Die virtuelle \CodeClass{Controllable} hält als Attribut eine Ausprägung der Enumeration \textit{ControllerType} und deklariert zudem die Methoden für die Funktionalität, einen Regelparameter \textit{k} verwalten zu können. Diese Funktionalität wird in der \CodeClass{Controller\_Basic} definiert.
+
+
+\newSec{ControlledOutput}{4}
+Mit der \CodeClass{ControlledOutput} werden die Funktionalitäten der Klassen \CodeClass{Controllable} und \CodeClass{Output} vereint.
+
+
+\newSec[ContrBasic]{Controller\_Basic}{4}
+Die \CodeClass{Controller\_Basic} bildet die Grundlage für die in der Implementierung vorhandenen Regelbausteine, ausgenommen der \CodeClass{ControllerPID}.
+
+
+\clearpage
+\newSec[ContrD]{Controller\_x}{4}
+Klassen, welche mit \glqq \CodeClass{Controller\_}\grqq\ beginnen und einen Baustein (vgl. \refCap{Regelerarten}) benennen, implementieren die Funktion des jeweiligen Bausteins.
+
+
+\newSec{ControllerSystem}{4}
+Instanzen der \CodeClass{ControllerSystem} kapseln Instanzen verschiedener Regelbausteine (\CodeClass{Controller\_}). Hierbei können diverse Regelbausteine als Reihenschaltung zusammengefasst werden.\\
+\note{In der Implementierung wird diese Klasse nicht aktiv genutzt.}
+
+
+\newSec{ControllerType}{4}
+Bei \textit{ControllerType} handelt es sich um eine Enumeration. Hier können Parameter der Regelbausteine über eine kapselnde Instanz der \CodeClass{ControllerSystem} angepasst werden.\\
+\note{Im Projektfortschritt hat sich keine Möglichkeit ergeben, dieses Funktionalität einzusetzen.}
+
+
+\newSec{Inputable und Input}{4}
+Die beiden Klassen ermöglichen einen Daten-Eingang für ein Objekt. Hierbei Besitzt die \CodeClass{Input} einen Pointer auf eine Instanz der \CodeClass{Outputable}.
+
+
+\newSec{Outputable und Output}{4}
+Die beiden Klassen bilden den Output eines Objekts an. Hierbei ist die \CodeMeth{TimedValue getOutput()} eine virtuelle Methode und muss in einer von der \CodeClass{Outputable} erbenden Klasse definiert werden.
+
+
+\newSec{TimedDifference}{4}
+Die \CodeClass{TimedDifference} wurde eingeführt, um ein Datum und einen Zeitstempel zu vereinen. Dies ist für die Berechnung der Regelbausteine notwendig.

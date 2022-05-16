@@ -1,18 +1,12 @@
-// Domain.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
+// Abstraction.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 //
 
 #include <iostream>
 
-#include "Domain/Header.h"
 
 int main()
 {
     std::cout << "Hello World!\n";
-
-    ControllerSystem Sys(Unit_Acceleration);
-
-
-    Sys.addController(Unit_Velocity, 1.0, ControllerType::P);
 }
 
 // Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"

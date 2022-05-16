@@ -1,0 +1,21 @@
+\newSec[ArchPlugThread]{\textit{threading} Package}{3}
+
+Das \CodePkg{threading} bietet die Möglichkeit wiederkehrende Aufgaben, abseits von separaten \Node[s], beabeiten zu können. Dieser Zusatz erlaubt ein monolithisches Programm zu entwerfen.
+
+
+\newSec{Thread}{4}
+Diese Klasse bietet die Basis für die Thread-Implementierung, indem die \CodeClass{std::thread} gekapselt wird. Hier wird mit Aufruf der \CodeMeth{start()} eine neue Instanz auf den zugehörigen \textit{Pointer} initialisiert. Zusätzlich implementiert die \CodeClass{Thread} einen Sperr-Mechanismus, um synchrones Schreiben auf das Run-Attribut zu vermeiden.
+
+
+\newSec{rosThread}{4}
+Die \CodeClass{rosThread} erweitert die \CodeClass{Thread} um eine generische Variable \CodeVar{T Payload}, welcher von den erbenden Klassen zum Versand genutzt werden kann. Die \CodeMeth{T runOnce(T Payload)} ist als \textit{full virtual} implementiert, somit wird ein Überschreiben durch erbende Klassen erzwungen. Die \CodeClass{ros::Rate} ermöglicht eine frequentiell pausierte Abarbeitung des der auszuführenden \CodeMeth{T runOnce()}.
+
+\note{Idealerweise sollte eine Instanz der \CodeClass{ROS::NodeHandler} ebenfalls in dieser Klasse integriert sein. Tests während der Entwicklung zeigten, dass dies nicht umsetzbar ist. Eine Begründung hierfür konnte nicht gefunden werden.}
+
+
+\newSec{AutoPublisher}{4}
+Wie der Name der \CodeClass{AutoPublisher} erahnen lässt, wird hier ein \CodeClass{ros::Publisher} implementiert. Mit dem Aufruf der \CodeMeth{runOnce()} wird wird der in \CodeClass{rosThread} gespeicherte \CodeVar{T Payload} mit der Instanz der \CodeClass{ros::Publisher} versandt.
+
+
+\newSec{AutoClient}{4}
+Die \CodeClass{AutoClient} kapselt eine Instanz der \CodeClass{ros::ServiceClient} und bietet somit die Option, Service-Anfragen regelmäßig senden zu können.

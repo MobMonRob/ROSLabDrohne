@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Domain/include;../DroneController/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,14 +141,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ros.cpp" />
     <ClCompile Include="ros\ros_Talker.cpp" />
     <ClCompile Include="ROS_Mock.cpp" />
     <ClCompile Include="termios.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ardrone_autonomy\Navdata.h" />
     <ClInclude Include="geometry_msgs\Point.h" />
     <ClInclude Include="geometry_msgs\PoseStamped.h" />
     <ClInclude Include="geometry_msgs\Quaternion.h" />
+    <ClInclude Include="geometry_msgs\Twist.h" />
     <ClInclude Include="geometry_msgs\Vector3.h" />
     <ClInclude Include="mavros_msgs\CommandBool.h" />
     <ClInclude Include="mavros_msgs\CommandBoolRequest.h" />
@@ -163,14 +166,19 @@
     <ClInclude Include="mavros_msgs\State.h" />
     <ClInclude Include="mavros_msgs\Thrust.h" />
     <ClInclude Include="ros\ros.h" />
+    <ClInclude Include="ros\rosTiming.h" />
     <ClInclude Include="ros\ros_Talker.h" />
     <ClInclude Include="sensor_msgs\BatteryState.h" />
     <ClInclude Include="sensor_msgs\Imu.h" />
     <ClInclude Include="sensor_msgs\Joy.h" />
     <ClInclude Include="sensor_msgs\Range.h" />
+    <ClInclude Include="std_msgs\Empty.h" />
     <ClInclude Include="std_msgs\Msg.h" />
     <ClInclude Include="std_msgs\Char.h" />
     <ClInclude Include="std_msgs\String.h" />
+    <ClInclude Include="std_srvs\Empty.h" />
+    <ClInclude Include="std_srvs\EmptyRequest.h" />
+    <ClInclude Include="std_srvs\EmptyResponse.h" />
     <ClInclude Include="termios.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

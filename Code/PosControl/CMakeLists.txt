@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(PosControl)
 
+add_compile_options(-std=c++11)
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -13,16 +15,15 @@ find_package(
     rospy
     std_msgs
     geometry_msgs
-    mavros_msgs
     sensor_msgs
-    
-    Abstraction
+
+	ardrone_autonomy
+
     Domain
-    Application
+	DroneController
     Adapter
-    calling
-    threading
-    coex
+    Controller
+	parrot
 )
 
 
@@ -32,9 +33,8 @@ find_package(
 catkin_package(
 	INCLUDE_DIRS
 		include
-		../coex/include
 #  LIBRARIES ${PROJECT_NAME}
-	CATKIN_DEPENDS roscpp rospy std_msgs
+	CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs sensor_msgs ardrone_autonomy
 #  DEPENDS
 )
 
@@ -45,29 +45,43 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(
 	include
-	../threading/include
-	../calling/include
-	../Abstraction/include
 	../Domain/include
-	../Application/include
+	../DroneController/include
 	../Adapter/include
-	../coex/include 
+	../Controller/include
+	../parrot/include
 	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ executable
-add_executable(BridgeNode 
+add_executable(AutoController 
 	include/PosControl/Header.h
-	src/PosBridge.cpp
-	src/RosBridge.cpp
-	src/StateBuilder.cpp
+	src/Integral1.cpp
+	src/Integral2.cpp
+	src/MainClass.cpp
+	src/PoseBuilder.cpp
+	src/Main.cpp
+	src/Transmitter_Mock.cpp
 )
 
+add_executable(ManualController 
+	include/PosControl/Header.h
+	src/ManualController.cpp
+	src/Integral1.cpp
+	src/Integral2.cpp
+	src/PoseBuilder.cpp
+)
+
+add_executable(RotationDetector 
+	src/AngleDetector.cpp
+)
 
 ## Add cmake target dependencies of the executable
-add_dependencies(BridgeNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
-
+add_dependencies(AutoController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
+add_dependencies(ManualController ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Controller_lib parrotController)
+add_dependencies(RotationDetector ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} Domain_lib)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(BridgeNode ${catkin_LIBRARIES} coexController Adapter_lib Application_lib Domain_lib Abstraction_lib)
-
+target_link_libraries(AutoController ${catkin_LIBRARIES} Domain_lib DroneController_lib Adapter_lib Controller_lib parrotController)
+target_link_libraries(ManualController ${catkin_LIBRARIES} Controller_lib parrotController)
+target_link_libraries(RotationDetector ${catkin_LIBRARIES} Domain_lib)

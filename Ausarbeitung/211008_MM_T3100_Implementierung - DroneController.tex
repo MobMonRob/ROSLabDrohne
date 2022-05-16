@@ -1,0 +1,70 @@
+\newSec[ImplApp]{Application Layer - \textit{DroneController} Package}{2}
+
+\newSec{Batteryable}{4}
+Die \CodeClass{Batteryable} hat die Aufgabe, den Akku-Stand des \Quad\ zu überwachen. Die Klasse bietet die virtuellen Methoden \CodeMeth{getVoltage()} und \CodeMeth{getPercentage()} an, die ableitende Klasse kann die Methoden-Definition in abhängigkeit der von der Hardware zur Verfügung gestellten Daten überschreiben.
+
+
+\newSec{DroneControlable}{4}
+Um die Interaktion mit der Hardware gekapselt zu gestalten und zudem die korrekte Initialisierung der beteiligten Klassen zu gewährleisten, wird die \CodeClass{DroneControlable} als Basis für eine Fassade eingesetzt. Die Klasse selbst erhält Pointer auf die für die Funktionalität des \Quad[s] benötigten Klassen (\CodeClass{Batteryable}, \CodeClass{PoseControlable}, \CodeClass{IMUState}, \CodeClass{Statusable} und \CodeClass{Transmitable}).\\
+Im Konstruktor der \CodeClass{DroneControlable} werden die Sicherheitsfunktionalitäten der verwalteten Instanzen miteinander verknüpft.
+
+
+\newSec{IMUable}{4}
+Die \CodeClass{IMUable} wurde als Basis-Klasse für die Aufnahme der \textit{Inertial Measurement Unit} (\textit{IMU}) Daten und die Weiterleitung zur Berechnung und Regelung der Pose implementiert.\\
+Neben der Sicherheitsfunktionalität (Ermittlung von Zusammenstößen anhand eines Beschleunigungsschwellwerts) werden als Attribute Pointer auf Instanzen der  \CodeClass{PoseBuildable} und \CodeClass{PoseControlable} eingesetzt. Hierbei handelt es sich im \textit{Dependency Injections}.
+
+
+\newSec{IMUState}{4}
+Die \CodeClass{IMUState} beinhaltet Attribute, welche die Daten der \textit{Inertial Measurement Unit} (\textit{IMU}) abbildet.\\
+\note{Mit der Änderung der Hardware ergab sich, dass die \CodeClass{IMUState} Daten der lokalen Orientierung enthält. Der \Quad\ \Clover\ sendet die Rate der Winkeländerung.}\\
+Im Sinne der Auswertung und Parameter-Optimierung wurde hier zusätzlich der gemessene Abstand zum Untergrund als Attribut aufgenommen. Dieser dient nur zu Referenzzwecken und wird, entsprechend der Aufgabenstellung (siehe \refCap{Problemstellung}), nicht zur Berechnung der Pose eingesetzt.
+
+
+\newSec{Pose}{4}
+Die \CodeClass{Pose} bildet die in \refCap{Pose} definierten Eingeschaften ab. Hierzu weden Instanzen der \CodeClass{Vector3D} eingesetzt. Zudem erhält jede berechente Pose einen Zeitstempel. Hierüber kann in einer Weiterführung des Projekts ein Flugweg zeitlich korrekt wiedergegeben werden.\\
+Für eine zukünftige Erweiterung sind bereits Attribute zur Erfassung der Unsicherheit der berechneten Pose vorhanden. Die Unsicherheiten können für Mapping-Algorithmen genutzt werden.
+
+
+\newSec{PoseBuildable}{4}
+Die \CodeClass{PoseBuildable} bietet eine Basis für \textit{Dependency Inversion} einer Factory für die \CodeClass{Pose}. Sie ist in diesen Paket angesiedelt, um der \CodeClass{IMUable} Zugriff zu ermöglichen. Eine Implementierung der Funktionalität wird in der PlugIn-Schicht übernommen.
+
+
+\newSec{PoseControlable}{4}
+Ebenfalls als Basis für eine \textit{Dependency Inversion} wird die \CodeClass{PoseControlable} genutzt. Nach der Berechnung der aktuellen Pose aus den aufgearbeiteten Beschleunigungsdaten wird die Pose an die Implementierung der \CodeClass{PoseControlable} übertragen. Hier werden die Stellgrößen für die Regelung des \Quad[s] ermittelt und anschließend die \CodeMeth{transmitAction} der \CodeClass{Transmitable} aufgerufen.
+
+
+\newSec{Statusable}{4}
+Die Aufgabe der \CodeClass{Statusable} ist die Interaktion mit den Status des \Quad\ und das senden von Befehlen, welche den Zustandsautomaten des \Quad[s] beeinflussen. Als Maßgebliche Befehle werde Start- und Lande-Befehle übertragen.
+
+
+\newSec{Timable}{4}
+Um eine allgemeine Zeit innerhalb des Systeme definieren zu können, wurde die \CodeClass{Timeable} implementiert. Die Methoden erlauben eine Ermittlung der vergangenen Zeit ab Programmstart \bzw\ erster eingetragener Nachricht.\\
+\note{Die Zeitstempel der mittels \ROS\ übertragenen Nachrichten enthalten die Zeit entsprechend \href{https://unixtime.org/}{Unix Epoch Time}}
+
+
+\newSec{Transmitable}{4}
+Die \CodeClass{Transmitable} bietet als \textit{full virutal} Klasse die \CodeMeth{bool transmitAction(double roll, double pitch, double yarn, double thrust)} zur Implementierung an. Von dieser Klasse ableitende Klassen übernehmen die Aufgabe, Steuerungsbefehle an die Hardware zu übersenden.
+
+
+\newSec{ImpactOK und ImpactWatcher}{4}
+Als Sicherheitsfunktionalität wird der \CodeClass{IMUable} eine Instanz der \CodeClass{ImpactWatcher} übergeben. Diese erhält zur Prüfung der Sicherheit Beschleunigungsdaten, welche durch die \CodeClass{StateBuilder} aufgearbeitet wurden. Überschreitet der Betrag der Beschleunigungswerte einen Schwellwert, wird die Sicherheitsfunktionalität ausgelöst.\\
+\note{Die vorgeschlagene Vorgehensweise kann nur angewandt werden, wenn der \ROS-\textit{core} auf dem Rechner (nicht auf dem \Quad) ausgeführt wird.}
+
+
+\newSec{PercentageOK und VoltageOK}{4}
+Die Ableitungen der \CodeClass{SafetRequirement} überprüfen, ob die als Pointer übergebene Instanz der \CodeClass{Batteryable} die geprüfte Eigenschaft (Spannung oder Akkustand) einhält.
+
+
+\clearpage
+\newSec{TimeoutOK und WatchDog}{4}
+Wie aus der Namensgebung ableitbar sind diese Klassen dafür gedacht, das System über Ausfälle der Datenübertragung zu informieren.
+Der derzeitige Stand prüft den zeitlichen Unerscheid zwischen eingegangenen Nachrichten, angewandt in der Instanz der \CodeClass{Statusable}.
+Als Verbesserung für diese Funktionalität kann ein nebenläufiger Timer implementiert werden, welcher bei Ablauf die Sicherheitsfunktionalität auslöst. Eine eingehende Nachricht würde den Timer zurücksetzen.
+
+
+\newSec{Rotor und Thrustable}{4}
+Die \CodeClass{Rotor} wurde versuchsweise hinzugefügt. Unter Umständen kann hier die auf den \Quad\ wirkenden Kräfte ermittelt werden und somit die Regelung in einer Umgebung ohne äußere Einflüsse verbessert werden.\\
+Als Interkation mit einem \Quad\ wird die virtuelle \CodeClass{Thrustable} eingeführt. Hier werden die vier Rotoren (Instanzen der \CodeClass{Rotor}) und die zugehörige Geometrie des \Quad[s] hinterlegt. Aus den Drehzahlen der Rotoren lässt sich die wirkende Gesamtkraft ermitteln.\\
+\note{Diese Klassen finden im aktuellen Programm keine Verwendung.}
+
+

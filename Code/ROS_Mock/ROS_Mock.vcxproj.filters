@@ -24,6 +24,9 @@
     <ClCompile Include="termios.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ros.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ros\ros.h">
@@ -102,6 +105,27 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="mavros_msgs\Thrust.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ros\rosTiming.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ardrone_autonomy\Navdata.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_msgs\Twist.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_msgs\Empty.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_srvs\Empty.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_srvs\EmptyRequest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="std_srvs\EmptyResponse.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

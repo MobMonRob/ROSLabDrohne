@@ -1,0 +1,9 @@
+\newSec[ImplAdapter]{Adapter Layer}{2}
+
+\newSec{StateBuilder}{4}
+Innerhalb der \CodeClass{StateBuilder} werden große Teile der Signalverabreitung übernommen. Hierzu werden verschiedene Instanzen der \CodeClass{StateHandler} mit entsprechenden Aufgaben implementiert. Als Funktionalität bietet die \CodeClass{StateBuilder} vor Allem das Glätten von Signalen, sowie die Anpassung einer dauerhaften Nullpunkt-Abweichung an.
+
+
+\newSec{StateHandler}{4}
+Die \CodeClass{StateHandler} erbt von der \CodeClass{Ringbuffer} für das \textit{Template} der \CodeClass{IMUState}.
+Zudem werden verschiedene Methoden als Grundlage für die Signalverabreitung angeboten (\CodeMeth{IMUState getAvgState()},  \CodeMeth{IMUState getMedianState()} und \CodeMeth{IMUState getVariance()}).
