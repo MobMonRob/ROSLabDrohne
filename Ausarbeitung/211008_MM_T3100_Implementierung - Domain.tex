@@ -4,22 +4,22 @@ Der \textit{Domain Layer} stellt als Teil der \clean\ die Ebene dar, in der allg
 
 
 \newSec{Optional}{4}
-Die Klasse \CodeClass{Optional} soll dem Ringbuffer ermöglichen, das Nichtvorhandensein von Einträgen darstellen zu können. Diese Klasse ist als \textit{template} implementiert und enthält neben dem Speicherplatz für die generische Instanz einen bool'schen Wert als Validierung.
-Hiermit wird das Arbeit mit \textit{Null-pointern} im Kontext desr Klasse \CodeClass{Ringbuffer} vermieden.
+Die \CodeClass{Optional} soll dem Ringbuffer ermöglichen, das Nichtvorhandensein von Einträgen darstellen zu können. Diese Klasse ist als \textit{template} implementiert und enthält neben dem Speicherplatz für die generische Instanz einen bool'schen Wert als Validierung.
+Hiermit wird das Arbeit mit \textit{Null-pointern} im Kontext desr \CodeClass{Ringbuffer} vermieden.
 \note{Mit der Verwendung von c++17 ist eine vergleichbare Klasse Teil der Standard-Bibliothek. Die Sprachversion des Projekts ist c++11.}
 
 
 \newSec{Ringbuffer}{4}
-Die Klasse \CodeClass{Ringbuffer} soll einen Ringspeicher abbilden. Hier wird nicht -wie ner Name vermuten lässt- ein Ringspeicher im Sinne einer ringförmig verketteten Liste implementiert. Diese Klasse Kapselt eine \textit{Standard Template Library} (\textit{STL}) vom Typ \CodeClass{std::vector<T>}, wobei bei Überschreiten der maximalen Anzahl an Elementen das vordere Elemente entfernt wird.\\
-\note{Die Implementierung der Klasse \CodeClass{std::vector<T>} sieht vor, neue Elemente an das Ende anzuhängen.}
+Die \CodeClass{Ringbuffer} soll einen Ringspeicher abbilden. Hier wird nicht -wie ner Name vermuten lässt- ein Ringspeicher im Sinne einer ringförmig verketteten Liste implementiert. Diese Klasse Kapselt eine \textit{Standard Template Library} (\textit{STL}) vom Typ \CodeClass{std::vector<T>}, wobei bei Überschreiten der maximalen Anzahl an Elementen das vordere Elemente entfernt wird.\\
+\note{Die Implementierung der \CodeClass{std::vector<T>} sieht vor, neue Elemente an das Ende anzuhängen.}
 
 
 \newSec{TimedValue}{4}
-Die Klasse \CodeClass{TimedValue} soll einen mit einem Zeitstemlep versehenen Wert abbilden. Dies wird durch das Erben von den Klassen \textit{Timestamp} und \CodeClass{Value} umgesetzt.
+Die \CodeClass{TimedValue} soll einen mit einem Zeitstemlep versehenen Wert abbilden. Dies wird durch das Erben von den Klassen \CodeClass{Timestamp} und \CodeClass{Value} umgesetzt.
 
 
 \newSec{Timestamp}{4}
-Mit der Klasse \CodeClass{Timestamp} wird ein Zeitstempel eingeführt. Alle \ROS-Nachrichten beinhalten durch die Kapselung der \CodeClass{std\_msgs::Header}-Klasse einen Zeitstempel.
+Mit der \CodeClass{Timestamp} wird ein Zeitstempel eingeführt. Alle \ROS-Nachrichten beinhalten durch die Kapselung der \CodeClass{std\_msgs::Header}-Klasse einen Zeitstempel.
 
 
 \newSec{Unit}{4}
@@ -27,11 +27,11 @@ Mit \CodeClass{Unit} werden Einheiten umgesetzt, um eine korrekte Übergabe von 
 
 
 \newSec{Value}{4}
-Die Klasse \CodeClass{Value} bildet einen Wert ab. Sie besteht aus einer \CodeClass{Unit} und einem dazugehöigen Zahlenwert.
+Die \CodeClass{Value} bildet einen Wert ab. Sie besteht aus einer \CodeClass{Unit} und einem dazugehöigen Zahlenwert.
 
 
 \newSec{Vector3D}{4}
-Bei der Klasse \CodeClass{Vector3D} handelt es sich um die Abbildung eines Vektors im dreidimensionalen Raum. Zusätzlich wird dem Vektor eine Einheit zugewiesen.
+Bei der \CodeClass{Vector3D} handelt es sich um die Abbildung eines Vektors im dreidimensionalen Raum. Zusätzlich wird dem Vektor eine Einheit zugewiesen.
 Zudem werden in dieser Klasse grundlegende mathematische Operationen für Vektoren implementiert.
 
 

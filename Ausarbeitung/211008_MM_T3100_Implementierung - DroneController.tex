@@ -15,7 +15,7 @@ Neben der Sicherheitsfunktionalität (Ermittlung von Zusammenstößen anhand ein
 
 
 \newSec{IMUState}{4}
-Die Klasse \CodeClass{IMUState} beinhaltet Attribute, welche die Daten der \textit{Inertial Measurement Unit} (\textit{IMU}) abbildet.\\
+Die \CodeClass{IMUState} beinhaltet Attribute, welche die Daten der \textit{Inertial Measurement Unit} (\textit{IMU}) abbildet.\\
 \note{Mit der Änderung der Hardware ergab sich, dass die \CodeClass{IMUState} Daten der lokalen Orientierung enthält. Der \Quad\ \Clover\ sendet die Rate der Winkeländerung.}\\
 Im Sinne der Auswertung und Parameter-Optimierung wurde hier zusätzlich der gemessene Abstand zum Untergrund als Attribut aufgenommen. Dieser dient nur zu Referenzzwecken und wird, entsprechend der Aufgabenstellung (siehe \refCap{Problemstellung}), nicht zur Berechnung der Pose eingesetzt.
 
@@ -55,6 +55,7 @@ Als Sicherheitsfunktionalität wird der \CodeClass{IMUable} eine Instanz der \Co
 Die Ableitungen der \CodeClass{SafetRequirement} überprüfen, ob die als Pointer übergebene Instanz der \CodeClass{Batteryable} die geprüfte Eigenschaft (Spannung oder Akkustand) einhält.
 
 
+\clearpage
 \newSec{TimeoutOK und WatchDog}{4}
 Wie aus der Namensgebung ableitbar sind diese Klassen dafür gedacht, das System über Ausfälle der Datenübertragung zu informieren.
 Der derzeitige Stand prüft den zeitlichen Unerscheid zwischen eingegangenen Nachrichten, angewandt in der Instanz der \CodeClass{Statusable}.

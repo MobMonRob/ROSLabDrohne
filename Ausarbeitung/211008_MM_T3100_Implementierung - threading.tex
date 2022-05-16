@@ -8,9 +8,9 @@ Diese Klasse bietet die Basis für die Thread-Implementierung, indem die \CodeCl
 
 
 \newSec{rosThread}{4}
-Die Klasse \CodeClass{rosThread} erweitert die Klasse \CodeClass{Thread} um eine generische Variable \CodeVar{T Payload}, welcher von den erbenden Klassen zum Versand genutzt werden kann. Die Methode \CodeMeth{T runOnce(T Payload)} ist als \textit{full virtual} implementiert, somit wird ein Überschreiben durch erbende Klassen erzwungen. Die Klasse \CodeClass{ros::Rate} ermöglicht eine frequentiell pausierte Abarbeitung des der auszuführenden \CodeMeth{T runOnce()}.
+Die \CodeClass{rosThread} erweitert die \CodeClass{Thread} um eine generische Variable \CodeVar{T Payload}, welcher von den erbenden Klassen zum Versand genutzt werden kann. Die \CodeMeth{T runOnce(T Payload)} ist als \textit{full virtual} implementiert, somit wird ein Überschreiben durch erbende Klassen erzwungen. Die \CodeClass{ros::Rate} ermöglicht eine frequentiell pausierte Abarbeitung des der auszuführenden \CodeMeth{T runOnce()}.
 
-\note{Idealerweise sollte eine Instanz der Klasse \CodeClass{ROS::NodeHandler} ebenfalls in dieser Klasse integriert sein. Tests während der Entwicklung zeigten, dass dies nicht umsetzbar ist. Eine Begründung hierfür konnte nicht gefunden werden.}
+\note{Idealerweise sollte eine Instanz der \CodeClass{ROS::NodeHandler} ebenfalls in dieser Klasse integriert sein. Tests während der Entwicklung zeigten, dass dies nicht umsetzbar ist. Eine Begründung hierfür konnte nicht gefunden werden.}
 
 
 \newSec{AutoPublisher}{4}
