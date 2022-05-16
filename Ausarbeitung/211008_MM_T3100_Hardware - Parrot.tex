@@ -4,25 +4,7 @@ Um die Problematik der COEX Drohne zu umgehen, steigt diese \Arbeit\ auf die Dro
 Hierbei handelt es sich um die Drohne \Ar. Nachfolgend soll die Drohne und die eingebaute Sensorik näher bechrieben werden.
 
 
-
-\newSec{Geometrie}{3}
-
-
-\newSec[parrotGeom]{Anordnung der Rotoren}{4}
-\missing
-
-X
-
-
-\newSec[parrotSize]{Abmessungen}{4}
-\missing
-
-
-
-
-
 \newSec{Sensorik}{3}
-
 \begin{itemize}
 \item Beschleunigungssensorik
 \item Magnetometer
@@ -30,11 +12,6 @@ X
 \item Frontkamera
 \item Bodenkamera
 \end{itemize}
-
-
-
-
-
 
 
 \newSec[parrotROS]{Interaktion mittels \ROS}{3}
@@ -45,13 +22,17 @@ Als \ROS-seitige Schnittstelle werden verschiedene \Topic[s] und \Service[s] ang
 
 
 \newSec[parrotTopics]{Topics}{4}
+\begin{figure}[ht!]
+\vspace{0.25cm}
+\begin{center}
+\fbox{\includegraphics[width=8cm]{Pictures/RQT DroneOnly.png}}
+\caption{rqt-Graph der \Ar}
+\label{fig:rqtRaw}
+\end{center}
 
-
-
-
-\missing[Bild von rqt-graph]
-
-
+\vspace{0.25cm}
+Die hier gezeigten \Topic[s] beschränken sich auf die \Topic[s] zum steuern des \Quad[s] \Ar.
+\end{figure}
 
 
 \newSec[parrotTopicsNav]{\rTopic{NavData}}{5}
@@ -59,44 +40,20 @@ Das \rTopic{NavData} fasst alle für die verfügbaren Daten des \Quad[s] in eine
 
 
 \newSec[parrotTopicsCMD]{\rTopic{cmd\_vel}}{5}
-Nur geschwindigkeits-Daten. Keine tatsächliche Übergabe von Neigungswinkeln und so ODER??
-\missing\
-
-
-
-
-
+Entsprechend der Dokumentation werden über das \rTopic{cmd\_vel} die linearen Geschwindigkeiten und die Winkelgeschwindigkeit übertragen. Eine vorgabe der \textit{Roll-Pitch-Yaw}-Winkel ist nicht vorgesehen. \comp{parotCmdVel}\\
+Entsprechen alle Attribute der \texttt{geometry\_msgs::Twist}-Nachricht dem Wert 0, schaltet die \Ar\ in einen Hover-Modus um und versucht, die aktuelle Position zu halten. Zu beachten ist, dass diese Funktion nicht für die Aufgabenstellung herangezogen werden kann, da für den studentischen Laborversuch \textit{Höhenregelung} Daten abweichend des Werts 0 über das \rTopic{cmd\_vel} übermittelt werden.
 
 
 \newSec[parrotTopicsStream]{Video-Streams}{5}
 Die Übertragung der Video-Daten der beiden Kameras soll an dieser Stelle lediglich erwähnt werden.
 
 
-\newSec[parrotService]{Services}{4}
-
-
-
-
-
-
-
-
-
-\newSec[parrotParams]{Parameter}{4}
-
-
-
-
-
-
-
-
 \newSec[parrotIB]{Inbetriebnahme auf separatem Rechner}{3}
 
-Der in \refCap{parrotAutonomy} Treiber kann entsprechend folgender Anleitung isntalliert werden:
+Der in \refCap{parrotAutonomy} Treiber kann entsprechend folgender Anleitung isntalliert werden:\\
 \href{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}{https://ardrone-autonomy.readthedocs.io/en/latest/installation.html}
 
-Für das System werden folgende \ROS-Knoten benötigt:
+Für das in dieser \Arbeit\ entwickelte Programm werden folgende \ROS-Knoten benötigt:
 \begin{itemize}
 \item roslaunch ardrone\_autonomy ardrone.launch
 \item rosrun PosControl AutoController\\
